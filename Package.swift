@@ -23,10 +23,10 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/AparokshaUI/Meta", branch: "main"),
-        .package(url: "https://github.com/AparokshaUI/meta-sqlite", branch: "main"),
+        .package(url: "https://git.aparoksha.dev/aparoksha/meta", branch: "main"),
+        .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", branch: "main"),
         .package(
-            url: "https://github.com/david-swift/LevenshteinTransformations",
+            url: "https://git.aparoksha.dev/aparoksha/levenshtein-transformations",
             from: "0.1.1"
         ),
         .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1")
@@ -40,8 +40,8 @@ let package = Package(
             name: "Adwaita",
             dependencies: [
                 "CAdw",
-                .product(name: "LevenshteinTransformations", package: "LevenshteinTransformations"),
-                .product(name: "Meta", package: "Meta"),
+                .product(name: "LevenshteinTransformations", package: "levenshtein-transformations"),
+                .product(name: "Meta", package: "meta"),
                 .product(name: "MetaSQLite", package: "meta-sqlite")
             ]
         ),

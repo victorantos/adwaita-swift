@@ -133,8 +133,8 @@ struct Demo: App {
                 developer: "david-swift",
                 version: "Test",
                 icon: .default(icon: .applicationXExecutable),
-                website: .init(string: "https://aparokshaui.github.io/adwaita-swift/"),
-                issues: .init(string: "https://github.com/AparokshaUI/adwaita-swift/issues")
+                website: .init(string: "https://adwaita-swift.aparoksha.dev/"),
+                issues: .init(string: "https://git.aparoksha.dev/aparoksha/adwaita-swift/issues")
             )
         }
 

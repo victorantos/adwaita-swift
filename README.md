@@ -4,12 +4,12 @@
 </p>
 
 <p align="center">
-  <a href="https://aparokshaui.github.io/adwaita-swift/">
+  <a href="https://adwaita-swift.aparoksha.dev/">
   Documentation
   </a>
   ·
-  <a href="https://github.com/AparokshaUI/Adwaita">
-  GitHub
+  <a href="https://git.aparoksha.dev/aparoksha/adwaita-swift">
+  Code
   </a>
 </p>
 
@@ -56,7 +56,7 @@ More examples are available in the [demo app][1].
 
 _Adwaita_’s main goal is to provide an easy-to-use interface for creating GNOME apps. The backend should stay as simple as possible, while not limiting the possibilities there are with [Libadwaita][7] and [GTK][8].
 
-If you want to use _Adwaita_ in a project, but there are widgets missing, open an [issue on GitHub][9].
+If you want to use _Adwaita_ in a project, but there are widgets missing, open an [issue][9].
 
 Find more information about the project's motivation in [this blog post](https://www.swift.org/blog/adwaita-swift/).
 
@@ -87,36 +87,36 @@ brew install libadwaita
 2. Open the `Package.swift` file.
 3. Into the `Package` initializer, under `dependencies`, paste:
 ```swift
-.package(url: "https://github.com/AparokshaUI/Adwaita", from: "0.1.0")   
+.package(url: "https://git.aparoksha.dev/aparoksha/adwaita-swift", from: "0.1.0")   
 ```
 
 ## Usage
 
 I recommend using the [template repository](https://github.com/AparokshaUI/AdwaitaTemplate) as a starting point.
 
-Follow the [interactive tutorial](https://aparokshaui.github.io/adwaita-swift/tutorials/table-of-contents) or [read the docs](https://aparokshaui.github.io/adwaita-swift/documentation/adwaita) in order to get to know _Adwaita for Swift_.
+Follow the [interactive tutorial](https://adwaita-swift.aparoksha.dev//tutorials/table-of-contents) or [read the docs](https://adwaita-swift.aparoksha.dev/) in order to get to know _Adwaita for Swift_.
 
 ## Thanks
 
 ### Dependencies
-- [XMLCoder][18] licensed under the [MIT license][19]
-- [Levenshtein Transformations](https://github.com/david-swift/LevenshteinTransformations) licensed under the [MIT license](https://github.com/david-swift/LevenshteinTransformations/blob/main/LICENSE.md)
+- [XMLCoder][18] licensed under the [MIT License][19]
+- [Levenshtein Transformations](https://git.aparoksha.dev/aparoksha/levenshtein-transformations) licensed under the [MIT License](https://git.aparoksha.dev/aparoksha/levenshtein-transformations/src/branch/main/LICENSE.md)
+- [Meta](https://git.aparoksha.dev/aparoksha/meta) licensed under the [MIT License](https://git.aparoksha.dev/aparoksha/meta/src/branch/main/LICENSE.md)
+- [SQLite for Meta](https://git.aparoksha.dev/aparoksha/meta-sqlite) licensed under the [MIT License](https://git.aparoksha.dev/aparoksha/meta-sqlite/src/branch/main/LICENSE.md)
 
 ### Other Thanks
-- The [contributors][20]
 - The auto-generation of widgets is based on [Swift Cross UI](https://github.com/stackotter/swift-cross-ui)
 - [SwiftLint][21] for checking whether code style conventions are violated
 - The programming language [Swift][22]
 
-[1]:    Tests/
+[1]:    Sources/Demo/
 [2]:	#goals
 [4]:	#installation
 [5]:	#usage
 [6]:	#thanks
 [7]:	https://gnome.pages.gitlab.gnome.org/libadwaita/doc/1-latest/index.html
 [8]:	https://docs.gtk.org/gtk4/
-[9]:	https://github.com/AparokshaUI/Adwaita/issues
-[10]:	https://github.com/AparokshaUI/Libadwaita
+[9]:https://git.aparoksha.dev/aparoksha/adwaita-swift/issues
 [11]:	https://brew.sh
 [12]:	user-manual/GettingStarted.md
 [13]:	user-manual/Basics/HelloWorld.md
@@ -126,10 +126,7 @@ Follow the [interactive tutorial](https://aparokshaui.github.io/adwaita-swift/tu
 [17]:   user-manual/Advanced/CreatingWidgets.md
 [18]:	https://github.com/CoreOffice/XMLCoder
 [19]:	https://github.com/CoreOffice/XMLCoder/blob/main/LICENSE
-[20]:	Contributors.md
 [21]:	https://github.com/realm/SwiftLint
 [22]:	https://github.com/apple/swift
-[23]:	https://github.com/SourceDocs/SourceDocs
 
 [image-1]: Icons/Counter.png
-[image-2]: Icons/Demo.png
