@@ -9,11 +9,6 @@ jobs:
     runs-on: david-macbook
     steps:
       - uses: actions/checkout@v4
-      - name: Install Libadwaita
-        run: |
-          brew update
-          brew upgrade libadwaita
-          sed -i '' 's/-I..includedir.//g' $(brew --prefix)/Library/Homebrew/os/mac/pkgconfig/*/libffi.pc
       - name: Clone DocC Repo
         run: |
           git clone https://git.aparoksha.dev/aparoksha/adwaita.docc Sources/Adwaita/Adwaita.docc
