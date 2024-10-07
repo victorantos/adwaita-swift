@@ -9,7 +9,6 @@ jobs:
     runs-on: david-macbook
     steps:
       - uses: actions/checkout@v4
-      - name: Build Docs
       - name: Install Libadwaita
         run: |
           brew update
@@ -21,6 +20,7 @@ jobs:
           rm Sources/Adwaita/Adwaita.docc/LICENSE.md
           rm Sources/Adwaita/Adwaita.docc/README.md
           y | rm -r Sources/Adwaita/Adwaita.docc/.git
+      - name: Build Docs
         run: |
           xcrun xcodebuild docbuild \
             -scheme Adwaita \
