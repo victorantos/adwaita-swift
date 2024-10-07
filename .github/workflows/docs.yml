@@ -14,7 +14,7 @@ jobs:
           git clone https://git.aparoksha.dev/aparoksha/adwaita.docc Sources/Adwaita/Adwaita.docc
           rm Sources/Adwaita/Adwaita.docc/LICENSE.md
           rm Sources/Adwaita/Adwaita.docc/README.md
-          y | rm -r Sources/Adwaita/Adwaita.docc/.git
+          rm -rf Sources/Adwaita/Adwaita.docc/.git
       - name: Build Docs
         run: |
           xcrun xcodebuild docbuild \
