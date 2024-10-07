@@ -27,7 +27,7 @@ let package = Package(
         .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", branch: "main"),
         .package(
             url: "https://git.aparoksha.dev/aparoksha/levenshtein-transformations",
-            from: "0.1.1"
+            branch: "main"
         ),
         .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1")
     ],
