@@ -13,8 +13,7 @@ import Foundation
 @main
 struct Demo: App {
 
-    let id = "io.github.AparokshaUI.Demo"
-    var app: AdwaitaApp!
+    var app = AdwaitaApp(id: "io.github.AparokshaUI.Demo")
 
     @State private var pictureURL: URL?
 
