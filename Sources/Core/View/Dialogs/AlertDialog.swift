@@ -33,6 +33,27 @@ public struct AlertDialog: AdwaitaWidget {
     /// The child view.
     var child: AnyView
 
+    /// Initialize an alert dialog wrapper.
+    /// - Parameters:
+    ///     - visible: Whether the dialog is visible.
+    ///     - child: The child view.
+    ///     - id: A unique identifier for dialogs on the view.
+    ///     - heading: The heading.
+    ///     - body: The body text.
+    public init(
+        visible: Binding<Bool>,
+        child: AnyView,
+        id: String,
+        heading: String,
+        body: String
+    ) {
+        self._visible = visible
+        self.child = child
+        self.id = id
+        self.heading = heading
+        self.body = body
+    }
+
     /// Information about a response.
     struct Response: Identifiable {
 
@@ -210,30 +231,6 @@ public struct AlertDialog: AdwaitaWidget {
         var newSelf = self
         newSelf.responses.append(.init(title: title, appearance: appearance, role: role, action: action))
         return newSelf
-    }
-
-}
-
-extension AnyView {
-
-    /// Add an alert dialog to the parent window.
-    /// - Parameters:
-    ///     - visible: Whether the dialog is presented.
-    ///     - heading: The heading.
-    ///     - body: The body text.
-    public func alertDialog(
-        visible: Binding<Bool>,
-        heading: String,
-        body: String = "",
-        id: String? = nil
-    ) -> AlertDialog {
-        .init(
-            visible: visible,
-            id: id ?? "no-id",
-            heading: heading,
-            body: body,
-            child: self
-        )
     }
 
 }

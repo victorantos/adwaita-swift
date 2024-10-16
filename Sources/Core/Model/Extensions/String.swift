@@ -8,9 +8,9 @@
 extension String {
 
     /// A label for the transition data in a widget's fields.
-    static var transition: Self { "transition" }
+    public static var transition: Self { "transition" }
     /// A label for the navigation label in a widget's fields.
-    static var navigationLabel: Self { "navigation-label" }
+    public static var navigationLabel: Self { "navigation-label" }
 
     /// Add the Ctrl key to a shortcut.
     /// - Returns: The shortcut.

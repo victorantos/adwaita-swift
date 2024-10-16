@@ -8,7 +8,7 @@
 import CAdw
 
 /// The dialog widget.
-struct Dialog: AdwaitaWidget {
+public struct Dialog: AdwaitaWidget {
 
     /// Whether the dialog is visible.
     @Binding var visible: Bool
@@ -30,12 +30,39 @@ struct Dialog: AdwaitaWidget {
     /// The ID for the content's storage.
     let contentID = "content"
 
+    /// Initialize a dialog wrapper.
+    /// - Parameters:
+    ///     - visible: Whether the dialog is visible.
+    ///     - child: The wrapped view.
+    ///     - id: An unique identifier for dialogs on the view.
+    ///     - content: The content.
+    ///     - title: The title.
+    ///     - width: The width.
+    ///     - height: The height.
+    public init(
+        visible: Binding<Bool>,
+        child: AnyView,
+        id: String,
+        content: Body,
+        title: String? = nil,
+        width: Int? = nil,
+        height: Int? = nil
+    ) {
+        self._visible = visible
+        self.child = child
+        self.id = id
+        self.content = content
+        self.title = title
+        self.width = width
+        self.height = height
+    }
+
     /// The view storage.
     /// - Parameters:
     ///     - modifiers: Modify views before being updated.
     ///     - type: The view render data type.
     /// - Returns: The view storage.
-    func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let child = child.storage(data: data, type: type)
         let storage = ViewStorage(child.opaquePointer, content: [.mainContent: [child]])
         update(storage, data: data, updateProperties: true, type: type)
@@ -48,7 +75,7 @@ struct Dialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated
     ///     - updateProperties: Whether to update the view's properties.
     ///     - type: The view render data type.
-    func update<Data>(
+    public func update<Data>(
         _ storage: ViewStorage,
         data: WidgetData,
         updateProperties: Bool,
@@ -112,36 +139,6 @@ struct Dialog: AdwaitaWidget {
                 visible = false
             }
         }
-    }
-
-}
-
-extension AnyView {
-
-    /// Add a dialog to the parent window.
-    /// - Parameters:
-    ///     - visible: Whether the dialog is presented.
-    ///     - title: The dialog's title.
-    ///     - width: The dialog's width.
-    ///     - height: The dialog's height.
-    ///     - content: The dialog's content.
-    public func dialog(
-        visible: Binding<Bool>,
-        title: String? = nil,
-        id: String? = nil,
-        width: Int? = nil,
-        height: Int? = nil,
-        @ViewBuilder content: () -> Body
-    ) -> AnyView {
-        Dialog(
-            visible: visible,
-            id: id ?? "",
-            title: title,
-            child: self,
-            content: content(),
-            width: width,
-            height: height
-        )
     }
 
 }

@@ -32,11 +32,6 @@ extension VStack {
         }
     }
 
-    /// Link the children.
-    public func linked(_ active: Bool = true) -> AnyView {
-        style("linked", active: active)
-    }
-
 }
 
 /// A wrapper around ``VStack`` which applies the ``VStack`` only if there is more than one view.

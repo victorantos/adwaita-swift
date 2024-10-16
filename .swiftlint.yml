@@ -154,6 +154,5 @@ type_contents_order:
         - other_method
 
 excluded:
-    - Sources/Adwaita/View/Generated/
-    - Sources/Adwaita/Adwaita.docc/
+    - Sources/Core/View/Generated/
     - .build/

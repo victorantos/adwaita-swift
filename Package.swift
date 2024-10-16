@@ -18,6 +18,10 @@ let package = Package(
             targets: ["Adwaita"]
         ),
         .library(
+            name: "Core",
+            targets: ["Core"]
+        ),
+        .library(
             name: "CAdw",
             targets: ["CAdw"]
         )
@@ -37,13 +41,17 @@ let package = Package(
             pkgConfig: "libadwaita-1"
         ),
         .target(
-            name: "Adwaita",
+            name: "Core",
             dependencies: [
                 "CAdw",
                 .product(name: "LevenshteinTransformations", package: "levenshtein-transformations"),
                 .product(name: "Meta", package: "meta"),
                 .product(name: "MetaSQLite", package: "meta-sqlite")
             ]
+        ),
+        .target(
+            name: "Adwaita",
+            dependencies: ["Core"]
         ),
         .executableTarget(
             name: "Generation",

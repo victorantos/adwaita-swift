@@ -1,8 +1,8 @@
 //
-//  AnyView+.swift
+//  AnyView++.swift
 //  Adwaita
 //
-//  Created by david-swift on 01.08.24.
+//  Created by david-swift on 16.10.24.
 //
 
 import CAdw

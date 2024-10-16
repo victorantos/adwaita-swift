@@ -9,10 +9,10 @@ import CAdw
 import Foundation
 
 /// A structure representing a file dialog window.
-struct FileDialog: AdwaitaWidget {
+public struct FileDialog: AdwaitaWidget {
 
     /// Whether the dialog is an importer.
-    var importer = true
+    var importer: Bool
     /// Whether the dialog should open.
     var open: Signal
     /// The dialog's child.
@@ -28,12 +28,44 @@ struct FileDialog: AdwaitaWidget {
     /// The closure to run when the import or export is not successful.
     var cancel: () -> Void
 
+    // swiftlint:disable function_default_parameter_at_end
+    /// Initialize the file dialog wrapper.
+    /// - Parameters:
+    ///     - importer: Whether it is an importer.
+    ///     - open: The signal.
+    ///     - child: The wrapped view.
+    ///     - initialFolder: The initial URL.
+    ///     - initialName: The initial name.
+    ///     - extensions: The file extensions.
+    ///     - result: Run when the import or export succeeds.
+    ///     - cancel: Run when the import or export is not successful.
+    public init(
+        importer: Bool = true,
+        `open`: Signal,
+        child: AnyView,
+        result: @escaping (URL) -> Void,
+        cancel: @escaping () -> Void,
+        initialFolder: URL? = nil,
+        initialName: String? = nil,
+        extensions: [String]? = nil
+    ) {
+        self.importer = importer
+        self.open = open
+        self.child = child
+        self.result = result
+        self.cancel = cancel
+        self.initialFolder = initialFolder
+        self.initialName = initialName
+        self.extensions = extensions
+    }
+    // swiftlint:enable function_default_parameter_at_end
+
     /// The view storage.
     /// - Parameters:
     ///     - modifiers: Modify views before being updated.
     ///     - type: The view render data type.
     /// - Returns: The view storage.
-    func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let child = child.storage(data: data, type: type)
         let storage = ViewStorage(child.opaquePointer, content: [.mainContent: [child]])
         update(storage, data: data, updateProperties: true, type: type)
@@ -46,7 +78,7 @@ struct FileDialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated
     ///     - updateProperties: Whether to update the view's properties.
     ///     - type: The view render data type.
-    func update<Data>(
+    public func update<Data>(
         _ storage: ViewStorage,
         data: WidgetData,
         updateProperties: Bool,
@@ -88,62 +120,6 @@ struct FileDialog: AdwaitaWidget {
                 gtui_filedialog_save(ptr, unsafeBitCast(callbacks, to: UInt64.self), window)
             }
         }
-    }
-
-}
-
-extension AnyView {
-
-    /// Create an importer file dialog.
-    /// - Parameters:
-    ///     - open: The signal to open the dialog.
-    ///     - initialFolder: The URL to the folder open when being opened.
-    ///     - extensions: The accepted file extensions.
-    ///     - folders: Whether folders are accepted.
-    ///     - onOpen: Run this when a file for importing has been chosen.
-    ///     - onClose: Run this when the user cancelled the action.
-    public func fileImporter(
-        open: Signal,
-        initialFolder: URL? = nil,
-        extensions: [String]? = nil,
-        onOpen: @escaping (URL) -> Void,
-        onClose: @escaping () -> Void
-    ) -> AnyView {
-        FileDialog(
-            importer: true,
-            open: open,
-            child: self,
-            initialFolder: initialFolder,
-            initialName: nil,
-            extensions: extensions,
-            result: onOpen,
-            cancel: onClose
-        )
-    }
-
-    /// Create an exporter file dialog.
-    /// - Parameters:
-    ///     - exporter: The signal to open the dialog.
-    ///     - initialFolder: The URL to the folder open when being opened.
-    ///     - initialName: The default file name.
-    ///     - onSave: Run this when a path for exporting has been chosen.
-    ///     - onClose: Run this when the user cancelled the action.
-    public func fileExporter(
-        open: Signal,
-        initialFolder: URL? = nil,
-        initialName: String? = nil,
-        onSave: @escaping (URL) -> Void,
-        onClose: @escaping () -> Void
-    ) -> AnyView {
-        FileDialog(
-            importer: false,
-            open: open,
-            child: self,
-            initialFolder: initialFolder,
-            initialName: initialName,
-            result: onSave,
-            cancel: onClose
-        )
     }
 
 }

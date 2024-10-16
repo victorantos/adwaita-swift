@@ -35,7 +35,7 @@ struct GenerationConfiguration {
     var adwGirFilePath = adwGirFilePath + "Adw-1.gir"
 
     /// The folder containing the generated Swift files.
-    var folder = "Sources/Adwaita/View/Generated/"
+    var folder = "Sources/Core/View/Generated/"
 
     /// The Libadwaita widgets.
     var adwWidgets: [WidgetConfiguration] = [

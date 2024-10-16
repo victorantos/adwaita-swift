@@ -9,7 +9,7 @@ import CAdw
 import Foundation
 
 /// The about dialog widget.
-struct AboutDialog: AdwaitaWidget {
+public struct AboutDialog: AdwaitaWidget {
 
     /// Whether the dialog is visible.
     @Binding var visible: Bool
@@ -32,12 +32,42 @@ struct AboutDialog: AdwaitaWidget {
     /// The ID for the dialog's storage.
     let dialogID = "dialog"
 
+    /// Initialize the about dialog wrapper.
+    /// - Parameters:
+    ///     - visible: The visibility.
+    ///     - child: The child view.
+    ///     - appName: The app's name.
+    ///     - developer: The developer's name.
+    ///     - version: The version.
+    ///     - icon: The icon.
+    ///     - website: The website's URL.
+    ///     - issues: The link for opening issues.
+    public init(
+        visible: Binding<Bool>,
+        child: AnyView,
+        appName: String? = nil,
+        developer: String? = nil,
+        version: String? = nil,
+        icon: Icon? = nil,
+        website: URL? = nil,
+        issues: URL? = nil
+    ) {
+        self._visible = visible
+        self.child = child
+        self.appName = appName
+        self.developer = developer
+        self.version = version
+        self.icon = icon
+        self.website = website
+        self.issues = issues
+    }
+
     /// The view storage.
     /// - Parameters:
     ///     - modifiers: Modify views before being updated.
     ///     - type: The view render data type.
     /// - Returns: The view storage.
-    func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let storage = child.storage(data: data, type: type)
         update(storage, data: data, updateProperties: true, type: type)
         return storage
@@ -49,7 +79,7 @@ struct AboutDialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated
     ///     - updateProperties: Whether to update the view's properties.
     ///     - type: The view render data type.
-    func update<Data>(
+    public func update<Data>(
         _ storage: ViewStorage,
         data: WidgetData,
         updateProperties: Bool,
@@ -107,40 +137,6 @@ struct AboutDialog: AdwaitaWidget {
                 visible = false
             }
         }
-    }
-
-}
-
-extension AnyView {
-
-    /// Add an about dialog to the parent window.
-    /// - Parameters:
-    ///     - visible: Whether the dialog is presented.
-    ///     - app: The app's name.
-    ///     - developer: The developer's name.
-    ///     - version: The version string.
-    ///     - icon: The app icon.
-    ///     - website: The app's website.
-    ///     - issues: Website for reporting issues.
-    public func aboutDialog(
-        visible: Binding<Bool>,
-        app: String? = nil,
-        developer: String? = nil,
-        version: String? = nil,
-        icon: Icon? = nil,
-        website: URL? = nil,
-        issues: URL? = nil
-    ) -> AnyView {
-        AboutDialog(
-            visible: visible,
-            child: self,
-            appName: app,
-            developer: developer,
-            version: version,
-            icon: icon,
-            website: website,
-            issues: issues
-        )
     }
 
 }

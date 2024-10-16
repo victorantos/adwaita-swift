@@ -8,7 +8,7 @@
 import CAdw
 
 /// A wrapper for view modifiers for any view.
-struct ModifierWrapper: AdwaitaWidget {
+public struct ModifierWrapper: AdwaitaWidget {
 
     /// The view.
     var content: AnyView
@@ -39,12 +39,60 @@ struct ModifierWrapper: AdwaitaWidget {
     /// The tooltip.
     var tooltip: String?
 
+    /// Initialize a modifier wrapper.
+    /// - Parameters:
+    ///     - content: The view.
+    ///     - padding: The padding.
+    ///     - edges: The padding edges.
+    ///     - hexpand: Whether to expand horizontally.
+    ///     - vexpand: Whether to expand vertically.
+    ///     - halign: The horizontal alignment.
+    ///     - valign: The vertical alignment.
+    ///     - minWidth: The minimum width.
+    ///     - minHeight: The minimum height.
+    ///     - style: The style class.
+    ///     - styleActive: Whether the style is active.
+    ///     - insensitive: Whether the view is insensitive.
+    ///     - visible: Whether the view is visible.
+    ///     - tooltip: The tooltip.
+    public init(
+        content: AnyView,
+        padding: Int? = nil,
+        edges: Set<Edge>? = nil,
+        hexpand: Bool? = nil,
+        vexpand: Bool? = nil,
+        halign: Alignment? = nil,
+        valign: Alignment? = nil,
+        minWidth: Int? = nil,
+        minHeight: Int? = nil,
+        style: String? = nil,
+        styleActive: Bool? = nil,
+        insensitive: Bool? = nil,
+        visible: Bool? = nil,
+        tooltip: String? = nil
+    ) {
+        self.content = content
+        self.padding = padding
+        self.edges = edges
+        self.hexpand = hexpand
+        self.vexpand = vexpand
+        self.halign = halign
+        self.valign = valign
+        self.minWidth = minWidth
+        self.minHeight = minHeight
+        self.style = style
+        self.styleActive = styleActive
+        self.insensitive = insensitive
+        self.visible = visible
+        self.tooltip = tooltip
+    }
+
     /// The view storage.
     /// - Parameters:
     ///     - modifiers: Modify views before being updated.
     ///     - type: The view render data type.
     /// - Returns: The view storage.
-    func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let content = content.storage(data: data, type: type)
         let storage = ViewStorage(content.pointer, content: [.mainContent: [content]])
         update(storage, data: data, updateProperties: true, type: type)
@@ -57,7 +105,7 @@ struct ModifierWrapper: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated
     ///     - updateProperties: Whether to update the view's properties.
     ///     - type: The view render data type.
-    func update<Data>(
+    public func update<Data>(
         _ storage: ViewStorage,
         data: WidgetData,
         updateProperties: Bool,
@@ -139,86 +187,6 @@ struct ModifierWrapper: AdwaitaWidget {
         if let tooltip, previousState?.tooltip != tooltip {
             gtk_widget_set_tooltip_markup(storage.opaquePointer?.cast(), tooltip)
         }
-    }
-
-}
-
-extension AnyView {
-
-    /// Add padding around a view.
-    /// - Parameters:
-    ///   - padding: The size of the padding.
-    ///   - edges: The edges which are affected by the padding.
-    /// - Returns: A view.
-    public func padding(_ padding: Int = 10, _ edges: Set<Edge> = .all) -> AnyView {
-        ModifierWrapper(content: self, padding: padding, edges: edges)
-    }
-
-    /// Enable or disable the horizontal expansion.
-    /// - Parameter enabled: Whether it is enabled or disabled.
-    /// - Returns: A view.
-    public func hexpand(_ enabled: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, hexpand: enabled)
-    }
-
-    /// Enable or disable the vertical expansion.
-    /// - Parameter enabled: Whether it is enabled or disabled.
-    /// - Returns: A view.
-    public func vexpand(_ enabled: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, vexpand: enabled)
-    }
-
-    /// Set the horizontal alignment.
-    /// - Parameter align: The alignment.
-    /// - Returns: A view.
-    public func halign(_ align: Alignment) -> AnyView {
-        ModifierWrapper(content: self, halign: align)
-    }
-
-    /// Set the vertical alignment.
-    /// - Parameter align: The alignment.
-    /// - Returns: A view.
-    public func valign(_ align: Alignment) -> AnyView {
-        ModifierWrapper(content: self, valign: align)
-    }
-
-    /// Set the view's minimal width or height.
-    /// - Parameters:
-    ///   - minWidth: The minimal width.
-    ///   - minHeight: The minimal height.
-    /// - Returns: A view.
-    public func frame(minWidth: Int? = nil, minHeight: Int? = nil) -> AnyView {
-        ModifierWrapper(content: self, minWidth: minWidth, minHeight: minHeight)
-    }
-
-    /// Add a style class to the view.
-    /// - Parameters:
-    ///     - style: The style class.
-    ///     - active: Whether the style is currently applied.
-    /// - Returns: A view.
-    public func style(_ style: String, active: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, style: style, styleActive: active)
-    }
-
-    /// Make the view insensitive (useful e.g. in overlays).
-    /// - Parameter insensitive: Whether the view is insensitive.
-    /// - Returns: A view.
-    public func insensitive(_ insensitive: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, insensitive: insensitive)
-    }
-
-    /// Set the view's visibility.
-    /// - Parameter visible: Whether the view is visible.
-    /// - Returns: A view.
-    public func visible(_ visible: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, visible: visible)
-    }
-
-    /// Add a tooltip to the widget.
-    /// - Parameter tooltip: The tooltip text.
-    /// - Returns: A view.
-    public func tooltip(_ tooltip: String) -> AnyView {
-        ModifierWrapper(content: self, tooltip: tooltip)
     }
 
 }

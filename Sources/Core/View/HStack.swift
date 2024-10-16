@@ -15,8 +15,7 @@ public struct HStack: SimpleView {
 
     /// The view's body.
     public var view: Body {
-        VStack(horizontal: true, content: content)
-            .linked(linked)
+        ModifierWrapper(content: VStack(horizontal: true, content: content), style: "linked", styleActive: linked)
     }
 
     /// Initialize a `HStack`.
