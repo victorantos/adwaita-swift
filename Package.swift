@@ -27,11 +27,11 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://git.aparoksha.dev/aparoksha/meta", branch: "main"),
-        .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", branch: "main"),
+        .package(url: "https://git.aparoksha.dev/aparoksha/meta", from: "0.1.0"),
+        .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", from: "0.1.0"),
         .package(
             url: "https://git.aparoksha.dev/aparoksha/levenshtein-transformations",
-            branch: "main"
+            from: "0.1.0"
         ),
         .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1")
     ],
