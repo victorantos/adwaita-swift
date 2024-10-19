@@ -90,10 +90,6 @@ struct ViewSwitcherDemo: View {
             }())
         }
 
-        init?(title: String) {
-            self.init(rawValue: title.lowercased())
-        }
-
     }
 
 }

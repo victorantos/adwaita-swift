@@ -74,7 +74,7 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
         let stack = switcher.fields["stack"] as? ViewStorage
         stack?.notify(name: "visible-child") {
             if let title = adw_view_stack_get_visible_child_name(stack?.opaquePointer),
-            let option = Element(title: .init(cString: title)) {
+            let option = elements.first(where: { $0.title == .init(cString: title) }) {
                 selectedElement = option
             }
         }
@@ -120,8 +120,5 @@ public protocol ViewSwitcherOption {
     var title: String { get }
     /// A symbolic representation in the view switcher.
     var icon: Icon { get }
-
-    /// Get the element from the title.
-    init?(title: String)
 
 }
