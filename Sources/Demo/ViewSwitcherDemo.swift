@@ -57,14 +57,14 @@ struct ViewSwitcherDemo: View {
         var toolbar: AnyView {
             HeaderBar(titleButtons: !bottom) { } end: { }
                 .headerBarTitle {
-                    ViewSwitcher(selection: $selection)
+                    ViewSwitcher(selectedElement: $selection)
                         .wideDesign(!bottom)
                 }
         }
 
     }
 
-    enum ViewSwitcherView: String, ViewSwitcherOption {
+    enum ViewSwitcherView: String, ViewSwitcherOption, CaseIterable {
 
         case albums
         case artists
