@@ -39,15 +39,6 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
         let switcher = ViewStorage(adw_view_switcher_new()?.opaque())
         let stack = ViewStorage(adw_view_stack_new()?.opaque())
         adw_view_switcher_set_stack(switcher.opaquePointer, stack.opaquePointer)
-        for option in elements {
-            adw_view_stack_add_titled_with_icon(
-                stack.opaquePointer,
-                gtk_label_new(""),
-                option.title,
-                option.title,
-                option.icon.string
-            )
-        }
         updateSwitcher(switcher: switcher)
         switcher.fields["stack"] = stack
         return switcher
@@ -87,6 +78,34 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
             )
         }
         let adwStack = adw_view_switcher_get_stack(switcher.opaquePointer)
+        let insert: (String) -> Void = { title in
+            if let element = elements.first(where: { $0.title == title }) {
+                    adw_view_stack_add_titled_with_icon(
+                        adwStack,
+                        gtk_label_new(""),
+                        element.title,
+                        element.title,
+                        element.icon.string
+                    )
+                }
+        }
+        let remove: (Int) -> Void = { index in
+            if let element = elements[safe: index] {
+                let child = adw_view_stack_get_child_by_name(adwStack, element.title)
+                adw_view_stack_remove(adwStack, child)
+            }
+        }
+        ((switcher.previousState as? Self)?.elements ?? []).map { $0.title }.transform(
+            to: elements.map { $0.title },
+            functions: .init { index, title in
+                remove(index)
+                insert(title)
+            } delete: { index in
+                remove(index)
+            } insert: { _, title in
+                insert(title)
+            }
+        )
         adw_view_stack_set_visible_child_name(adwStack, selectedElement.title)
         switcher.previousState = self
     }
