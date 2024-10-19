@@ -33,10 +33,8 @@ struct ViewSwitcherDemo: View {
             VStack {
                 Text(selection.title)
                     .padding()
-                HStack {
-                    Button(bottom ? "Show Top Bar" : "Show Bottom Bar") {
-                        bottom.toggle()
-                    }
+                Button(bottom ? "Show Top Bar" : "Show Bottom Bar") {
+                    bottom.toggle()
                 }
                 .halign(.center)
             }

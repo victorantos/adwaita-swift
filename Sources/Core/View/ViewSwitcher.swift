@@ -65,7 +65,9 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
         updateProperties: Bool,
         type: Data.Type
     ) where Data: ViewRenderData {
-        updateSwitcher(switcher: storage)
+        if updateProperties {
+            updateSwitcher(switcher: storage)
+        }
     }
 
     /// Update a view switcher's style and selection.
@@ -84,10 +86,8 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
                 wide ? ADW_VIEW_SWITCHER_POLICY_WIDE : ADW_VIEW_SWITCHER_POLICY_NARROW
             )
         }
-        if (switcher.previousState as? Self)?.selectedElement.title != selectedElement.title {
-            let stack = adw_view_switcher_get_stack(switcher.opaquePointer)
-            adw_view_stack_set_visible_child_name(stack, selectedElement.title)
-        }
+        let adwStack = adw_view_switcher_get_stack(switcher.opaquePointer)
+        adw_view_stack_set_visible_child_name(adwStack, selectedElement.title)
         switcher.previousState = self
     }
 
