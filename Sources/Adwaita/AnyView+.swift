@@ -267,4 +267,36 @@ extension AnyView {
             .action(button: button, handler: handler)
     }
 
+    /// Add a breakpoint.
+    /// - Parameters:
+    ///     - maxWidth: The maximum width.
+    ///     - matches: Whether the content view matches the breakpoint.
+    public func breakpoint(maxWidth: Int, matches: Binding<Bool>) -> AnyView {
+        BreakpointBin(condition: .maxWidth(maxWidth), matches: matches) { self }
+    }
+
+    /// Add a breakpoint.
+    /// - Parameters:
+    ///     - minWidth: The minimum width.
+    ///     - matches: Whether the content view matches the breakpoint.
+    public func breakpoint(minWidth: Int, matches: Binding<Bool>) -> AnyView {
+        BreakpointBin(condition: .minWidth(minWidth), matches: matches) { self }
+    }
+
+    /// Add a breakpoint.
+    /// - Parameters:
+    ///     - maxHeight: The maximum height.
+    ///     - matches: Whether the content view matches the breakpoint.
+    public func breakpoint(maxHeight: Int, matches: Binding<Bool>) -> AnyView {
+        BreakpointBin(condition: .maxHeight(maxHeight), matches: matches) { self }
+    }
+
+    /// Add a breakpoint.
+    /// - Parameters:
+    ///     - minHeight: The minimum height.
+    ///     - matches: Whether the content view matches the breakpoint.
+    public func breakpoint(minHeight: Int, matches: Binding<Bool>) -> AnyView {
+        BreakpointBin(condition: .minHeight(minHeight), matches: matches) { self }
+    }
+
 }

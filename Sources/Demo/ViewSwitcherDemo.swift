@@ -8,6 +8,7 @@
 // swiftlint:disable missing_docs
 
 import Adwaita
+import CAdw
 
 struct ViewSwitcherDemo: View {
 
@@ -33,10 +34,6 @@ struct ViewSwitcherDemo: View {
             VStack {
                 Text(selection.title)
                     .padding()
-                Button(bottom ? "Show Top Bar" : "Show Bottom Bar") {
-                    bottom.toggle()
-                }
-                .halign(.center)
             }
             .valign(.center)
             .topToolbar {
@@ -44,15 +41,16 @@ struct ViewSwitcherDemo: View {
                     HeaderBar
                         .empty()
                 } else {
-                    toolbar
+                    toolbar(bottom: false)
                 }
             }
             .bottomToolbar(visible: bottom) {
-                toolbar
+                toolbar(bottom: true)
             }
+            .breakpoint(maxWidth: 600, matches: $bottom)
         }
 
-        var toolbar: AnyView {
+        func toolbar(bottom: Bool) -> AnyView {
             HeaderBar(titleButtons: !bottom) { } end: { }
                 .headerBarTitle {
                     ViewSwitcher(selectedElement: $selection)

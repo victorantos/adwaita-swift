@@ -52,3 +52,11 @@ gtui_alertdialog_choose (uint64_t dialog, uint64_t data, uint64_t parent)
   adw_alert_dialog_choose (dialog, parent, NULL, gtui_alertdialog_cb, data);
 }
 
+static GValue
+gtui_initialize_boolean (gboolean boolean)
+{
+  GValue val = G_VALUE_INIT;
+  g_value_init(&val, G_TYPE_BOOLEAN);
+  g_value_set_boolean(&val, boolean);
+  return val;
+}
