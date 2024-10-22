@@ -2,7 +2,7 @@
 //  Avatar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -110,7 +110,6 @@ public struct Avatar: AdwaitaWidget {
     public func iconName(_ iconName: String?) -> Self {
         var newSelf = self
         newSelf.iconName = iconName
-        
         return newSelf
     }
 
@@ -120,7 +119,6 @@ public struct Avatar: AdwaitaWidget {
     public func showInitials(_ showInitials: Bool) -> Self {
         var newSelf = self
         newSelf.showInitials = showInitials
-        
         return newSelf
     }
 
@@ -128,7 +126,6 @@ public struct Avatar: AdwaitaWidget {
     public func size(_ size: Int) -> Self {
         var newSelf = self
         newSelf.size = size
-        
         return newSelf
     }
 
@@ -139,7 +136,6 @@ public struct Avatar: AdwaitaWidget {
     public func text(_ text: String?) -> Self {
         var newSelf = self
         newSelf.text = text
-        
         return newSelf
     }
 

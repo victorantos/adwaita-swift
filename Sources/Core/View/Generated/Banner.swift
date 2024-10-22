@@ -2,7 +2,7 @@
 //  Banner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -122,7 +122,6 @@ public struct Banner: AdwaitaWidget {
     public func buttonLabel(_ buttonLabel: String?) -> Self {
         var newSelf = self
         newSelf.buttonLabel = buttonLabel
-        
         return newSelf
     }
 
@@ -130,7 +129,6 @@ public struct Banner: AdwaitaWidget {
     public func revealed(_ revealed: Bool? = true) -> Self {
         var newSelf = self
         newSelf.revealed = revealed
-        
         return newSelf
     }
 
@@ -140,7 +138,6 @@ public struct Banner: AdwaitaWidget {
     public func title(_ title: String) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -150,7 +147,6 @@ public struct Banner: AdwaitaWidget {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 

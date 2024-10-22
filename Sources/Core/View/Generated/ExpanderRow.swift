@@ -2,7 +2,7 @@
 //  ExpanderRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -33,6 +33,15 @@ import LevenshteinTransformations
 /// It contains the subnodes `row.header` for its main embedded row,
 /// `list.nested` for the list it can expand, and `image.expander-row-arrow` for
 /// its arrow.
+/// 
+/// ## Style classes
+/// 
+/// `AdwExpanderRow` can use the [`.`](style-classes.html#property-rows)
+/// style class to emphasize the row subtitle instead of the row title, which is
+/// useful for displaying read-only properties.
+/// 
+/// When used together with the `.monospace` style class, only the subtitle
+/// becomes monospace, not the title or any extra widgets.
 public struct ExpanderRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -223,7 +232,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func enableExpansion(_ enableExpansion: Binding<Bool>?) -> Self {
         var newSelf = self
         newSelf.enableExpansion = enableExpansion
-        
         return newSelf
     }
 
@@ -231,7 +239,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func expanded(_ expanded: Binding<Bool>?) -> Self {
         var newSelf = self
         newSelf.expanded = expanded
-        
         return newSelf
     }
 
@@ -239,7 +246,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func showEnableSwitch(_ showEnableSwitch: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showEnableSwitch = showEnableSwitch
-        
         return newSelf
     }
 
@@ -250,7 +256,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
-        
         return newSelf
     }
 
@@ -261,7 +266,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func subtitleLines(_ subtitleLines: Int?) -> Self {
         var newSelf = self
         newSelf.subtitleLines = subtitleLines
-        
         return newSelf
     }
 
@@ -272,7 +276,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -282,7 +285,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func titleLines(_ titleLines: Int?) -> Self {
         var newSelf = self
         newSelf.titleLines = titleLines
-        
         return newSelf
     }
 
@@ -292,7 +294,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
-        
         return newSelf
     }
 
@@ -304,7 +305,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 
@@ -312,7 +312,6 @@ if let expanded, newValue != expanded.wrappedValue {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

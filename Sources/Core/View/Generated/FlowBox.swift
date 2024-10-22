@@ -2,7 +2,7 @@
 //  FlowBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -34,6 +34,15 @@ import LevenshteinTransformations
 /// 
 /// Also see [class@Gtk.ListBox].
 /// 
+/// # Shortcuts and Gestures
+/// 
+/// The following signals have default keybindings:
+/// 
+/// - [signal@Gtk.FlowBox::move-cursor]
+/// - [signal@Gtk.FlowBox::select-all]
+/// - [signal@Gtk.FlowBox::toggle-cursor-child]
+/// - [signal@Gtk.FlowBox::unselect-all]
+/// 
 /// # CSS nodes
 /// 
 /// ```
@@ -59,7 +68,7 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     /// Additional appear functions for type extensions.
     var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
 
-/// accept-unpaired-release
+    /// Whether to accept unpaired release events.
     var acceptUnpairedRelease: Bool?
     /// The accessible role of the given `GtkAccessible` implementation.
     /// 
@@ -256,11 +265,10 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
         }
     }
 
-/// accept-unpaired-release
+    /// Whether to accept unpaired release events.
     public func acceptUnpairedRelease(_ acceptUnpairedRelease: Bool? = true) -> Self {
         var newSelf = self
         newSelf.acceptUnpairedRelease = acceptUnpairedRelease
-        
         return newSelf
     }
 
@@ -270,7 +278,6 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -279,7 +286,6 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func activateOnSingleClick(_ activateOnSingleClick: Bool? = true) -> Self {
         var newSelf = self
         newSelf.activateOnSingleClick = activateOnSingleClick
-        
         return newSelf
     }
 
@@ -287,7 +293,6 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func columnSpacing(_ columnSpacing: UInt?) -> Self {
         var newSelf = self
         newSelf.columnSpacing = columnSpacing
-        
         return newSelf
     }
 
@@ -296,7 +301,6 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func homogeneous(_ homogeneous: Bool? = true) -> Self {
         var newSelf = self
         newSelf.homogeneous = homogeneous
-        
         return newSelf
     }
 
@@ -305,7 +309,6 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func maxChildrenPerLine(_ maxChildrenPerLine: UInt?) -> Self {
         var newSelf = self
         newSelf.maxChildrenPerLine = maxChildrenPerLine
-        
         return newSelf
     }
 
@@ -318,7 +321,6 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func minChildrenPerLine(_ minChildrenPerLine: UInt?) -> Self {
         var newSelf = self
         newSelf.minChildrenPerLine = minChildrenPerLine
-        
         return newSelf
     }
 
@@ -326,7 +328,6 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func rowSpacing(_ rowSpacing: UInt?) -> Self {
         var newSelf = self
         newSelf.rowSpacing = rowSpacing
-        
         return newSelf
     }
 

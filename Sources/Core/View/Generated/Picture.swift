@@ -2,7 +2,7 @@
 //  Picture.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -126,7 +126,6 @@ public struct Picture: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -134,7 +133,6 @@ public struct Picture: AdwaitaWidget {
     public func alternativeText(_ alternativeText: String?) -> Self {
         var newSelf = self
         newSelf.alternativeText = alternativeText
-        
         return newSelf
     }
 
@@ -142,7 +140,6 @@ public struct Picture: AdwaitaWidget {
     public func canShrink(_ canShrink: Bool? = true) -> Self {
         var newSelf = self
         newSelf.canShrink = canShrink
-        
         return newSelf
     }
 
@@ -150,7 +147,6 @@ public struct Picture: AdwaitaWidget {
     public func contentFit(_ contentFit: ContentFit?) -> Self {
         var newSelf = self
         newSelf.contentFit = contentFit
-        
         return newSelf
     }
 

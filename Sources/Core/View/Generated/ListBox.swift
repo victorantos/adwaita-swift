@@ -2,7 +2,7 @@
 //  ListBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -37,6 +37,15 @@ import LevenshteinTransformations
 /// setting a child as the placeholder by specifying “placeholder” as the “type”
 /// attribute of a `<child>` element. See [method@Gtk.ListBox.set_placeholder]
 /// for info.
+/// 
+/// # Shortcuts and Gestures
+/// 
+/// The following signals have default keybindings:
+/// 
+/// - [signal@Gtk.ListBox::move-cursor]
+/// - [signal@Gtk.ListBox::select-all]
+/// - [signal@Gtk.ListBox::toggle-cursor-row]
+/// - [signal@Gtk.ListBox::unselect-all]
 /// 
 /// # CSS nodes
 /// 
@@ -79,9 +88,19 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     var activateOnSingleClick: Bool?
     /// Whether to show separators between rows.
     var showSeparators: Bool?
-    /// activateCursorRow
+    /// Emitted when the cursor row is activated.
     var activateCursorRow: (() -> Void)?
-    /// moveCursor
+    /// Emitted when the user initiates a cursor movement.
+    /// 
+    /// The default bindings for this signal come in two variants, the variant with
+    /// the Shift modifier extends the selection, the variant without the Shift
+    /// modifier does not. There are too many key combinations to list them all
+    /// here.
+    /// 
+    /// - <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+    /// move by individual children
+    /// - <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
+    /// - <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
     var moveCursor: (() -> Void)?
     /// Emitted when a row has been activated by the user.
     var rowActivated: (() -> Void)?
@@ -101,7 +120,9 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     var selectAll: (() -> Void)?
     /// Emitted when the set of selected rows changes.
     var selectedRowsChanged: (() -> Void)?
-    /// toggleCursorRow
+    /// Emitted when the cursor row is toggled.
+    /// 
+    /// The default bindings for this signal is <kbd>Ctrl</kbd>+<kbd>␣</kbd>.
     var toggleCursorRow: (() -> Void)?
     /// Emitted to unselect all children of the box, if the selection
     /// mode permits it.
@@ -230,7 +251,6 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func acceptUnpairedRelease(_ acceptUnpairedRelease: Bool? = true) -> Self {
         var newSelf = self
         newSelf.acceptUnpairedRelease = acceptUnpairedRelease
-        
         return newSelf
     }
 
@@ -240,7 +260,6 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -249,7 +268,6 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func activateOnSingleClick(_ activateOnSingleClick: Bool? = true) -> Self {
         var newSelf = self
         newSelf.activateOnSingleClick = activateOnSingleClick
-        
         return newSelf
     }
 
@@ -257,18 +275,27 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     public func showSeparators(_ showSeparators: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showSeparators = showSeparators
-        
         return newSelf
     }
 
-    /// activateCursorRow
+    /// Emitted when the cursor row is activated.
     public func activateCursorRow(_ activateCursorRow: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.activateCursorRow = activateCursorRow
         return newSelf
     }
 
-    /// moveCursor
+    /// Emitted when the user initiates a cursor movement.
+    /// 
+    /// The default bindings for this signal come in two variants, the variant with
+    /// the Shift modifier extends the selection, the variant without the Shift
+    /// modifier does not. There are too many key combinations to list them all
+    /// here.
+    /// 
+    /// - <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+    /// move by individual children
+    /// - <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
+    /// - <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
     public func moveCursor(_ moveCursor: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.moveCursor = moveCursor
@@ -313,7 +340,9 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
         return newSelf
     }
 
-    /// toggleCursorRow
+    /// Emitted when the cursor row is toggled.
+    /// 
+    /// The default bindings for this signal is <kbd>Ctrl</kbd>+<kbd>␣</kbd>.
     public func toggleCursorRow(_ toggleCursorRow: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.toggleCursorRow = toggleCursorRow

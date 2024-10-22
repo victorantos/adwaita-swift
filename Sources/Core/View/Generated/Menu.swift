@@ -2,7 +2,7 @@
 //  Menu.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -208,7 +208,6 @@ if let active, newValue != active.wrappedValue {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -216,7 +215,6 @@ if let active, newValue != active.wrappedValue {
     public func active(_ active: Binding<Bool>?) -> Self {
         var newSelf = self
         newSelf.active = active
-        
         return newSelf
     }
 
@@ -224,7 +222,6 @@ if let active, newValue != active.wrappedValue {
     public func alwaysShowArrow(_ alwaysShowArrow: Bool? = true) -> Self {
         var newSelf = self
         newSelf.alwaysShowArrow = alwaysShowArrow
-        
         return newSelf
     }
 
@@ -233,7 +230,6 @@ if let active, newValue != active.wrappedValue {
     public func canShrink(_ canShrink: Bool? = true) -> Self {
         var newSelf = self
         newSelf.canShrink = canShrink
-        
         return newSelf
     }
 
@@ -241,7 +237,6 @@ if let active, newValue != active.wrappedValue {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -249,7 +244,6 @@ if let active, newValue != active.wrappedValue {
     public func hasFrame(_ hasFrame: Bool? = true) -> Self {
         var newSelf = self
         newSelf.hasFrame = hasFrame
-        
         return newSelf
     }
 
@@ -257,7 +251,6 @@ if let active, newValue != active.wrappedValue {
     public func iconName(_ iconName: String?) -> Self {
         var newSelf = self
         newSelf.iconName = iconName
-        
         return newSelf
     }
 
@@ -265,7 +258,6 @@ if let active, newValue != active.wrappedValue {
     public func label(_ label: String?) -> Self {
         var newSelf = self
         newSelf.label = label
-        
         return newSelf
     }
 
@@ -276,7 +268,6 @@ if let active, newValue != active.wrappedValue {
     public func menuModel(@ViewBuilder _ menuModel: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.menuModel = menuModel
-        
         return newSelf
     }
 
@@ -286,7 +277,6 @@ if let active, newValue != active.wrappedValue {
     public func primary(_ primary: Bool? = true) -> Self {
         var newSelf = self
         newSelf.primary = primary
-        
         return newSelf
     }
 
@@ -294,7 +284,6 @@ if let active, newValue != active.wrappedValue {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

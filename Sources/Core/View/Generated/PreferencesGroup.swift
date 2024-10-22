@@ -2,7 +2,7 @@
 //  PreferencesGroup.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -18,6 +18,11 @@ import LevenshteinTransformations
 /// To summarize the role of the preferences it gathers, a group can have both a
 /// title and a description. The title will be used by [class@PreferencesDialog]
 /// to let the user look for a preference.
+/// 
+/// The [property@PreferencesGroup:separate-rows] property can be used to
+/// separate the rows within the group, same as when using the
+/// [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+/// instead of `.boxed-list`.
 /// 
 /// ## AdwPreferencesGroup as GtkBuildable
 /// 
@@ -52,6 +57,12 @@ public struct PreferencesGroup: AdwaitaWidget {
     /// Suffixes are commonly used to show a button or a spinner for the whole
     /// group.
     var headerSuffix: (() -> Body)?
+    /// Whether to separate rows.
+    /// 
+    /// Equivalent to using the
+    /// [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+    /// on a [class@Gtk.ListBox] instead of `.boxed-list`.
+    var separateRows: Bool?
     /// The title for this group of preferences.
     var title: String?
     /// The body for the widget "child".
@@ -101,6 +112,9 @@ public struct PreferencesGroup: AdwaitaWidget {
             if let widget = storage.content["headerSuffix"]?.first {
                 headerSuffix?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
+            if let separateRows, updateProperties, (storage.previousState as? Self)?.separateRows != separateRows {
+                adw_preferences_group_set_separate_rows(widget?.cast(), separateRows.cBool)
+            }
             if let title, updateProperties, (storage.previousState as? Self)?.title != title {
                 adw_preferences_group_set_title(widget?.cast(), title)
             }
@@ -131,7 +145,6 @@ public struct PreferencesGroup: AdwaitaWidget {
     public func description(_ description: String?) -> Self {
         var newSelf = self
         newSelf.description = description
-        
         return newSelf
     }
 
@@ -144,7 +157,17 @@ public struct PreferencesGroup: AdwaitaWidget {
     public func headerSuffix(@ViewBuilder _ headerSuffix: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.headerSuffix = headerSuffix
-        
+        return newSelf
+    }
+
+    /// Whether to separate rows.
+    /// 
+    /// Equivalent to using the
+    /// [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
+    /// on a [class@Gtk.ListBox] instead of `.boxed-list`.
+    public func separateRows(_ separateRows: Bool? = true) -> Self {
+        var newSelf = self
+        newSelf.separateRows = separateRows
         return newSelf
     }
 
@@ -152,7 +175,6 @@ public struct PreferencesGroup: AdwaitaWidget {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 

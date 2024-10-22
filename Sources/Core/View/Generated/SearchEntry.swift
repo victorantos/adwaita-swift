@@ -2,7 +2,7 @@
 //  SearchEntry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -38,6 +38,15 @@ import LevenshteinTransformations
 /// 
 /// `GtkSearchEntry` provides only minimal API and should be used with
 /// the [iface@Gtk.Editable] API.
+/// 
+/// ## Shortcuts and Gestures
+/// 
+/// The following signals have default keybindings:
+/// 
+/// - [signal@Gtk.SearchEntry::activate]
+/// - [signal@Gtk.SearchEntry::next-match]
+/// - [signal@Gtk.SearchEntry::previous-match]
+/// - [signal@Gtk.SearchEntry::stop-search]
 /// 
 /// ## CSS Nodes
 /// 
@@ -91,7 +100,7 @@ public struct SearchEntry: AdwaitaWidget {
     var xalign: Float?
     /// Emitted when the entry is activated.
     /// 
-    /// The keybindings for this signal are all forms of the Enter key.
+    /// The keybindings for this signal are all forms of the <kbd>Enter</kbd> key.
     var activate: (() -> Void)?
     /// Emitted at the end of a single user-visible operation on the
     /// contents.
@@ -127,7 +136,7 @@ public struct SearchEntry: AdwaitaWidget {
     /// Applications should connect to it, to implement moving
     /// between matches.
     /// 
-    /// The default bindings for this signal is Ctrl-g.
+    /// The default bindings for this signal is <kbd>Ctrl</kbd>+<kbd>g</kbd>.
     var nextMatch: (() -> Void)?
     /// Emitted when the user initiates a move to the previous match
     /// for the current search string.
@@ -137,7 +146,8 @@ public struct SearchEntry: AdwaitaWidget {
     /// Applications should connect to it, to implement moving
     /// between matches.
     /// 
-    /// The default bindings for this signal is Ctrl-Shift-g.
+    /// The default bindings for this signal is
+    /// <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>g</kbd>.
     var previousMatch: (() -> Void)?
     /// Emitted with a delay. The length of the delay can be
     /// changed with the [property@Gtk.SearchEntry:search-delay]
@@ -152,7 +162,7 @@ public struct SearchEntry: AdwaitaWidget {
     /// Applications should connect to it, to implement hiding
     /// the search entry in this case.
     /// 
-    /// The default bindings for this signal is Escape.
+    /// The default bindings for this signal is <kbd>Escape</kbd>.
     var stopSearch: (() -> Void)?
 
     /// Initialize `SearchEntry`.
@@ -234,6 +244,9 @@ if let text, newValue != text.wrappedValue {
     text.wrappedValue = newValue
 }
         }
+            if let cursorPosition, updateProperties, (storage.previousState as? Self)?.cursorPosition != cursorPosition {
+                gtk_editable_set_position(widget, cursorPosition.cInt)
+            }
             if let editable, updateProperties, (storage.previousState as? Self)?.editable != editable {
                 gtk_editable_set_editable(widget, editable.cBool)
             }
@@ -255,6 +268,9 @@ if let text, newValue != text.wrappedValue {
             if let widthChars, updateProperties, (storage.previousState as? Self)?.widthChars != widthChars {
                 gtk_editable_set_width_chars(widget, widthChars.cInt)
             }
+            if let xalign, updateProperties, (storage.previousState as? Self)?.xalign != xalign {
+                gtk_editable_set_alignment(widget, xalign)
+            }
 
 
         }
@@ -272,7 +288,6 @@ if let text, newValue != text.wrappedValue {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -280,7 +295,6 @@ if let text, newValue != text.wrappedValue {
     public func activatesDefault(_ activatesDefault: Bool? = true) -> Self {
         var newSelf = self
         newSelf.activatesDefault = activatesDefault
-        
         return newSelf
     }
 
@@ -288,7 +302,6 @@ if let text, newValue != text.wrappedValue {
     public func cursorPosition(_ cursorPosition: Int?) -> Self {
         var newSelf = self
         newSelf.cursorPosition = cursorPosition
-        
         return newSelf
     }
 
@@ -296,7 +309,6 @@ if let text, newValue != text.wrappedValue {
     public func editable(_ editable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.editable = editable
-        
         return newSelf
     }
 
@@ -304,7 +316,6 @@ if let text, newValue != text.wrappedValue {
     public func enableUndo(_ enableUndo: Bool? = true) -> Self {
         var newSelf = self
         newSelf.enableUndo = enableUndo
-        
         return newSelf
     }
 
@@ -312,7 +323,6 @@ if let text, newValue != text.wrappedValue {
     public func maxWidthChars(_ maxWidthChars: Int?) -> Self {
         var newSelf = self
         newSelf.maxWidthChars = maxWidthChars
-        
         return newSelf
     }
 
@@ -321,7 +331,6 @@ if let text, newValue != text.wrappedValue {
     public func placeholderText(_ placeholderText: String?) -> Self {
         var newSelf = self
         newSelf.placeholderText = placeholderText
-        
         return newSelf
     }
 
@@ -330,7 +339,6 @@ if let text, newValue != text.wrappedValue {
     public func searchDelay(_ searchDelay: UInt?) -> Self {
         var newSelf = self
         newSelf.searchDelay = searchDelay
-        
         return newSelf
     }
 
@@ -338,7 +346,6 @@ if let text, newValue != text.wrappedValue {
     public func selectionBound(_ selectionBound: Int?) -> Self {
         var newSelf = self
         newSelf.selectionBound = selectionBound
-        
         return newSelf
     }
 
@@ -346,7 +353,6 @@ if let text, newValue != text.wrappedValue {
     public func text(_ text: Binding<String>?) -> Self {
         var newSelf = self
         newSelf.text = text
-        
         return newSelf
     }
 
@@ -354,7 +360,6 @@ if let text, newValue != text.wrappedValue {
     public func widthChars(_ widthChars: Int?) -> Self {
         var newSelf = self
         newSelf.widthChars = widthChars
-        
         return newSelf
     }
 
@@ -364,13 +369,12 @@ if let text, newValue != text.wrappedValue {
     public func xalign(_ xalign: Float?) -> Self {
         var newSelf = self
         newSelf.xalign = xalign
-        
         return newSelf
     }
 
     /// Emitted when the entry is activated.
     /// 
-    /// The keybindings for this signal are all forms of the Enter key.
+    /// The keybindings for this signal are all forms of the <kbd>Enter</kbd> key.
     public func activate(_ activate: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.activate = activate
@@ -426,7 +430,7 @@ if let text, newValue != text.wrappedValue {
     /// Applications should connect to it, to implement moving
     /// between matches.
     /// 
-    /// The default bindings for this signal is Ctrl-g.
+    /// The default bindings for this signal is <kbd>Ctrl</kbd>+<kbd>g</kbd>.
     public func nextMatch(_ nextMatch: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.nextMatch = nextMatch
@@ -441,7 +445,8 @@ if let text, newValue != text.wrappedValue {
     /// Applications should connect to it, to implement moving
     /// between matches.
     /// 
-    /// The default bindings for this signal is Ctrl-Shift-g.
+    /// The default bindings for this signal is
+    /// <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>g</kbd>.
     public func previousMatch(_ previousMatch: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.previousMatch = previousMatch
@@ -471,7 +476,7 @@ if let text, newValue != text.wrappedValue {
     /// Applications should connect to it, to implement hiding
     /// the search entry in this case.
     /// 
-    /// The default bindings for this signal is Escape.
+    /// The default bindings for this signal is <kbd>Escape</kbd>.
     public func stopSearch(_ stopSearch: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.stopSearch = stopSearch

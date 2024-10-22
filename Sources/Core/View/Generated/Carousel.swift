@@ -2,7 +2,7 @@
 //  Carousel.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -159,7 +159,6 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     public func allowLongSwipes(_ allowLongSwipes: Bool? = true) -> Self {
         var newSelf = self
         newSelf.allowLongSwipes = allowLongSwipes
-        
         return newSelf
     }
 
@@ -169,7 +168,6 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     public func allowMouseDrag(_ allowMouseDrag: Bool? = true) -> Self {
         var newSelf = self
         newSelf.allowMouseDrag = allowMouseDrag
-        
         return newSelf
     }
 
@@ -179,7 +177,6 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     public func allowScrollWheel(_ allowScrollWheel: Bool? = true) -> Self {
         var newSelf = self
         newSelf.allowScrollWheel = allowScrollWheel
-        
         return newSelf
     }
 
@@ -190,7 +187,6 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     public func interactive(_ interactive: Bool? = true) -> Self {
         var newSelf = self
         newSelf.interactive = interactive
-        
         return newSelf
     }
 
@@ -198,7 +194,6 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     public func nPages(_ nPages: UInt?) -> Self {
         var newSelf = self
         newSelf.nPages = nPages
-        
         return newSelf
     }
 
@@ -208,7 +203,6 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     public func revealDuration(_ revealDuration: UInt?) -> Self {
         var newSelf = self
         newSelf.revealDuration = revealDuration
-        
         return newSelf
     }
 
@@ -216,7 +210,6 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     public func spacing(_ spacing: UInt?) -> Self {
         var newSelf = self
         newSelf.spacing = spacing
-        
         return newSelf
     }
 

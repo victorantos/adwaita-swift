@@ -2,7 +2,7 @@
 //  NavigationView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -234,7 +234,6 @@ public struct NavigationView: AdwaitaWidget {
     public func animateTransitions(_ animateTransitions: Bool? = true) -> Self {
         var newSelf = self
         newSelf.animateTransitions = animateTransitions
-        
         return newSelf
     }
 
@@ -245,7 +244,6 @@ public struct NavigationView: AdwaitaWidget {
     public func popOnEscape(_ popOnEscape: Bool? = true) -> Self {
         var newSelf = self
         newSelf.popOnEscape = popOnEscape
-        
         return newSelf
     }
 

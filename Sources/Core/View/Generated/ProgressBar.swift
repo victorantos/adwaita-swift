@@ -2,7 +2,7 @@
 //  ProgressBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -145,7 +145,6 @@ public struct ProgressBar: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -153,7 +152,6 @@ public struct ProgressBar: AdwaitaWidget {
     public func fraction(_ fraction: Double?) -> Self {
         var newSelf = self
         newSelf.fraction = fraction
-        
         return newSelf
     }
 
@@ -161,7 +159,6 @@ public struct ProgressBar: AdwaitaWidget {
     public func inverted(_ inverted: Bool? = true) -> Self {
         var newSelf = self
         newSelf.inverted = inverted
-        
         return newSelf
     }
 
@@ -169,7 +166,6 @@ public struct ProgressBar: AdwaitaWidget {
     public func pulseStep(_ pulseStep: Double?) -> Self {
         var newSelf = self
         newSelf.pulseStep = pulseStep
-        
         return newSelf
     }
 
@@ -186,7 +182,6 @@ public struct ProgressBar: AdwaitaWidget {
     public func showText(_ showText: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showText = showText
-        
         return newSelf
     }
 
@@ -194,7 +189,6 @@ public struct ProgressBar: AdwaitaWidget {
     public func text(_ text: String?) -> Self {
         var newSelf = self
         newSelf.text = text
-        
         return newSelf
     }
 

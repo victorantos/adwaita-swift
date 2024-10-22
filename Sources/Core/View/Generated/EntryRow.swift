@@ -2,7 +2,7 @@
 //  EntryRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -52,6 +52,8 @@ public struct EntryRow: AdwaitaWidget {
     /// 
     /// Emoji replacement is done with :-delimited names, like `:heart:`.
     var enableEmojiCompletion: Bool?
+    /// Maximum number of characters for the entry.
+    var maxLength: Int?
     /// Whether to show the apply button.
     /// 
     /// When set to `TRUE`, typing text in the entry will reveal an apply button.
@@ -148,6 +150,9 @@ public struct EntryRow: AdwaitaWidget {
             if let enableEmojiCompletion, updateProperties, (storage.previousState as? Self)?.enableEmojiCompletion != enableEmojiCompletion {
                 adw_entry_row_set_enable_emoji_completion(widget?.cast(), enableEmojiCompletion.cBool)
             }
+            if let maxLength, updateProperties, (storage.previousState as? Self)?.maxLength != maxLength {
+                adw_entry_row_set_max_length(widget?.cast(), maxLength.cInt)
+            }
             if let showApplyButton, updateProperties, (storage.previousState as? Self)?.showApplyButton != showApplyButton {
                 adw_entry_row_set_show_apply_button(widget?.cast(), showApplyButton.cBool)
             }
@@ -202,7 +207,6 @@ public struct EntryRow: AdwaitaWidget {
     public func activatesDefault(_ activatesDefault: Bool? = true) -> Self {
         var newSelf = self
         newSelf.activatesDefault = activatesDefault
-        
         return newSelf
     }
 
@@ -212,7 +216,13 @@ public struct EntryRow: AdwaitaWidget {
     public func enableEmojiCompletion(_ enableEmojiCompletion: Bool? = true) -> Self {
         var newSelf = self
         newSelf.enableEmojiCompletion = enableEmojiCompletion
-        
+        return newSelf
+    }
+
+    /// Maximum number of characters for the entry.
+    public func maxLength(_ maxLength: Int?) -> Self {
+        var newSelf = self
+        newSelf.maxLength = maxLength
         return newSelf
     }
 
@@ -228,7 +238,6 @@ public struct EntryRow: AdwaitaWidget {
     public func showApplyButton(_ showApplyButton: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showApplyButton = showApplyButton
-        
         return newSelf
     }
 
@@ -236,7 +245,6 @@ public struct EntryRow: AdwaitaWidget {
     public func textLength(_ textLength: UInt?) -> Self {
         var newSelf = self
         newSelf.textLength = textLength
-        
         return newSelf
     }
 
@@ -247,7 +255,6 @@ public struct EntryRow: AdwaitaWidget {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -257,7 +264,6 @@ public struct EntryRow: AdwaitaWidget {
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
-        
         return newSelf
     }
 
@@ -269,7 +275,6 @@ public struct EntryRow: AdwaitaWidget {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 
@@ -277,7 +282,6 @@ public struct EntryRow: AdwaitaWidget {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

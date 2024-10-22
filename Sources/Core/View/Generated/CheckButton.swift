@@ -2,7 +2,7 @@
 //  CheckButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -48,10 +48,16 @@ import LevenshteinTransformations
 /// `GAction` with a target for each button. Using the `toggled` signals to keep
 /// track of the group changes and state is discouraged.
 /// 
+/// # Shortcuts and Gestures
+/// 
+/// `GtkCheckButton` supports the following keyboard shortcuts:
+/// 
+/// - <kbd>␣</kbd> or <kbd>Enter</kbd> activates the button.
+/// 
 /// # CSS nodes
 /// 
 /// ```
-/// checkbutton[.text-button]
+/// checkbutton[.text-button][.grouped]
 /// ├── check
 /// ╰── [label]
 /// ```
@@ -76,7 +82,7 @@ public struct CheckButton: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     var accessibleRole: String?
-/// action-name
+    /// The name of the action with which this widget should be associated.
     var actionName: String?
     /// If the check button is active.
     /// 
@@ -193,15 +199,13 @@ if let active, newValue != active.wrappedValue {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
-/// action-name
+    /// The name of the action with which this widget should be associated.
     public func actionName(_ actionName: String?) -> Self {
         var newSelf = self
         newSelf.actionName = actionName
-        
         return newSelf
     }
 
@@ -212,7 +216,6 @@ if let active, newValue != active.wrappedValue {
     public func active(_ active: Binding<Bool>?) -> Self {
         var newSelf = self
         newSelf.active = active
-        
         return newSelf
     }
 
@@ -220,7 +223,6 @@ if let active, newValue != active.wrappedValue {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -231,7 +233,6 @@ if let active, newValue != active.wrappedValue {
     public func inconsistent(_ inconsistent: Bool? = true) -> Self {
         var newSelf = self
         newSelf.inconsistent = inconsistent
-        
         return newSelf
     }
 
@@ -239,7 +240,6 @@ if let active, newValue != active.wrappedValue {
     public func label(_ label: String?) -> Self {
         var newSelf = self
         newSelf.label = label
-        
         return newSelf
     }
 
@@ -248,7 +248,6 @@ if let active, newValue != active.wrappedValue {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

@@ -78,7 +78,9 @@ struct GenerationConfiguration {
         .init(
             class: "ComboRow",
             bindings: [.init(property: "selected")],
-            excludeProperties: ["expression", "factory", "list-factory", "model", "selected-item"],
+            excludeProperties: [
+                "expression", "factory", "list-factory", "model", "selected-item", "header-factory", "search-match-mode"
+            ],
             cast: true
         ),
         .init(

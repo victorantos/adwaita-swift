@@ -2,7 +2,7 @@
 //  SwitchRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -28,6 +28,10 @@ import LevenshteinTransformations
 /// 
 /// The [property@SwitchRow:active] property should be connected to in order to
 /// monitor changes to the active state.
+/// 
+/// ## Accessibility
+/// 
+/// `AdwSwitchRow` uses the `GTK_ACCESSIBLE_ROLE_SWITCH` role.
 public struct SwitchRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -197,7 +201,6 @@ if let active, newValue != active.wrappedValue {
     public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.activatableWidget = activatableWidget
-        
         return newSelf
     }
 
@@ -205,7 +208,6 @@ if let active, newValue != active.wrappedValue {
     public func active(_ active: Binding<Bool>?) -> Self {
         var newSelf = self
         newSelf.active = active
-        
         return newSelf
     }
 
@@ -216,7 +218,6 @@ if let active, newValue != active.wrappedValue {
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
-        
         return newSelf
     }
 
@@ -227,7 +228,6 @@ if let active, newValue != active.wrappedValue {
     public func subtitleLines(_ subtitleLines: Int?) -> Self {
         var newSelf = self
         newSelf.subtitleLines = subtitleLines
-        
         return newSelf
     }
 
@@ -237,7 +237,6 @@ if let active, newValue != active.wrappedValue {
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.subtitleSelectable = subtitleSelectable
-        
         return newSelf
     }
 
@@ -248,7 +247,6 @@ if let active, newValue != active.wrappedValue {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -258,7 +256,6 @@ if let active, newValue != active.wrappedValue {
     public func titleLines(_ titleLines: Int?) -> Self {
         var newSelf = self
         newSelf.titleLines = titleLines
-        
         return newSelf
     }
 
@@ -268,7 +265,6 @@ if let active, newValue != active.wrappedValue {
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
-        
         return newSelf
     }
 
@@ -280,7 +276,6 @@ if let active, newValue != active.wrappedValue {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 
@@ -288,7 +283,6 @@ if let active, newValue != active.wrappedValue {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

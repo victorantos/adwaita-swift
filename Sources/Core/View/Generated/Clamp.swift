@@ -2,7 +2,7 @@
 //  Clamp.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -21,7 +21,9 @@ import LevenshteinTransformations
 /// allocated the minimum size it can fit in instead.
 /// 
 /// `AdwClamp` can scale with the text scale factor, use the
-/// [property@ClampLayout:unit] property to enable that behavior.
+/// [property@Clamp:unit] property to enable that behavior.
+/// 
+/// See also: [class@ClampLayout], [class@ClampScrollable].
 /// 
 /// ## CSS nodes
 /// 
@@ -111,7 +113,6 @@ public struct Clamp: AdwaitaWidget {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -121,7 +122,6 @@ public struct Clamp: AdwaitaWidget {
     public func maximumSize(_ maximumSize: Int?) -> Self {
         var newSelf = self
         newSelf.maximumSize = maximumSize
-        
         return newSelf
     }
 
@@ -142,7 +142,6 @@ public struct Clamp: AdwaitaWidget {
     public func tighteningThreshold(_ tighteningThreshold: Int?) -> Self {
         var newSelf = self
         newSelf.tighteningThreshold = tighteningThreshold
-        
         return newSelf
     }
 

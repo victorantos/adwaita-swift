@@ -2,7 +2,7 @@
 //  ToolbarView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -242,7 +242,6 @@ public struct ToolbarView: AdwaitaWidget {
     public func bottomBarHeight(_ bottomBarHeight: Int?) -> Self {
         var newSelf = self
         newSelf.bottomBarHeight = bottomBarHeight
-        
         return newSelf
     }
 
@@ -250,7 +249,6 @@ public struct ToolbarView: AdwaitaWidget {
     public func content(@ViewBuilder _ content: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.content = content
-        
         return newSelf
     }
 
@@ -264,7 +262,6 @@ public struct ToolbarView: AdwaitaWidget {
     public func extendContentToBottomEdge(_ extendContentToBottomEdge: Bool? = true) -> Self {
         var newSelf = self
         newSelf.extendContentToBottomEdge = extendContentToBottomEdge
-        
         return newSelf
     }
 
@@ -277,7 +274,6 @@ public struct ToolbarView: AdwaitaWidget {
     public func extendContentToTopEdge(_ extendContentToTopEdge: Bool? = true) -> Self {
         var newSelf = self
         newSelf.extendContentToTopEdge = extendContentToTopEdge
-        
         return newSelf
     }
 
@@ -293,7 +289,6 @@ public struct ToolbarView: AdwaitaWidget {
     public func revealBottomBars(_ revealBottomBars: Bool? = true) -> Self {
         var newSelf = self
         newSelf.revealBottomBars = revealBottomBars
-        
         return newSelf
     }
 
@@ -309,7 +304,6 @@ public struct ToolbarView: AdwaitaWidget {
     public func revealTopBars(_ revealTopBars: Bool? = true) -> Self {
         var newSelf = self
         newSelf.revealTopBars = revealTopBars
-        
         return newSelf
     }
 
@@ -322,7 +316,6 @@ public struct ToolbarView: AdwaitaWidget {
     public func topBarHeight(_ topBarHeight: Int?) -> Self {
         var newSelf = self
         newSelf.topBarHeight = topBarHeight
-        
         return newSelf
     }
 

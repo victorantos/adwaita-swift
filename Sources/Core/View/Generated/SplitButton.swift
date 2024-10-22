@@ -2,7 +2,7 @@
 //  SplitButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -36,6 +36,17 @@ import LevenshteinTransformations
 /// The main CSS node will contain the `.image-button` or `.text-button` style
 /// classes matching the button contents. The nested button nodes will never
 /// contain them.
+/// 
+/// ## Style classes
+/// 
+/// `AdwSplitButton` can use some of the same style classes as [class@Gtk.Button]:
+/// 
+/// - [`.suggested-action`](style-classes.html#suggested-action)
+/// - [`.destructive-action`](style-classes.html#destructive-action)
+/// - [`.flat`](style-classes.html#flat)
+/// - [`.raised`](style-classes.html#raised)
+/// 
+/// Other style classes, like `.pill`, cannot be used.
 /// 
 /// ## Accessibility
 /// 
@@ -185,7 +196,6 @@ public struct SplitButton: AdwaitaWidget {
     public func canShrink(_ canShrink: Bool? = true) -> Self {
         var newSelf = self
         newSelf.canShrink = canShrink
-        
         return newSelf
     }
 
@@ -196,7 +206,6 @@ public struct SplitButton: AdwaitaWidget {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -206,7 +215,6 @@ public struct SplitButton: AdwaitaWidget {
     public func dropdownTooltip(_ dropdownTooltip: String?) -> Self {
         var newSelf = self
         newSelf.dropdownTooltip = dropdownTooltip
-        
         return newSelf
     }
 
@@ -217,7 +225,6 @@ public struct SplitButton: AdwaitaWidget {
     public func iconName(_ iconName: String?) -> Self {
         var newSelf = self
         newSelf.iconName = iconName
-        
         return newSelf
     }
 
@@ -228,7 +235,6 @@ public struct SplitButton: AdwaitaWidget {
     public func label(_ label: String?) -> Self {
         var newSelf = self
         newSelf.label = label
-        
         return newSelf
     }
 
@@ -245,7 +251,6 @@ public struct SplitButton: AdwaitaWidget {
     public func menuModel(@ViewBuilder _ menuModel: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.menuModel = menuModel
-        
         return newSelf
     }
 
@@ -255,7 +260,6 @@ public struct SplitButton: AdwaitaWidget {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

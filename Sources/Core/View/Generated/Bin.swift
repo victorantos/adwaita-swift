@@ -2,7 +2,7 @@
 //  Bin.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -77,7 +77,6 @@ public struct Bin: AdwaitaWidget {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 

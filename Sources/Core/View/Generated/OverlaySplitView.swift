@@ -2,7 +2,7 @@
 //  OverlaySplitView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -40,7 +40,7 @@ import LevenshteinTransformations
 /// setting the `collapsed` property to `TRUE` on small widths, as follows:
 /// 
 /// ```xml
-/// <object class="AdwWindow"><property name="width-request">360</property><property name="height-request">200</property><property name="default-width">800</property><property name="default-height">800</property><child><object class="AdwBreakpoint"><condition>max-width: 400sp</condition><setter object="split_view" property="collapsed">True</setter></object></child><property name="content"><object class="AdwOverlaySplitView" id="split_view"><property name="sidebar"><!-- ... --></property><property name="content"><!-- ... --></property></object></property></object>
+/// <object class="AdwWindow"><property name="default-width">800</property><property name="default-height">800</property><child><object class="AdwBreakpoint"><condition>max-width: 400sp</condition><setter object="split_view" property="collapsed">True</setter></object></child><property name="content"><object class="AdwOverlaySplitView" id="split_view"><property name="sidebar"><!-- ... --></property><property name="content"><!-- ... --></property></object></property></object>
 /// ```
 /// 
 /// `AdwOverlaySplitView` is often used for implementing the
@@ -261,7 +261,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func collapsed(_ collapsed: Bool? = true) -> Self {
         var newSelf = self
         newSelf.collapsed = collapsed
-        
         return newSelf
     }
 
@@ -269,7 +268,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func content(@ViewBuilder _ content: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.content = content
-        
         return newSelf
     }
 
@@ -279,7 +277,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func enableHideGesture(_ enableHideGesture: Bool? = true) -> Self {
         var newSelf = self
         newSelf.enableHideGesture = enableHideGesture
-        
         return newSelf
     }
 
@@ -289,7 +286,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func enableShowGesture(_ enableShowGesture: Bool? = true) -> Self {
         var newSelf = self
         newSelf.enableShowGesture = enableShowGesture
-        
         return newSelf
     }
 
@@ -303,7 +299,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func maxSidebarWidth(_ maxSidebarWidth: Double?) -> Self {
         var newSelf = self
         newSelf.maxSidebarWidth = maxSidebarWidth
-        
         return newSelf
     }
 
@@ -317,7 +312,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func minSidebarWidth(_ minSidebarWidth: Double?) -> Self {
         var newSelf = self
         newSelf.minSidebarWidth = minSidebarWidth
-        
         return newSelf
     }
 
@@ -329,7 +323,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func pinSidebar(_ pinSidebar: Bool? = true) -> Self {
         var newSelf = self
         newSelf.pinSidebar = pinSidebar
-        
         return newSelf
     }
 
@@ -337,7 +330,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func showSidebar(_ showSidebar: Binding<Bool>?) -> Self {
         var newSelf = self
         newSelf.showSidebar = showSidebar
-        
         return newSelf
     }
 
@@ -345,7 +337,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func sidebar(@ViewBuilder _ sidebar: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.sidebar = sidebar
-        
         return newSelf
     }
 
@@ -360,7 +351,6 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     public func sidebarWidthFraction(_ sidebarWidthFraction: Double?) -> Self {
         var newSelf = self
         newSelf.sidebarWidthFraction = sidebarWidthFraction
-        
         return newSelf
     }
 

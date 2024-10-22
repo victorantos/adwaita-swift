@@ -2,7 +2,7 @@
 //  CenterBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -146,7 +146,6 @@ public struct CenterBox: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -154,7 +153,6 @@ public struct CenterBox: AdwaitaWidget {
     public func centerWidget(@ViewBuilder _ centerWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.centerWidget = centerWidget
-        
         return newSelf
     }
 
@@ -166,7 +164,6 @@ public struct CenterBox: AdwaitaWidget {
     public func endWidget(@ViewBuilder _ endWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.endWidget = endWidget
-        
         return newSelf
     }
 
@@ -181,7 +178,6 @@ public struct CenterBox: AdwaitaWidget {
     public func shrinkCenterLast(_ shrinkCenterLast: Bool? = true) -> Self {
         var newSelf = self
         newSelf.shrinkCenterLast = shrinkCenterLast
-        
         return newSelf
     }
 
@@ -193,7 +189,6 @@ public struct CenterBox: AdwaitaWidget {
     public func startWidget(@ViewBuilder _ startWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.startWidget = startWidget
-        
         return newSelf
     }
 

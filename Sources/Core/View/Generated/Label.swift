@@ -2,7 +2,7 @@
 //  Label.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -14,6 +14,40 @@ import LevenshteinTransformations
 /// such as a [class@Button].
 /// 
 /// ![An example GtkLabel](label.png)
+/// 
+/// ## Shortcuts and Gestures
+/// 
+/// `GtkLabel` supports the following keyboard shortcuts, when the cursor is
+/// visible:
+/// 
+/// - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+/// - <kbd>Ctrl</kbd>+<kbd>A</kbd> or <kbd>Ctrl</kbd>+<kbd>&sol;</kbd>
+/// selects all.
+/// - <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd> or
+/// <kbd>Ctrl</kbd>+<kbd>&bsol;</kbd> unselects all.
+/// 
+/// Additionally, the following signals have default keybindings:
+/// 
+/// - [signal@Gtk.Label::activate-current-link]
+/// - [signal@Gtk.Label::copy-clipboard]
+/// - [signal@Gtk.Label::move-cursor]
+/// 
+/// ## Actions
+/// 
+/// `GtkLabel` defines a set of built-in actions:
+/// 
+/// - `clipboard.copy` copies the text to the clipboard.
+/// - `clipboard.cut` doesn't do anything, since text in labels can't be deleted.
+/// - `clipboard.paste` doesn't do anything, since text in labels can't be
+/// edited.
+/// - `link.open` opens the link, when activated on a link inside the label.
+/// - `link.copy` copies the link to the clipboard, when activated on a link
+/// inside the label.
+/// - `menu.popup` opens the context menu.
+/// - `selection.delete` doesn't do anything, since text in labels can't be
+/// deleted.
+/// - `selection.select-all` selects all of the text, if the label allows
+/// selection.
 /// 
 /// ## CSS nodes
 /// 
@@ -360,7 +394,6 @@ public struct Label: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -379,7 +412,6 @@ public struct Label: AdwaitaWidget {
     public func label(_ label: String) -> Self {
         var newSelf = self
         newSelf.label = label
-        
         return newSelf
     }
 
@@ -391,7 +423,6 @@ public struct Label: AdwaitaWidget {
     public func lines(_ lines: Int?) -> Self {
         var newSelf = self
         newSelf.lines = lines
-        
         return newSelf
     }
 
@@ -405,7 +436,6 @@ public struct Label: AdwaitaWidget {
     public func maxWidthChars(_ maxWidthChars: Int?) -> Self {
         var newSelf = self
         newSelf.maxWidthChars = maxWidthChars
-        
         return newSelf
     }
 
@@ -413,7 +443,6 @@ public struct Label: AdwaitaWidget {
     public func mnemonicKeyval(_ mnemonicKeyval: UInt?) -> Self {
         var newSelf = self
         newSelf.mnemonicKeyval = mnemonicKeyval
-        
         return newSelf
     }
 
@@ -421,7 +450,6 @@ public struct Label: AdwaitaWidget {
     public func mnemonicWidget(@ViewBuilder _ mnemonicWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.mnemonicWidget = mnemonicWidget
-        
         return newSelf
     }
 
@@ -429,7 +457,6 @@ public struct Label: AdwaitaWidget {
     public func selectable(_ selectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.selectable = selectable
-        
         return newSelf
     }
 
@@ -442,7 +469,6 @@ public struct Label: AdwaitaWidget {
     public func singleLineMode(_ singleLineMode: Bool? = true) -> Self {
         var newSelf = self
         newSelf.singleLineMode = singleLineMode
-        
         return newSelf
     }
 
@@ -452,7 +478,6 @@ public struct Label: AdwaitaWidget {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 
@@ -461,7 +486,6 @@ public struct Label: AdwaitaWidget {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 
@@ -475,7 +499,6 @@ public struct Label: AdwaitaWidget {
     public func widthChars(_ widthChars: Int?) -> Self {
         var newSelf = self
         newSelf.widthChars = widthChars
-        
         return newSelf
     }
 
@@ -483,7 +506,6 @@ public struct Label: AdwaitaWidget {
     public func wrap(_ wrap: Bool? = true) -> Self {
         var newSelf = self
         newSelf.wrap = wrap
-        
         return newSelf
     }
 
@@ -494,7 +516,6 @@ public struct Label: AdwaitaWidget {
     public func xalign(_ xalign: Float?) -> Self {
         var newSelf = self
         newSelf.xalign = xalign
-        
         return newSelf
     }
 
@@ -505,7 +526,6 @@ public struct Label: AdwaitaWidget {
     public func yalign(_ yalign: Float?) -> Self {
         var newSelf = self
         newSelf.yalign = yalign
-        
         return newSelf
     }
 

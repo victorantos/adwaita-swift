@@ -2,7 +2,7 @@
 //  LinkButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -26,6 +26,19 @@ import LevenshteinTransformations
 /// [signal@Gtk.LinkButton::activate-link] signal and returning %TRUE from
 /// the signal handler.
 /// 
+/// # Shortcuts and Gestures
+/// 
+/// `GtkLinkButton` supports the following keyboard shortcuts:
+/// 
+/// - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
+/// 
+/// # Actions
+/// 
+/// `GtkLinkButton` defines a set of built-in actions:
+/// 
+/// - `clipboard.copy` copies the url to the clipboard.
+/// - `menu.popup` opens the context menu.
+/// 
 /// # CSS nodes
 /// 
 /// `GtkLinkButton` has a single CSS node with name button. To differentiate
@@ -45,7 +58,7 @@ public struct LinkButton: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     var accessibleRole: String?
-/// action-name
+    /// The name of the action with which this widget should be associated.
     var actionName: String?
     /// Whether the size of the button can be made smaller than the natural
     /// size of its contents.
@@ -170,15 +183,13 @@ public struct LinkButton: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
-/// action-name
+    /// The name of the action with which this widget should be associated.
     public func actionName(_ actionName: String?) -> Self {
         var newSelf = self
         newSelf.actionName = actionName
-        
         return newSelf
     }
 
@@ -192,7 +203,6 @@ public struct LinkButton: AdwaitaWidget {
     public func canShrink(_ canShrink: Bool? = true) -> Self {
         var newSelf = self
         newSelf.canShrink = canShrink
-        
         return newSelf
     }
 
@@ -200,7 +210,6 @@ public struct LinkButton: AdwaitaWidget {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -208,7 +217,6 @@ public struct LinkButton: AdwaitaWidget {
     public func hasFrame(_ hasFrame: Bool? = true) -> Self {
         var newSelf = self
         newSelf.hasFrame = hasFrame
-        
         return newSelf
     }
 
@@ -216,7 +224,6 @@ public struct LinkButton: AdwaitaWidget {
     public func iconName(_ iconName: String?) -> Self {
         var newSelf = self
         newSelf.iconName = iconName
-        
         return newSelf
     }
 
@@ -224,7 +231,6 @@ public struct LinkButton: AdwaitaWidget {
     public func label(_ label: String?) -> Self {
         var newSelf = self
         newSelf.label = label
-        
         return newSelf
     }
 
@@ -232,7 +238,6 @@ public struct LinkButton: AdwaitaWidget {
     public func uri(_ uri: String) -> Self {
         var newSelf = self
         newSelf.uri = uri
-        
         return newSelf
     }
 
@@ -241,7 +246,6 @@ public struct LinkButton: AdwaitaWidget {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 
@@ -251,7 +255,6 @@ public struct LinkButton: AdwaitaWidget {
     public func visited(_ visited: Bool? = true) -> Self {
         var newSelf = self
         newSelf.visited = visited
-        
         return newSelf
     }
 

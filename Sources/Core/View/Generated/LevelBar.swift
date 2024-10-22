@@ -2,7 +2,7 @@
 //  LevelBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -199,7 +199,6 @@ public struct LevelBar: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -210,7 +209,6 @@ public struct LevelBar: AdwaitaWidget {
     public func inverted(_ inverted: Bool? = true) -> Self {
         var newSelf = self
         newSelf.inverted = inverted
-        
         return newSelf
     }
 
@@ -218,7 +216,6 @@ public struct LevelBar: AdwaitaWidget {
     public func maxValue(_ maxValue: Double?) -> Self {
         var newSelf = self
         newSelf.maxValue = maxValue
-        
         return newSelf
     }
 
@@ -226,7 +223,6 @@ public struct LevelBar: AdwaitaWidget {
     public func minValue(_ minValue: Double?) -> Self {
         var newSelf = self
         newSelf.minValue = minValue
-        
         return newSelf
     }
 
@@ -234,7 +230,6 @@ public struct LevelBar: AdwaitaWidget {
     public func value(_ value: Double?) -> Self {
         var newSelf = self
         newSelf.value = value
-        
         return newSelf
     }
 

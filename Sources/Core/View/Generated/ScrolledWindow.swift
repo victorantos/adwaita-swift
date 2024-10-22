@@ -2,7 +2,7 @@
 //  ScrolledWindow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -53,6 +53,12 @@ import LevenshteinTransformations
 /// scrollbars are desired although no mouse is present, this behaviour
 /// can be turned off with the [property@Gtk.ScrolledWindow:overlay-scrolling]
 /// property.
+/// 
+/// # Shortcuts and Gestures
+/// 
+/// The following signals have default keybindings:
+/// 
+/// - [signal@Gtk.ScrolledWindow::scroll-child]
 /// 
 /// # CSS nodes
 /// 
@@ -154,8 +160,8 @@ public struct ScrolledWindow: AdwaitaWidget {
     /// This is a [keybinding signal](class.SignalAction.html).
     /// 
     /// The default bindings for this signal are
-    /// `Ctrl + Tab` to move forward and `Ctrl + Shift + Tab` to
-    /// move backward.
+    /// <kbd>Ctrl</kbd>+<kbd>Tab</kbd> to move forward and
+    /// <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>` to move backward.
     var moveFocusOut: (() -> Void)?
     /// Emitted when a keybinding that scrolls is pressed.
     /// 
@@ -264,7 +270,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -276,7 +281,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -284,7 +288,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func hasFrame(_ hasFrame: Bool? = true) -> Self {
         var newSelf = self
         newSelf.hasFrame = hasFrame
-        
         return newSelf
     }
 
@@ -294,7 +297,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func kineticScrolling(_ kineticScrolling: Bool? = true) -> Self {
         var newSelf = self
         newSelf.kineticScrolling = kineticScrolling
-        
         return newSelf
     }
 
@@ -302,7 +304,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func maxContentHeight(_ maxContentHeight: Int?) -> Self {
         var newSelf = self
         newSelf.maxContentHeight = maxContentHeight
-        
         return newSelf
     }
 
@@ -310,7 +311,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func maxContentWidth(_ maxContentWidth: Int?) -> Self {
         var newSelf = self
         newSelf.maxContentWidth = maxContentWidth
-        
         return newSelf
     }
 
@@ -318,7 +318,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func minContentHeight(_ minContentHeight: Int?) -> Self {
         var newSelf = self
         newSelf.minContentHeight = minContentHeight
-        
         return newSelf
     }
 
@@ -326,7 +325,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func minContentWidth(_ minContentWidth: Int?) -> Self {
         var newSelf = self
         newSelf.minContentWidth = minContentWidth
-        
         return newSelf
     }
 
@@ -341,7 +339,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func overlayScrolling(_ overlayScrolling: Bool? = true) -> Self {
         var newSelf = self
         newSelf.overlayScrolling = overlayScrolling
-        
         return newSelf
     }
 
@@ -353,7 +350,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func propagateNaturalHeight(_ propagateNaturalHeight: Bool? = true) -> Self {
         var newSelf = self
         newSelf.propagateNaturalHeight = propagateNaturalHeight
-        
         return newSelf
     }
 
@@ -365,7 +361,6 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func propagateNaturalWidth(_ propagateNaturalWidth: Bool? = true) -> Self {
         var newSelf = self
         newSelf.propagateNaturalWidth = propagateNaturalWidth
-        
         return newSelf
     }
 
@@ -405,8 +400,8 @@ public struct ScrolledWindow: AdwaitaWidget {
     /// This is a [keybinding signal](class.SignalAction.html).
     /// 
     /// The default bindings for this signal are
-    /// `Ctrl + Tab` to move forward and `Ctrl + Shift + Tab` to
-    /// move backward.
+    /// <kbd>Ctrl</kbd>+<kbd>Tab</kbd> to move forward and
+    /// <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>` to move backward.
     public func moveFocusOut(_ moveFocusOut: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.moveFocusOut = moveFocusOut

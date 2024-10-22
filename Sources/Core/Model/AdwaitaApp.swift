@@ -100,7 +100,9 @@ public class AdwaitaApp: AppStorage {
             g_action_map_add_action(.init(pointer), action)
             signals[id] = data
         }
-        gtk_application_set_accels_for_action(pointer, (window == nil ? "app." : "win.") + id, [shortcut].cArray)
+        let array = [shortcut].cArray
+        gtk_application_set_accels_for_action(pointer, (window == nil ? "app." : "win.") + id, array)
+        array?.deallocate()
     }
 
     /// Remove a keyboard shortcut from the application.

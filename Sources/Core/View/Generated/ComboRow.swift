@@ -2,7 +2,7 @@
 //  ComboRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -236,7 +236,6 @@ if let selected, newValue != selected.wrappedValue {
     public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.activatableWidget = activatableWidget
-        
         return newSelf
     }
 
@@ -249,7 +248,6 @@ if let selected, newValue != selected.wrappedValue {
     public func enableSearch(_ enableSearch: Bool? = true) -> Self {
         var newSelf = self
         newSelf.enableSearch = enableSearch
-        
         return newSelf
     }
 
@@ -260,7 +258,6 @@ if let selected, newValue != selected.wrappedValue {
     public func selected(_ selected: Binding<UInt>?) -> Self {
         var newSelf = self
         newSelf.selected = selected
-        
         return newSelf
     }
 
@@ -271,7 +268,6 @@ if let selected, newValue != selected.wrappedValue {
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
-        
         return newSelf
     }
 
@@ -282,7 +278,6 @@ if let selected, newValue != selected.wrappedValue {
     public func subtitleLines(_ subtitleLines: Int?) -> Self {
         var newSelf = self
         newSelf.subtitleLines = subtitleLines
-        
         return newSelf
     }
 
@@ -292,7 +287,6 @@ if let selected, newValue != selected.wrappedValue {
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.subtitleSelectable = subtitleSelectable
-        
         return newSelf
     }
 
@@ -303,7 +297,6 @@ if let selected, newValue != selected.wrappedValue {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -313,7 +306,6 @@ if let selected, newValue != selected.wrappedValue {
     public func titleLines(_ titleLines: Int?) -> Self {
         var newSelf = self
         newSelf.titleLines = titleLines
-        
         return newSelf
     }
 
@@ -323,7 +315,6 @@ if let selected, newValue != selected.wrappedValue {
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
-        
         return newSelf
     }
 
@@ -335,7 +326,6 @@ if let selected, newValue != selected.wrappedValue {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 
@@ -351,7 +341,6 @@ if let selected, newValue != selected.wrappedValue {
     public func useSubtitle(_ useSubtitle: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useSubtitle = useSubtitle
-        
         return newSelf
     }
 
@@ -359,7 +348,6 @@ if let selected, newValue != selected.wrappedValue {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

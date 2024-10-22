@@ -2,7 +2,7 @@
 //  PreferencesRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -100,7 +100,6 @@ public struct PreferencesRow: AdwaitaWidget {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -110,7 +109,6 @@ public struct PreferencesRow: AdwaitaWidget {
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
-        
         return newSelf
     }
 
@@ -122,7 +120,6 @@ public struct PreferencesRow: AdwaitaWidget {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 
@@ -130,7 +127,6 @@ public struct PreferencesRow: AdwaitaWidget {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

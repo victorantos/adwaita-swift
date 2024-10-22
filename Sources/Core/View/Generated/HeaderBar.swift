@@ -2,7 +2,7 @@
 //  HeaderBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -19,7 +19,7 @@ import LevenshteinTransformations
 /// ## Dialog Integration
 /// 
 /// When placed inside an [class@Dialog], `AdwHeaderBar` will display the dialog
-/// title intead of window title. It will also adjust the decoration layout to
+/// title instead of window title. It will also adjust the decoration layout to
 /// ensure it always has a close button and nothing else. Set
 /// [property@HeaderBar:show-start-title-buttons] and
 /// [property@HeaderBar:show-end-title-buttons] to `FALSE` to remove it if it's
@@ -43,6 +43,13 @@ import LevenshteinTransformations
 /// When placed inside [class@NavigationSplitView] or [class@OverlaySplitView],
 /// `AdwHeaderBar` will automatically hide the title buttons other than at the
 /// edges of the window.
+/// 
+/// ## Bottom Sheet Integration
+/// 
+/// When played inside [class@BottomSheet], `AdwHeaderBar` will not show the title
+/// unless [property@BottomSheet:show-drag-handle] is set to `FALSE`, regardless
+/// of [property@HeaderBar:show-title]. This only applies to the default title,
+/// titles set with [property@HeaderBar:title-widget] will still be shown.
 /// 
 /// ## Centering Policy
 /// 
@@ -265,7 +272,6 @@ public struct HeaderBar: AdwaitaWidget {
     public func decorationLayout(_ decorationLayout: String?) -> Self {
         var newSelf = self
         newSelf.decorationLayout = decorationLayout
-        
         return newSelf
     }
 
@@ -276,7 +282,6 @@ public struct HeaderBar: AdwaitaWidget {
     public func showBackButton(_ showBackButton: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showBackButton = showBackButton
-        
         return newSelf
     }
 
@@ -291,7 +296,6 @@ public struct HeaderBar: AdwaitaWidget {
     public func showEndTitleButtons(_ showEndTitleButtons: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showEndTitleButtons = showEndTitleButtons
-        
         return newSelf
     }
 
@@ -306,7 +310,6 @@ public struct HeaderBar: AdwaitaWidget {
     public func showStartTitleButtons(_ showStartTitleButtons: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showStartTitleButtons = showStartTitleButtons
-        
         return newSelf
     }
 
@@ -314,7 +317,6 @@ public struct HeaderBar: AdwaitaWidget {
     public func showTitle(_ showTitle: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showTitle = showTitle
-        
         return newSelf
     }
 
@@ -331,7 +333,6 @@ public struct HeaderBar: AdwaitaWidget {
     public func titleWidget(@ViewBuilder _ titleWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.titleWidget = titleWidget
-        
         return newSelf
     }
 

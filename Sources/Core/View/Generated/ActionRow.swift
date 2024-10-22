@@ -2,7 +2,7 @@
 //  ActionRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -40,10 +40,16 @@ import LevenshteinTransformations
 /// It contains subnodes `label.title` and `label.subtitle` representing
 /// respectively the title label and subtitle label.
 /// 
-/// `AdwActionRow` can use the
-/// [`.property`](style-classes.html#property-rows) style class to emphasize
-/// the row subtitle instead of the row title, which is useful for
-/// displaying read-only properties.
+/// ## Style classes
+/// 
+/// `AdwActionRow` can use the [`.property`](style-classes.html#property-rows)
+/// style class to emphasize the row subtitle instead of the row title, which is
+/// useful for displaying read-only properties.
+/// 
+/// <picture><source srcset="property-row-dark.png" media="(prefers-color-scheme: dark)"><img src="property-row.png" alt="property-row"></picture>
+/// 
+/// When used together with the `.monospace` style class, only the subtitle
+/// becomes monospace, not the title or any extra widgets.
 public struct ActionRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -226,7 +232,6 @@ public struct ActionRow: AdwaitaWidget {
     public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.activatableWidget = activatableWidget
-        
         return newSelf
     }
 
@@ -237,7 +242,6 @@ public struct ActionRow: AdwaitaWidget {
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
-        
         return newSelf
     }
 
@@ -248,7 +252,6 @@ public struct ActionRow: AdwaitaWidget {
     public func subtitleLines(_ subtitleLines: Int?) -> Self {
         var newSelf = self
         newSelf.subtitleLines = subtitleLines
-        
         return newSelf
     }
 
@@ -258,7 +261,6 @@ public struct ActionRow: AdwaitaWidget {
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.subtitleSelectable = subtitleSelectable
-        
         return newSelf
     }
 
@@ -269,7 +271,6 @@ public struct ActionRow: AdwaitaWidget {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -279,7 +280,6 @@ public struct ActionRow: AdwaitaWidget {
     public func titleLines(_ titleLines: Int?) -> Self {
         var newSelf = self
         newSelf.titleLines = titleLines
-        
         return newSelf
     }
 
@@ -289,7 +289,6 @@ public struct ActionRow: AdwaitaWidget {
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
-        
         return newSelf
     }
 
@@ -301,7 +300,6 @@ public struct ActionRow: AdwaitaWidget {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 
@@ -309,7 +307,6 @@ public struct ActionRow: AdwaitaWidget {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

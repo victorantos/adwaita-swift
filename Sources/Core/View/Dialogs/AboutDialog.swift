@@ -86,7 +86,7 @@ public struct AboutDialog: AdwaitaWidget {
         type: Data.Type
     ) where Data: ViewRenderData {
         child.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
-        guard updateProperties, (storage.previousState as? Self)?.visible != visible else {
+        guard updateProperties else {
             return
         }
         if visible {

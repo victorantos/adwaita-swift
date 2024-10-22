@@ -2,7 +2,7 @@
 //  AspectFrame.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -15,7 +15,7 @@ import LevenshteinTransformations
 /// 
 /// # CSS nodes
 /// 
-/// `GtkAspectFrame` uses a CSS node with name `frame`.
+/// `GtkAspectFrame` uses a CSS node with name `aspectframe`.
 /// 
 /// # Accessibility
 /// 
@@ -112,7 +112,6 @@ public struct AspectFrame: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -120,7 +119,6 @@ public struct AspectFrame: AdwaitaWidget {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -128,7 +126,6 @@ public struct AspectFrame: AdwaitaWidget {
     public func obeyChild(_ obeyChild: Bool? = true) -> Self {
         var newSelf = self
         newSelf.obeyChild = obeyChild
-        
         return newSelf
     }
 
@@ -139,7 +136,6 @@ public struct AspectFrame: AdwaitaWidget {
     public func ratio(_ ratio: Float) -> Self {
         var newSelf = self
         newSelf.ratio = ratio
-        
         return newSelf
     }
 
@@ -147,7 +143,6 @@ public struct AspectFrame: AdwaitaWidget {
     public func xalign(_ xalign: Float?) -> Self {
         var newSelf = self
         newSelf.xalign = xalign
-        
         return newSelf
     }
 
@@ -155,7 +150,6 @@ public struct AspectFrame: AdwaitaWidget {
     public func yalign(_ yalign: Float?) -> Self {
         var newSelf = self
         newSelf.yalign = yalign
-        
         return newSelf
     }
 

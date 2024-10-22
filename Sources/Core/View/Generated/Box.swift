@@ -2,7 +2,7 @@
 //  Box.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -155,7 +155,6 @@ public struct Box: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -163,7 +162,6 @@ public struct Box: AdwaitaWidget {
     public func baselineChild(_ baselineChild: Int?) -> Self {
         var newSelf = self
         newSelf.baselineChild = baselineChild
-        
         return newSelf
     }
 
@@ -171,7 +169,6 @@ public struct Box: AdwaitaWidget {
     public func homogeneous(_ homogeneous: Bool? = true) -> Self {
         var newSelf = self
         newSelf.homogeneous = homogeneous
-        
         return newSelf
     }
 
@@ -179,7 +176,6 @@ public struct Box: AdwaitaWidget {
     public func spacing(_ spacing: Int) -> Self {
         var newSelf = self
         newSelf.spacing = spacing
-        
         return newSelf
     }
 

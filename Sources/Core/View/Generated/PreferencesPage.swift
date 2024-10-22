@@ -2,7 +2,7 @@
 //  PreferencesPage.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -31,6 +31,8 @@ public struct PreferencesPage: AdwaitaWidget {
 
     /// The description to be displayed at the top of the page.
     var description: String?
+    /// Whether the description should be centered.
+    var descriptionCentered: Bool?
     /// The icon name for this page.
     var iconName: String?
     /// The name of this page.
@@ -79,6 +81,9 @@ public struct PreferencesPage: AdwaitaWidget {
             if let description, updateProperties, (storage.previousState as? Self)?.description != description {
                 adw_preferences_page_set_description(widget?.cast(), description)
             }
+            if let descriptionCentered, updateProperties, (storage.previousState as? Self)?.descriptionCentered != descriptionCentered {
+                adw_preferences_page_set_description_centered(widget?.cast(), descriptionCentered.cBool)
+            }
             if let iconName, updateProperties, (storage.previousState as? Self)?.iconName != iconName {
                 adw_preferences_page_set_icon_name(widget?.cast(), iconName)
             }
@@ -118,7 +123,13 @@ public struct PreferencesPage: AdwaitaWidget {
     public func description(_ description: String?) -> Self {
         var newSelf = self
         newSelf.description = description
-        
+        return newSelf
+    }
+
+    /// Whether the description should be centered.
+    public func descriptionCentered(_ descriptionCentered: Bool? = true) -> Self {
+        var newSelf = self
+        newSelf.descriptionCentered = descriptionCentered
         return newSelf
     }
 
@@ -126,7 +137,6 @@ public struct PreferencesPage: AdwaitaWidget {
     public func iconName(_ iconName: String?) -> Self {
         var newSelf = self
         newSelf.iconName = iconName
-        
         return newSelf
     }
 
@@ -134,7 +144,6 @@ public struct PreferencesPage: AdwaitaWidget {
     public func name(_ name: String?) -> Self {
         var newSelf = self
         newSelf.name = name
-        
         return newSelf
     }
 
@@ -142,7 +151,6 @@ public struct PreferencesPage: AdwaitaWidget {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -150,7 +158,6 @@ public struct PreferencesPage: AdwaitaWidget {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 

@@ -2,7 +2,7 @@
 //  Popover.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -29,13 +29,24 @@ import LevenshteinTransformations
 /// 
 /// ## GtkPopover as menu replacement
 /// 
-/// `GtkPopover` is often used to replace menus. The best was to do this
+/// `GtkPopover` is often used to replace menus. The best way to do this
 /// is to use the [class@Gtk.PopoverMenu] subclass which supports being
 /// populated from a `GMenuModel` with [ctor@Gtk.PopoverMenu.new_from_model].
 /// 
 /// ```xml
 /// <section><attribute name="display-hint">horizontal-buttons</attribute><item><attribute name="label">Cut</attribute><attribute name="action">app.cut</attribute><attribute name="verb-icon">edit-cut-symbolic</attribute></item><item><attribute name="label">Copy</attribute><attribute name="action">app.copy</attribute><attribute name="verb-icon">edit-copy-symbolic</attribute></item><item><attribute name="label">Paste</attribute><attribute name="action">app.paste</attribute><attribute name="verb-icon">edit-paste-symbolic</attribute></item></section>
 /// ```
+/// 
+/// # Shortcuts and Gestures
+/// 
+/// `GtkPopover` supports the following keyboard shortcuts:
+/// 
+/// - <kbd>Escape</kbd> closes the popover.
+/// - <kbd>Alt</kbd> makes the mnemonics visible.
+/// 
+/// The following signals have default keybindings:
+/// 
+/// - [signal@Gtk.Popover::activate-default]
 /// 
 /// # CSS nodes
 /// 
@@ -96,6 +107,8 @@ public struct Popover: AdwaitaWidget {
     /// Emitted whend the user activates the default widget.
     /// 
     /// This is a [keybinding signal](class.SignalAction.html).
+    /// 
+    /// The default binding for this signal is <kbd>Enter</kbd>.
     var activateDefault: (() -> Void)?
     /// Emitted when the popover is closed.
     var closed: (() -> Void)?
@@ -181,7 +194,6 @@ public struct Popover: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -189,7 +201,6 @@ public struct Popover: AdwaitaWidget {
     public func autohide(_ autohide: Bool? = true) -> Self {
         var newSelf = self
         newSelf.autohide = autohide
-        
         return newSelf
     }
 
@@ -199,7 +210,6 @@ public struct Popover: AdwaitaWidget {
     public func cascadePopdown(_ cascadePopdown: Bool? = true) -> Self {
         var newSelf = self
         newSelf.cascadePopdown = cascadePopdown
-        
         return newSelf
     }
 
@@ -207,7 +217,6 @@ public struct Popover: AdwaitaWidget {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -215,7 +224,6 @@ public struct Popover: AdwaitaWidget {
     public func defaultWidget(@ViewBuilder _ defaultWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.defaultWidget = defaultWidget
-        
         return newSelf
     }
 
@@ -223,7 +231,6 @@ public struct Popover: AdwaitaWidget {
     public func hasArrow(_ hasArrow: Bool? = true) -> Self {
         var newSelf = self
         newSelf.hasArrow = hasArrow
-        
         return newSelf
     }
 
@@ -231,13 +238,14 @@ public struct Popover: AdwaitaWidget {
     public func mnemonicsVisible(_ mnemonicsVisible: Bool? = true) -> Self {
         var newSelf = self
         newSelf.mnemonicsVisible = mnemonicsVisible
-        
         return newSelf
     }
 
     /// Emitted whend the user activates the default widget.
     /// 
     /// This is a [keybinding signal](class.SignalAction.html).
+    /// 
+    /// The default binding for this signal is <kbd>Enter</kbd>.
     public func activateDefault(_ activateDefault: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.activateDefault = activateDefault

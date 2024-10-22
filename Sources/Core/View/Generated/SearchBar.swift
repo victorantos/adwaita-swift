@@ -2,7 +2,7 @@
 //  SearchBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -33,6 +33,12 @@ import LevenshteinTransformations
 /// entry.
 /// 
 /// [A simple example](https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/search-bar.c)
+/// 
+/// # Shortcuts and Gestures
+/// 
+/// `GtkSearchBar` supports the following keyboard shortcuts:
+/// 
+/// - <kbd>Escape</kbd> hides the search bar.
 /// 
 /// # CSS nodes
 /// 
@@ -114,6 +120,9 @@ public struct SearchBar: AdwaitaWidget {
             if let widget = storage.content["keyCaptureWidget"]?.first {
                 keyCaptureWidget?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
+            if let searchModeEnabled, updateProperties, (storage.previousState as? Self)?.searchModeEnabled != searchModeEnabled {
+                gtk_search_bar_set_search_mode(widget, searchModeEnabled.cBool)
+            }
             if let showCloseButton, updateProperties, (storage.previousState as? Self)?.showCloseButton != showCloseButton {
                 gtk_search_bar_set_show_close_button(widget, showCloseButton.cBool)
             }
@@ -134,7 +143,6 @@ public struct SearchBar: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -142,7 +150,6 @@ public struct SearchBar: AdwaitaWidget {
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
-        
         return newSelf
     }
 
@@ -150,7 +157,6 @@ public struct SearchBar: AdwaitaWidget {
     public func keyCaptureWidget(@ViewBuilder _ keyCaptureWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.keyCaptureWidget = keyCaptureWidget
-        
         return newSelf
     }
 
@@ -158,7 +164,6 @@ public struct SearchBar: AdwaitaWidget {
     public func searchModeEnabled(_ searchModeEnabled: Bool? = true) -> Self {
         var newSelf = self
         newSelf.searchModeEnabled = searchModeEnabled
-        
         return newSelf
     }
 
@@ -166,7 +171,6 @@ public struct SearchBar: AdwaitaWidget {
     public func showCloseButton(_ showCloseButton: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showCloseButton = showCloseButton
-        
         return newSelf
     }
 

@@ -2,7 +2,7 @@
 //  SpinRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -24,6 +24,11 @@ import LevenshteinTransformations
 /// 
 /// `AdwSpinRow` has the same structure as [class@ActionRow], as well as the
 /// `.spin` style class on the main node.
+/// 
+/// ## Accessibility
+/// 
+/// `AdwSpinRow` uses an internal `GtkSpinButton` with the
+/// `GTK_ACCESSIBLE_ROLE_SPIN_BUTTON` role.
 public struct SpinRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -252,7 +257,6 @@ if let value, newValue != value.wrappedValue {
     public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.activatableWidget = activatableWidget
-        
         return newSelf
     }
 
@@ -260,7 +264,6 @@ if let value, newValue != value.wrappedValue {
     public func climbRate(_ climbRate: Double) -> Self {
         var newSelf = self
         newSelf.climbRate = climbRate
-        
         return newSelf
     }
 
@@ -268,7 +271,6 @@ if let value, newValue != value.wrappedValue {
     public func digits(_ digits: UInt) -> Self {
         var newSelf = self
         newSelf.digits = digits
-        
         return newSelf
     }
 
@@ -276,7 +278,6 @@ if let value, newValue != value.wrappedValue {
     public func numeric(_ numeric: Bool? = true) -> Self {
         var newSelf = self
         newSelf.numeric = numeric
-        
         return newSelf
     }
 
@@ -284,7 +285,6 @@ if let value, newValue != value.wrappedValue {
     public func snapToTicks(_ snapToTicks: Bool? = true) -> Self {
         var newSelf = self
         newSelf.snapToTicks = snapToTicks
-        
         return newSelf
     }
 
@@ -295,7 +295,6 @@ if let value, newValue != value.wrappedValue {
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
-        
         return newSelf
     }
 
@@ -306,7 +305,6 @@ if let value, newValue != value.wrappedValue {
     public func subtitleLines(_ subtitleLines: Int?) -> Self {
         var newSelf = self
         newSelf.subtitleLines = subtitleLines
-        
         return newSelf
     }
 
@@ -316,7 +314,6 @@ if let value, newValue != value.wrappedValue {
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.subtitleSelectable = subtitleSelectable
-        
         return newSelf
     }
 
@@ -327,7 +324,6 @@ if let value, newValue != value.wrappedValue {
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
-        
         return newSelf
     }
 
@@ -337,7 +333,6 @@ if let value, newValue != value.wrappedValue {
     public func titleLines(_ titleLines: Int?) -> Self {
         var newSelf = self
         newSelf.titleLines = titleLines
-        
         return newSelf
     }
 
@@ -347,7 +342,6 @@ if let value, newValue != value.wrappedValue {
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
-        
         return newSelf
     }
 
@@ -359,7 +353,6 @@ if let value, newValue != value.wrappedValue {
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
-        
         return newSelf
     }
 
@@ -367,7 +360,6 @@ if let value, newValue != value.wrappedValue {
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
-        
         return newSelf
     }
 
@@ -375,7 +367,6 @@ if let value, newValue != value.wrappedValue {
     public func value(_ value: Binding<Double>?) -> Self {
         var newSelf = self
         newSelf.value = value
-        
         return newSelf
     }
 
@@ -383,7 +374,6 @@ if let value, newValue != value.wrappedValue {
     public func wrap(_ wrap: Bool? = true) -> Self {
         var newSelf = self
         newSelf.wrap = wrap
-        
         return newSelf
     }
 

@@ -2,7 +2,7 @@
 //  Spinner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.08.24.
+//  Created by auto-generation on 22.10.24.
 //
 
 import CAdw
@@ -85,7 +85,6 @@ public struct Spinner: AdwaitaWidget {
     public func accessibleRole(_ accessibleRole: String?) -> Self {
         var newSelf = self
         newSelf.accessibleRole = accessibleRole
-        
         return newSelf
     }
 
@@ -93,7 +92,6 @@ public struct Spinner: AdwaitaWidget {
     public func spinning(_ spinning: Bool? = true) -> Self {
         var newSelf = self
         newSelf.spinning = spinning
-        
         return newSelf
     }
 
