@@ -47,7 +47,7 @@ struct ViewSwitcherDemo: View {
             .bottomToolbar(visible: bottom) {
                 toolbar(bottom: true)
             }
-            .breakpoint(maxWidth: 600, matches: $bottom)
+            .naturalWidth(matches: .init { !bottom } set: { bottom = !$0 })
         }
 
         func toolbar(bottom: Bool) -> AnyView {

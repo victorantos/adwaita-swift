@@ -30,13 +30,26 @@ public struct BreakpointBin: AdwaitaWidget {
     /// The condition.
     @Property(
         set: { bin, condition, storage in
-            let condition = adw_breakpoint_condition_parse(condition.condition)
+            let string: OpaquePointer
+            switch condition {
+            case .naturalWidth:
+                let child = adw_breakpoint_bin_get_child(bin.cast())
+                var size: Int32 = 0
+                gtk_widget_measure(child, GTK_ORIENTATION_HORIZONTAL, -1, nil, &size, nil, nil)
+                string = adw_breakpoint_condition_parse(BreakpointCondition.minWidth(.init(size)).condition)
+            case .naturalHeight:
+                let child = adw_breakpoint_bin_get_child(bin.cast())
+                var size: Int32 = 0
+                gtk_widget_measure(child, GTK_ORIENTATION_VERTICAL, -1, nil, &size, nil, nil)
+                string = adw_breakpoint_condition_parse(BreakpointCondition.minHeight(.init(size)).condition)
+            default:
+                string = adw_breakpoint_condition_parse(condition.condition)
+            }
             if let breakpoint = storage.fields["breakpoint"] as? OpaquePointer {
                 g_object_unref(adw_breakpoint_get_condition(breakpoint)?.cast())
-                adw_breakpoint_set_condition(breakpoint, condition)
+                adw_breakpoint_set_condition(breakpoint, string)
             } else {
-                let breakpoint = adw_breakpoint_new(condition)
-                adw_breakpoint_bin_add_breakpoint(bin.cast(), breakpoint)
+                let breakpoint = adw_breakpoint_new(string); adw_breakpoint_bin_add_breakpoint(bin.cast(), breakpoint)
                 storage.fields["breakpoint"] = breakpoint
                 if let bin = storage.content["_content"]?.first?.content["append"]?.first {
                     adw_breakpoint_add_setter(
@@ -97,9 +110,13 @@ public enum BreakpointCondition: Equatable {
     case minWidth(_ width: Int)
     /// Define a minimum height.
     case minHeight(_ height: Int)
+    /// The minimum width is the content's natural width.
+    case naturalWidth
+    /// The minimum height is the content's natural height.
+    case naturalHeight
 
     /// The condition to parse.
-    var condition: String {
+    var condition: String? {
         switch self {
         case let .maxWidth(width):
             "max-width: \(width)sp"
@@ -109,6 +126,8 @@ public enum BreakpointCondition: Equatable {
             "min-width: \(width)sp"
         case let .minHeight(height):
             "min-height: \(height)sp"
+        default:
+            nil
         }
     }
 

@@ -299,4 +299,16 @@ extension AnyView {
         BreakpointBin(condition: .minHeight(minHeight), matches: matches) { self }
     }
 
+    /// Whether the view has a width higher or equal to its natural width.
+    /// - Parameter matches: Whether the content view matches the breakpoint.
+    public func naturalWidth(matches: Binding<Bool>) -> AnyView {
+        BreakpointBin(condition: .naturalWidth, matches: matches) { self }
+    }
+
+    /// Whether the view has a height higher or equal to its natural height.
+    /// - Parameter matches: Whether the content view matches the breakpoint.
+    public func naturalHeight(matches: Binding<Bool>) -> AnyView {
+        BreakpointBin(condition: .naturalHeight, matches: matches) { self }
+    }
+
 }
