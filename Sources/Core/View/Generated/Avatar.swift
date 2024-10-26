@@ -95,6 +95,7 @@ public struct Avatar: AdwaitaWidget {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

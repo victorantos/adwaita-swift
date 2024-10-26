@@ -194,6 +194,7 @@ public struct EntryRow: AdwaitaWidget {
                 }
             }
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

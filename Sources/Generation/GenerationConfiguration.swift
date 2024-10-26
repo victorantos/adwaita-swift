@@ -240,10 +240,20 @@ struct GenerationConfiguration {
             class: "ScrolledWindow",
             excludeProperties: [
                 "hadjustment",
-                "hscrollbar-policy",
                 "vadjustment",
-                "vscrollbar-policy",
                 "window-placement"
+            ],
+            setters: [
+                """
+                if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
+                || vscrollbarPolicy != (storage.previousState as? Self)?.vscrollbarPolicy {
+                    gtk_scrolled_window_set_policy(
+                        widget,
+                        (hscrollbarPolicy ?? .automatic).gtkValue,
+                        (vscrollbarPolicy ?? .automatic).gtkValue
+                    )
+                }
+                """
             ]
         ),
         .init(class: "Overlay", staticWidgets: [.init(name: "overlay", add: "gtk_overlay_add_overlay")]),
@@ -298,7 +308,8 @@ struct GenerationConfiguration {
         "GdkPixbuf*": "OpaquePointer",
         "GdkPaintable*": "OpaquePointer",
         "NavigationPage": "NavigationPage",
-        "ContentFit": "ContentFit"
+        "ContentFit": "ContentFit",
+        "PolicyType": "ScrollbarVisibility"
     ]
 
     /// Modifications for converting a Swift into a C type.
@@ -306,7 +317,8 @@ struct GenerationConfiguration {
         "Bool": "cBool",
         "Int": "cInt",
         "UInt": "cInt",
-        "ContentFit": "gtkValue"
+        "ContentFit": "gtkValue",
+        "ScrollbarVisibility": "gtkValue"
     ]
 
     /// Default values for modifiers with a certain type.

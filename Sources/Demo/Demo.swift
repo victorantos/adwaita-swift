@@ -85,11 +85,13 @@ struct Demo: App {
                 ScrollView {
                     List(Page.allCases, selection: $selection) { element in
                         Text(element.label)
+                            .ellipsize()
                             .halign(.start)
                             .padding()
                     }
                     .sidebarStyle()
                 }
+                .hscrollbarPolicy(.never)
                 .topToolbar {
                     HeaderBar.end {
                         menu

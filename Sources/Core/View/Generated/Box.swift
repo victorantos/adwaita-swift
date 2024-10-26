@@ -140,6 +140,7 @@ public struct Box: AdwaitaWidget {
                 }
             }
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

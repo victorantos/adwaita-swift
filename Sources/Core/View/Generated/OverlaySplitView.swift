@@ -245,6 +245,7 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

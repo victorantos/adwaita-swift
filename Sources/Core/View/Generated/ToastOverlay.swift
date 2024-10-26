@@ -91,6 +91,7 @@ public struct ToastOverlay: AdwaitaWidget {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

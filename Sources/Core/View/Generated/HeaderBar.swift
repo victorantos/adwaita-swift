@@ -248,6 +248,7 @@ public struct HeaderBar: AdwaitaWidget {
                 }
             }
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

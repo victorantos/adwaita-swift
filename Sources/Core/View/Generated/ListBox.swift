@@ -238,6 +238,7 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
             for (index, element) in elements.enumerated() {
                 content(element).updateStorage(contentStorage[index], data: data, updateProperties: updateProperties, type: type)
             }
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

@@ -273,6 +273,7 @@ if let text, newValue != text.wrappedValue {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

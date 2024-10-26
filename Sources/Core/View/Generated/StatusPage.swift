@@ -97,6 +97,7 @@ public struct StatusPage: AdwaitaWidget {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

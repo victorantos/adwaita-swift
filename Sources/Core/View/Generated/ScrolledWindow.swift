@@ -101,6 +101,11 @@ public struct ScrolledWindow: AdwaitaWidget {
     var child: (() -> Body)?
     /// Whether to draw a frame around the contents.
     var hasFrame: Bool?
+    /// When the horizontal scrollbar is displayed.
+    /// 
+    /// Use [method@Gtk.ScrolledWindow.set_policy] to set
+    /// this property.
+    var hscrollbarPolicy: ScrollbarVisibility?
     /// Whether kinetic scrolling is enabled or not.
     /// 
     /// Kinetic scrolling only applies to devices with source %GDK_SOURCE_TOUCHSCREEN.
@@ -134,6 +139,11 @@ public struct ScrolledWindow: AdwaitaWidget {
     /// This is useful in cases where an attempt should be made to allocate exactly
     /// enough space for the natural size of the child.
     var propagateNaturalWidth: Bool?
+    /// When the vertical scrollbar is displayed.
+    /// 
+    /// Use [method@Gtk.ScrolledWindow.set_policy] to set
+    /// this property.
+    var vscrollbarPolicy: ScrollbarVisibility?
     /// Emitted whenever user initiated scrolling makes the scrolled
     /// window firmly surpass the limits defined by the adjustment
     /// in that orientation.
@@ -255,6 +265,16 @@ public struct ScrolledWindow: AdwaitaWidget {
             }
 
 
+
+if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
+|| vscrollbarPolicy != (storage.previousState as? Self)?.vscrollbarPolicy {
+    gtk_scrolled_window_set_policy(
+        widget,
+        (hscrollbarPolicy ?? .automatic).gtkValue,
+        (vscrollbarPolicy ?? .automatic).gtkValue
+    )
+}
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)
@@ -288,6 +308,16 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func hasFrame(_ hasFrame: Bool? = true) -> Self {
         var newSelf = self
         newSelf.hasFrame = hasFrame
+        return newSelf
+    }
+
+    /// When the horizontal scrollbar is displayed.
+    /// 
+    /// Use [method@Gtk.ScrolledWindow.set_policy] to set
+    /// this property.
+    public func hscrollbarPolicy(_ hscrollbarPolicy: ScrollbarVisibility?) -> Self {
+        var newSelf = self
+        newSelf.hscrollbarPolicy = hscrollbarPolicy
         return newSelf
     }
 
@@ -361,6 +391,16 @@ public struct ScrolledWindow: AdwaitaWidget {
     public func propagateNaturalWidth(_ propagateNaturalWidth: Bool? = true) -> Self {
         var newSelf = self
         newSelf.propagateNaturalWidth = propagateNaturalWidth
+        return newSelf
+    }
+
+    /// When the vertical scrollbar is displayed.
+    /// 
+    /// Use [method@Gtk.ScrolledWindow.set_policy] to set
+    /// this property.
+    public func vscrollbarPolicy(_ vscrollbarPolicy: ScrollbarVisibility?) -> Self {
+        var newSelf = self
+        newSelf.vscrollbarPolicy = vscrollbarPolicy
         return newSelf
     }
 

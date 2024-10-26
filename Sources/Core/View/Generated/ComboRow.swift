@@ -215,6 +215,7 @@ if let selected, newValue != selected.wrappedValue {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

@@ -219,6 +219,7 @@ if let expanded, newValue != expanded.wrappedValue {
                 }
             }
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

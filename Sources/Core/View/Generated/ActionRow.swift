@@ -211,6 +211,7 @@ public struct ActionRow: AdwaitaWidget {
                 }
             }
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

@@ -48,7 +48,7 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
         case .alertDialog:
             return "Alert Dialog"
         case .passwordChecker:
-            return "Password Checker"
+            return "Password Checker is such a long name..."
         default:
             return rawValue.capitalized
         }

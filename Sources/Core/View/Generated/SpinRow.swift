@@ -236,6 +236,7 @@ if let value, newValue != value.wrappedValue {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

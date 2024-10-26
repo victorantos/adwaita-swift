@@ -152,6 +152,7 @@ public struct Button: AdwaitaWidget {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

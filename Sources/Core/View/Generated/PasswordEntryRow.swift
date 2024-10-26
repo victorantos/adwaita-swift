@@ -155,6 +155,7 @@ public struct PasswordEntryRow: AdwaitaWidget {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

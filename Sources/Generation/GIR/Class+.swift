@@ -77,6 +77,15 @@ extension Class {
         // swiftlint:enable fatal_error
     }
 
+    /// Generate the custom setters.
+    /// - Parameter config: The widget configuration.
+    /// - Returns: The code.
+    func generateManualSetters(
+        config: WidgetConfiguration
+    ) -> String {
+        config.setters.map { "\n\($0)\n" }.joined()
+    }
+
     /// Generate the assignments for the widgets and menus.
     /// - Parameters:
     ///     - config: The widget configuration.

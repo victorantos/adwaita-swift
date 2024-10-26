@@ -118,6 +118,7 @@ struct Class: ClassLike, Decodable {
         \(generateBindingAssignments(config: config, genConfig: genConfig, namespace: namespace, configs: configs))
         \(generateModifications(config: config, genConfig: genConfig, namespace: namespace, configs: configs))
         \(generateDynamicWidgetUpdate(config: config, genConfig: genConfig))
+        \(generateManualSetters(config: config))
                 }
                 for function in updateFunctions {
                     function(storage, data, updateProperties)

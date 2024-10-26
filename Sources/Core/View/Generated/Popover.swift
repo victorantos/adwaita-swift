@@ -179,6 +179,7 @@ public struct Popover: AdwaitaWidget {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

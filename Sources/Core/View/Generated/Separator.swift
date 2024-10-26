@@ -66,6 +66,7 @@ public struct Separator: AdwaitaWidget {
 
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

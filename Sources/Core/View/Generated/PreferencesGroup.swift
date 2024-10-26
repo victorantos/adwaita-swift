@@ -132,6 +132,7 @@ public struct PreferencesGroup: AdwaitaWidget {
                 }
             }
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

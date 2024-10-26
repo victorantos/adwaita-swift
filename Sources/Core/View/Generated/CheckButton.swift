@@ -184,6 +184,7 @@ if let active, newValue != active.wrappedValue {
             }
 
 
+
         }
         for function in updateFunctions {
             function(storage, data, updateProperties)

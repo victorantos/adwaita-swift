@@ -34,6 +34,8 @@ struct WidgetConfiguration {
     var setConditions: [String: String] = [:]
     /// Properties that are set in the end of an update.
     var lastProperties: [String] = []
+    /// Manually add setters which do not follow common practices.
+    var setters: [String] = []
 
     /// The configuration for a binding.
     struct BindingConfiguration {
