@@ -32,16 +32,16 @@ public struct BreakpointBin: AdwaitaWidget {
         set: { bin, condition, storage in
             let string: OpaquePointer
             switch condition {
-            case .naturalWidth:
+            case let .naturalWidth(padding):
                 let child = adw_breakpoint_bin_get_child(bin.cast())
                 var size: Int32 = 0
                 gtk_widget_measure(child, GTK_ORIENTATION_HORIZONTAL, -1, nil, &size, nil, nil)
-                string = adw_breakpoint_condition_parse(BreakpointCondition.minWidth(.init(size)).condition)
-            case .naturalHeight:
+                string = adw_breakpoint_condition_parse(BreakpointCondition.minWidth(.init(size) + padding).condition)
+            case let .naturalHeight(padding):
                 let child = adw_breakpoint_bin_get_child(bin.cast())
                 var size: Int32 = 0
                 gtk_widget_measure(child, GTK_ORIENTATION_VERTICAL, -1, nil, &size, nil, nil)
-                string = adw_breakpoint_condition_parse(BreakpointCondition.minHeight(.init(size)).condition)
+                string = adw_breakpoint_condition_parse(BreakpointCondition.minHeight(.init(size) + padding).condition)
             default:
                 string = adw_breakpoint_condition_parse(condition.condition)
             }
@@ -111,9 +111,9 @@ public enum BreakpointCondition: Equatable {
     /// Define a minimum height.
     case minHeight(_ height: Int)
     /// The minimum width is the content's natural width.
-    case naturalWidth
+    case naturalWidth(padding: Int = 0)
     /// The minimum height is the content's natural height.
-    case naturalHeight
+    case naturalHeight(padding: Int = 0)
 
     /// The condition to parse.
     var condition: String? {
