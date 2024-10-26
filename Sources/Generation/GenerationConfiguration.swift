@@ -154,7 +154,8 @@ struct GenerationConfiguration {
         .init(
             class: "NavigationView",
             excludeProperties: ["navigation-stack", "visible-page"]
-        )
+        ),
+        .init(class: "Spinner")
     ]
 
     /// The Gtk widgets.
@@ -185,7 +186,6 @@ struct GenerationConfiguration {
             excludeProperties: ["baseline-position", "orientation"],
             cast: true
         ),
-        .init(class: "Spinner"),
         .init(class: "LevelBar", excludeProperties: ["mode", "orientation"]),
         .init(
             class: "ListBox",

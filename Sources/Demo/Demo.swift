@@ -8,6 +8,7 @@
 // swiftlint:disable missing_docs implicitly_unwrapped_optional no_magic_numbers
 
 import Adwaita
+import CAdw
 import Foundation
 
 @main
@@ -72,6 +73,7 @@ struct Demo: App {
         @State private var sidebarVisible = true
         @State private var width = 650
         @State private var height = 550
+        @State private var wide = true
         @State private var maximized = false
         @State private var about = false
         var window: AdwaitaWindow
@@ -125,6 +127,8 @@ struct Demo: App {
                 }
                 .toast("This is a toast!", signal: toast)
             }
+            .collapsed(!wide)
+            .breakpoint(minWidth: 550, matches: $wide)
             .aboutDialog(
                 visible: $about,
                 app: "Demo",

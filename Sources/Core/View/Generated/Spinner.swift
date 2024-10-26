@@ -2,27 +2,36 @@
 //  Spinner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 22.10.24.
+//  Created by auto-generation on 26.10.24.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A `GtkSpinner` widget displays an icon-size spinning animation.
+/// A widget showing a loading spinner.
 /// 
-/// It is often used as an alternative to a [class@Gtk.ProgressBar]
-/// for displaying indefinite activity, instead of actual progress.
+/// <picture><source srcset="spinner-dark.png" media="(prefers-color-scheme: dark)"><img src="spinner.png" alt="spinner"></picture>
 /// 
-/// ![An example GtkSpinner](spinner.png)
+/// The size of the spinner depends on the available size, never smaller than
+/// 16×16 pixels and never larger than 64×64 pixels.
 /// 
-/// To start the animation, use [method@Gtk.Spinner.start], to stop it
-/// use [method@Gtk.Spinner.stop].
+/// Use the [property@Gtk.Widget:halign] and [property@Gtk.Widget:valign]
+/// properties in combination with [property@Gtk.Widget:width-request] and
+/// [property@Gtk.Widget:height-request] for fine sizing control.
 /// 
-/// # CSS nodes
+/// For example, the following snippet shows the spinner at 48×48 pixels:
 /// 
-/// `GtkSpinner` has a single CSS node with the name spinner.
-/// When the animation is active, the :checked pseudoclass is
-/// added to this node.
+/// ```xml
+/// <object class="AdwSpinner"><property name="halign">center</property><property name="valign">center</property><property name="width-request">48</property><property name="height-request">48</property></object>
+/// ```
+/// 
+/// See [class@SpinnerPaintable] for cases where using a widget is impractical or
+/// impossible, such as [property@StatusPage:paintable].
+/// 
+/// ## CSS nodes
+/// 
+/// `AdwSpinner` has a single node with the name `image` and the style class
+/// `.spinner`.
 public struct Spinner: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -30,12 +39,6 @@ public struct Spinner: AdwaitaWidget {
     /// Additional appear functions for type extensions.
     var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
 
-    /// The accessible role of the given `GtkAccessible` implementation.
-    /// 
-    /// The accessible role cannot be changed once set.
-    var accessibleRole: String?
-    /// Whether the spinner is spinning
-    var spinning: Bool?
 
     /// Initialize `Spinner`.
     public init() {
@@ -47,7 +50,7 @@ public struct Spinner: AdwaitaWidget {
     ///     - type: The view render data type.
     /// - Returns: The view storage.
     public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
-        let storage = ViewStorage(gtk_spinner_new()?.opaque())
+        let storage = ViewStorage(adw_spinner_new()?.opaque())
         for function in appearFunctions {
             function(storage, data)
         }
@@ -65,9 +68,6 @@ public struct Spinner: AdwaitaWidget {
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         storage.modify { widget in
 
-            if let spinning, updateProperties, (storage.previousState as? Self)?.spinning != spinning {
-                gtk_spinner_set_spinning(widget, spinning.cBool)
-            }
 
 
         }
@@ -77,22 +77,6 @@ public struct Spinner: AdwaitaWidget {
         if updateProperties {
             storage.previousState = self
         }
-    }
-
-    /// The accessible role of the given `GtkAccessible` implementation.
-    /// 
-    /// The accessible role cannot be changed once set.
-    public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
-    }
-
-    /// Whether the spinner is spinning
-    public func spinning(_ spinning: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.spinning = spinning
-        return newSelf
     }
 
 }

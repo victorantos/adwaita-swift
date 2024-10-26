@@ -2,7 +2,7 @@
 //  ToggleButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 22.10.24.
+//  Created by auto-generation on 26.10.24.
 //
 
 import CAdw
