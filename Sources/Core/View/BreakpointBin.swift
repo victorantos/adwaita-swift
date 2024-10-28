@@ -30,34 +30,34 @@ public struct BreakpointBin: AdwaitaWidget {
     /// The condition.
     @Property(
         set: { bin, condition, storage in
-            let string: OpaquePointer
+            var condition = condition
             switch condition {
             case let .naturalWidth(padding):
                 let child = adw_breakpoint_bin_get_child(bin.cast())
                 var size: Int32 = 0
                 gtk_widget_measure(child, GTK_ORIENTATION_HORIZONTAL, -1, nil, &size, nil, nil)
-                string = adw_breakpoint_condition_parse(BreakpointCondition.minWidth(.init(size) + padding).condition)
+                condition = .minWidth(.init(size) + padding)
             case let .naturalHeight(padding):
                 let child = adw_breakpoint_bin_get_child(bin.cast())
                 var size: Int32 = 0
                 gtk_widget_measure(child, GTK_ORIENTATION_VERTICAL, -1, nil, &size, nil, nil)
-                string = adw_breakpoint_condition_parse(BreakpointCondition.minHeight(.init(size) + padding).condition)
+                condition = .minHeight(.init(size) + padding)
             default:
-                string = adw_breakpoint_condition_parse(condition.condition)
+                break
             }
+            storage.fields["condition"] = condition
+            let string = adw_breakpoint_condition_parse(condition.condition)
             if let breakpoint = storage.fields["breakpoint"] as? OpaquePointer {
                 g_object_unref(adw_breakpoint_get_condition(breakpoint)?.cast())
                 adw_breakpoint_set_condition(breakpoint, string)
             } else {
-                let breakpoint = adw_breakpoint_new(string); adw_breakpoint_bin_add_breakpoint(bin.cast(), breakpoint)
+                let breakpoint = adw_breakpoint_new(string)
+                adw_breakpoint_bin_add_breakpoint(bin.cast(), breakpoint)
                 storage.fields["breakpoint"] = breakpoint
-                if let bin = storage.content["_content"]?.first?.content["append"]?.first {
-                    adw_breakpoint_add_setter(
-                        breakpoint,
-                        bin.opaquePointer?.cast(),
-                        "visible",
-                        false.gValue
-                    )
+                if let matches = storage.fields["binding"] as? Binding<Bool> {
+                    Idle {
+                        condition.initialize(child: adw_breakpoint_bin_get_child(bin.cast()), matches: matches)
+                    }
                 }
             }
         },
@@ -71,6 +71,7 @@ public struct BreakpointBin: AdwaitaWidget {
             storage.notify(name: "current-breakpoint") {
                 matches.wrappedValue = adw_breakpoint_bin_get_current_breakpoint(bin.cast()) != nil
             }
+            storage.fields["binding"] = matches
         },
         set: { _, _, _ in },
         pointer: OpaquePointer.self
@@ -128,6 +129,25 @@ public enum BreakpointCondition: Equatable {
             "min-height: \(height)sp"
         default:
             nil
+        }
+    }
+
+    /// Initialize the breakpoint when initializing the view.
+    /// - Parameters:
+    ///     - child: The widget.
+    ///     - matches: The matches binding.
+    func initialize(child: UnsafeMutablePointer<GtkWidget>?, matches: Binding<Bool>) {
+        switch self {
+        case let .maxWidth(width):
+            matches.wrappedValue = gtk_widget_get_width(child) <= width
+        case let .minWidth(width):
+            matches.wrappedValue = gtk_widget_get_width(child) >= width
+        case let .maxHeight(height):
+            matches.wrappedValue = gtk_widget_get_height(child) <= height
+        case let .minHeight(height):
+            matches.wrappedValue = gtk_widget_get_height(child) >= height
+        default:
+            break
         }
     }
 
