@@ -122,7 +122,6 @@ public struct AboutDialog: AdwaitaWidget {
                 adw_dialog_close(storage.content[dialogID]?.first?.opaquePointer?.cast())
             }
         }
-        storage.previousState = self
     }
 
     /// Create a new instance of the dialog.
