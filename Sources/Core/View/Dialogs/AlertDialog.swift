@@ -135,10 +135,7 @@ public struct AlertDialog: AdwaitaWidget {
             let old = storage.fields[Self.responsesID + id] as? [Response] ?? []
             old.identifiableTransform(
                 to: responses,
-                functions: .init { index, element in
-                    adw_alert_dialog_remove_response(pointer?.cast(), responseID(old[safe: index]?.id))
-                    adw_alert_dialog_add_response(pointer?.cast(), responseID(element.id), element.title)
-                } delete: { index in
+                functions: .init { index in
                     adw_alert_dialog_remove_response(pointer?.cast(), responseID(old[safe: index]?.id))
                 } insert: { _, element in
                     adw_alert_dialog_add_response(pointer?.cast(), responseID(element.id), element.title)
@@ -160,7 +157,9 @@ public struct AlertDialog: AdwaitaWidget {
             }
         } else {
             if storage.content[Self.dialogID + id]?.first != nil {
-                adw_dialog_close(storage.content[Self.dialogID + id]?.first?.opaquePointer?.cast())
+                let dialog = storage.content[Self.dialogID + id]?.first?.opaquePointer
+                adw_dialog_close(dialog?.cast())
+                g_object_unref(dialog?.cast())
             }
         }
     }

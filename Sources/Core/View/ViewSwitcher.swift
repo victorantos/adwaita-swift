@@ -97,10 +97,7 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
         }
         ((switcher.previousState as? Self)?.elements ?? []).map { $0.title }.transform(
             to: elements.map { $0.title },
-            functions: .init { index, title in
-                remove(index)
-                insert(title)
-            } delete: { index in
+            functions: .init { index in
                 remove(index)
             } insert: { _, title in
                 insert(title)

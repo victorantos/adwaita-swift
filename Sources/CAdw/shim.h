@@ -14,6 +14,7 @@ gtui_filedialog_save_finish (uint64_t dialog, uint64_t result, uint64_t data)
   GFile      *file = gtk_file_dialog_save_finish (dialog, result, NULL);
   const char *path = g_file_get_path (file);
   filedialog_on_save_cb (dialog, path, data);
+  g_object_unref (file);
 }
 
 static void

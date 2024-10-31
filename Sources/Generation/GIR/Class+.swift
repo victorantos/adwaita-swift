@@ -228,13 +228,7 @@ extension Class {
                         let old = storage.fields["element"] as? [Element] ?? []
                         old.identifiableTransform(
                             to: elements,
-                            functions: .init { index, element in
-                                \(child)
-                                \(dynamicWidget.remove)(\(widget), \(dynamicWidget.getElement))
-                                \(dynamicWidget.insert)(\(widget), \(pointer), index.cInt)
-                                contentStorage.remove(at: index)
-                                contentStorage.insert(child, at: index)
-                            } delete: { index in
+                            functions: .init { index in
                                 \(dynamicWidget.remove)(\(widget), \(dynamicWidget.getElement))
                                 contentStorage.remove(at: index)
                             } insert: { index, element in

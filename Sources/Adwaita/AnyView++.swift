@@ -351,6 +351,7 @@ extension AnyView {
                 provider?.opaque(),
                 .init(GTK_STYLE_PROVIDER_PRIORITY_APPLICATION)
             )
+            g_object_unref(provider)
         }
     }
 

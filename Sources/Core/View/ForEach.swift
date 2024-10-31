@@ -58,18 +58,10 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
         let widget: UnsafeMutablePointer<GtkBox>? = storage.opaquePointer?.cast()
         old.identifiableTransform(
             to: elements,
-            functions: .init { index, element in
-                let child = content(element).storage(data: data, type: type)
-                gtk_box_remove(widget, contentStorage[safe: index]?.opaquePointer?.cast())
-                gtk_box_insert_child_after(
-                    widget,
-                    child.opaquePointer?.cast(),
-                    contentStorage[safe: index - 1]?.opaquePointer?.cast()
-                )
-                contentStorage.remove(at: index)
-                contentStorage.insert(child, at: index)
-            } delete: { index in
-                gtk_box_remove(widget, contentStorage[safe: index]?.opaquePointer?.cast())
+            functions: .init { index in
+                let child = contentStorage[safe: index]?.opaquePointer
+                gtk_box_remove(widget, child?.cast())
+                g_object_unref(child?.cast())
                 contentStorage.remove(at: index)
             } insert: { index, element in
                 let child = content(element).storage(data: data, type: type)

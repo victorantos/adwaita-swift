@@ -59,10 +59,7 @@ extension ComboRow {
             let old = storage.fields[Self.values] as? [Element] ?? []
             old.identifiableTransform(
                 to: values,
-                functions: .init { index, element in
-                    gtk_string_list_remove(list, .init(index))
-                    gtk_string_list_append(list, element.description)
-                } delete: { index in
+                functions: .init { index in
                     gtk_string_list_remove(list, .init(index))
                 } insert: { _, element in
                     gtk_string_list_append(list, element.description)

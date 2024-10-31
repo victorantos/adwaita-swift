@@ -119,7 +119,9 @@ public struct AboutDialog: AdwaitaWidget {
             adw_dialog_set_content_height(dialog?.cast(), -1)
         } else {
             if storage.content[dialogID]?.first != nil {
-                adw_dialog_close(storage.content[dialogID]?.first?.opaquePointer?.cast())
+                let dialog = storage.content[dialogID]?.first?.opaquePointer
+                adw_dialog_close(dialog?.cast())
+                g_object_unref(dialog?.cast())
             }
         }
     }

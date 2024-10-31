@@ -22,7 +22,11 @@ extension Text {
     /// - Parameter ellipsize: Whether it should ellipsize.
     /// - Returns: The text widget.
     public func ellipsize(_ ellipsize: Bool = true) -> AnyView {
-        inspect { storage, _ in gtk_label_set_ellipsize(storage.opaquePointer, PANGO_ELLIPSIZE_END) }
+        inspect { storage, update in
+            if update {
+                gtk_label_set_ellipsize(storage.opaquePointer, PANGO_ELLIPSIZE_END)
+            }
+        }
     }
 
 }

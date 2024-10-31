@@ -2,7 +2,7 @@
 //  FlowBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.10.24.
+//  Created by auto-generation on 31.10.24.
 //
 
 import CAdw
@@ -236,13 +236,7 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
             let old = storage.fields["element"] as? [Element] ?? []
             old.identifiableTransform(
                 to: elements,
-                functions: .init { index, element in
-                    let child = content(element).storage(data: data, type: type)
-                    gtk_flow_box_remove(widget, gtk_flow_box_get_child_at_index(widget, index.cInt)?.cast())
-                    gtk_flow_box_insert(widget, child.opaquePointer?.cast(), index.cInt)
-                    contentStorage.remove(at: index)
-                    contentStorage.insert(child, at: index)
-                } delete: { index in
+                functions: .init { index in
                     gtk_flow_box_remove(widget, gtk_flow_box_get_child_at_index(widget, index.cInt)?.cast())
                     contentStorage.remove(at: index)
                 } insert: { index, element in

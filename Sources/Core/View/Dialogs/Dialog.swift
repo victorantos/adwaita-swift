@@ -111,7 +111,9 @@ public struct Dialog: AdwaitaWidget {
             }
         } else {
             if storage.content[dialogID + id]?.first != nil {
-                adw_dialog_close(storage.content[dialogID + id]?.first?.opaquePointer?.cast())
+                let dialog = storage.content[dialogID + id]?.first?.opaquePointer
+                adw_dialog_close(dialog?.cast())
+                g_object_unref(dialog?.cast())
             }
         }
     }

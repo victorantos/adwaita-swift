@@ -2,7 +2,7 @@
 //  Carousel.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.10.24.
+//  Created by auto-generation on 31.10.24.
 //
 
 import CAdw
@@ -124,13 +124,7 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
             let old = storage.fields["element"] as? [Element] ?? []
             old.identifiableTransform(
                 to: elements,
-                functions: .init { index, element in
-                    let child = content(element).storage(data: data, type: type)
-                    adw_carousel_remove(widget, adw_carousel_get_nth_page(widget, UInt(index).cInt))
-                    adw_carousel_insert(widget, child.opaquePointer?.cast(), index.cInt)
-                    contentStorage.remove(at: index)
-                    contentStorage.insert(child, at: index)
-                } delete: { index in
+                functions: .init { index in
                     adw_carousel_remove(widget, adw_carousel_get_nth_page(widget, UInt(index).cInt))
                     contentStorage.remove(at: index)
                 } insert: { index, element in

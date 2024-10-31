@@ -101,14 +101,17 @@ public struct FileDialog: AdwaitaWidget {
                     gtk_file_filter_add_suffix(filter, name)
                 }
                 gtk_file_dialog_set_default_filter(pointer, filter)
+                g_object_unref(filter?.cast())
             } else {
                 gtk_file_dialog_set_default_filter(pointer, nil)
             }
             if let initialFolder {
-                gtk_file_dialog_set_initial_folder(pointer, g_file_new_for_path(initialFolder.absoluteString))
+                let file = g_file_new_for_path(initialFolder.absoluteString)
+                gtk_file_dialog_set_initial_folder(pointer, file)
+                g_object_unref(file?.cast())
             }
             let callbacks = AdwaitaFileDialog()
-            callbacks.onResult = { (storage.fields["result"] as? (URL) -> Void)?($0) }
+            callbacks.onResult = { (storage.fields["result"] as? (URL) -> Void)?($0); g_object_unref(pointer?.cast()) }
             callbacks.onCancel = { (storage.fields["cancel"] as? () -> Void)?() }
             callbacks.reset = { storage.fields["callbacks"] = nil }
             storage.fields["callbacks"] = callbacks

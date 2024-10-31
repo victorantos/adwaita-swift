@@ -32,6 +32,9 @@ extension Picture {
                     g_bytes_new(ptr.baseAddress, .init(data.count))
                 }
                 let texture = gdk_texture_new_from_bytes(bytes, nil)
+                if let paintable = gtk_picture_get_paintable(pointer) {
+                    g_object_unref(paintable.cast())
+                }
                 gtk_picture_set_paintable(pointer, texture)
                 storage.fields[oldData] = data
             }
