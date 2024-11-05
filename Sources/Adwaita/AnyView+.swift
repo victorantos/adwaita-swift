@@ -86,6 +86,22 @@ extension AnyView {
         )
     }
 
+    /// Add a preferences dialog to the parent window.
+    /// - Parameters:
+    ///     - visible: Whether the dialog is presented.
+    ///     - id: The dialog's id.
+    /// - Returns: The view.
+    public func preferencesDialog(
+        visible: Binding<Bool>,
+        id: String? = nil
+    ) -> PreferencesDialog {
+        .init(
+            visible: visible,
+            child: self,
+            id: id ?? ""
+        )
+    }
+
     /// Create an importer file dialog.
     /// - Parameters:
     ///     - open: The signal to open the dialog.

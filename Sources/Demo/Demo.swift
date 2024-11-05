@@ -76,6 +76,7 @@ struct Demo: App {
         @State private var wide = true
         @State private var maximized = false
         @State private var about = false
+        @State private var preferences = false
         var window: AdwaitaWindow
         var app: AdwaitaApp!
         var pictureURL: URL?
@@ -140,6 +141,22 @@ struct Demo: App {
                 website: .init(string: "https://adwaita-swift.aparoksha.dev/"),
                 issues: .init(string: "https://git.aparoksha.dev/aparoksha/adwaita-swift/issues")
             )
+            .preferencesDialog(visible: $preferences)
+            .preferencesPage("Page 1", icon: .default(icon: .audioHeadset)) { page in
+                page
+                    .group("General") {
+                        SwitchRow()
+                            .title("Hello")
+                            .subtitle("World")
+                        SwitchRow()
+                            .title("Switch")
+                            .subtitle("Row")
+                    }
+                    .group("Extra", description: "This is the group's description") {
+                        ActionRow()
+                            .title("Extra Action")
+                    }
+            }
         }
 
         var menu: AnyView {
@@ -153,6 +170,8 @@ struct Demo: App {
                 }
                 .keyboardShortcut("w".ctrl())
                 MenuSection {
+                    MenuButton("Preferences") { preferences = true }
+                        .keyboardShortcut("comma".ctrl())
                     MenuButton("About") { about = true }
                     MenuButton("Quit", window: false) { app.quit() }
                         .keyboardShortcut("q".ctrl())
