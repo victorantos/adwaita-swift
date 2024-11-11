@@ -32,6 +32,7 @@ struct DialogDemo: View {
                 .topToolbar {
                     HeaderBar.empty()
                 }
+            Button("Close") { dialog = false }
         }
     }
 
