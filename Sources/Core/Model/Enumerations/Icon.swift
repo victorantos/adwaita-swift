@@ -29,7 +29,7 @@ public enum Icon {
     }
 
     /// A preinstalled icon.
-    public enum DefaultIcon: String {
+    public enum DefaultIcon: String, CaseIterable {
         // swiftlint:disable missing_docs identifier_name
         case acAdapter
         case accessoriesCalculator
@@ -40,7 +40,6 @@ public enum Icon {
         case addressBookNew
         case airplaneMode
         case alarm
-        case appRemove
         case appletsScreenshooter
         case applicationCertificate
         case applicationExitRtl
@@ -288,7 +287,6 @@ public enum Icon {
         case functionLinear
         case gestureSwipeLeft
         case gestureSwipeRight
-        case gnomeDisksStateStandby
         case gnomePowerManager
         case goBottom
         case goDown
@@ -301,12 +299,6 @@ public enum Icon {
         case goPrevious
         case goTop
         case goUp
-        case goaAccountExchange
-        case goaAccountGoogle
-        case goaAccountLastfm
-        case goaAccountMsn
-        case goaAccountOwncloud
-        case goaAccount
         case goaPanel
         case gtk3Demo
         case gtk3WidgetFactory
@@ -317,7 +309,6 @@ public enum Icon {
         case imageLoading
         case imageMissing
         case imageXGeneric
-        case info
         case inodeDirectory
         case inputDialpad
         case inputGaming
@@ -343,13 +334,6 @@ public enum Icon {
         case langTypedef
         case langUnion
         case langVariable
-        case libreofficeBase
-        case libreofficeCalc
-        case libreofficeDraw
-        case libreofficeImpress
-        case libreofficeMain
-        case libreofficeMath
-        case libreofficeWriter
         case listAdd
         case listDragHandle
         case listRemoveAll
@@ -469,9 +453,6 @@ public enum Icon {
         case networkWorkgroup
         case nightLightDisabled
         case nightLight
-        case nmDeviceWiredSecure
-        case nmDeviceWired
-        case nmDeviceWwan
         case nonStarred
         case notificationsDisabled
         case objectFlipHorizontal
@@ -480,70 +461,6 @@ public enum Icon {
         case objectRotateRight
         case objectSelect
         case openMenu
-        case orca
-        case fedoraprojectAnacondaInstaller = "org.fedoraproject.AnacondaInstaller"
-        case freedesktopMalcontentControl = "org.freedesktop.MalcontentControl"
-        case gnomeAdwaita1Demo = "org.gnome.Adwaita1.Demo"
-        case gnomeBoxes = "org.gnome.Boxes"
-        case gnomeBuilder = "org.gnome.Builder"
-        case gnomeCalculator = "org.gnome.Calculator"
-        case gnomeCharacters = "org.gnome.Characters"
-        case gnomeCheese = "org.gnome.Cheese"
-        case gnomeConsole = "org.gnome.Console"
-        case gnomeDiskUtility = "org.gnome.DiskUtility"
-        case gnomeEpiphany = "org.gnome.Epiphany"
-        case gnomeEvince = "org.gnome.Evince"
-        case gnomeLogs = "org.gnome.Logs"
-        case gnomeMaps = "org.gnome.Maps"
-        case gnomeNautilus = "org.gnome.Nautilus"
-        case gnomePhotos = "org.gnome.Photos"
-        case gnomeRhythmbox3 = "org.gnome.Rhythmbox3"
-        case gnomeSettingsAbout = "org.gnome.Settings-about"
-        case gnomeSettingsAccessibility = "org.gnome.Settings-accessibility"
-        case gnomeSettingsAppearance = "org.gnome.Settings-appearance"
-        case gnomeSettingsApplications = "org.gnome.Settings-applications"
-        case gnomeSettingsBluetooth = "org.gnome.Settings-bluetooth"
-        case gnomeSettingsCamera = "org.gnome.Settings-camera"
-        case gnomeSettingsColor = "org.gnome.Settings-color"
-        case gnomeSettingsDefaultApps = "org.gnome.Settings-default-apps"
-        case gnomeSettingsDiagnostics = "org.gnome.Settings-diagnostics"
-        case gnomeSettingsDisplay = "org.gnome.Settings-display"
-        case gnomeSettingsFileHistory = "org.gnome.Settings-file-history"
-        case gnomeSettingsKeyboard = "org.gnome.Settings-keyboard"
-        case gnomeSettingsLocation = "org.gnome.Settings-location"
-        case gnomeSettingsMicrophone = "org.gnome.Settings-microphone"
-        case gnomeSettingsMobileNetwork = "org.gnome.Settings-mobile-network"
-        case gnomeSettingsMouse = "org.gnome.Settings-mouse"
-        case gnomeSettingsMultitasking = "org.gnome.Settings-multitasking"
-        case gnomeSettingsNetwork = "org.gnome.Settings-network"
-        case gnomeSettingsNotifications = "org.gnome.Settings-notifications"
-        case gnomeSettingsOnlineAccounts = "org.gnome.Settings-online-accounts"
-        case gnomeSettingsPower = "org.gnome.Settings-power"
-        case gnomeSettingsPinters = "org.gnome.Setting-printers"
-        case gnomeSettingsRegion = "org.gnome.Settings-region"
-        case gnomeSettingsRemovableMedia = "org.gnome.Settings-removable-media"
-        case gnomeSettingsSearch = "org.gnome.Settings-search"
-        case gnomeSettingsSharing = "org.gnome.Settings-sharing"
-        case gnomeSettingsSound = "org.gnome.Settings-sound"
-        case gnomeSettings = "org.gnome.Settings"
-        case gnomeSettingsSystemLockScreen = "org.gnome.Settings-system-lock-screen"
-        case gnomeSettingsThunderbolt = "org.gnome.Settings-thunderbolt"
-        case gnomeSettingsTime = "org.gnome.Settings-time"
-        case gnomeSettingsUsers = "org.gnome.Settings-users"
-        case gnomeSettingsWacom = "org.gnome.Settings-wacom"
-        case gnomeShellExtensions = "org.gnome.Shell.Extensions"
-        case gnomeSoftware = "org.gnome.Software"
-        case gnomeSystemMonitor = "org.gnome.SystemMonitor"
-        case gnomeTextEditor = "org.gnome.TextEditor"
-        case gnomeTotem = "org.gnome.Totem"
-        case gnomeWeather = "org.gnome.Weather"
-        case gnomeYelp = "org.gnome.Yelp"
-        case gnomeBaobab = "org.gnome.baobab"
-        case gnomeClocks = "org.gnome.clocks"
-        case gnomeDesignIconLibrary = "org.gnome.design.IconLibrary"
-        case gnomeEog = "org.gnome.eog"
-        case gnomeFontViewer = "org.gnome.font-viewer"
-        case gnomeTweaks = "org.gnome.tweaks"
         case gtkDemo4 = "org.gtk.Demo4"
         case gtkIconBrowser4 = "org.gtk.IconBrowser4"
         case gtkPrintEditor4 = "org.gtk.PrintEditor4"
@@ -554,18 +471,12 @@ public enum Icon {
         case orientationPortraitInverse
         case orientationPortraitLeft
         case orientationPortraitRight
-        case orientationProtrait
+        case orientationPortrait
         case packageXGeneric
         case panDown
         case panEnd
         case panStart
         case panUp
-        case panelBottom
-        case panelCenter
-        case panelLeft
-        case panelModified
-        case panelRight
-        case panelTop
         case pda
         case phoneAppleIphone
         case phoneOld
@@ -629,7 +540,6 @@ public enum Icon {
         case sidebarShow
         case softwareUpdateAvailable
         case softwareUpdateUrgent
-        case speedometer
         case starNew
         case starred
         case startHere
@@ -652,13 +562,11 @@ public enum Icon {
         case tablet
         case taskDue
         case taskPastDue
-        case temperature
         case textEditor
         case textXGeneric
         case thunderboltAcquiring
         case thunderbolt
         case toolsCheckSpelling
-        case totemTv
         case touchDisabled
         case touchpadDisabled
         case tv
@@ -681,7 +589,7 @@ public enum Icon {
         case valueDecrease
         case valueIncrease
         case videoDisplay
-        case videoJoineDisplays
+        case videoJoinedDisplays
         case videoSingleDisplay
         case videoXGeneric
         case viewAppGrid
@@ -716,7 +624,6 @@ public enum Icon {
         case weatherFewCloudsNight
         case weatherFewClouds
         case weatherFog
-        case weatherHourly
         case weatherOvercast
         case weatherSevereAlert
         case weatherShowersScattered
