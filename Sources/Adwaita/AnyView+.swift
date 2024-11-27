@@ -45,6 +45,8 @@ extension AnyView {
     ///     - visible: Whether the dialog is presented.
     ///     - heading: The heading.
     ///     - body: The body text.
+    ///     - id: An optional identifier.
+    ///     - extraChild: A view with custom content.
     public func alertDialog(
         visible: Binding<Bool>,
         heading: String,
@@ -57,6 +59,30 @@ extension AnyView {
             id: id ?? "no-id",
             heading: heading,
             body: body
+        )
+    }
+
+    /// Add an alert dialog to the parent window.
+    /// - Parameters:
+    ///     - visible: Whether the dialog is presented.
+    ///     - heading: The heading.
+    ///     - body: The body text.
+    ///     - id: An optional identifier.
+    ///     - extraChild: A view with custom content.
+    public func alertDialog(
+        visible: Binding<Bool>,
+        heading: String,
+        body: String = "",
+        id: String? = nil,
+        @ViewBuilder extraChild: () -> Body
+    ) -> AlertDialog {
+        .init(
+            visible: visible,
+            child: self,
+            id: id ?? "no-id",
+            heading: heading,
+            body: body,
+            extraChild: extraChild()
         )
     }
 

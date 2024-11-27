@@ -28,6 +28,8 @@ public struct AlertDialog: AdwaitaWidget {
     var heading: String
     /// The body text.
     var body: String
+    /// The body view.
+    var extraChild: Body?
     /// The available responses.
     var responses: [Response] = []
     /// The child view.
@@ -40,18 +42,21 @@ public struct AlertDialog: AdwaitaWidget {
     ///     - id: A unique identifier for dialogs on the view.
     ///     - heading: The heading.
     ///     - body: The body text.
+    ///     - extraChild: The body view.
     public init(
         visible: Binding<Bool>,
         child: AnyView,
         id: String,
         heading: String,
-        body: String
+        body: String,
+        extraChild: Body? = nil
     ) {
         self._visible = visible
         self.child = child
         self.id = id
         self.heading = heading
         self.body = body
+        self.extraChild = extraChild
     }
 
     /// Information about a response.
@@ -126,7 +131,7 @@ public struct AlertDialog: AdwaitaWidget {
         if visible {
             var present = false
             if storage.content[Self.dialogID + id]?.first == nil {
-                createDialog(storage: storage)
+                createDialog(storage: storage, data: data)
                 present = true
             }
             let pointer = storage.content[Self.dialogID + id]?.first?.opaquePointer
@@ -198,11 +203,18 @@ public struct AlertDialog: AdwaitaWidget {
     }
 
     /// Create a new instance of the dialog.
-    /// - Parameter storage: The wrapped view's storage.
-    func createDialog(storage: ViewStorage) {
+    /// - Parameters:
+    ///     - storage: The wrapped view's storage.
+    ///     - data: The widget data.
+    func createDialog(storage: ViewStorage, data: WidgetData) {
         let pointer = adw_alert_dialog_new(nil, nil)
         let dialog = ViewStorage(pointer?.opaque())
         storage.content[Self.dialogID + id] = [dialog]
+        if let extraChild {
+            let child = extraChild.storage(data: data, type: AdwaitaMainView.self)
+            let childPointer = child.pointer as? OpaquePointer
+            adw_alert_dialog_set_extra_child(pointer?.cast(), childPointer?.cast())
+        }
     }
 
     /// Get the identifier of a response which is combined with the dialog's id.
