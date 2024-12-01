@@ -62,6 +62,8 @@ public struct Window: AdwaitaSceneElement {
         let pointer: UnsafeMutablePointer<AdwApplicationWindow>?
         /// Fields for storing signal data.
         var signals: [String: SignalData] = [:]
+        /// Other fields.
+        public var fields: [String: Any] = [:]
         /// The App.
         let app: AdwaitaApp
 
