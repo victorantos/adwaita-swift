@@ -91,7 +91,9 @@ public struct FileDialog: AdwaitaWidget {
         }
         child.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
         if open.update, storage.fields["callbacks"] == nil {
+            var unref: [OpaquePointer?] = []
             let pointer = gtk_file_dialog_new()
+            unref.append(pointer)
             if let initialName {
                 gtk_file_dialog_set_initial_name(pointer, initialName)
             }
@@ -101,18 +103,24 @@ public struct FileDialog: AdwaitaWidget {
                     gtk_file_filter_add_suffix(filter, name)
                 }
                 gtk_file_dialog_set_default_filter(pointer, filter)
-                g_object_unref(filter?.cast())
+                unref.append(filter)
             } else {
                 gtk_file_dialog_set_default_filter(pointer, nil)
             }
             if let initialFolder {
                 let file = g_file_new_for_path(initialFolder.absoluteString)
                 gtk_file_dialog_set_initial_folder(pointer, file)
-                g_object_unref(file?.cast())
+                unref.append(file)
             }
             let callbacks = AdwaitaFileDialog()
-            callbacks.onResult = { (storage.fields["result"] as? (URL) -> Void)?($0); g_object_unref(pointer?.cast()) }
-            callbacks.onCancel = { (storage.fields["cancel"] as? () -> Void)?() }
+            let unrefClosure = {
+                for ref in unref {
+                    g_object_unref(ref?.cast())
+                }
+                storage.fields["callbacks"] = nil
+            }
+            callbacks.onResult = { (storage.fields["result"] as? (URL) -> Void)?($0); unrefClosure() }
+            callbacks.onCancel = { (storage.fields["cancel"] as? () -> Void)?(); unrefClosure() }
             callbacks.reset = { storage.fields["callbacks"] = nil }
             storage.fields["callbacks"] = callbacks
             let ptr = UInt64(Int(bitPattern: pointer))
@@ -138,8 +146,9 @@ class AdwaitaFileDialog {
     var reset: () -> Void = { }
 
     /// Initialize the window callback.
-    init() {
-    }
+    init() { }
+
+    deinit { print("DEINIT fd") }
 
     /// Run this when a file gets opened.
     /// - Parameter path: The file path.

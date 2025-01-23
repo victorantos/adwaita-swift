@@ -38,6 +38,7 @@ extension ComboRow {
             let list = gtk_string_list_new(nil)
             storage.fields[Self.stringList] = list
             adw_combo_row_set_model(storage.opaquePointer?.cast(), list)
+            g_object_unref(list?.cast())
             Self.updateContent(storage: storage, values: values, element: Element.self)
         }
         updateFunctions.append { storage, _, _ in

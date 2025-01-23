@@ -28,9 +28,13 @@ static void
 gtui_filedialog_open_finish (uint64_t dialog, uint64_t result, uint64_t data)
 {
   GFile      *file = gtk_file_dialog_open_finish (dialog, result, NULL);
-  const char *path = g_file_peek_path (file);
-  g_object_unref (file);
-  filedialog_on_open_cb (dialog, path, data);
+  if (file != NULL) {
+    const char *path = g_file_peek_path (file);
+    g_object_unref (file);
+    filedialog_on_open_cb (dialog, path, data);
+  } else {
+    filedialog_on_open_cb (dialog, NULL, data);
+  }
 }
 
 static void

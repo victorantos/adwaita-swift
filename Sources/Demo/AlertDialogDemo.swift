@@ -24,7 +24,9 @@ struct AlertDialogDemo: View {
             .frame(maxWidth: 100)
             .padding()
         }
-        .alertDialog(visible: $dialog, heading: "Alert Dialog", body: "This is an alert dialog")
+        .alertDialog(visible: $dialog, heading: "Alert Dialog", body: "This is an alert dialog") {
+            CounterDemo()
+        }
         .response("Cancel", role: .close) {
             print("Cancel")
         }

@@ -14,11 +14,4 @@ extension Bool {
         self ? 1 : 0
     }
 
-    /// The gboolean as a GValue.
-    public var gValue: UnsafePointer<GValue> {
-        let pointer = UnsafeMutablePointer<GValue>.allocate(capacity: 1)
-        pointer.initialize(to: gtui_initialize_boolean(cBool))
-        return .init(pointer)
-    }
-
 }

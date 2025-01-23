@@ -121,7 +121,7 @@ public struct AboutDialog: AdwaitaWidget {
             if storage.content[dialogID]?.first != nil {
                 let dialog = storage.content[dialogID]?.first?.opaquePointer
                 adw_dialog_close(dialog?.cast())
-                g_object_unref(dialog?.cast())
+                storage.content[dialogID] = []
             }
         }
     }

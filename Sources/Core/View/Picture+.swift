@@ -20,6 +20,7 @@ extension Picture {
                 let pointer = storage.opaquePointer
                 guard let data else {
                     if storage.fields[oldData] != nil {
+                        g_object_unref(gtk_picture_get_paintable(pointer)?.cast())
                         gtk_picture_set_paintable(pointer, gdk_paintable_new_empty(0, 0))
                         storage.fields[oldData] = nil
                     }

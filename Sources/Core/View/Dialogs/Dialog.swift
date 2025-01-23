@@ -113,6 +113,7 @@ public struct Dialog: AdwaitaWidget {
             if storage.content[dialogID + id]?.first != nil {
                 let dialog = storage.content[dialogID + id]?.first?.opaquePointer
                 adw_dialog_close(dialog?.cast())
+                storage.content[dialogID + id] = []
             }
         }
     }
