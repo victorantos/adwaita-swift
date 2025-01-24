@@ -125,7 +125,7 @@ public struct AlertDialog: AdwaitaWidget {
     ) where Data: ViewRenderData {
         storage.fields[Self.visibleID + id] = _visible
         child.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
-        if let storage = storage.content["extra-child"]?.first {
+        if let storage = storage.content["extra-child"]?.first, visible {
             extraChild?.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
         }
         guard updateProperties else {
