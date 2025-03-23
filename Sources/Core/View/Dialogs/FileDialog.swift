@@ -89,7 +89,7 @@ public struct FileDialog: AdwaitaWidget {
         guard let mainStorage = storage.content[.mainContent]?.first else {
             return
         }
-        child.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
+        child.updateStorage(mainStorage, data: data, updateProperties: updateProperties, type: type)
         if open.update, storage.fields["callbacks"] == nil {
             var unref: [OpaquePointer?] = []
             let pointer = gtk_file_dialog_new()
