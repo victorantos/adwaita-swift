@@ -65,6 +65,19 @@ struct Demo: App {
         .title("Navigation View Demo")
     }
 
+    enum WindowName: String, CaseIterable, CustomStringConvertible, Identifiable {
+
+        case demo = "Demo"
+        case alternative = "Alternative"
+
+        var id: Self { self }
+
+        var description: String {
+            rawValue
+        }
+
+    }
+
     struct DemoContent: WindowView {
 
         @State("selection")
@@ -77,6 +90,7 @@ struct Demo: App {
         @State private var maximized = false
         @State private var about = false
         @State private var preferences = false
+        @State private var title: WindowName = .demo
         var window: AdwaitaWindow
         var app: AdwaitaApp!
         var pictureURL: URL?
@@ -98,7 +112,7 @@ struct Demo: App {
                         menu
                     }
                     .headerBarTitle {
-                        WindowTitle(subtitle: "", title: "Demo")
+                        WindowTitle(subtitle: "", title: title.description)
                     }
                 }
             } content: {
@@ -111,6 +125,7 @@ struct Demo: App {
                     HeaderBar {
                         Toggle(icon: .default(icon: .sidebarShow), isOn: $sidebarVisible)
                             .tooltip("Toggle Sidebar")
+                        DropDown(selection: $title, values: WindowName.allCases)
                     } end: {
                         if sidebarVisible {
                             Text("").transition(.crossfade)
@@ -123,7 +138,7 @@ struct Demo: App {
                             Text("")
                                 .transition(.crossfade)
                         } else {
-                            WindowTitle(subtitle: "Demo", title: selection.label)
+                            WindowTitle(subtitle: title.description, title: selection.label)
                                 .transition(.crossfade)
                         }
                     }

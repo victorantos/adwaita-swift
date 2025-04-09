@@ -292,7 +292,21 @@ struct GenerationConfiguration {
             initializer: "gtk_separator_new(GTK_ORIENTATION_VERTICAL)",
             excludeProperties: ["orientation"]
         ),
-        .init(class: "Fixed")
+        .init(class: "Fixed"),
+        .init(
+            class: "DropDown",
+            initializer: "gtk_drop_down_new(gtk_string_list_new(nil), nil)",
+            bindings: [.init(property: "selected")],
+            excludeProperties: [
+                "expression",
+                "factory",
+                "header-factory",
+                "list-factory",
+                "model",
+                "search-match-mode",
+                "selected-item"
+            ]
+        )
     ]
 
     /// The unshortening map.
