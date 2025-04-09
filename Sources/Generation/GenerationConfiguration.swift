@@ -127,7 +127,7 @@ struct GenerationConfiguration {
         .init(
             class: "PreferencesPage",
             staticWidgets: [
-                .init(name: "child", add: "adw_preferences_page_add"),
+                .init(name: "child", add: "adw_preferences_page_add")
             ],
             excludeProperties: ["banner"],
             cast: true
