@@ -2,7 +2,7 @@
 //  PreferencesRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw

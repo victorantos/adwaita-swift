@@ -2,15 +2,15 @@
 //  Popover.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkPopover` is a bubble-like context popup.
+/// Presents a bubble-like popup.
 /// 
-/// ![An example GtkPopover](popover.png)
+/// <picture><source srcset="popover-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkPopover" src="popover.png"></picture>
 /// 
 /// It is primarily meant to provide context-dependent information
 /// or options. Popovers are attached to a parent widget. By default,

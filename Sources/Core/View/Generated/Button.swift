@@ -2,16 +2,15 @@
 //  Button.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// The `GtkButton` widget is generally used to trigger a callback function that is
-/// called when the button is pressed.
+/// Calls a callback function when the button is clicked.
 /// 
-/// ![An example GtkButton](button.png)
+/// <picture><source srcset="button-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkButton" src="button.png"></picture>
 /// 
 /// The `GtkButton` widget can hold any valid child widget. That is, it can hold
 /// almost any other standard `GtkWidget`. The most commonly used child is the
@@ -43,7 +42,7 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// `GtkButton` uses the %GTK_ACCESSIBLE_ROLE_BUTTON role.
+/// `GtkButton` uses the [enum@Gtk.AccessibleRole.button] role.
 public struct Button: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

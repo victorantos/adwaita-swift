@@ -2,13 +2,15 @@
 //  ListBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkListBox` is a vertical list.
+/// Shows a vertical list.
+/// 
+/// <picture><source srcset="list-box-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkListBox" src="list-box.png"></picture>
 /// 
 /// A `GtkListBox` only contains `GtkListBoxRow` children. These rows can
 /// by dynamically sorted and filtered, and headers can be added dynamically
@@ -49,10 +51,10 @@ import LevenshteinTransformations
 /// 
 /// # CSS nodes
 /// 
-/// |[<!-- language="plain" -->
+/// ```
 /// list[.separators][.rich-list][.navigation-sidebar][.boxed-list]
 /// ╰── row[.activatable]
-/// ]|
+/// ```
 /// 
 /// `GtkListBox` uses a single CSS node named list. It may carry the .separators
 /// style class, when the [property@Gtk.ListBox:show-separators] property is set.
@@ -68,8 +70,8 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// `GtkListBox` uses the %GTK_ACCESSIBLE_ROLE_LIST role and `GtkListBoxRow` uses
-/// the %GTK_ACCESSIBLE_ROLE_LIST_ITEM role.
+/// `GtkListBox` uses the [enum@Gtk.AccessibleRole.list] role and `GtkListBoxRow` uses
+/// the [enum@Gtk.AccessibleRole.list_item] role.
 public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Additional update functions for type extensions.

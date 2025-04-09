@@ -2,13 +2,15 @@
 //  FlowBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A `GtkFlowBox` puts child widgets in reflowing grid.
+/// Puts child widgets in a reflowing grid.
+/// 
+/// <picture><source srcset="flow-box-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkFlowBox" src="flow-box.png"></picture>
 /// 
 /// For instance, with the horizontal orientation, the widgets will be
 /// arranged from left to right, starting a new row under the previous
@@ -59,8 +61,8 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// `GtkFlowBox` uses the %GTK_ACCESSIBLE_ROLE_GRID role, and `GtkFlowBoxChild`
-/// uses the %GTK_ACCESSIBLE_ROLE_GRID_CELL role.
+/// `GtkFlowBox` uses the [enum@Gtk.AccessibleRole.grid] role, and `GtkFlowBoxChild`
+/// uses the [enum@Gtk.AccessibleRole.grid_cell] role.
 public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Additional update functions for type extensions.

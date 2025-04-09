@@ -2,13 +2,13 @@
 //  Fixed.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkFixed` places its child widgets at fixed positions and with fixed sizes.
+/// Places its child widgets at fixed positions and with fixed sizes.
 /// 
 /// `GtkFixed` performs no automatic layout management.
 /// 

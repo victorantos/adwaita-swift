@@ -2,7 +2,7 @@
 //  NavigationView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
@@ -129,11 +129,29 @@ public struct NavigationView: AdwaitaWidget {
     /// 
     /// Gesture-based transitions are always animated.
     var animateTransitions: Bool?
+    /// Whether the view is horizontally homogeneous.
+    /// 
+    /// If the view is horizontally homogeneous, it allocates the same width for
+    /// all pages.
+    /// 
+    /// If it's not, the page may change width when a different page becomes
+    /// visible.
+    var hhomogeneous: Bool?
     /// Whether pressing Escape pops the current page.
     /// 
     /// Applications using `AdwNavigationView` to implement a browser may want to
     /// disable it.
     var popOnEscape: Bool?
+    /// Whether the view is vertically homogeneous.
+    /// 
+    /// If the view is vertically homogeneous, it allocates the same height for
+    /// all pages.
+    /// 
+    /// If it's not, the view may change height when a different page becomes
+    /// visible.
+    var vhomogeneous: Bool?
+    /// The tag of the currently visible page.
+    var visiblePageTag: String?
     /// Emitted when a push shortcut or a gesture is triggered.
     /// 
     /// To support the push shortcuts and gestures, the application is expected to
@@ -214,8 +232,14 @@ public struct NavigationView: AdwaitaWidget {
             if let animateTransitions, updateProperties, (storage.previousState as? Self)?.animateTransitions != animateTransitions {
                 adw_navigation_view_set_animate_transitions(widget, animateTransitions.cBool)
             }
+            if let hhomogeneous, updateProperties, (storage.previousState as? Self)?.hhomogeneous != hhomogeneous {
+                adw_navigation_view_set_hhomogeneous(widget, hhomogeneous.cBool)
+            }
             if let popOnEscape, updateProperties, (storage.previousState as? Self)?.popOnEscape != popOnEscape {
                 adw_navigation_view_set_pop_on_escape(widget, popOnEscape.cBool)
+            }
+            if let vhomogeneous, updateProperties, (storage.previousState as? Self)?.vhomogeneous != vhomogeneous {
+                adw_navigation_view_set_vhomogeneous(widget, vhomogeneous.cBool)
             }
 
 
@@ -238,6 +262,19 @@ public struct NavigationView: AdwaitaWidget {
         return newSelf
     }
 
+    /// Whether the view is horizontally homogeneous.
+    /// 
+    /// If the view is horizontally homogeneous, it allocates the same width for
+    /// all pages.
+    /// 
+    /// If it's not, the page may change width when a different page becomes
+    /// visible.
+    public func hhomogeneous(_ hhomogeneous: Bool? = true) -> Self {
+        var newSelf = self
+        newSelf.hhomogeneous = hhomogeneous
+        return newSelf
+    }
+
     /// Whether pressing Escape pops the current page.
     /// 
     /// Applications using `AdwNavigationView` to implement a browser may want to
@@ -245,6 +282,26 @@ public struct NavigationView: AdwaitaWidget {
     public func popOnEscape(_ popOnEscape: Bool? = true) -> Self {
         var newSelf = self
         newSelf.popOnEscape = popOnEscape
+        return newSelf
+    }
+
+    /// Whether the view is vertically homogeneous.
+    /// 
+    /// If the view is vertically homogeneous, it allocates the same height for
+    /// all pages.
+    /// 
+    /// If it's not, the view may change height when a different page becomes
+    /// visible.
+    public func vhomogeneous(_ vhomogeneous: Bool? = true) -> Self {
+        var newSelf = self
+        newSelf.vhomogeneous = vhomogeneous
+        return newSelf
+    }
+
+    /// The tag of the currently visible page.
+    public func visiblePageTag(_ visiblePageTag: String?) -> Self {
+        var newSelf = self
+        newSelf.visiblePageTag = visiblePageTag
         return newSelf
     }
 

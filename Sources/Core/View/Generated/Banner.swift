@@ -2,7 +2,7 @@
 //  Banner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
@@ -22,7 +22,10 @@ import LevenshteinTransformations
 /// 
 /// Banners can optionally have a button with text on it, set through
 /// [property@Banner:button-label]. The button can be used with a `GAction`,
-/// or with the [signal@Banner::button-clicked] signal.
+/// or with the [signal@Banner::button-clicked] signal. The button can have
+/// different styles, a gray style and a suggested style.
+/// 
+/// <picture><source srcset="banner-suggested-dark.png" media="(prefers-color-scheme: dark)"><img src="banner-suggested.png" alt="banner with suggested button style"></picture>
 /// 
 /// ## CSS nodes
 /// 

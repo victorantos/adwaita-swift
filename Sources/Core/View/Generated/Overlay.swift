@@ -2,16 +2,15 @@
 //  Overlay.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkOverlay` is a container which contains a single main child, on top
-/// of which it can place “overlay” widgets.
+/// Places “overlay” widgets on top of a single main child.
 /// 
-/// ![An example GtkOverlay](overlay.png)
+/// <picture><source srcset="overlay-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkOverlay" src="overlay.png"></picture>
 /// 
 /// The position of each overlay widget is determined by its
 /// [property@Gtk.Widget:halign] and [property@Gtk.Widget:valign]

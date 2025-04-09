@@ -2,15 +2,15 @@
 //  SearchBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkSearchBar` is a container made to have a search entry.
+/// Reveals a search entry when search is started.
 /// 
-/// ![An example GtkSearchBar](search-bar.png)
+/// <picture><source srcset="search-bar-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkSearchBar" src="search-bar.png"></picture>
 /// 
 /// It can also contain additional widgets, such as drop-down menus,
 /// or buttons.  The search bar would appear when a search is started
@@ -57,7 +57,7 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// `GtkSearchBar` uses the %GTK_ACCESSIBLE_ROLE_SEARCH role.
+/// `GtkSearchBar` uses the [enum@Gtk.AccessibleRole.search] role.
 public struct SearchBar: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

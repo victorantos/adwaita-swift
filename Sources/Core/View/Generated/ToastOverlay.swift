@@ -2,7 +2,7 @@
 //  ToastOverlay.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
@@ -15,6 +15,9 @@ import LevenshteinTransformations
 /// Much like [class@Gtk.Overlay], `AdwToastOverlay` is a container with a single
 /// main child, on top of which it can display a [class@Toast], overlaid.
 /// Toasts can be shown with [method@ToastOverlay.add_toast].
+/// 
+/// Use [method@ToastOverlay.dismiss_all] to dismiss all toasts at once, or
+/// [method@Toast.dismiss] to dismiss a single toast.
 /// 
 /// See [class@Toast] for details.
 /// 

@@ -2,13 +2,15 @@
 //  ScrolledWindow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkScrolledWindow` is a container that makes its child scrollable.
+/// Makes its child scrollable.
+/// 
+/// <picture><source srcset="scrolledwindow-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkScrolledWindow" src="scrolledwindow.png"></picture>
 /// 
 /// It does so using either internally added scrollbars or externally
 /// associated adjustments, and optionally draws a frame around the child.
@@ -79,9 +81,10 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// Until GTK 4.10, `GtkScrolledWindow` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
+/// Until GTK 4.10, `GtkScrolledWindow` used the [enum@Gtk.AccessibleRole.group] role.
 /// 
-/// Starting from GTK 4.12, `GtkScrolledWindow` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
+/// Starting from GTK 4.12, `GtkScrolledWindow` uses the [enum@Gtk.AccessibleRole.generic]
+/// role.
 public struct ScrolledWindow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

@@ -2,18 +2,17 @@
 //  Label.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// The `GtkLabel` widget displays a small amount of text.
+/// Displays a small amount of text.
 /// 
-/// As the name implies, most labels are used to label another widget
-/// such as a [class@Button].
+/// Most labels are used to label another widget (such as an [class@Entry]).
 /// 
-/// ![An example GtkLabel](label.png)
+/// <picture><source srcset="label-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkLabel" src="label.png"></picture>
 /// 
 /// ## Shortcuts and Gestures
 /// 
@@ -92,7 +91,7 @@ import LevenshteinTransformations
 /// 
 /// ## Accessibility
 /// 
-/// `GtkLabel` uses the %GTK_ACCESSIBLE_ROLE_LABEL role.
+/// `GtkLabel` uses the [enum@Gtk.AccessibleRole.label] role.
 /// 
 /// ## Mnemonics
 /// 
@@ -137,9 +136,8 @@ import LevenshteinTransformations
 /// 
 /// ## Markup (styled text)
 /// 
-/// To make it easy to format text in a label (changing colors,
-/// fonts, etc.), label text can be provided in a simple
-/// markup format:
+/// To make it easy to format text in a label (changing colors, fonts, etc.),
+/// label text can be provided in a simple markup format:
 /// 
 /// Here’s how to create a label with a small font:
 /// ```c
@@ -150,7 +148,7 @@ import LevenshteinTransformations
 /// (See the Pango manual for complete documentation] of available
 /// tags, [func@Pango.parse_markup])
 /// 
-/// The markup passed to [method@Gtk.Label.set_markup] must be valid; for example,
+/// The markup passed to [method@Gtk.Label.set_markup] must be valid XML; for example,
 /// literal `<`, `>` and `&` characters must be escaped as `&lt;`, `&gt;`, and `&amp;`.
 /// If you pass text obtained from the user, file, or a network to
 /// [method@Gtk.Label.set_markup], you’ll want to escape it with
@@ -161,16 +159,16 @@ import LevenshteinTransformations
 /// attributes in some cases. Be careful though; [struct@Pango.AttrList] tends
 /// to cause internationalization problems, unless you’re applying attributes
 /// to the entire string (i.e. unless you set the range of each attribute
-/// to [0, %G_MAXINT)). The reason is that specifying the start_index and
-/// end_index for a [struct@Pango.Attribute] requires knowledge of the exact
+/// to [0, `G_MAXINT`)). The reason is that specifying the `start_index` and
+/// `end_index` for a [struct@Pango.Attribute] requires knowledge of the exact
 /// string being displayed, so translations will cause problems.
 /// 
 /// ## Selectable labels
 /// 
 /// Labels can be made selectable with [method@Gtk.Label.set_selectable].
-/// Selectable labels allow the user to copy the label contents to
-/// the clipboard. Only labels that contain useful-to-copy information—such
-/// as error messages—should be made selectable.
+/// Selectable labels allow the user to copy the label contents to the
+/// clipboard. Only labels that contain useful-to-copy information — such
+/// as error messages — should be made selectable.
 /// 
 /// ## Text layout
 /// 
@@ -198,11 +196,11 @@ import LevenshteinTransformations
 /// ## Links
 /// 
 /// GTK supports markup for clickable hyperlinks in addition to regular Pango
-/// markup. The markup for links is borrowed from HTML, using the `<a>` with
-/// “href“, “title“ and “class“ attributes. GTK renders links similar to the
-/// way they appear in web browsers, with colored, underlined text. The “title“
-/// attribute is displayed as a tooltip on the link. The “class“ attribute is
-/// used as style class on the CSS node for the link.
+/// markup. The markup for links is borrowed from HTML, using the `<a>` tag
+/// with “href“, “title“ and “class“ attributes. GTK renders links similar to
+/// the way they appear in web browsers, with colored, underlined text. The
+/// “title“ attribute is displayed as a tooltip on the link. The “class“
+/// attribute is used as style class on the CSS node for the link.
 /// 
 /// An example of inline links looks like this:
 /// 
@@ -233,27 +231,37 @@ public struct Label: AdwaitaWidget {
     /// 
     /// If the string contains Pango markup (see [func@Pango.parse_markup]),
     /// you will have to set the [property@Gtk.Label:use-markup] property to
-    /// %TRUE in order for the label to display the markup attributes. See also
+    /// true in order for the label to display the markup attributes. See also
     /// [method@Gtk.Label.set_markup] for a convenience function that sets both
     /// this property and the [property@Gtk.Label:use-markup] property at the
     /// same time.
     /// 
     /// If the string contains underlines acting as mnemonics, you will have to
-    /// set the [property@Gtk.Label:use-underline] property to %TRUE in order
+    /// set the [property@Gtk.Label:use-underline] property to true in order
     /// for the label to display them.
     var label: String
     /// The number of lines to which an ellipsized, wrapping label
-    /// should be limited.
+    /// should display before it gets ellipsized. This both prevents the label
+    /// from ellipsizing before this many lines are displayed, and limits the
+    /// height request of the label to this many lines.
+    /// 
+    /// ::: warning
+    /// Setting this property has unintuitive and unfortunate consequences
+    /// for the minimum _width_ of the label. Specifically, if the height
+    /// of the label is such that it fits a smaller number of lines than
+    /// the value of this property, the label can not be ellipsized at all,
+    /// which means it must be wide enough to fit all the text fully.
     /// 
     /// This property has no effect if the label is not wrapping or ellipsized.
+    /// 
     /// Set this property to -1 if you don't want to limit the number of lines.
     var lines: Int?
     /// The desired maximum width of the label, in characters.
     /// 
     /// If this property is set to -1, the width will be calculated automatically.
     /// 
-    /// See the section on [text layout](class.Label.html#text-layout) for details of how
-    /// [property@Gtk.Label:width-chars] and [property@Gtk.Label:max-width-chars]
+    /// See the section on [text layout](class.Label.html#text-layout) for details
+    /// of how [property@Gtk.Label:width-chars] and [property@Gtk.Label:max-width-chars]
     /// determine the width of ellipsized and wrapped labels.
     var maxWidthChars: Int?
     /// The mnemonic accelerator key for the label.
@@ -269,22 +277,22 @@ public struct Label: AdwaitaWidget {
     /// can be an advantage in situations where resizing the label because
     /// of text changes would be distracting, e.g. in a statusbar.
     var singleLineMode: Bool?
-    /// %TRUE if the text of the label includes Pango markup.
+    /// True if the text of the label includes Pango markup.
     /// 
     /// See [func@Pango.parse_markup].
     var useMarkup: Bool?
-    /// %TRUE if the text of the label indicates a mnemonic with an _
+    /// True if the text of the label indicates a mnemonic with an `_`
     /// before the mnemonic character.
     var useUnderline: Bool?
     /// The desired width of the label, in characters.
     /// 
     /// If this property is set to -1, the width will be calculated automatically.
     /// 
-    /// See the section on [text layout](class.Label.html#text-layout) for details of how
-    /// [property@Gtk.Label:width-chars] and [property@Gtk.Label:max-width-chars]
+    /// See the section on [text layout](class.Label.html#text-layout) for details
+    /// of how [property@Gtk.Label:width-chars] and [property@Gtk.Label:max-width-chars]
     /// determine the width of ellipsized and wrapped labels.
     var widthChars: Int?
-    /// %TRUE if the label text will wrap if it gets too wide.
+    /// True if the label text will wrap if it gets too wide.
     var wrap: Bool?
     /// The horizontal alignment of the label text inside its size allocation.
     /// 
@@ -298,7 +306,7 @@ public struct Label: AdwaitaWidget {
     var yalign: Float?
     /// Gets emitted to copy the selection to the clipboard.
     /// 
-    /// The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+    /// The `::copy-clipboard` signal is a [keybinding signal](class.SignalAction.html).
     /// 
     /// The default binding for this signal is <kbd>Ctrl</kbd>+<kbd>c</kbd>.
     var copyClipboard: (() -> Void)?
@@ -402,13 +410,13 @@ public struct Label: AdwaitaWidget {
     /// 
     /// If the string contains Pango markup (see [func@Pango.parse_markup]),
     /// you will have to set the [property@Gtk.Label:use-markup] property to
-    /// %TRUE in order for the label to display the markup attributes. See also
+    /// true in order for the label to display the markup attributes. See also
     /// [method@Gtk.Label.set_markup] for a convenience function that sets both
     /// this property and the [property@Gtk.Label:use-markup] property at the
     /// same time.
     /// 
     /// If the string contains underlines acting as mnemonics, you will have to
-    /// set the [property@Gtk.Label:use-underline] property to %TRUE in order
+    /// set the [property@Gtk.Label:use-underline] property to true in order
     /// for the label to display them.
     public func label(_ label: String) -> Self {
         var newSelf = self
@@ -417,9 +425,19 @@ public struct Label: AdwaitaWidget {
     }
 
     /// The number of lines to which an ellipsized, wrapping label
-    /// should be limited.
+    /// should display before it gets ellipsized. This both prevents the label
+    /// from ellipsizing before this many lines are displayed, and limits the
+    /// height request of the label to this many lines.
+    /// 
+    /// ::: warning
+    /// Setting this property has unintuitive and unfortunate consequences
+    /// for the minimum _width_ of the label. Specifically, if the height
+    /// of the label is such that it fits a smaller number of lines than
+    /// the value of this property, the label can not be ellipsized at all,
+    /// which means it must be wide enough to fit all the text fully.
     /// 
     /// This property has no effect if the label is not wrapping or ellipsized.
+    /// 
     /// Set this property to -1 if you don't want to limit the number of lines.
     public func lines(_ lines: Int?) -> Self {
         var newSelf = self
@@ -431,8 +449,8 @@ public struct Label: AdwaitaWidget {
     /// 
     /// If this property is set to -1, the width will be calculated automatically.
     /// 
-    /// See the section on [text layout](class.Label.html#text-layout) for details of how
-    /// [property@Gtk.Label:width-chars] and [property@Gtk.Label:max-width-chars]
+    /// See the section on [text layout](class.Label.html#text-layout) for details
+    /// of how [property@Gtk.Label:width-chars] and [property@Gtk.Label:max-width-chars]
     /// determine the width of ellipsized and wrapped labels.
     public func maxWidthChars(_ maxWidthChars: Int?) -> Self {
         var newSelf = self
@@ -473,7 +491,7 @@ public struct Label: AdwaitaWidget {
         return newSelf
     }
 
-    /// %TRUE if the text of the label includes Pango markup.
+    /// True if the text of the label includes Pango markup.
     /// 
     /// See [func@Pango.parse_markup].
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
@@ -482,7 +500,7 @@ public struct Label: AdwaitaWidget {
         return newSelf
     }
 
-    /// %TRUE if the text of the label indicates a mnemonic with an _
+    /// True if the text of the label indicates a mnemonic with an `_`
     /// before the mnemonic character.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
@@ -494,8 +512,8 @@ public struct Label: AdwaitaWidget {
     /// 
     /// If this property is set to -1, the width will be calculated automatically.
     /// 
-    /// See the section on [text layout](class.Label.html#text-layout) for details of how
-    /// [property@Gtk.Label:width-chars] and [property@Gtk.Label:max-width-chars]
+    /// See the section on [text layout](class.Label.html#text-layout) for details
+    /// of how [property@Gtk.Label:width-chars] and [property@Gtk.Label:max-width-chars]
     /// determine the width of ellipsized and wrapped labels.
     public func widthChars(_ widthChars: Int?) -> Self {
         var newSelf = self
@@ -503,7 +521,7 @@ public struct Label: AdwaitaWidget {
         return newSelf
     }
 
-    /// %TRUE if the label text will wrap if it gets too wide.
+    /// True if the label text will wrap if it gets too wide.
     public func wrap(_ wrap: Bool? = true) -> Self {
         var newSelf = self
         newSelf.wrap = wrap
@@ -532,7 +550,7 @@ public struct Label: AdwaitaWidget {
 
     /// Gets emitted to copy the selection to the clipboard.
     /// 
-    /// The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+    /// The `::copy-clipboard` signal is a [keybinding signal](class.SignalAction.html).
     /// 
     /// The default binding for this signal is <kbd>Ctrl</kbd>+<kbd>c</kbd>.
     public func copyClipboard(_ copyClipboard: @escaping () -> Void) -> Self {

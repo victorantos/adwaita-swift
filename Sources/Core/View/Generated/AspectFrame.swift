@@ -2,13 +2,13 @@
 //  AspectFrame.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkAspectFrame` preserves the aspect ratio of its child.
+/// Preserves the aspect ratio of its child.
 /// 
 /// The frame can respect the aspect ratio of the child widget,
 /// or use its own aspect ratio.
@@ -19,9 +19,9 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// Until GTK 4.10, `GtkAspectFrame` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
+/// Until GTK 4.10, `GtkAspectFrame` used the [enum@Gtk.AccessibleRole.group] role.
 /// 
-/// Starting from GTK 4.12, `GtkAspectFrame` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
+/// Starting from GTK 4.12, `GtkAspectFrame` uses the [enum@Gtk.AccessibleRole.generic] role.
 public struct AspectFrame: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

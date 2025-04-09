@@ -2,21 +2,21 @@
 //  Box.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// The `GtkBox` widget arranges child widgets into a single row or column.
+/// Arranges child widgets into a single row or column.
 /// 
-/// ![An example GtkBox](box.png)
+/// <picture><source srcset="box-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkBox" src="box.png"></picture>
 /// 
 /// Whether it is a row or column depends on the value of its
 /// [property@Gtk.Orientable:orientation] property. Within the other
-/// dimension, all children are allocated the same size. Of course, the
-/// [property@Gtk.Widget:halign] and [property@Gtk.Widget:valign] properties
-/// can be used on the children to influence their allocation.
+/// dimension, all children are allocated the same size. The
+/// [property@Gtk.Widget:halign] and [property@Gtk.Widget:valign]
+/// properties can be used on the children to influence their allocation.
 /// 
 /// Use repeated calls to [method@Gtk.Box.append] to pack widgets into a
 /// `GtkBox` from start to end. Use [method@Gtk.Box.remove] to remove widgets
@@ -39,9 +39,9 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// Until GTK 4.10, `GtkBox` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
+/// Until GTK 4.10, `GtkBox` used the [enum@Gtk.AccessibleRole.group] role.
 /// 
-/// Starting from GTK 4.12, `GtkBox` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
+/// Starting from GTK 4.12, `GtkBox` uses the [enum@Gtk.AccessibleRole.generic] role.
 public struct Box: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -53,7 +53,9 @@ public struct Box: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     var accessibleRole: String?
-    /// The child that determines the baseline, in vertical orientation.
+    /// The position of the child that determines the baseline.
+    /// 
+    /// This is only relevant if the box is in vertical orientation.
     var baselineChild: Int?
     /// Whether the children should all be the same size.
     var homogeneous: Bool?
@@ -159,7 +161,9 @@ public struct Box: AdwaitaWidget {
         return newSelf
     }
 
-    /// The child that determines the baseline, in vertical orientation.
+    /// The position of the child that determines the baseline.
+    /// 
+    /// This is only relevant if the box is in vertical orientation.
     public func baselineChild(_ baselineChild: Int?) -> Self {
         var newSelf = self
         newSelf.baselineChild = baselineChild

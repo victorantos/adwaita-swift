@@ -2,15 +2,15 @@
 //  Menu.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// The `GtkMenuButton` widget is used to display a popup when clicked.
+/// Displays a popup when clicked.
 /// 
-/// ![An example GtkMenuButton](menu-button.png)
+/// <picture><source srcset="menu-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkMenuButton" src="menu-button.png"></picture>
 /// 
 /// This popup can be provided either as a `GtkPopover` or as an abstract
 /// `GMenuModel`.
@@ -68,7 +68,7 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// `GtkMenuButton` uses the %GTK_ACCESSIBLE_ROLE_BUTTON role.
+/// `GtkMenuButton` uses the [enum@Gtk.AccessibleRole.button] role.
 public struct Menu: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

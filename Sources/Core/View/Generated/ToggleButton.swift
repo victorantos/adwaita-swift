@@ -2,14 +2,15 @@
 //  ToggleButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A `GtkToggleButton` is a button which remains “pressed-in” when
-/// clicked.
+/// Shows a button which remains “pressed-in” when clicked.
+/// 
+/// <picture><source srcset="toggle-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="Example GtkToggleButtons" src="toggle-button.png"></picture>
 /// 
 /// Clicking again will cause the toggle button to return to its normal state.
 /// 
@@ -21,9 +22,6 @@ import LevenshteinTransformations
 /// The state of a `GtkToggleButton` can be set specifically using
 /// [method@Gtk.ToggleButton.set_active], and retrieved using
 /// [method@Gtk.ToggleButton.get_active].
-/// 
-/// To simply switch the state of a toggle button, use
-/// [method@Gtk.ToggleButton.toggled].
 /// 
 /// ## Grouping
 /// 
@@ -40,7 +38,7 @@ import LevenshteinTransformations
 /// 
 /// ## Accessibility
 /// 
-/// `GtkToggleButton` uses the %GTK_ACCESSIBLE_ROLE_TOGGLE_BUTTON role.
+/// `GtkToggleButton` uses the [enum@Gtk.AccessibleRole.toggle_button] role.
 /// 
 /// ## Creating two `GtkToggleButton` widgets.
 /// 

@@ -2,15 +2,15 @@
 //  Picture.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// The `GtkPicture` widget displays a `GdkPaintable`.
+/// Displays a `GdkPaintable`.
 /// 
-/// ![An example GtkPicture](picture.png)
+/// picture><source srcset="picture-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkPicture" src="picture.png"></picture>
 /// 
 /// Many convenience functions are provided to make pictures simple to use.
 /// For example, if you want to load an image from a file, and then display
@@ -53,7 +53,7 @@ import LevenshteinTransformations
 /// 
 /// ## Accessibility
 /// 
-/// `GtkPicture` uses the `GTK_ACCESSIBLE_ROLE_IMG` role.
+/// `GtkPicture` uses the [enum@Gtk.AccessibleRole.img] role.
 public struct Picture: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

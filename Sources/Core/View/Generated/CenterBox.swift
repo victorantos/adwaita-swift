@@ -2,16 +2,16 @@
 //  CenterBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkCenterBox` arranges three children in a row, keeping the middle child
+/// Arranges three children in a row, keeping the middle child
 /// centered as well as possible.
 /// 
-/// ![An example GtkCenterBox](centerbox.png)
+/// <picture><source srcset="centerbox-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkCenterBox" src="centerbox.png"></picture>
 /// 
 /// To add children to `GtkCenterBox`, use [method@Gtk.CenterBox.set_start_widget],
 /// [method@Gtk.CenterBox.set_center_widget] and
@@ -39,9 +39,10 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// Until GTK 4.10, `GtkCenterBox` used the `GTK_ACCESSIBLE_ROLE_GROUP` role.
+/// Until GTK 4.10, `GtkCenterBox` used the [enum@Gtk.AccessibleRole.group] role.
 /// 
-/// Starting from GTK 4.12, `GtkCenterBox` uses the `GTK_ACCESSIBLE_ROLE_GENERIC` role.
+/// Starting from GTK 4.12, `GtkCenterBox` uses the [enum@Gtk.AccessibleRole.generic]
+/// role.
 public struct CenterBox: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -59,7 +60,7 @@ public struct CenterBox: AdwaitaWidget {
     /// 
     /// In vertical orientation, the end position is at the bottom.
     /// In horizontal orientation, the end position is at the trailing
-    /// edge wrt. to the text direction.
+    /// edge with respect to the text direction.
     var endWidget: (() -> Body)?
     /// Whether to shrink the center widget after other children.
     /// 
@@ -67,14 +68,14 @@ public struct CenterBox: AdwaitaWidget {
     /// natural widths, the start and end widgets start shrinking and the
     /// center child keeps natural width until they reach minimum width.
     /// 
-    /// If set to `FALSE`, start and end widgets keep natural width and the
+    /// If false, start and end widgets keep natural width and the
     /// center widget starts shrinking instead.
     var shrinkCenterLast: Bool?
     /// The widget that is placed at the start position.
     /// 
     /// In vertical orientation, the start position is at the top.
     /// In horizontal orientation, the start position is at the leading
-    /// edge wrt. to the text direction.
+    /// edge with respect to the text direction.
     var startWidget: (() -> Body)?
 
     /// Initialize `CenterBox`.
@@ -161,7 +162,7 @@ public struct CenterBox: AdwaitaWidget {
     /// 
     /// In vertical orientation, the end position is at the bottom.
     /// In horizontal orientation, the end position is at the trailing
-    /// edge wrt. to the text direction.
+    /// edge with respect to the text direction.
     public func endWidget(@ViewBuilder _ endWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.endWidget = endWidget
@@ -174,7 +175,7 @@ public struct CenterBox: AdwaitaWidget {
     /// natural widths, the start and end widgets start shrinking and the
     /// center child keeps natural width until they reach minimum width.
     /// 
-    /// If set to `FALSE`, start and end widgets keep natural width and the
+    /// If false, start and end widgets keep natural width and the
     /// center widget starts shrinking instead.
     public func shrinkCenterLast(_ shrinkCenterLast: Bool? = true) -> Self {
         var newSelf = self
@@ -186,7 +187,7 @@ public struct CenterBox: AdwaitaWidget {
     /// 
     /// In vertical orientation, the start position is at the top.
     /// In horizontal orientation, the start position is at the leading
-    /// edge wrt. to the text direction.
+    /// edge with respect to the text direction.
     public func startWidget(@ViewBuilder _ startWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.startWidget = startWidget

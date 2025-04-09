@@ -40,7 +40,12 @@ struct GenerationConfiguration {
     /// The Libadwaita widgets.
     var adwWidgets: [WidgetConfiguration] = [
         .init(class: "StatusPage", excludeProperties: ["paintable"]),
-        .init(class: "Banner", initializer: "adw_banner_new(title)", requiredProperties: ["title"]),
+        .init(
+            class: "Banner",
+            initializer: "adw_banner_new(title)",
+            requiredProperties: ["title"],
+            excludeProperties: ["button-style"]
+        ),
         .init(
             class: "Avatar",
             initializer: "adw_avatar_new(size.cInt, text, showInitials.cBool)",
@@ -121,7 +126,10 @@ struct GenerationConfiguration {
         ),
         .init(
             class: "PreferencesPage",
-            staticWidgets: [.init(name: "child", add: "adw_preferences_group_add")],
+            staticWidgets: [
+                .init(name: "child", add: "adw_preferences_page_add"),
+            ],
+            excludeProperties: ["banner"],
             cast: true
         ),
         .init(
@@ -194,7 +202,7 @@ struct GenerationConfiguration {
                 remove: "gtk_list_box_remove",
                 getElement: "gtk_list_box_get_row_at_index(widget, index.cInt)?.cast()"
             ),
-            excludeProperties: ["selection-mode"]
+            excludeProperties: ["selection-mode", "tab-behavior"]
         ),
         .init(class: "ProgressBar", excludeProperties: ["ellipsize", "orientation"]),
         .init(

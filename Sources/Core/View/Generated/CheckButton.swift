@@ -2,15 +2,15 @@
 //  CheckButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A `GtkCheckButton` places a label next to an indicator.
+/// Places a label next to an indicator.
 /// 
-/// ![Example GtkCheckButtons](check-button.png)
+/// <picture><source srcset="check-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="Example GtkCheckButtons" src="check-button.png"></picture>
 /// 
 /// A `GtkCheckButton` is created by calling either [ctor@Gtk.CheckButton.new]
 /// or [ctor@Gtk.CheckButton.new_with_label].
@@ -39,7 +39,7 @@ import LevenshteinTransformations
 /// Grouped check buttons use a different indicator, and are commonly referred
 /// to as *radio buttons*.
 /// 
-/// ![Example GtkCheckButtons](radio-button.png)
+/// <picture><source srcset="radio-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="Example GtkRadioButtons" src="radio-button.png"></picture>
 /// 
 /// To add a `GtkCheckButton` to a group, use [method@Gtk.CheckButton.set_group].
 /// 
@@ -70,7 +70,7 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// `GtkCheckButton` uses the %GTK_ACCESSIBLE_ROLE_CHECKBOX role.
+/// `GtkCheckButton` uses the [enum@Gtk.AccessibleRole.checkbox] role.
 public struct CheckButton: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

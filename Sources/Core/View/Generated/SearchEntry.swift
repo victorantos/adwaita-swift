@@ -2,19 +2,18 @@
 //  SearchEntry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// `GtkSearchEntry` is an entry widget that has been tailored for use
-/// as a search entry.
+/// A single-line text entry widget for use as a search entry.
 /// 
 /// The main API for interacting with a `GtkSearchEntry` as entry
 /// is the `GtkEditable` interface.
 /// 
-/// ![An example GtkSearchEntry](search-entry.png)
+/// <picture><source srcset="search-entry-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkSearchEntry" src="search-entry.png"></picture>
 /// 
 /// It will show an inactive symbolic “find” icon when the search
 /// entry is empty, and a symbolic “clear” icon when there is text.
@@ -60,7 +59,7 @@ import LevenshteinTransformations
 /// 
 /// ## Accessibility
 /// 
-/// `GtkSearchEntry` uses the %GTK_ACCESSIBLE_ROLE_SEARCH_BOX role.
+/// `GtkSearchEntry` uses the [enum@Gtk.AccessibleRole.search_box] role.
 public struct SearchEntry: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

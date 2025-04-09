@@ -2,15 +2,15 @@
 //  LinkButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A `GtkLinkButton` is a button with a hyperlink.
+/// A button with a hyperlink.
 /// 
-/// ![An example GtkLinkButton](link-button.png)
+/// <picture><source srcset="link-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkLinkButton" src="link-button.png"></picture>
 /// 
 /// It is useful to show quick links to resources.
 /// 
@@ -46,7 +46,7 @@ import LevenshteinTransformations
 /// 
 /// # Accessibility
 /// 
-/// `GtkLinkButton` uses the %GTK_ACCESSIBLE_ROLE_LINK role.
+/// `GtkLinkButton` uses the [enum@Gtk.AccessibleRole.link] role.
 public struct LinkButton: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

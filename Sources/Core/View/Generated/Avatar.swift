@@ -2,7 +2,7 @@
 //  Avatar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.10.24.
+//  Created by auto-generation on 09.04.25.
 //
 
 import CAdw
@@ -28,6 +28,10 @@ import LevenshteinTransformations
 /// ## CSS nodes
 /// 
 /// `AdwAvatar` has a single CSS node with name `avatar`.
+/// 
+/// ## Accessibility
+/// 
+/// `AdwAvatar` uses the `GTK_ACCESSIBLE_ROLE_IMG` role.
 public struct Avatar: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
