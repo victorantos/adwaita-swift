@@ -31,7 +31,7 @@ jobs:
           echo "<script>window.location.href += \"/documentation/adwaita\"</script><p>Please enable JavaScript to view the documentation <a href='/documentation/adwaita'>here</a>.</p>" > docs/index.html;
           sed -i '' 's/,2px/,10px/g' docs/css/index.*.css
       - name: Upload
-        uses: wangyucode/sftp-upload-action@v2.0.2
+        uses: wangyucode/sftp-upload-action@v2.0.4
         with:
           host: 'volans.uberspace.de'
           username: 'akforum'
