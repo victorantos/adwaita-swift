@@ -43,7 +43,8 @@
       ],
       "build-commands": [
         "swift build -c debug --static-swift-stdlib",
-        "install -Dm755 .build/debug/Demo /app/bin/Demo"
+        "install -Dm755 .build/debug/Demo /app/bin/Demo",
+        "swiftlint"
       ]
     }
   ]
