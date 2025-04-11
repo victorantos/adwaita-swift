@@ -13,17 +13,19 @@ public typealias VStack = Box
 extension VStack {
 
     /// Initialize a `VStack`.
-    /// - Parameter content: The view content.
-    public init(@ViewBuilder content: @escaping () -> Body) {
-        self.init(horizontal: false, content: content)
+    /// - Parameters:
+    ///     - spacing: The spacing between elements.
+    ///     - content: The view content.
+    public init(spacing: Int = 0, @ViewBuilder content: @escaping () -> Body) {
+        self.init(horizontal: false, spacing: spacing, content: content)
     }
 
     /// Initialize a `VStack`.
     /// - Parameters:
     ///     - horizontal: Whether the box is horizontal.
     ///     - content: The view content.
-    init(horizontal: Bool, @ViewBuilder content: @escaping () -> Body) {
-        self.init(spacing: 0)
+    init(horizontal: Bool, spacing: Int, @ViewBuilder content: @escaping () -> Body) {
+        self.init(spacing: spacing)
         self = self.append(content)
         if horizontal {
             appearFunctions.append { storage, _ in

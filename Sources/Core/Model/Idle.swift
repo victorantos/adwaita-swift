@@ -78,6 +78,20 @@ public struct Idle {
     /// An idle handler.
     class IdleHandler {
 
+        /// Execute the function.
+        /// - Parameter pointer: The closure wrapper's pointer.
+        static func run(pointer: gpointer?) -> Int32 {
+            if let pointer {
+                let container = Unmanaged<ClosureContainer>.fromOpaque(pointer).takeUnretainedValue()
+                let result = container.closure()
+                if !result {
+                    Unmanaged<ClosureContainer>.fromOpaque(pointer).release()
+                }
+                return result.cBool
+            }
+            return G_SOURCE_REMOVE
+        }
+
         /// Add a function to be called whenever there are no higher priority events pending to the default main loop.
         /// - Parameter closure: The function.
         func add(_ closure: @escaping () -> Bool, priority: Int32, delay: Int64? = nil) {
@@ -91,20 +105,6 @@ public struct Idle {
                 g_idle_add_full(priority, { IdleHandler.run(pointer: $0) }, context, nil)
                 // swiftlint:enable prefer_self_in_static_references
             }
-        }
-
-        /// Execute the function.
-        /// - Parameter pointer: The closure wrapper's pointer.
-        static func run(pointer: gpointer?) -> Int32 {
-            if let pointer {
-                let container = Unmanaged<ClosureContainer>.fromOpaque(pointer).takeUnretainedValue()
-                let result = container.closure()
-                if !result {
-                    Unmanaged<ClosureContainer>.fromOpaque(pointer).release()
-                }
-                return result.cBool
-            }
-            return G_SOURCE_REMOVE
         }
 
     }

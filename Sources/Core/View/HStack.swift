@@ -10,18 +10,27 @@ public struct HStack: SimpleView {
 
     /// The content.
     var content: () -> Body
+    /// The spacing between elements.
+    var spacing: Int
     /// Whether the linked style should be used.
     var linked = false
 
     /// The view's body.
     public var view: Body {
-        ModifierWrapper(content: VStack(horizontal: true, content: content), style: "linked", styleActive: linked)
+        ModifierWrapper(
+            content: VStack(horizontal: true, spacing: spacing, content: content),
+            style: "linked",
+            styleActive: linked
+        )
     }
 
     /// Initialize a `HStack`.
-    /// - Parameter content: The view content.
-    public init(@ViewBuilder content: @escaping () -> Body) {
+    /// - Parameters:
+    ///     - spacing: The spacing between elements.
+    ///     - content: The view content.
+    public init(spacing: Int = 0, @ViewBuilder content: @escaping () -> Body) {
         self.content = content
+        self.spacing = spacing
     }
 
     /// Link the children.
