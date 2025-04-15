@@ -2,7 +2,7 @@
 //  ToolbarView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 09.04.25.
+//  Created by auto-generation on 15.04.25.
 //
 
 import CAdw
@@ -90,6 +90,31 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// See [property@ToolbarView:top-bar-height].
     var bottomBarHeight: Int?
+    /// Appearance of the bottom bars.
+    /// 
+    /// If set to `ADW_TOOLBAR_FLAT`, bottom bars are flat and scrolling content
+    /// has a subtle undershoot shadow when touching them, same as the
+    /// [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
+    /// style class. This works well for simple content, e.g. [class@StatusPage] or
+    /// [class@PreferencesPage], where the background at the bottom of the page is
+    /// uniform. Additionally, windows with sidebars should always use this style.
+    /// 
+    /// Undershoot shadow is only present if a bottom bar is actually present and
+    /// visible. It is also never present if
+    /// [property@ToolbarView:extend-content-to-bottom-edge] is set to `TRUE`.
+    /// 
+    /// If set to `ADW_TOOLBAR_RAISED`, bottom bars have an opaque background and a
+    /// persistent shadow, this is suitable for content such as
+    /// [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+    /// where some elements are directly adjacent to the bottom bars, or
+    /// [class@TabView], where each page can have a different background.
+    /// 
+    /// `ADW_TOOLBAR_RAISED_BORDER` is similar to `ADW_TOOLBAR_RAISED`, but the
+    /// shadow is replaced with a more subtle border. This can be useful for
+    /// applications like image viewers.
+    /// 
+    /// See also [property@ToolbarView:top-bar-style].
+    var bottomBarStyle: ToolbarStyle?
     /// The content widget.
     var content: (() -> Body)?
     /// Whether the content widget can extend behind bottom bars.
@@ -134,6 +159,31 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// See [property@ToolbarView:bottom-bar-height].
     var topBarHeight: Int?
+    /// Appearance of the top bars.
+    /// 
+    /// If set to `ADW_TOOLBAR_FLAT`, top bars are flat and scrolling content has a
+    /// subtle undershoot shadow when touching them, same as the
+    /// [`.undershoot-top`](style-classes.html#undershoot-indicators)
+    /// style class. This works well for simple content, e.g. [class@StatusPage] or
+    /// [class@PreferencesPage], where the background at the top of the page is
+    /// uniform. Additionally, windows with sidebars should always use this style.
+    /// 
+    /// Undershoot shadow is only present if a top bar is actually present and
+    /// visible. It is also never present if
+    /// [property@ToolbarView:extend-content-to-top-edge] is set to `TRUE`.
+    /// 
+    /// If set to `ADW_TOOLBAR_RAISED`, top bars have an opaque background and a
+    /// persistent shadow, this is suitable for content such as
+    /// [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+    /// where some elements are directly adjacent to the top bars, or
+    /// [class@TabView], where each page can have a different background.
+    /// 
+    /// `ADW_TOOLBAR_RAISED_BORDER` is similar to `ADW_TOOLBAR_RAISED`, but the
+    /// shadow is replaced with a more subtle border. This can be useful for
+    /// applications like image viewers.
+    /// 
+    /// See also [property@ToolbarView:bottom-bar-style].
+    var topBarStyle: ToolbarStyle?
     /// The body for the widget "bottom".
     var bottom: () -> Body = { [] }
     /// The body for the widget "top".
@@ -183,6 +233,9 @@ public struct ToolbarView: AdwaitaWidget {
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         storage.modify { widget in
 
+            if let bottomBarStyle, updateProperties, (storage.previousState as? Self)?.bottomBarStyle != bottomBarStyle {
+                adw_toolbar_view_set_bottom_bar_style(widget, bottomBarStyle.gtkValue)
+            }
             if let widget = storage.content["content"]?.first {
                 content?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
@@ -197,6 +250,9 @@ public struct ToolbarView: AdwaitaWidget {
             }
             if let revealTopBars, updateProperties, (storage.previousState as? Self)?.revealTopBars != revealTopBars {
                 adw_toolbar_view_set_reveal_top_bars(widget, revealTopBars.cBool)
+            }
+            if let topBarStyle, updateProperties, (storage.previousState as? Self)?.topBarStyle != topBarStyle {
+                adw_toolbar_view_set_top_bar_style(widget, topBarStyle.gtkValue)
             }
 
             if let bottomStorage = storage.content["bottom"] {
@@ -243,6 +299,36 @@ public struct ToolbarView: AdwaitaWidget {
     public func bottomBarHeight(_ bottomBarHeight: Int?) -> Self {
         var newSelf = self
         newSelf.bottomBarHeight = bottomBarHeight
+        return newSelf
+    }
+
+    /// Appearance of the bottom bars.
+    /// 
+    /// If set to `ADW_TOOLBAR_FLAT`, bottom bars are flat and scrolling content
+    /// has a subtle undershoot shadow when touching them, same as the
+    /// [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
+    /// style class. This works well for simple content, e.g. [class@StatusPage] or
+    /// [class@PreferencesPage], where the background at the bottom of the page is
+    /// uniform. Additionally, windows with sidebars should always use this style.
+    /// 
+    /// Undershoot shadow is only present if a bottom bar is actually present and
+    /// visible. It is also never present if
+    /// [property@ToolbarView:extend-content-to-bottom-edge] is set to `TRUE`.
+    /// 
+    /// If set to `ADW_TOOLBAR_RAISED`, bottom bars have an opaque background and a
+    /// persistent shadow, this is suitable for content such as
+    /// [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+    /// where some elements are directly adjacent to the bottom bars, or
+    /// [class@TabView], where each page can have a different background.
+    /// 
+    /// `ADW_TOOLBAR_RAISED_BORDER` is similar to `ADW_TOOLBAR_RAISED`, but the
+    /// shadow is replaced with a more subtle border. This can be useful for
+    /// applications like image viewers.
+    /// 
+    /// See also [property@ToolbarView:top-bar-style].
+    public func bottomBarStyle(_ bottomBarStyle: ToolbarStyle?) -> Self {
+        var newSelf = self
+        newSelf.bottomBarStyle = bottomBarStyle
         return newSelf
     }
 
@@ -317,6 +403,36 @@ public struct ToolbarView: AdwaitaWidget {
     public func topBarHeight(_ topBarHeight: Int?) -> Self {
         var newSelf = self
         newSelf.topBarHeight = topBarHeight
+        return newSelf
+    }
+
+    /// Appearance of the top bars.
+    /// 
+    /// If set to `ADW_TOOLBAR_FLAT`, top bars are flat and scrolling content has a
+    /// subtle undershoot shadow when touching them, same as the
+    /// [`.undershoot-top`](style-classes.html#undershoot-indicators)
+    /// style class. This works well for simple content, e.g. [class@StatusPage] or
+    /// [class@PreferencesPage], where the background at the top of the page is
+    /// uniform. Additionally, windows with sidebars should always use this style.
+    /// 
+    /// Undershoot shadow is only present if a top bar is actually present and
+    /// visible. It is also never present if
+    /// [property@ToolbarView:extend-content-to-top-edge] is set to `TRUE`.
+    /// 
+    /// If set to `ADW_TOOLBAR_RAISED`, top bars have an opaque background and a
+    /// persistent shadow, this is suitable for content such as
+    /// [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
+    /// where some elements are directly adjacent to the top bars, or
+    /// [class@TabView], where each page can have a different background.
+    /// 
+    /// `ADW_TOOLBAR_RAISED_BORDER` is similar to `ADW_TOOLBAR_RAISED`, but the
+    /// shadow is replaced with a more subtle border. This can be useful for
+    /// applications like image viewers.
+    /// 
+    /// See also [property@ToolbarView:bottom-bar-style].
+    public func topBarStyle(_ topBarStyle: ToolbarStyle?) -> Self {
+        var newSelf = self
+        newSelf.topBarStyle = topBarStyle
         return newSelf
     }
 

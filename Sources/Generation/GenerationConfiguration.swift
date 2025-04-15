@@ -150,8 +150,7 @@ struct GenerationConfiguration {
             staticWidgets: [
                 .init(name: "bottom", add: "adw_toolbar_view_add_bottom_bar"),
                 .init(name: "top", add: "adw_toolbar_view_add_top_bar")
-            ],
-            excludeProperties: ["top-bar-style", "bottom-bar-style"]
+            ]
         ),
         .init(class: "ToastOverlay"),
         .init(
@@ -331,7 +330,8 @@ struct GenerationConfiguration {
         "GdkPaintable*": "OpaquePointer",
         "NavigationPage": "NavigationPage",
         "ContentFit": "ContentFit",
-        "PolicyType": "ScrollbarVisibility"
+        "PolicyType": "ScrollbarVisibility",
+        "ToolbarStyle": "ToolbarStyle"
     ]
 
     /// Modifications for converting a Swift into a C type.
@@ -340,7 +340,8 @@ struct GenerationConfiguration {
         "Int": "cInt",
         "UInt": "cInt",
         "ContentFit": "gtkValue",
-        "ScrollbarVisibility": "gtkValue"
+        "ScrollbarVisibility": "gtkValue",
+        "ToolbarStyle": "gtkValue"
     ]
 
     /// Default values for modifiers with a certain type.
