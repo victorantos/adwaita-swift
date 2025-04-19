@@ -35,6 +35,10 @@ public struct Window: AdwaitaSceneElement {
     var width: Binding<Int>?
     /// The binding for the window's height.
     var height: Binding<Int>?
+    /// The window's minimum width.
+    var minWidth: Int?
+    /// The window's minimum height.
+    var minHeight: Int?
     /// The window's default width.
     var defaultWidth: Int?
     /// The window's default height.
@@ -127,6 +131,9 @@ public struct Window: AdwaitaSceneElement {
         let width = template.width?.wrappedValue ?? template.defaultWidth ?? -1
         let height = template.height?.wrappedValue ?? template.defaultHeight ?? -1
         gtk_window_set_default_size(window.pointer?.cast(), .init(width), .init(height))
+        if minWidth != nil || minHeight != nil {
+            gtk_widget_set_size_request(window.pointer?.cast(), .init(minWidth ?? -1), .init(minHeight ?? -1))
+        }
         update(storage, app: app, updateProperties: true)
         return storage
     }
@@ -332,6 +339,17 @@ public struct Window: AdwaitaSceneElement {
         var newSelf = self
         newSelf.width = width
         newSelf.height = height
+        return newSelf
+    }
+
+    /// Set the window's minimum width and height.
+    /// - Parameters:
+    ///     - minWidth: The window's minimum width.
+    ///     - minHeight: The window's minimum height.
+    public func minSize(width: Int = -1, height: Int = -1) -> Self {
+        var newSelf = self
+        newSelf.minWidth = width
+        newSelf.minHeight = height
         return newSelf
     }
 
