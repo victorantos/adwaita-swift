@@ -2,7 +2,7 @@
 //  ToastOverlay.swift
 //  Adwaita
 //
-//  Created by auto-generation on 15.04.25.
+//  Created by auto-generation on 19.04.25.
 //
 
 import CAdw
@@ -46,7 +46,7 @@ import LevenshteinTransformations
 /// 
 /// ## Accessibility
 /// 
-/// `AdwToastOverlay` uses the `GTK_ACCESSIBLE_ROLE_TAB_GROUP` role.
+/// `AdwToastOverlay` uses the [enum@Gtk.AccessibleRole.GROUP] role.
 public struct ToastOverlay: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

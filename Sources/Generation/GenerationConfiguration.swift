@@ -233,6 +233,26 @@ struct GenerationConfiguration {
             setConditions: ["label": "storage.content[\"child\"] == nil"]
         ),
         .init(
+            class: "Entry",
+            bindings: [.init(property: "text")],
+            excludeProperties: [
+                "activates-default",
+                "attributes",
+                "buffer",
+                "completion",
+                "input-hints",
+                "input-purpose",
+                "primary-icon-gicon",
+                "primary-icon-paintable",
+                "primary-icon-storage-type",
+                "secondary-icon-gicon",
+                "secondary-icon-paintable",
+                "secondary-icon-storage-type",
+                "tabs"
+            ],
+            cast: true
+        ),
+        .init(
             class: "MenuButton",
             name: "Menu",
             bindings: [.init(property: "active")],
