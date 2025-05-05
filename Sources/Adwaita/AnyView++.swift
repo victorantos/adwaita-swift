@@ -339,19 +339,24 @@ extension AnyView {
     /// - Parameter getString: Get the CSS.
     /// - Returns: A view.
     public func css(_ getString: @escaping () -> String) -> AnyView {
-        inspectOnAppear { _ in
-            let provider = gtk_css_provider_new()
-            gtk_css_provider_load_from_string(
-                provider,
-                getString()
-            )
-            let display = gdk_display_get_default()
-            gtk_style_context_add_provider_for_display(
-                display,
-                provider?.opaque(),
-                .init(GTK_STYLE_PROVIDER_PRIORITY_APPLICATION)
-            )
-            g_object_unref(provider)
+        inspect { storage, updateProperties in
+            let cssID = "internal-css"
+            let previous = storage.fields[cssID] as? String
+            let string = getString()
+            if updateProperties, string != previous {
+                let provider = gtk_css_provider_new()
+                gtk_css_provider_load_from_string(
+                    provider,
+                    string
+                )
+                let display = gdk_display_get_default()
+                gtk_style_context_add_provider_for_display(
+                    display,
+                    provider?.opaque(),
+                    .init(GTK_STYLE_PROVIDER_PRIORITY_APPLICATION)
+                )
+                g_object_unref(provider)
+            }
         }
     }
 

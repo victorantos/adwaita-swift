@@ -32,7 +32,8 @@ struct DiceDemo: View {
             .css {
                 """
                 .dice-button {
-                    background-color: @green_5;
+                    background-color: \(number == nil ? "@blue_5" : "@green_5");
+                    transition: 0.2s;
                 }
                 """
             }
