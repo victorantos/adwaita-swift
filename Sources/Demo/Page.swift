@@ -32,6 +32,7 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
     case picture
     case idle
     case fixed
+    case textEditor
 
     var id: Self {
         self
@@ -49,6 +50,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Alert Dialog"
         case .passwordChecker:
             return "Password Checker"
+        case .textEditor:
+            return "Text Editor"
         default:
             return rawValue.capitalized
         }
@@ -105,6 +108,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Update UI from an asynchronous context"
         case .fixed:
             return "Place widgets in a coordinate system"
+        case .textEditor:
+            return "A simple text editor"
         }
     }
 
@@ -152,6 +157,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             IdleDemo()
         case .fixed:
             FixedDemo()
+        case .textEditor:
+            TextEditorDemo()
         }
     }
     // swiftlint:enable cyclomatic_complexity
