@@ -66,7 +66,7 @@ Find more information about the project's motivation in [this blog post](https:/
 
 It is recommended to develop apps inside of a Flatpak.
 That way, you don't have to install Swift or any of the dependencies on your system, and you always have access to the latest versions.
-Take a look at the [template repository](https://github.com/AparokshaUI/AdwaitaTemplate).
+Take a look at the [template repository](https://git.aparoksha.dev/aparoksha/adwaita-template).
 This works on Linux only.
 
 #### Directly on System
@@ -92,7 +92,7 @@ brew install libadwaita
 
 ## Usage
 
-I recommend using the [template repository](https://github.com/AparokshaUI/AdwaitaTemplate) as a starting point.
+I recommend using the [template repository](https://git.aparoksha.dev/aparoksha/adwaita-template) as a starting point.
 
 Follow the [interactive tutorial](https://adwaita-swift.aparoksha.dev//tutorials/table-of-contents) or [read the docs](https://adwaita-swift.aparoksha.dev/) in order to get to know _Adwaita for Swift_.
 
