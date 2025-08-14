@@ -173,9 +173,11 @@ public struct PreferencesDialog: AdwaitaWidget {
         if let storage = storage.content[.mainContent]?.first {
             child.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
         }
-        for (index, page) in pages.enumerated() {
-            if let preferences = storage.content["preferences-\(index)"] {
-                page.update(groups: preferences, data: data, updateProperties: updateProperties)
+        defer {
+            for (index, page) in pages.enumerated() {
+                if let preferences = storage.content["preferences-\(index)"] {
+                    page.update(groups: preferences, data: data, updateProperties: updateProperties)
+                }
             }
         }
         guard updateProperties else {

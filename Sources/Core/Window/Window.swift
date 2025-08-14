@@ -121,10 +121,12 @@ public struct Window: AdwaitaSceneElement {
             .storage(data: .init(sceneStorage: storage, appStorage: app), type: AdwaitaMainView.self)
         adw_application_window_set_content(window.pointer?.cast(), viewStorage.opaquePointer?.cast())
         storage.content[.mainContent] = [viewStorage]
+        let observeID = "destroy"
         let data = SignalData {
             storage.destroy = true
+        } destroy: {
+            window.signals[observeID] = nil
         }
-        let observeID = "destroy"
         data.connect(pointer: window.pointer, signal: observeID)
         window.signals[observeID] = data
         let template = getTemplate(content: content)

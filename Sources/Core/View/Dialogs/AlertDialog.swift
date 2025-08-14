@@ -125,8 +125,10 @@ public struct AlertDialog: AdwaitaWidget {
     ) where Data: ViewRenderData {
         storage.fields[Self.visibleID + id] = _visible
         child.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
-        if let storage = storage.content["extra-child"]?.first, visible {
-            extraChild?.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
+        defer {
+            if let storage = storage.content["extra-child"]?.first, visible {
+                extraChild?.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
+            }
         }
         guard updateProperties else {
             return
@@ -168,7 +170,6 @@ public struct AlertDialog: AdwaitaWidget {
                 let dialog = storage.content[Self.dialogID + id]?.first?.opaquePointer
                 adw_dialog_close(dialog?.cast())
                 storage.content[Self.dialogID] = []
-                storage.content["extra-child"] = nil
             }
         }
     }

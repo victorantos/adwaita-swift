@@ -70,7 +70,7 @@ extension Storage {
         if let data = fields[name + id] as? SignalData {
             data.closure = handler
         } else {
-            let data = SignalData(closure: handler)
+            let data = SignalData(closure: handler) { [self] in fields[name + id] = nil }
             fields[name + id] = data
             data.connect(pointer: (pointer ?? opaquePointer)?.cast(), signal: name, argCount: argCount)
         }

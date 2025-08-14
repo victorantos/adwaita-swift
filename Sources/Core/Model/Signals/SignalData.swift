@@ -12,6 +12,8 @@ public class SignalData {
 
     /// The closure.
     public var closure: ([Any?]) -> Void
+    /// Destroy the class.
+    public var selfDestruction: (() -> Void)?
 
     /// The closure as a C handler.
     var handler: @convention(c) (UnsafeMutableRawPointer, UnsafeMutableRawPointer) -> Void {
@@ -61,15 +63,20 @@ public class SignalData {
     }
 
     /// Initialize the signal data.
-    /// - Parameter closure: The signal's closure.
-    public convenience init(closure: @escaping () -> Void) {
-        self.init { _ in closure() }
+    /// - Parameters:
+    ///     - closure: The signal's closure.
+    ///     - destroy: The self destruction.
+    public convenience init(closure: @escaping () -> Void, destroy: (() -> Void)? = nil) {
+        self.init(closure: { _ in closure() }, destroy: destroy)
     }
 
     /// Initialize the signal data.
-    /// - Parameter closure: The signal's closure.
-    public init(closure: @escaping ([Any]) -> Void) {
+    /// - Parameters:
+    ///     - closure: The signal's closure.
+    ///     - destroy: The self destruction.
+    public init(closure: @escaping ([Any]) -> Void, destroy: (() -> Void)? = nil) {
         self.closure = closure
+        self.selfDestruction = destroy
     }
 
     /// Connect the signal data to a signal.
@@ -88,12 +95,19 @@ public class SignalData {
         } else {
             callback = unsafeBitCast(handler, to: GCallback.self)
         }
+        let destroy: GClosureNotify = { data, _ in
+            guard let data else {
+                return
+            }
+            let signalData: SignalData = Unmanaged.fromOpaque(data).takeUnretainedValue()
+            signalData.selfDestruction?()
+        }
         g_signal_connect_data(
             pointer,
             signal,
             callback,
             Unmanaged.passUnretained(self).toOpaque().cast(),
-            nil,
+            destroy,
             G_CONNECT_AFTER
         )
     }
