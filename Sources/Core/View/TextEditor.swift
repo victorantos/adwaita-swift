@@ -19,6 +19,8 @@ public struct TextView: AdwaitaWidget {
     var padding = 0
     /// The edges affected by the padding.
     var paddingEdges: Set<Edge> = []
+    /// The (word) wrap mode used when rendering the text.
+    var wrapMode: WrapMode = .none
 
     /// Initialize a text editor.
     /// - Parameter text: The editor's content.
@@ -74,7 +76,21 @@ public struct TextView: AdwaitaWidget {
             if paddingEdges.contains(.trailing) {
                 gtk_text_view_set_right_margin(storage.opaquePointer?.cast(), padding.cInt)
             }
+            // update the wrapping mode
+            gtk_text_view_set_wrap_mode(storage.opaquePointer?.cast(), wrapMode.rawValue)
         }
+    }
+
+	/// Set the wrapMode for the text view.
+	///
+	/// Available wrap modes are `none`, `char`, `word`, `wordChar`. Please refer to the 
+	/// corresponding `GtkWrapMode` documentation for the details on how they work.
+	///
+	/// - Parameter mode: The `WrapMode` to set. 
+    public func wrapMode(_ mode: WrapMode) -> Self {
+      var newSelf = self
+      newSelf.wrapMode = mode
+      return newSelf
     }
 
     /// Get the text view's content.
