@@ -81,12 +81,12 @@ public struct TextView: AdwaitaWidget {
         }
     }
 
-	/// Set the wrapMode for the text view.
-	///
-	/// Available wrap modes are `none`, `char`, `word`, `wordChar`. Please refer to the 
-	/// corresponding `GtkWrapMode` documentation for the details on how they work.
-	///
-	/// - Parameter mode: The `WrapMode` to set. 
+    /// Set the wrapMode for the text view.
+    ///
+    /// Available wrap modes are `none`, `char`, `word`, `wordChar`. Please refer to the
+    /// corresponding `GtkWrapMode` documentation for the details on how they work.
+    ///
+    /// - Parameter mode: The `WrapMode` to set.
     public func wrapMode(_ mode: WrapMode) -> Self {
       var newSelf = self
       newSelf.wrapMode = mode
