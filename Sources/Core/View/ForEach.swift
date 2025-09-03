@@ -61,7 +61,6 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
             functions: .init { index in
                 let child = contentStorage[safe: index]?.opaquePointer
                 gtk_box_remove(widget, child?.cast())
-                g_object_unref(child?.cast())
                 contentStorage.remove(at: index)
             } insert: { index, element in
                 let child = content(element).storage(data: data, type: type)
