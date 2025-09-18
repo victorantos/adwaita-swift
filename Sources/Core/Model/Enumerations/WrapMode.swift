@@ -21,7 +21,7 @@ public enum WrapMode: GtkWrapMode, RawRepresentable {
     /// GTK_WRAP_WORD_CHAR
     case wordChar
 
-    /// Get the GtkWrapMode.
+    /// Get the GtkWrapMode.
     public var rawValue: GtkWrapMode {
         switch self {
         case .none:

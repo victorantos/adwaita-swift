@@ -11,7 +11,7 @@ import Foundation
 /// A split view.
 struct SplitView: AdwaitaWidget {
 
-    /// The start widget.
+    /// The start widget.
     @ViewProperty(
         set: { widget, view in gtk_paned_set_start_child(.init(widget), view.cast()) },
         pointer: OpaquePointer.self,
@@ -41,7 +41,7 @@ struct SplitView: AdwaitaWidget {
     /// Whether the split view is vertical.
     var vertical: Bool
 
-    /// Initialize a split view.
+    /// Initialize a split view.
     /// - Parameters:
     ///     - splitter: The position of the splitter.
     ///     - vertical: Whether to make the splitter vertical.
@@ -53,7 +53,7 @@ struct SplitView: AdwaitaWidget {
         start: Body,
         end: Body
     ) {
-        self.vertical = vertical
+        self.vertical = vertical
         self.splitter = splitter
         self.start = start
         self.end = end
@@ -69,11 +69,11 @@ struct SplitView: AdwaitaWidget {
 /// A horizontal split view.
 public struct HSplitView: SimpleView {
 
-    /// The splitter.
+    /// The splitter.
     @Binding var splitter: Int
-    /// The start widget.
+    /// The start widget.
     var start: Body
-    /// The end widget.
+    /// The end widget.
     var end: Body
 
     /// The view.
@@ -81,7 +81,7 @@ public struct HSplitView: SimpleView {
         SplitView(splitter: $splitter, vertical: false, start: start, end: end)
     }
 
-    /// Initialize a horizontal split view.
+    /// Initialize a horizontal split view.
     /// - Parameters:
     ///     - splitter: The position of the splitter.
     ///     - start: The start widget.
@@ -101,11 +101,11 @@ public struct HSplitView: SimpleView {
 /// A vertical split view.
 public struct VSplitView: SimpleView {
 
-    /// The splitter.
+    /// The splitter.
     @Binding var splitter: Int
-    /// The start widget.
+    /// The start widget.
     var start: Body
-    /// The end widget.
+    /// The end widget.
     var end: Body
 
     /// The view.
@@ -113,7 +113,7 @@ public struct VSplitView: SimpleView {
         SplitView(splitter: $splitter, vertical: true, start: start, end: end)
     }
 
-    /// Initialize a vertical split view.
+    /// Initialize a vertical split view.
     /// - Parameters:
     ///     - splitter: The position of the splitter.
     ///     - start: The start widget.

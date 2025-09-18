@@ -57,11 +57,11 @@ public struct TextView: AdwaitaWidget {
 
         /// The padding.
         var padding: Int
-        /// The affected edges.
+        /// The affected edges.
         var paddingEdges: Set<Edge>
 
-        /// Set the inner padding on a text view.
-        /// - Parameter pointer: The text view.
+        /// Set the inner padding on a text view.
+        /// - Parameter pointer: The text view.
         func set(_ pointer: OpaquePointer) {
             if paddingEdges.contains(.top) {
                 gtk_text_view_set_top_margin(pointer.cast(), padding.cInt)
