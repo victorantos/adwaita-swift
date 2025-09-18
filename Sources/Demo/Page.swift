@@ -33,6 +33,7 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
     case idle
     case fixed
     case textEditor
+    case splitView
 
     var id: Self {
         self
@@ -52,6 +53,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Password Checker"
         case .textEditor:
             return "Text Editor"
+        case .splitView:
+            return "Split View"
         default:
             return rawValue.capitalized
         }
@@ -110,6 +113,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Place widgets in a coordinate system"
         case .textEditor:
             return "A simple text editor"
+        case .splitView:
+            return "A split view whose panes are ajustable in size"
         }
     }
 
@@ -159,6 +164,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             FixedDemo()
         case .textEditor:
             TextEditorDemo()
+        case .splitView:
+            SplitViewDemo()
         }
     }
     // swiftlint:enable cyclomatic_complexity
