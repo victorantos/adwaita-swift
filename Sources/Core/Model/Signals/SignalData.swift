@@ -11,7 +11,7 @@ import CAdw
 public class SignalData {
 
     /// The closure.
-    public var closure: ([Any?]) -> Void
+    public var closure: ([Any?]) -> Any?
     /// Destroy the class.
     public var selfDestruction: (() -> Void)?
 
@@ -62,11 +62,19 @@ public class SignalData {
         }
     }
 
+    /// The closure as a C handler with a return value.
+    var boolHandler: @convention(c) (UnsafeMutableRawPointer, UnsafeMutableRawPointer) -> Bool {
+        { _, data in
+            let data = unsafeBitCast(data, to: SignalData.self)
+            return data.closure([]) as? Bool ?? false
+        }
+    }
+
     /// Initialize the signal data.
     /// - Parameters:
     ///     - closure: The signal's closure.
     ///     - destroy: The self destruction.
-    public convenience init(closure: @escaping () -> Void, destroy: (() -> Void)? = nil) {
+    public convenience init(closure: @escaping () -> Any?, destroy: (() -> Void)? = nil) {
         self.init(closure: { _ in closure() }, destroy: destroy)
     }
 
@@ -74,9 +82,25 @@ public class SignalData {
     /// - Parameters:
     ///     - closure: The signal's closure.
     ///     - destroy: The self destruction.
-    public init(closure: @escaping ([Any]) -> Void, destroy: (() -> Void)? = nil) {
+    public convenience init(closure: @escaping () -> Void, destroy: (() -> Void)? = nil) {
+        self.init(closure: { _ in closure(); return nil }, destroy: destroy)
+    }
+
+    /// Initialize the signal data.
+    /// - Parameters:
+    ///     - closure: The signal's closure.
+    ///     - destroy: The self destruction.
+    public init(closure: @escaping ([Any]) -> Any?, destroy: (() -> Void)? = nil) {
         self.closure = closure
         self.selfDestruction = destroy
+    }
+
+    /// The return type.
+    public enum ReturnType {
+
+        /// Returns a boolean.
+        case bool
+
     }
 
     /// Connect the signal data to a signal.
@@ -84,9 +108,20 @@ public class SignalData {
     ///     - pointer: The pointer to the object which holds the signal.
     ///     - signal: The signal's name.
     ///     - argCount: The number of arguments.
-    public func connect(pointer: UnsafeMutableRawPointer?, signal: String, argCount: Int = 0) {
+    ///     - return: The return type.
+    public func connect(
+        pointer: UnsafeMutableRawPointer?,
+        signal: String,
+        argCount: Int = 0,
+        return: ReturnType? = nil
+    ) {
         let callback: GCallback
-        if argCount >= 3 {
+        if let `return` {
+            switch `return` {
+            case .bool:
+                callback = unsafeBitCast(boolHandler, to: GCallback.self)
+            }
+        } else if argCount >= 3 {
             callback = unsafeBitCast(fiveParamsHandler, to: GCallback.self)
         } else if argCount == 2 {
             callback = unsafeBitCast(fourParamsHandler, to: GCallback.self)

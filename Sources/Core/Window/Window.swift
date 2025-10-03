@@ -47,6 +47,9 @@ public struct Window: AdwaitaSceneElement {
     var maximized: Binding<Bool>?
     /// Whether the window uses the development style.
     var devel: Bool?
+    /// Run this function when the window should close.
+    /// Return true to stop the closing process.
+    var onClose: (() -> Bool)?
 
     /// Create a window type with a certain identifier and user interface.
     /// - Parameters:
@@ -135,6 +138,9 @@ public struct Window: AdwaitaSceneElement {
         gtk_window_set_default_size(window.pointer?.cast(), .init(width), .init(height))
         if minWidth != nil || minHeight != nil {
             gtk_widget_set_size_request(window.pointer?.cast(), .init(minWidth ?? -1), .init(minHeight ?? -1))
+        }
+        storage.connectSignal(name: "close-request", id: "on-close", return: .bool) {
+            (storage.fields["on-close"] as? (() -> Bool))?() ?? false
         }
         update(storage, app: app, updateProperties: true)
         return storage
@@ -245,6 +251,9 @@ public struct Window: AdwaitaSceneElement {
             } else {
                 gtk_window_unmaximize(window.pointer?.cast())
             }
+        }
+        if let onClose {
+            storage.fields["on-close"] = onClose
         }
         storage.previousState = self
     }
@@ -373,9 +382,19 @@ public struct Window: AdwaitaSceneElement {
         return newSelf
     }
 
+    /// Run this closure when the window should be closed.
+    /// - Parameter onClose: The closure. Return true to cancel the closing process.
+    /// - Returns: The window.
+    ///
+    /// This does not get executed if the user quits the whole application.
+    public func onClose(onClose: @escaping () -> Bool) -> Self {
+        var newSelf = self
+        newSelf.onClose = onClose
+        return newSelf
+    }
+
 }
 
 // swiftlint:enable discouraged_optional_collection
-
 /// An AdwApplicationWindow.
 public typealias AdwaitaWindow = Window.AdwaitaWindow

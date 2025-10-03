@@ -91,6 +91,8 @@ struct Demo: App {
         @State private var about = false
         @State private var preferences = false
         @State private var title: WindowName = .demo
+        @State private var closeAlert = false
+        @State private var destroy = false
         var window: AdwaitaWindow
         var app: AdwaitaApp!
         var pictureURL: URL?
@@ -172,6 +174,16 @@ struct Demo: App {
                             .title("Extra Action")
                     }
             }
+            .alertDialog(
+                visible: $closeAlert,
+                heading: "Close this Window?",
+                body: "Nothing will be lost. This is a demo."
+            )
+            .response("Cancel", role: .close) { }
+            .response("Close", appearance: .suggested, role: .default) {
+                destroy = true
+                window.close()
+            }
         }
 
         var menu: AnyView {
@@ -200,6 +212,7 @@ struct Demo: App {
             window
                 .size(width: $width, height: $height)
                 .maximized($maximized)
+                .onClose { closeAlert = !destroy; return !destroy }
         }
 
     }

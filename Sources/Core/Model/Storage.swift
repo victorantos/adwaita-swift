@@ -48,7 +48,30 @@ extension Storage {
         pointer: OpaquePointer? = nil,
         handler: @escaping () -> Void
     ) {
-        connectSignal(name: name, id: id, argCount: argCount, pointer: pointer) { _ in
+        connectSignal(name: name, id: id, argCount: argCount, pointer: pointer) {
+            handler()
+            return nil
+        }
+    }
+
+    /// Connect a handler to a signal.
+    /// - Parameters:
+    ///     - name: The signal's name.
+    ///     - id: The handlers id to separate form others connecting to the signal.
+    ///     - connectFlags: The GConnectFlags.
+    ///     - argCount: The number of additional arguments (without the first and the last one).
+    ///     - return: The return type.
+    ///     - pointer: A custom pointer instead of the stored one.
+    ///     - handler: The signal's handler.
+    public func connectSignal(
+        name: String,
+        id: String = "",
+        argCount: Int = 0,
+        return: SignalData.ReturnType? = nil,
+        pointer: OpaquePointer? = nil,
+        handler: @escaping () -> Any?
+    ) {
+        connectSignal(name: name, id: id, argCount: argCount, return: `return`, pointer: pointer) { _ in
             handler()
         }
     }
@@ -67,12 +90,41 @@ extension Storage {
         pointer: OpaquePointer? = nil,
         handler: @escaping ([Any]) -> Void
     ) {
+        connectSignal(name: name, id: id, argCount: argCount, pointer: pointer) { args in
+            handler(args)
+            return nil
+        }
+    }
+
+    /// Connect a handler to a signal.
+    /// - Parameters:
+    ///     - name: The signal's name.
+    ///     - id: The handlers id to separate form others connecting to the signal.
+    ///     - argCount: The number of additional arguments (without the first and the last one).
+    ///     - return: The return type.
+    ///     - pointer: A custom pointer instead of the stored one.
+    ///     - handler: The signal's handler.
+    public func connectSignal(
+        name: String,
+        id: String = "",
+        argCount: Int = 0,
+        return: SignalData.ReturnType? = nil,
+        pointer: OpaquePointer? = nil,
+        handler: @escaping ([Any]) -> Any?
+    ) {
         if let data = fields[name + id] as? SignalData {
             data.closure = handler
         } else {
             let data = SignalData(closure: handler) { [self] in fields[name + id] = nil }
             fields[name + id] = data
-            data.connect(pointer: (pointer ?? opaquePointer)?.cast(), signal: name, argCount: argCount)
+            data.connect(
+                pointer: (
+                    pointer ?? opaquePointer ?? ((self as? SceneStorage)?.pointer as? AdwaitaWindow)?.pointer?.opaque()
+                )?.cast(),
+                signal: name,
+                argCount: argCount,
+                return: `return`
+            )
         }
     }
 
