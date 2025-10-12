@@ -48,8 +48,7 @@ public struct Window: AdwaitaSceneElement {
     /// Whether the window uses the development style.
     var devel: Bool?
     /// Run this function when the window should close.
-    /// Return true to stop the closing process.
-    var onClose: (() -> Bool)?
+    var onClose: (() -> CloseConfirmation)?
 
     /// Create a window type with a certain identifier and user interface.
     /// - Parameters:
@@ -85,6 +84,16 @@ public struct Window: AdwaitaSceneElement {
         public func close() {
             gtk_window_close(pointer?.cast())
         }
+
+    }
+
+    /// Whether to close or keep a window.
+    public enum CloseConfirmation {
+
+        /// Close the window.
+        case close
+        /// Keep the window.
+        case keep
 
     }
 
@@ -253,7 +262,7 @@ public struct Window: AdwaitaSceneElement {
             }
         }
         if let onClose {
-            storage.fields["on-close"] = onClose
+            storage.fields["on-close"] = { onClose() == .keep } as (() -> Bool)
         }
         storage.previousState = self
     }
@@ -383,11 +392,9 @@ public struct Window: AdwaitaSceneElement {
     }
 
     /// Run this closure when the window should be closed.
-    /// - Parameter onClose: The closure. Return true to cancel the closing process.
+    /// - Parameter onClose: The closure.
     /// - Returns: The window.
-    ///
-    /// This does not get executed if the user quits the whole application.
-    public func onClose(onClose: @escaping () -> Bool) -> Self {
+    public func onClose(onClose: @escaping () -> CloseConfirmation) -> Self {
         var newSelf = self
         newSelf.onClose = onClose
         return newSelf

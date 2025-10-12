@@ -91,7 +91,7 @@ struct Demo: App {
         @State private var about = false
         @State private var preferences = false
         @State private var title: WindowName = .demo
-        @State private var closeAlert = false
+        @State private var closeAlert = false
         @State private var destroy = false
         var window: AdwaitaWindow
         var app: AdwaitaApp!
@@ -212,7 +212,7 @@ struct Demo: App {
             window
                 .size(width: $width, height: $height)
                 .maximized($maximized)
-                .onClose { closeAlert = !destroy; return !destroy }
+                .onClose { closeAlert = !destroy; return destroy ? .close : .keep }
         }
 
     }
