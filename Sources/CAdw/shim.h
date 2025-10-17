@@ -45,6 +45,26 @@ gtui_filedialog_open (uint64_t dialog, uint64_t data, uint64_t window)
 }
 
 static void
+gtui_filedialog_open_folder_finish (uint64_t dialog, uint64_t result, uint64_t data)
+{
+  GFile      *file = gtk_file_dialog_select_folder_finish (dialog, result, NULL);
+  if (file != NULL) {
+    const char *path = g_file_peek_path (file);
+    g_object_unref (file);
+    filedialog_on_open_cb (dialog, path, data);
+  } else {
+    filedialog_on_open_cb (dialog, NULL, data);
+  }
+}
+
+static void
+gtui_filedialog_open_folder (uint64_t dialog, uint64_t data, uint64_t window)
+{
+  swift_retain (data);
+  gtk_file_dialog_select_folder (dialog, window, NULL, G_CALLBACK (gtui_filedialog_open_folder_finish), (void *)data);
+}
+
+static void
 gtui_alertdialog_cb (uint64_t dialog, uint64_t result, uint64_t data)
 {
   const char *response = adw_alert_dialog_choose_finish (dialog, result);

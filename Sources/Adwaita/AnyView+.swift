@@ -133,7 +133,6 @@ extension AnyView {
     ///     - open: The signal to open the dialog.
     ///     - initialFolder: The URL to the folder open when being opened.
     ///     - extensions: The accepted file extensions.
-    ///     - folders: Whether folders are accepted.
     ///     - onOpen: Run this when a file for importing has been chosen.
     ///     - onClose: Run this when the user cancelled the action.
     public func fileImporter(
@@ -144,14 +143,34 @@ extension AnyView {
         onClose: @escaping () -> Void
     ) -> AnyView {
         FileDialog(
-            importer: true,
+            type: .importer(folder: false, extensions: extensions),
             open: open,
             child: self,
             result: onOpen,
             cancel: onClose,
-            initialFolder: initialFolder,
-            initialName: nil,
-            extensions: extensions
+            initialFolder: initialFolder
+        )
+    }
+
+    /// Create an importer file dialog for folders.
+    /// - Parameters:
+    ///     - open: The signal to open the dialog.
+    ///     - initialFolder: The URL to the folder open when being opened.
+    ///     - onOpen: Run this when a file for importing has been chosen.
+    ///     - onClose: Run this when the user cancelled the action.
+    public func folderImporter(
+        open: Signal,
+        initialFolder: URL? = nil,
+        onOpen: @escaping (URL) -> Void,
+        onClose: @escaping () -> Void
+    ) -> AnyView {
+        FileDialog(
+            type: .importer(folder: true, extensions: nil),
+            open: open,
+            child: self,
+            result: onOpen,
+            cancel: onClose,
+            initialFolder: initialFolder
         )
     }
 
@@ -170,13 +189,12 @@ extension AnyView {
         onClose: @escaping () -> Void
     ) -> AnyView {
         FileDialog(
-            importer: false,
+            type: .exporter(initialName: initialName),
             open: open,
             child: self,
             result: onSave,
             cancel: onClose,
-            initialFolder: initialFolder,
-            initialName: initialName
+            initialFolder: initialFolder
         )
     }
 

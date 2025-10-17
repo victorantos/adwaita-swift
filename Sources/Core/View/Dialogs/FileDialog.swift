@@ -11,54 +11,92 @@ import Foundation
 /// A structure representing a file dialog window.
 public struct FileDialog: AdwaitaWidget {
 
-    /// Whether the dialog is an importer.
-    var importer: Bool
+    /// The dialog type.
+    var type: DialogType
     /// Whether the dialog should open.
     var open: Signal
     /// The dialog's child.
     var child: AnyView
     /// The initial folder.
     var initialFolder: URL?
-    /// The initial file name for the file exporter.
-    var initialName: String?
-    /// The accepted extensions for the file importer.
-    var extensions: [String]?
     /// The closure to run when the import or export is successful.
     var result: (URL) -> Void
     /// The closure to run when the import or export is not successful.
     var cancel: () -> Void
 
-    // swiftlint:disable function_default_parameter_at_end
     /// Initialize the file dialog wrapper.
     /// - Parameters:
-    ///     - importer: Whether it is an importer.
+    ///     - type: The dialog type.
     ///     - open: The signal.
     ///     - child: The wrapped view.
-    ///     - initialFolder: The initial URL.
-    ///     - initialName: The initial name.
-    ///     - extensions: The file extensions.
     ///     - result: Run when the import or export succeeds.
     ///     - cancel: Run when the import or export is not successful.
+    ///     - initialFolder: The initial folder.
     public init(
-        importer: Bool = true,
+        type: DialogType,
         `open`: Signal,
         child: AnyView,
         result: @escaping (URL) -> Void,
         cancel: @escaping () -> Void,
         initialFolder: URL? = nil,
-        initialName: String? = nil,
-        extensions: [String]? = nil
     ) {
-        self.importer = importer
+        self.type = type
         self.open = open
         self.child = child
         self.result = result
         self.cancel = cancel
         self.initialFolder = initialFolder
-        self.initialName = initialName
-        self.extensions = extensions
     }
-    // swiftlint:enable function_default_parameter_at_end
+
+    /// The different types of dialogs and their properties.
+    public enum DialogType {
+
+        /// An importer dialog.
+        case importer(folder: Bool, extensions: [String]?)
+        /// An exporter dialog.
+        case exporter(initialName: String?)
+
+        /// Whether the dialog is an importer.
+        var isImporter: Bool {
+            switch self {
+            case .importer:
+                true
+            default:
+                false
+            }
+        }
+
+        /// The supported extensions.
+        var extensions: [String]? {
+            switch self {
+            case let .importer(folder: _, extensions: extensions):
+                extensions
+            default:
+                nil
+            }
+        }
+
+        /// Whether to import folders.
+        var folder: Bool {
+            switch self {
+            case let .importer(folder: folder, extensions: _):
+                folder
+            default:
+                false
+            }
+        }
+
+        /// The initial name.
+        var initialName: String? {
+            switch self {
+            case let .exporter(initialName: initialName):
+                initialName
+            default:
+                nil
+            }
+        }
+
+    }
 
     /// The view storage.
     /// - Parameters:
@@ -94,10 +132,10 @@ public struct FileDialog: AdwaitaWidget {
             var unref: [OpaquePointer?] = []
             let pointer = gtk_file_dialog_new()
             unref.append(pointer)
-            if let initialName {
+            if let initialName = self.type.initialName {
                 gtk_file_dialog_set_initial_name(pointer, initialName)
             }
-            if let extensions {
+            if let extensions = self.type.extensions {
                 let filter = gtk_file_filter_new()
                 for name in extensions {
                     gtk_file_filter_add_suffix(filter, name)
@@ -125,7 +163,9 @@ public struct FileDialog: AdwaitaWidget {
             storage.fields["callbacks"] = callbacks
             let ptr = UInt64(Int(bitPattern: pointer))
             let window = UInt64(Int(bitPattern: gtk_widget_get_root(mainStorage.opaquePointer?.cast())))
-            if importer {
+            if self.type.isImporter && self.type.folder {
+                gtui_filedialog_open_folder(ptr, unsafeBitCast(callbacks, to: UInt64.self), window)
+            } else if self.type.isImporter {
                 gtui_filedialog_open(ptr, unsafeBitCast(callbacks, to: UInt64.self), window)
             } else {
                 gtui_filedialog_save(ptr, unsafeBitCast(callbacks, to: UInt64.self), window)
