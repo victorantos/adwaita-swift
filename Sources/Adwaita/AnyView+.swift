@@ -140,7 +140,7 @@ extension AnyView {
         initialFolder: URL? = nil,
         extensions: [String]? = nil,
         onOpen: @escaping (URL) -> Void,
-        onClose: @escaping () -> Void
+        onClose: @escaping () -> Void = { }
     ) -> AnyView {
         FileDialog(
             type: .importer(folder: false, extensions: extensions),
@@ -162,7 +162,7 @@ extension AnyView {
         open: Signal,
         initialFolder: URL? = nil,
         onOpen: @escaping (URL) -> Void,
-        onClose: @escaping () -> Void
+        onClose: @escaping () -> Void = { }
     ) -> AnyView {
         FileDialog(
             type: .importer(folder: true, extensions: nil),
@@ -186,7 +186,7 @@ extension AnyView {
         initialFolder: URL? = nil,
         initialName: String? = nil,
         onSave: @escaping (URL) -> Void,
-        onClose: @escaping () -> Void
+        onClose: @escaping () -> Void = { }
     ) -> AnyView {
         FileDialog(
             type: .exporter(initialName: initialName),
