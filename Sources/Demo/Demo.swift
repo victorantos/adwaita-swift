@@ -212,7 +212,7 @@ struct Demo: App {
             window
                 .size(width: $width, height: $height)
                 .maximized($maximized)
-                .onClose { closeAlert = !destroy; return destroy ? .close : .keep }
+                .onClose { closeAlert = !destroy; return destroy ? .close : .cancel }
         }
 
     }

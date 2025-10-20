@@ -92,8 +92,8 @@ public struct Window: AdwaitaSceneElement {
 
         /// Close the window.
         case close
-        /// Keep the window.
-        case keep
+        /// Cancel the closing process and keep the window.
+        case cancel
 
     }
 
@@ -262,7 +262,7 @@ public struct Window: AdwaitaSceneElement {
             }
         }
         if let onClose {
-            storage.fields["on-close"] = { onClose() == .keep } as (() -> Bool)
+            storage.fields["on-close"] = { onClose() == .cancel } as (() -> Bool)
         }
         storage.previousState = self
     }
