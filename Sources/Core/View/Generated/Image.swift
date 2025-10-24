@@ -1,0 +1,182 @@
+//
+//  Image.swift
+//  Adwaita
+//
+//  Created by auto-generation on 23.10.25.
+//
+
+import CAdw
+import LevenshteinTransformations
+
+/// Displays an image.
+/// 
+/// picture><source srcset="image-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkImage" src="image.png"></picture>
+/// 
+/// Various kinds of object can be displayed as an image; most typically,
+/// you would load a `GdkTexture` from a file, using the convenience function
+/// [ctor@Gtk.Image.new_from_file], for instance:
+/// 
+/// ```c
+/// GtkWidget *image = gtk_image_new_from_file ("myfile.png");
+/// ```
+/// 
+/// If the file isn’t loaded successfully, the image will contain a
+/// “broken image” icon similar to that used in many web browsers.
+/// 
+/// If you want to handle errors in loading the file yourself,
+/// for example by displaying an error message, then load the image with
+/// [ctor@Gdk.Texture.new_from_file], then create the `GtkImage` with
+/// [ctor@Gtk.Image.new_from_paintable].
+/// 
+/// Sometimes an application will want to avoid depending on external data
+/// files, such as image files. See the documentation of `GResource` inside
+/// GIO, for details. In this case, [property@Gtk.Image:resource],
+/// [ctor@Gtk.Image.new_from_resource], and [method@Gtk.Image.set_from_resource]
+/// should be used.
+/// 
+/// `GtkImage` displays its image as an icon, with a size that is determined
+/// by the application. See [class@Gtk.Picture] if you want to show an image
+/// at is actual size.
+/// 
+/// ## CSS nodes
+/// 
+/// `GtkImage` has a single CSS node with the name `image`. The style classes
+/// `.normal-icons` or `.large-icons` may appear, depending on the
+/// [property@Gtk.Image:icon-size] property.
+/// 
+/// ## Accessibility
+/// 
+/// `GtkImage` uses the [enum@Gtk.AccessibleRole.img] role.
+public struct Image: AdwaitaWidget {
+
+    /// Additional update functions for type extensions.
+    var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
+    /// Additional appear functions for type extensions.
+    var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+
+    /// The accessible role of the given `GtkAccessible` implementation.
+    /// 
+    /// The accessible role cannot be changed once set.
+    var accessibleRole: String?
+    /// The name of the icon in the icon theme.
+    /// 
+    /// If the icon theme is changed, the image will be updated automatically.
+    var iconName: String?
+    /// The size in pixels to display icons at.
+    /// 
+    /// If set to a value != -1, this property overrides the
+    /// [property@Gtk.Image:icon-size] property for images of type
+    /// `GTK_IMAGE_ICON_NAME`.
+    var pixelSize: Int?
+    /// A path to a resource file to display.
+    var resource: String?
+    /// The representation being used for image data.
+    var storageType: String?
+    /// Whether the icon displayed in the `GtkImage` will use
+    /// standard icon names fallback.
+    /// 
+    /// The value of this property is only relevant for images of type
+    /// %GTK_IMAGE_ICON_NAME and %GTK_IMAGE_GICON.
+    var useFallback: Bool?
+
+    /// Initialize `Image`.
+    public init() {
+    }
+
+    /// The view storage.
+    /// - Parameters:
+    ///     - modifiers: Modify views before being updated.
+    ///     - type: The view render data type.
+    /// - Returns: The view storage.
+    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+        let storage = ViewStorage(gtk_image_new()?.opaque())
+        for function in appearFunctions {
+            function(storage, data)
+        }
+        update(storage, data: data, updateProperties: true, type: type)
+
+        return storage
+    }
+
+    /// Update the stored content.
+    /// - Parameters:
+    ///     - storage: The storage to update.
+    ///     - modifiers: Modify views before being updated
+    ///     - updateProperties: Whether to update the view's properties.
+    ///     - type: The view render data type.
+    public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
+        storage.modify { widget in
+
+            if let iconName, updateProperties, (storage.previousState as? Self)?.iconName != iconName {
+                gtk_image_set_from_icon_name(widget, iconName)
+            }
+            if let pixelSize, updateProperties, (storage.previousState as? Self)?.pixelSize != pixelSize {
+                gtk_image_set_pixel_size(widget, pixelSize.cInt)
+            }
+
+
+
+        }
+        for function in updateFunctions {
+            function(storage, data, updateProperties)
+        }
+        if updateProperties {
+            storage.previousState = self
+        }
+    }
+
+    /// The accessible role of the given `GtkAccessible` implementation.
+    /// 
+    /// The accessible role cannot be changed once set.
+    public func accessibleRole(_ accessibleRole: String?) -> Self {
+        var newSelf = self
+        newSelf.accessibleRole = accessibleRole
+        return newSelf
+    }
+
+    /// The name of the icon in the icon theme.
+    /// 
+    /// If the icon theme is changed, the image will be updated automatically.
+    public func iconName(_ iconName: String?) -> Self {
+        var newSelf = self
+        newSelf.iconName = iconName
+        return newSelf
+    }
+
+    /// The size in pixels to display icons at.
+    /// 
+    /// If set to a value != -1, this property overrides the
+    /// [property@Gtk.Image:icon-size] property for images of type
+    /// `GTK_IMAGE_ICON_NAME`.
+    public func pixelSize(_ pixelSize: Int?) -> Self {
+        var newSelf = self
+        newSelf.pixelSize = pixelSize
+        return newSelf
+    }
+
+    /// A path to a resource file to display.
+    public func resource(_ resource: String?) -> Self {
+        var newSelf = self
+        newSelf.resource = resource
+        return newSelf
+    }
+
+    /// The representation being used for image data.
+    public func storageType(_ storageType: String?) -> Self {
+        var newSelf = self
+        newSelf.storageType = storageType
+        return newSelf
+    }
+
+    /// Whether the icon displayed in the `GtkImage` will use
+    /// standard icon names fallback.
+    /// 
+    /// The value of this property is only relevant for images of type
+    /// %GTK_IMAGE_ICON_NAME and %GTK_IMAGE_GICON.
+    public func useFallback(_ useFallback: Bool? = true) -> Self {
+        var newSelf = self
+        newSelf.useFallback = useFallback
+        return newSelf
+    }
+
+}

@@ -2,7 +2,7 @@
 //  Spinner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 19.04.25.
+//  Created by auto-generation on 23.10.25.
 //
 
 import CAdw
@@ -32,6 +32,10 @@ import LevenshteinTransformations
 /// 
 /// `AdwSpinner` has a single node with the name `image` and the style class
 /// `.spinner`.
+/// 
+/// ## Accessibility
+/// 
+/// `AdwSpinner` uses the [enum@Gtk.AccessibleRole.progress-bar] role.
 public struct Spinner: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
