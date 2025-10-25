@@ -301,6 +301,7 @@ struct GenerationConfiguration {
         ),
         .init(class: "SearchBar"),
         .init(class: "Picture", excludeProperties: ["file", "paintable"]),
+        .init(class: "Image", excludeProperties: ["file", "paintable", "gicon", "icon-size"]),
         .init(
             class: "AspectFrame",
             initializer: "gtk_aspect_frame_new(0.5, 0.5, ratio, 0)",
