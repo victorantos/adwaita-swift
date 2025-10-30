@@ -9,7 +9,7 @@ import CAdw
 import Foundation
 
 /// The about dialog widget.
-public struct AboutDialog: AdwaitaWidget {
+struct AboutDialog: AdwaitaWidget {
 
     /// Whether the dialog is visible.
     @Binding var visible: Bool
@@ -42,7 +42,7 @@ public struct AboutDialog: AdwaitaWidget {
     ///     - icon: The icon.
     ///     - website: The website's URL.
     ///     - issues: The link for opening issues.
-    public init(
+    init(
         visible: Binding<Bool>,
         child: AnyView,
         appName: String? = nil,
@@ -67,7 +67,7 @@ public struct AboutDialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated.
     ///     - type: The view render data type.
     /// - Returns: The view storage.
-    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+    func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let storage = child.storage(data: data, type: type)
         update(storage, data: data, updateProperties: true, type: type)
         return storage
@@ -79,7 +79,7 @@ public struct AboutDialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated
     ///     - updateProperties: Whether to update the view's properties.
     ///     - type: The view render data type.
-    public func update<Data>(
+    func update<Data>(
         _ storage: ViewStorage,
         data: WidgetData,
         updateProperties: Bool,

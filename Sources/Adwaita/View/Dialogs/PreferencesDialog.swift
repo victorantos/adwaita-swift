@@ -29,7 +29,7 @@ public struct PreferencesDialog: AdwaitaWidget {
     ///     - visible: Whether the dialog is visible.
     ///     - child: The wrapped view.
     ///     - id: An unique identifier for dialogs on the view.
-    public init(
+    init(
         visible: Binding<Bool>,
         child: AnyView,
         id: String
@@ -53,7 +53,7 @@ public struct PreferencesDialog: AdwaitaWidget {
         /// - Parameters:
         ///     - title: The page title.
         ///     - icon: The page's icon.
-        public init(_ title: String, icon: Icon) {
+        init(_ title: String, icon: Icon) {
             self.title = title
             self.icon = icon
         }
@@ -62,7 +62,7 @@ public struct PreferencesDialog: AdwaitaWidget {
         /// - Parameter data: The widget data.
         /// - Returns: The preferences page pointer and the groups view storages.
         func gtkPreferencesPage(data: WidgetData) -> (OpaquePointer?, [ViewStorage]) {
-            let page = Core.PreferencesPage()
+            let page = Adwaita.PreferencesPage()
                 .title(title)
                 .iconName(icon.string)
                 .storage(data: data.noModifiers, type: AdwaitaMainView.self)
@@ -120,7 +120,7 @@ public struct PreferencesDialog: AdwaitaWidget {
         /// Get the GTk preferences group.
         /// - Parameter data: The widget data.
         /// - Returns: The preferences group.
-        func group(data: WidgetData) -> Core.PreferencesGroup {
+        func group(data: WidgetData) -> Adwaita.PreferencesGroup {
             .init()
                 .title(title)
                 .description(description)

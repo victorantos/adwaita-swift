@@ -8,7 +8,7 @@
 import CAdw
 
 /// The dialog widget.
-public struct Dialog: AdwaitaWidget {
+struct Dialog: AdwaitaWidget {
 
     /// Whether the dialog is visible.
     @Binding var visible: Bool
@@ -39,7 +39,7 @@ public struct Dialog: AdwaitaWidget {
     ///     - title: The title.
     ///     - width: The width.
     ///     - height: The height.
-    public init(
+    init(
         visible: Binding<Bool>,
         child: AnyView,
         id: String,
@@ -62,7 +62,7 @@ public struct Dialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated.
     ///     - type: The view render data type.
     /// - Returns: The view storage.
-    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+    func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let child = child.storage(data: data, type: type)
         let storage = ViewStorage(child.opaquePointer, content: [.mainContent: [child]])
         update(storage, data: data, updateProperties: true, type: type)
@@ -75,7 +75,7 @@ public struct Dialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated
     ///     - updateProperties: Whether to update the view's properties.
     ///     - type: The view render data type.
-    public func update<Data>(
+    func update<Data>(
         _ storage: ViewStorage,
         data: WidgetData,
         updateProperties: Bool,

@@ -8,7 +8,7 @@
 import CAdw
 
 /// A wrapper for view modifiers for any view.
-public struct ModifierWrapper: AdwaitaWidget {
+struct ModifierWrapper: AdwaitaWidget {
 
     /// The view.
     var content: AnyView
@@ -55,7 +55,7 @@ public struct ModifierWrapper: AdwaitaWidget {
     ///     - insensitive: Whether the view is insensitive.
     ///     - visible: Whether the view is visible.
     ///     - tooltip: The tooltip.
-    public init(
+    init(
         content: AnyView,
         padding: Int? = nil,
         edges: Set<Edge>? = nil,
@@ -92,7 +92,7 @@ public struct ModifierWrapper: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated.
     ///     - type: The view render data type.
     /// - Returns: The view storage.
-    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+    func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let content = content.storage(data: data, type: type)
         let storage = ViewStorage(content.pointer, content: [.mainContent: [content]])
         update(storage, data: data, updateProperties: true, type: type)
@@ -105,7 +105,7 @@ public struct ModifierWrapper: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated
     ///     - updateProperties: Whether to update the view's properties.
     ///     - type: The view render data type.
-    public func update<Data>(
+    func update<Data>(
         _ storage: ViewStorage,
         data: WidgetData,
         updateProperties: Bool,

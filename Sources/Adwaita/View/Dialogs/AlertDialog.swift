@@ -43,7 +43,7 @@ public struct AlertDialog: AdwaitaWidget {
     ///     - heading: The heading.
     ///     - body: The body text.
     ///     - extraChild: The body view.
-    public init(
+    init(
         visible: Binding<Bool>,
         child: AnyView,
         id: String,

@@ -5,7 +5,6 @@
 //  Created by david-swift on 16.10.24.
 //
 
-@_exported import Core
 import Foundation
 
 extension AnyView {

@@ -9,7 +9,7 @@ import CAdw
 import Foundation
 
 /// A structure representing a file dialog window.
-public struct FileDialog: AdwaitaWidget {
+struct FileDialog: AdwaitaWidget {
 
     /// The dialog type.
     var type: DialogType
@@ -32,7 +32,7 @@ public struct FileDialog: AdwaitaWidget {
     ///     - result: Run when the import or export succeeds.
     ///     - cancel: Run when the import or export is not successful.
     ///     - initialFolder: The initial folder.
-    public init(
+    init(
         type: DialogType,
         `open`: Signal,
         child: AnyView,
@@ -49,7 +49,7 @@ public struct FileDialog: AdwaitaWidget {
     }
 
     /// The different types of dialogs and their properties.
-    public enum DialogType {
+    enum DialogType {
 
         /// An importer dialog.
         case importer(folder: Bool, extensions: [String]?)
@@ -103,7 +103,7 @@ public struct FileDialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated.
     ///     - type: The view render data type.
     /// - Returns: The view storage.
-    public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
+    func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let child = child.storage(data: data, type: type)
         let storage = ViewStorage(child.opaquePointer, content: [.mainContent: [child]])
         update(storage, data: data, updateProperties: true, type: type)
@@ -116,7 +116,7 @@ public struct FileDialog: AdwaitaWidget {
     ///     - modifiers: Modify views before being updated
     ///     - updateProperties: Whether to update the view's properties.
     ///     - type: The view render data type.
-    public func update<Data>(
+    func update<Data>(
         _ storage: ViewStorage,
         data: WidgetData,
         updateProperties: Bool,
