@@ -45,8 +45,11 @@ extension Button {
     ///     - window: The application window.
     ///     - active: Whether the keyboard shortcut is active.
     /// - Returns: The button.
-    public func keyboardShortcut(_ shortcut: String, window: AdwaitaWindow, active: Bool = true) -> AnyView {
-        onUpdate {
+    public func keyboardShortcut(_ shortcut: String, active: Bool = true) -> AnyView {
+        inspect { _, data, _ in
+            guard let window = data.sceneStorage.pointer as? AdwaitaWindow else {
+                return
+            }
             if active {
                 window.app.addKeyboardShortcut(shortcut, id: shortcut, window: window) { self.clicked?() }
             } else {
@@ -63,12 +66,15 @@ extension Button {
     ///     - window: The application.
     ///     - active: Whether the keyboard shortcut is active.
     /// - Returns: The button.
-    public func keyboardShortcut(_ shortcut: String, app: AdwaitaApp, active: Bool = true) -> AnyView {
-        onUpdate {
+    public func appKeyboardShortcut(_ shortcut: String, active: Bool = true) -> AnyView {
+        inspect { _, data, _ in
+            guard let window = data.sceneStorage.pointer as? AdwaitaWindow else {
+                return
+            }
             if active {
-                app.addKeyboardShortcut(shortcut, id: shortcut) { self.clicked?() }
+                window.app.addKeyboardShortcut(shortcut, id: shortcut) { self.clicked?() }
             } else {
-                app.removeKeyboardShortcut(id: shortcut)
+                window.app.removeKeyboardShortcut(id: shortcut)
             }
         }
     }
