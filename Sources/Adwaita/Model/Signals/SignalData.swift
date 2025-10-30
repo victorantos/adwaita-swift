@@ -19,7 +19,7 @@ public class SignalData {
     var handler: @convention(c) (UnsafeMutableRawPointer, UnsafeMutableRawPointer) -> Void {
         { _, data in
             let data = unsafeBitCast(data, to: SignalData.self)
-            data.closure([])
+            _ = data.closure([])
         }
     }
 
@@ -31,7 +31,7 @@ public class SignalData {
     ) -> Void {
         { _, arg1, data in
             let data = unsafeBitCast(data, to: SignalData.self)
-            data.closure([arg1])
+            _ = data.closure([arg1])
         }
     }
 
@@ -44,7 +44,7 @@ public class SignalData {
     ) -> Void {
         { _, arg1, arg2, data in
             let data = unsafeBitCast(data, to: SignalData.self)
-            data.closure([arg1, arg2])
+            _ = data.closure([arg1, arg2])
         }
     }
 
@@ -58,7 +58,7 @@ public class SignalData {
     ) -> Void {
         { _, arg1, arg2, arg3, data in
             let data = unsafeBitCast(data, to: SignalData.self)
-            data.closure([arg1, arg2, arg3])
+            _ = data.closure([arg1, arg2, arg3])
         }
     }
 
