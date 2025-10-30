@@ -2,15 +2,15 @@
 //  SpinRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// An [class@ActionRow] with an embedded spin button.
+/// An `ActionRow` with an embedded spin button.
 /// 
-/// <picture><source srcset="spin-row-dark.png" media="(prefers-color-scheme: dark)"><img src="spin-row.png" alt="spin-row"></picture>
+/// 
 /// 
 /// Example of an `AdwSpinRow` UI definition:
 /// 
@@ -18,17 +18,9 @@ import LevenshteinTransformations
 /// <object class="AdwSpinRow"><property name="title" translatable="yes">Spin Row</property><property name="adjustment"><object class="GtkAdjustment"><property name="lower">0</property><property name="upper">100</property><property name="value">50</property><property name="page-increment">10</property><property name="step-increment">1</property></object></property></object>
 /// ```
 /// 
-/// See [class@Gtk.SpinButton] for details.
+/// See `Gtk.SpinButton` for details.
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwSpinRow` has the same structure as [class@ActionRow], as well as the
-/// `.spin` style class on the main node.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwSpinRow` uses an internal `GtkSpinButton` with the
-/// `GTK_ACCESSIBLE_ROLE_SPIN_BUTTON` role.
 public struct SpinRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -39,12 +31,12 @@ public struct SpinRow: AdwaitaWidget {
     /// The widget to activate when the row is activated.
     /// 
     /// The row can be activated either by clicking on it, calling
-    /// [method@ActionRow.activate], or via mnemonics in the title.
-    /// See the [property@PreferencesRow:use-underline] property to enable
+    /// `ActionRow.activate`, or via mnemonics in the title.
+    /// See the ``useUnderline(_:)`` property to enable
     /// mnemonics.
     /// 
     /// The target widget will be activated by emitting the
-    /// [signal@Gtk.Widget::mnemonic-activate] signal on it.
+    /// `Gtk.Widget::mnemonic-activate` signal on it.
     var activatableWidget: (() -> Body)?
     /// The acceleration rate when you hold down a button or key.
     var climbRate: Double
@@ -57,7 +49,7 @@ public struct SpinRow: AdwaitaWidget {
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var subtitle: String?
     /// The number of lines at the end of which the subtitle label will be
     /// ellipsized.
@@ -66,12 +58,12 @@ public struct SpinRow: AdwaitaWidget {
     var subtitleLines: Int?
     /// Whether the user can copy the subtitle from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var subtitleSelectable: Bool?
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var title: String?
     /// The number of lines at the end of which the title label will be ellipsized.
     /// 
@@ -79,13 +71,13 @@ public struct SpinRow: AdwaitaWidget {
     var titleLines: Int?
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var titleSelectable: Bool?
     /// Whether to use Pango markup for the title label.
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// Whether an embedded underline in the title indicates a mnemonic.
     var useUnderline: Bool?
@@ -97,20 +89,20 @@ public struct SpinRow: AdwaitaWidget {
     var activated: (() -> Void)?
     /// Emitted to convert the user's input into a double value.
     /// 
-    /// The signal handler is expected to use [method@Gtk.Editable.get_text] to
+    /// The signal handler is expected to use `Gtk.Editable.get_text` to
     /// retrieve the text of the spinbutton and set new_value to the new value.
     /// 
-    /// The default conversion uses [func@GLib.strtod].
+    /// The default conversion uses `GLib.strtod`.
     /// 
-    /// See [signal@Gtk.SpinButton::input].
+    /// See `Gtk.SpinButton::input`.
     var input: (() -> Void)?
     /// Emitted to tweak the formatting of the value for display.
     /// 
-    /// See [signal@Gtk.SpinButton::output].
+    /// See `Gtk.SpinButton::output`.
     var output: (() -> Void)?
     /// Emitted right after the spinbutton wraps.
     /// 
-    /// See [signal@Gtk.SpinButton::wrapped].
+    /// See `Gtk.SpinButton::wrapped`.
     var wrapped: (() -> Void)?
     /// The body for the widget "suffix".
     var suffix: () -> Body = { [] }
@@ -249,12 +241,12 @@ if let value, newValue != value.wrappedValue {
     /// The widget to activate when the row is activated.
     /// 
     /// The row can be activated either by clicking on it, calling
-    /// [method@ActionRow.activate], or via mnemonics in the title.
-    /// See the [property@PreferencesRow:use-underline] property to enable
+    /// `ActionRow.activate`, or via mnemonics in the title.
+    /// See the ``useUnderline(_:)`` property to enable
     /// mnemonics.
     /// 
     /// The target widget will be activated by emitting the
-    /// [signal@Gtk.Widget::mnemonic-activate] signal on it.
+    /// `Gtk.Widget::mnemonic-activate` signal on it.
     public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.activatableWidget = activatableWidget
@@ -292,7 +284,7 @@ if let value, newValue != value.wrappedValue {
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
@@ -311,7 +303,7 @@ if let value, newValue != value.wrappedValue {
 
     /// Whether the user can copy the subtitle from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.subtitleSelectable = subtitleSelectable
@@ -321,7 +313,7 @@ if let value, newValue != value.wrappedValue {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -339,7 +331,7 @@ if let value, newValue != value.wrappedValue {
 
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
@@ -350,7 +342,7 @@ if let value, newValue != value.wrappedValue {
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
@@ -387,12 +379,12 @@ if let value, newValue != value.wrappedValue {
 
     /// Emitted to convert the user's input into a double value.
     /// 
-    /// The signal handler is expected to use [method@Gtk.Editable.get_text] to
+    /// The signal handler is expected to use `Gtk.Editable.get_text` to
     /// retrieve the text of the spinbutton and set new_value to the new value.
     /// 
-    /// The default conversion uses [func@GLib.strtod].
+    /// The default conversion uses `GLib.strtod`.
     /// 
-    /// See [signal@Gtk.SpinButton::input].
+    /// See `Gtk.SpinButton::input`.
     public func input(_ input: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.input = input
@@ -401,7 +393,7 @@ if let value, newValue != value.wrappedValue {
 
     /// Emitted to tweak the formatting of the value for display.
     /// 
-    /// See [signal@Gtk.SpinButton::output].
+    /// See `Gtk.SpinButton::output`.
     public func output(_ output: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.output = output
@@ -410,7 +402,7 @@ if let value, newValue != value.wrappedValue {
 
     /// Emitted right after the spinbutton wraps.
     /// 
-    /// See [signal@Gtk.SpinButton::wrapped].
+    /// See `Gtk.SpinButton::wrapped`.
     public func wrapped(_ wrapped: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.wrapped = wrapped

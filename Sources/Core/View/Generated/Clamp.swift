@@ -2,7 +2,7 @@
 //  Clamp.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,7 +10,7 @@ import LevenshteinTransformations
 
 /// A widget constraining its child to a given size.
 /// 
-/// <picture><source srcset="clamp-wide-dark.png" media="(prefers-color-scheme: dark)"><img src="clamp-wide.png" alt="clamp-wide"></picture><picture><source srcset="clamp-narrow-dark.png" media="(prefers-color-scheme: dark)"><img src="clamp-narrow.png" alt="clamp-narrow"></picture>
+/// 
 /// 
 /// The `AdwClamp` widget constrains the size of the widget it contains to a
 /// given maximum size. It will constrain the width if it is horizontal, or the
@@ -21,13 +21,11 @@ import LevenshteinTransformations
 /// allocated the minimum size it can fit in instead.
 /// 
 /// `AdwClamp` can scale with the text scale factor, use the
-/// [property@Clamp:unit] property to enable that behavior.
+/// ``unit(_:)`` property to enable that behavior.
 /// 
-/// See also: [class@ClampLayout], [class@ClampScrollable].
+/// See also: `ClampLayout`, `ClampScrollable`.
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwClamp` has a single CSS node with name `clamp`.
 public struct Clamp: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

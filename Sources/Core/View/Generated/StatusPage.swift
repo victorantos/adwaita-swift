@@ -2,7 +2,7 @@
 //  StatusPage.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,27 +10,12 @@ import LevenshteinTransformations
 
 /// A page used for empty/error states and similar use-cases.
 /// 
-/// <picture><source srcset="status-page-dark.png" media="(prefers-color-scheme: dark)"><img src="status-page.png" alt="status-page"></picture>
+/// 
 /// 
 /// The `AdwStatusPage` widget can have an icon, a title, a description and a
 /// custom widget which is displayed below them.
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwStatusPage` has a main CSS node with name `statuspage`.
-/// 
-/// When setting an [class@SpinnerPaintable] as [property@StatusPage:paintable],
-/// the main nodes gains the `.spinner` style class for a more compact
-/// appearance.
-/// 
-/// ## Style classes
-/// 
-/// `AdwStatusPage` can use the
-/// [`.compact`](style-classes.html#compact-status-page) style class for when it
-/// needs to fit into a small space such a sidebar or a popover, similar to when
-/// using a spinner as the paintable.
-/// 
-/// <picture><source srcset="status-page-compact-dark.png" media="(prefers-color-scheme: dark)"><img src="status-page-compact.png" alt="status-page-compact"></picture>
 public struct StatusPage: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -44,7 +29,7 @@ public struct StatusPage: AdwaitaWidget {
     var description: String?
     /// The name of the icon to be used.
     /// 
-    /// Changing this will set [property@StatusPage:paintable] to `NULL`.
+    /// Changing this will set ``paintable(_:)`` to `NULL`.
     var iconName: String?
     /// The title to be displayed below the icon.
     /// 
@@ -123,7 +108,7 @@ public struct StatusPage: AdwaitaWidget {
 
     /// The name of the icon to be used.
     /// 
-    /// Changing this will set [property@StatusPage:paintable] to `NULL`.
+    /// Changing this will set ``paintable(_:)`` to `NULL`.
     public func iconName(_ iconName: String?) -> Self {
         var newSelf = self
         newSelf.iconName = iconName

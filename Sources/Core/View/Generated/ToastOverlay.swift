@@ -2,7 +2,7 @@
 //  ToastOverlay.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,43 +10,18 @@ import LevenshteinTransformations
 
 /// A widget showing toasts above its content.
 /// 
-/// <picture><source srcset="toast-overlay-dark.png" media="(prefers-color-scheme: dark)"><img src="toast-overlay.png" alt="toast-overlay"></picture>
 /// 
-/// Much like [class@Gtk.Overlay], `AdwToastOverlay` is a container with a single
-/// main child, on top of which it can display a [class@Toast], overlaid.
-/// Toasts can be shown with [method@ToastOverlay.add_toast].
 /// 
-/// Use [method@ToastOverlay.dismiss_all] to dismiss all toasts at once, or
-/// [method@Toast.dismiss] to dismiss a single toast.
+/// Much like `Gtk.Overlay`, `AdwToastOverlay` is a container with a single
+/// main child, on top of which it can display a `Toast`, overlaid.
+/// Toasts can be shown with `ToastOverlay.add_toast`.
 /// 
-/// See [class@Toast] for details.
+/// Use `ToastOverlay.dismiss_all` to dismiss all toasts at once, or
+/// `Toast.dismiss` to dismiss a single toast.
 /// 
-/// ## CSS nodes
+/// See `Toast` for details.
 /// 
-/// ```
-/// toastoverlay
-/// ├── [child]
-/// ├── toast
-/// ┊   ├── widget
-/// ┊   │   ├── [label.heading]
-/// │   ╰── [custom title]
-/// ├── [button]
-/// ╰── button.circular.flat
-/// ```
 /// 
-/// `AdwToastOverlay`'s CSS node is called `toastoverlay`. It contains the child,
-/// as well as zero or more `toast` subnodes.
-/// 
-/// Each of the `toast` nodes contains a `widget` subnode, optionally a `button`
-/// subnode, and another `button` subnode with `.circular` and `.flat` style
-/// classes.
-/// 
-/// The `widget` subnode contains a `label` subnode with the `.heading` style
-/// class, or a custom widget provided by the application.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwToastOverlay` uses the [enum@Gtk.AccessibleRole.GROUP] role.
 public struct ToastOverlay: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

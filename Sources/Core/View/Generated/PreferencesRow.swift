@@ -2,19 +2,19 @@
 //  PreferencesRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A [class@Gtk.ListBoxRow] used to present preferences.
+/// A `Gtk.ListBoxRow` used to present preferences.
 /// 
-/// The `AdwPreferencesRow` widget has a title that [class@PreferencesDialog]
+/// The `AdwPreferencesRow` widget has a title that `PreferencesDialog`
 /// will use to let the user look for a preference. It doesn't present the title
 /// in any way and lets you present the preference as you please.
 /// 
-/// [class@ActionRow] and its derivatives are convenient to use as preference
+/// `ActionRow` and its derivatives are convenient to use as preference
 /// rows as they take care of presenting the preference's title while letting you
 /// compose the inputs of the preference around it.
 public struct PreferencesRow: AdwaitaWidget {
@@ -27,17 +27,17 @@ public struct PreferencesRow: AdwaitaWidget {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var title: String?
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var titleSelectable: Bool?
     /// Whether to use Pango markup for the title label.
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// Whether an embedded underline in the title indicates a mnemonic.
     var useUnderline: Bool?
@@ -97,7 +97,7 @@ public struct PreferencesRow: AdwaitaWidget {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -106,7 +106,7 @@ public struct PreferencesRow: AdwaitaWidget {
 
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
@@ -117,7 +117,7 @@ public struct PreferencesRow: AdwaitaWidget {
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup

@@ -2,7 +2,7 @@
 //  Overlay.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,10 +10,10 @@ import LevenshteinTransformations
 
 /// Places “overlay” widgets on top of a single main child.
 /// 
-/// <picture><source srcset="overlay-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkOverlay" src="overlay.png"></picture>
+/// 
 /// 
 /// The position of each overlay widget is determined by its
-/// [property@Gtk.Widget:halign] and [property@Gtk.Widget:valign]
+/// ``halign(_:)`` and ``valign(_:)``
 /// properties. E.g. a widget with both alignments set to %GTK_ALIGN_START
 /// will be placed at the top left corner of the `GtkOverlay` container,
 /// whereas an overlay with halign set to %GTK_ALIGN_CENTER and valign set
@@ -22,23 +22,13 @@ import LevenshteinTransformations
 /// properties of the child to non-zero values.
 /// 
 /// More complicated placement of overlays is possible by connecting
-/// to the [signal@Gtk.Overlay::get-child-position] signal.
+/// to the `Gtk.Overlay::get-child-position` signal.
 /// 
 /// An overlay’s minimum and natural sizes are those of its main child.
 /// The sizes of overlay children are not considered when measuring these
 /// preferred sizes.
 /// 
-/// # GtkOverlay as GtkBuildable
 /// 
-/// The `GtkOverlay` implementation of the `GtkBuildable` interface
-/// supports placing a child as an overlay by specifying “overlay” as
-/// the “type” attribute of a `<child>` element.
-/// 
-/// # CSS nodes
-/// 
-/// `GtkOverlay` has a single CSS node with the name “overlay”. Overlay children
-/// whose alignments cause them to be positioned at an edge get the style classes
-/// “.left”, “.right”, “.top”, and/or “.bottom” according to their position.
 public struct Overlay: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

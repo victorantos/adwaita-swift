@@ -2,7 +2,7 @@
 //  CenterBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -11,38 +11,16 @@ import LevenshteinTransformations
 /// Arranges three children in a row, keeping the middle child
 /// centered as well as possible.
 /// 
-/// <picture><source srcset="centerbox-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkCenterBox" src="centerbox.png"></picture>
 /// 
-/// To add children to `GtkCenterBox`, use [method@Gtk.CenterBox.set_start_widget],
-/// [method@Gtk.CenterBox.set_center_widget] and
-/// [method@Gtk.CenterBox.set_end_widget].
+/// 
+/// To add children to `GtkCenterBox`, use `Gtk.CenterBox.set_start_widget`,
+/// `Gtk.CenterBox.set_center_widget` and
+/// `Gtk.CenterBox.set_end_widget`.
 /// 
 /// The sizing and positioning of children can be influenced with the
 /// align and expand properties of the children.
 /// 
-/// # GtkCenterBox as GtkBuildable
 /// 
-/// The `GtkCenterBox` implementation of the `GtkBuildable` interface
-/// supports placing children in the 3 positions by specifying “start”, “center”
-/// or “end” as the “type” attribute of a `<child>` element.
-/// 
-/// # CSS nodes
-/// 
-/// `GtkCenterBox` uses a single CSS node with the name “box”,
-/// 
-/// The first child of the `GtkCenterBox` will be allocated depending on the
-/// text direction, i.e. in left-to-right layouts it will be allocated on the
-/// left and in right-to-left layouts on the right.
-/// 
-/// In vertical orientation, the nodes of the children are arranged from top to
-/// bottom.
-/// 
-/// # Accessibility
-/// 
-/// Until GTK 4.10, `GtkCenterBox` used the [enum@Gtk.AccessibleRole.group] role.
-/// 
-/// Starting from GTK 4.12, `GtkCenterBox` uses the [enum@Gtk.AccessibleRole.generic]
-/// role.
 public struct CenterBox: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

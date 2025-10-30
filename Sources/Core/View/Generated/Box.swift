@@ -2,7 +2,7 @@
 //  Box.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,38 +10,30 @@ import LevenshteinTransformations
 
 /// Arranges child widgets into a single row or column.
 /// 
-/// <picture><source srcset="box-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkBox" src="box.png"></picture>
+/// 
 /// 
 /// Whether it is a row or column depends on the value of its
-/// [property@Gtk.Orientable:orientation] property. Within the other
+/// ``orientation(_:)`` property. Within the other
 /// dimension, all children are allocated the same size. The
-/// [property@Gtk.Widget:halign] and [property@Gtk.Widget:valign]
+/// ``halign(_:)`` and ``valign(_:)``
 /// properties can be used on the children to influence their allocation.
 /// 
-/// Use repeated calls to [method@Gtk.Box.append] to pack widgets into a
-/// `GtkBox` from start to end. Use [method@Gtk.Box.remove] to remove widgets
-/// from the `GtkBox`. [method@Gtk.Box.insert_child_after] can be used to add
+/// Use repeated calls to `Gtk.Box.append` to pack widgets into a
+/// `GtkBox` from start to end. Use `Gtk.Box.remove` to remove widgets
+/// from the `GtkBox`. `Gtk.Box.insert_child_after` can be used to add
 /// a child at a particular position.
 /// 
-/// Use [method@Gtk.Box.set_homogeneous] to specify whether or not all children
+/// Use `Gtk.Box.set_homogeneous` to specify whether or not all children
 /// of the `GtkBox` are forced to get the same amount of space.
 /// 
-/// Use [method@Gtk.Box.set_spacing] to determine how much space will be minimally
+/// Use `Gtk.Box.set_spacing` to determine how much space will be minimally
 /// placed between all children in the `GtkBox`. Note that spacing is added
 /// *between* the children.
 /// 
-/// Use [method@Gtk.Box.reorder_child_after] to move a child to a different
+/// Use `Gtk.Box.reorder_child_after` to move a child to a different
 /// place in the box.
 /// 
-/// # CSS nodes
 /// 
-/// `GtkBox` uses a single CSS node with name box.
-/// 
-/// # Accessibility
-/// 
-/// Until GTK 4.10, `GtkBox` used the [enum@Gtk.AccessibleRole.group] role.
-/// 
-/// Starting from GTK 4.12, `GtkBox` uses the [enum@Gtk.AccessibleRole.generic] role.
 public struct Box: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

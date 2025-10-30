@@ -2,7 +2,7 @@
 //  FlowBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,7 +10,7 @@ import LevenshteinTransformations
 
 /// Puts child widgets in a reflowing grid.
 /// 
-/// <picture><source srcset="flow-box-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkFlowBox" src="flow-box.png"></picture>
+/// 
 /// 
 /// For instance, with the horizontal orientation, the widgets will be
 /// arranged from left to right, starting a new row under the previous
@@ -30,39 +30,13 @@ import LevenshteinTransformations
 /// The children of a `GtkFlowBox` can be dynamically sorted and filtered.
 /// 
 /// Although a `GtkFlowBox` must have only `GtkFlowBoxChild` children, you
-/// can add any kind of widget to it via [method@Gtk.FlowBox.insert], and a
+/// can add any kind of widget to it via `Gtk.FlowBox.insert`, and a
 /// `GtkFlowBoxChild` widget will automatically be inserted between the box
 /// and the widget.
 /// 
-/// Also see [class@Gtk.ListBox].
+/// Also see `Gtk.ListBox`.
 /// 
-/// # Shortcuts and Gestures
 /// 
-/// The following signals have default keybindings:
-/// 
-/// - [signal@Gtk.FlowBox::move-cursor]
-/// - [signal@Gtk.FlowBox::select-all]
-/// - [signal@Gtk.FlowBox::toggle-cursor-child]
-/// - [signal@Gtk.FlowBox::unselect-all]
-/// 
-/// # CSS nodes
-/// 
-/// ```
-/// flowbox
-/// ├── flowboxchild
-/// │   ╰── <child>├── flowboxchild
-/// │   ╰── <child>┊
-/// ╰── [rubberband]
-/// ```
-/// 
-/// `GtkFlowBox` uses a single CSS node with name flowbox. `GtkFlowBoxChild`
-/// uses a single CSS node with name flowboxchild. For rubberband selection,
-/// a subnode with name rubberband is used.
-/// 
-/// # Accessibility
-/// 
-/// `GtkFlowBox` uses the [enum@Gtk.AccessibleRole.grid] role, and `GtkFlowBoxChild`
-/// uses the [enum@Gtk.AccessibleRole.grid_cell] role.
 public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Additional update functions for type extensions.
@@ -128,8 +102,8 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     var selectAll: (() -> Void)?
     /// Emitted when the set of selected children changes.
     /// 
-    /// Use [method@Gtk.FlowBox.selected_foreach] or
-    /// [method@Gtk.FlowBox.get_selected_children] to obtain the
+    /// Use `Gtk.FlowBox.selected_foreach` or
+    /// `Gtk.FlowBox.get_selected_children` to obtain the
     /// selected children.
     var selectedChildrenChanged: (() -> Void)?
     /// Emitted to toggle the selection of the child that has the focus.
@@ -380,8 +354,8 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Emitted when the set of selected children changes.
     /// 
-    /// Use [method@Gtk.FlowBox.selected_foreach] or
-    /// [method@Gtk.FlowBox.get_selected_children] to obtain the
+    /// Use `Gtk.FlowBox.selected_foreach` or
+    /// `Gtk.FlowBox.get_selected_children` to obtain the
     /// selected children.
     public func selectedChildrenChanged(_ selectedChildrenChanged: @escaping () -> Void) -> Self {
         var newSelf = self

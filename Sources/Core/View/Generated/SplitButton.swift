@@ -2,7 +2,7 @@
 //  SplitButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,47 +10,15 @@ import LevenshteinTransformations
 
 /// A combined button and dropdown widget.
 /// 
-/// <picture><source srcset="split-button-dark.png" media="(prefers-color-scheme: dark)"><img src="split-button.png" alt="split-button"></picture>
+/// 
 /// 
 /// `AdwSplitButton` is typically used to present a set of actions in a menu,
 /// but allow access to one of them with a single click.
 /// 
-/// The API is very similar to [class@Gtk.Button] and [class@Gtk.MenuButton], see
+/// The API is very similar to `Gtk.Button` and `Gtk.MenuButton`, see
 /// their documentation for details.
 /// 
-/// ## CSS nodes
 /// 
-/// ```
-/// splitbutton[.image-button][.text-button]
-/// ├── button
-/// │   ╰── <content>├── separator
-/// ╰── menubutton
-/// ╰── button.toggle
-/// ╰── arrow
-/// ```
-/// 
-/// `AdwSplitButton`'s CSS node is called `splitbutton`. It contains the css
-/// nodes: `button`, `separator`, `menubutton`. See [class@Gtk.MenuButton]
-/// documentation for the `menubutton` contents.
-/// 
-/// The main CSS node will contain the `.image-button` or `.text-button` style
-/// classes matching the button contents. The nested button nodes will never
-/// contain them.
-/// 
-/// ## Style classes
-/// 
-/// `AdwSplitButton` can use some of the same style classes as [class@Gtk.Button]:
-/// 
-/// - [`.suggested-action`](style-classes.html#suggested-action)
-/// - [`.destructive-action`](style-classes.html#destructive-action)
-/// - [`.flat`](style-classes.html#flat)
-/// - [`.raised`](style-classes.html#raised)
-/// 
-/// Other style classes, like `.pill`, cannot be used.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwSplitButton` uses the `GTK_ACCESSIBLE_ROLE_GROUP` role.
 public struct SplitButton: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -60,15 +28,15 @@ public struct SplitButton: AdwaitaWidget {
 
     /// Whether the button can be smaller than the natural size of its contents.
     /// 
-    /// If set to `TRUE`, the label will ellipsize.
+    /// If set to `true`, the label will ellipsize.
     /// 
-    /// See [property@Gtk.Button:can-shrink] and
-    /// [property@Gtk.MenuButton:can-shrink].
+    /// See ``canShrink(_:)`` and
+    /// ``canShrink(_:)``.
     var canShrink: Bool?
     /// The child widget.
     /// 
-    /// Setting the child widget will set [property@SplitButton:label] and
-    /// [property@SplitButton:icon-name] to `NULL`.
+    /// Setting the child widget will set ``label(_:)`` and
+    /// ``iconName(_:)`` to `NULL`.
     var child: (() -> Body)?
     /// The tooltip of the dropdown button.
     /// 
@@ -76,33 +44,33 @@ public struct SplitButton: AdwaitaWidget {
     var dropdownTooltip: String?
     /// The name of the icon used to automatically populate the button.
     /// 
-    /// Setting the icon name will set [property@SplitButton:label] and
-    /// [property@SplitButton:child] to `NULL`.
+    /// Setting the icon name will set ``label(_:)`` and
+    /// ``child(_:)`` to `NULL`.
     var iconName: String?
     /// The label for the button.
     /// 
-    /// Setting the label will set [property@SplitButton:icon-name] and
-    /// [property@SplitButton:child] to `NULL`.
+    /// Setting the label will set ``iconName(_:)`` and
+    /// ``child(_:)`` to `NULL`.
     var label: String?
     /// The `GMenuModel` from which the popup will be created.
     /// 
     /// If the menu model is `NULL`, the dropdown is disabled.
     /// 
-    /// A [class@Gtk.Popover] will be created from the menu model with
-    /// [ctor@Gtk.PopoverMenu.new_from_model]. Actions will be connected as
+    /// A `Gtk.Popover` will be created from the menu model with
+    /// `Gtk.PopoverMenu.new_from_model`. Actions will be connected as
     /// documented for this function.
     /// 
-    /// If [property@SplitButton:popover] is already set, it will be dissociated
+    /// If ``popover(_:)`` is already set, it will be dissociated
     /// from the button, and the property is set to `NULL`.
     var menuModel: (() -> Body)?
     /// Whether an underline in the text indicates a mnemonic.
     /// 
-    /// See [property@SplitButton:label].
+    /// See ``label(_:)``.
     var useUnderline: Bool?
     /// Emitted to animate press then release.
     /// 
     /// This is an action signal. Applications should never connect to this signal,
-    /// but use the [signal@SplitButton::clicked] signal.
+    /// but use the `SplitButton::clicked` signal.
     var activate: (() -> Void)?
     /// Emitted when the button has been activated (pressed and released).
     var clicked: (() -> Void)?
@@ -190,10 +158,10 @@ public struct SplitButton: AdwaitaWidget {
 
     /// Whether the button can be smaller than the natural size of its contents.
     /// 
-    /// If set to `TRUE`, the label will ellipsize.
+    /// If set to `true`, the label will ellipsize.
     /// 
-    /// See [property@Gtk.Button:can-shrink] and
-    /// [property@Gtk.MenuButton:can-shrink].
+    /// See ``canShrink(_:)`` and
+    /// ``canShrink(_:)``.
     public func canShrink(_ canShrink: Bool? = true) -> Self {
         var newSelf = self
         newSelf.canShrink = canShrink
@@ -202,8 +170,8 @@ public struct SplitButton: AdwaitaWidget {
 
     /// The child widget.
     /// 
-    /// Setting the child widget will set [property@SplitButton:label] and
-    /// [property@SplitButton:icon-name] to `NULL`.
+    /// Setting the child widget will set ``label(_:)`` and
+    /// ``iconName(_:)`` to `NULL`.
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
@@ -221,8 +189,8 @@ public struct SplitButton: AdwaitaWidget {
 
     /// The name of the icon used to automatically populate the button.
     /// 
-    /// Setting the icon name will set [property@SplitButton:label] and
-    /// [property@SplitButton:child] to `NULL`.
+    /// Setting the icon name will set ``label(_:)`` and
+    /// ``child(_:)`` to `NULL`.
     public func iconName(_ iconName: String?) -> Self {
         var newSelf = self
         newSelf.iconName = iconName
@@ -231,8 +199,8 @@ public struct SplitButton: AdwaitaWidget {
 
     /// The label for the button.
     /// 
-    /// Setting the label will set [property@SplitButton:icon-name] and
-    /// [property@SplitButton:child] to `NULL`.
+    /// Setting the label will set ``iconName(_:)`` and
+    /// ``child(_:)`` to `NULL`.
     public func label(_ label: String?) -> Self {
         var newSelf = self
         newSelf.label = label
@@ -243,11 +211,11 @@ public struct SplitButton: AdwaitaWidget {
     /// 
     /// If the menu model is `NULL`, the dropdown is disabled.
     /// 
-    /// A [class@Gtk.Popover] will be created from the menu model with
-    /// [ctor@Gtk.PopoverMenu.new_from_model]. Actions will be connected as
+    /// A `Gtk.Popover` will be created from the menu model with
+    /// `Gtk.PopoverMenu.new_from_model`. Actions will be connected as
     /// documented for this function.
     /// 
-    /// If [property@SplitButton:popover] is already set, it will be dissociated
+    /// If ``popover(_:)`` is already set, it will be dissociated
     /// from the button, and the property is set to `NULL`.
     public func menuModel(@ViewBuilder _ menuModel: @escaping (() -> Body)) -> Self {
         var newSelf = self
@@ -257,7 +225,7 @@ public struct SplitButton: AdwaitaWidget {
 
     /// Whether an underline in the text indicates a mnemonic.
     /// 
-    /// See [property@SplitButton:label].
+    /// See ``label(_:)``.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline
@@ -267,7 +235,7 @@ public struct SplitButton: AdwaitaWidget {
     /// Emitted to animate press then release.
     /// 
     /// This is an action signal. Applications should never connect to this signal,
-    /// but use the [signal@SplitButton::clicked] signal.
+    /// but use the `SplitButton::clicked` signal.
     public func activate(_ activate: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.activate = activate

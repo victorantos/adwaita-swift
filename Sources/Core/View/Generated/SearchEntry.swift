@@ -2,7 +2,7 @@
 //  SearchEntry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -13,7 +13,7 @@ import LevenshteinTransformations
 /// The main API for interacting with a `GtkSearchEntry` as entry
 /// is the `GtkEditable` interface.
 /// 
-/// <picture><source srcset="search-entry-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkSearchEntry" src="search-entry.png"></picture>
+/// 
 /// 
 /// It will show an inactive symbolic “find” icon when the search
 /// entry is empty, and a symbolic “clear” icon when there is text.
@@ -22,44 +22,23 @@ import LevenshteinTransformations
 /// To make filtering appear more reactive, it is a good idea to
 /// not react to every change in the entry text immediately, but
 /// only after a short delay. To support this, `GtkSearchEntry`
-/// emits the [signal@Gtk.SearchEntry::search-changed] signal which
-/// can be used instead of the [signal@Gtk.Editable::changed] signal.
+/// emits the `Gtk.SearchEntry::search-changed` signal which
+/// can be used instead of the `Gtk.Editable::changed` signal.
 /// 
-/// The [signal@Gtk.SearchEntry::previous-match],
-/// [signal@Gtk.SearchEntry::next-match] and
-/// [signal@Gtk.SearchEntry::stop-search] signals can be used to
+/// The `Gtk.SearchEntry::previous-match`,
+/// `Gtk.SearchEntry::next-match` and
+/// `Gtk.SearchEntry::stop-search` signals can be used to
 /// implement moving between search results and ending the search.
 /// 
 /// Often, `GtkSearchEntry` will be fed events by means of being
-/// placed inside a [class@Gtk.SearchBar]. If that is not the case,
-/// you can use [method@Gtk.SearchEntry.set_key_capture_widget] to
+/// placed inside a `Gtk.SearchBar`. If that is not the case,
+/// you can use `Gtk.SearchEntry.set_key_capture_widget` to
 /// let it capture key input from another widget.
 /// 
 /// `GtkSearchEntry` provides only minimal API and should be used with
-/// the [iface@Gtk.Editable] API.
+/// the `Gtk.Editable` API.
 /// 
-/// ## Shortcuts and Gestures
 /// 
-/// The following signals have default keybindings:
-/// 
-/// - [signal@Gtk.SearchEntry::activate]
-/// - [signal@Gtk.SearchEntry::next-match]
-/// - [signal@Gtk.SearchEntry::previous-match]
-/// - [signal@Gtk.SearchEntry::stop-search]
-/// 
-/// ## CSS Nodes
-/// 
-/// ```
-/// entry.search
-/// ╰── text
-/// ```
-/// 
-/// `GtkSearchEntry` has a single CSS node with name entry that carries
-/// a `.search` style class, and the text node is a child of that.
-/// 
-/// ## Accessibility
-/// 
-/// `GtkSearchEntry` uses the [enum@Gtk.AccessibleRole.search_box] role.
 public struct SearchEntry: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -118,7 +97,7 @@ public struct SearchEntry: AdwaitaWidget {
     /// range of deleted text, or prevent it from being deleted entirely.
     /// 
     /// The @start_pos and @end_pos parameters are interpreted as for
-    /// [method@Gtk.Editable.delete_text].
+    /// `Gtk.Editable.delete_text`.
     var deleteText: (() -> Void)?
     /// Emitted when text is inserted into the widget by the user.
     /// 
@@ -149,7 +128,7 @@ public struct SearchEntry: AdwaitaWidget {
     /// <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>g</kbd>.
     var previousMatch: (() -> Void)?
     /// Emitted with a delay. The length of the delay can be
-    /// changed with the [property@Gtk.SearchEntry:search-delay]
+    /// changed with the ``searchDelay(_:)``
     /// property.
     var searchChanged: (() -> Void)?
     /// Emitted when the user initiated a search on the entry.
@@ -403,7 +382,7 @@ if let text, newValue != text.wrappedValue {
     /// range of deleted text, or prevent it from being deleted entirely.
     /// 
     /// The @start_pos and @end_pos parameters are interpreted as for
-    /// [method@Gtk.Editable.delete_text].
+    /// `Gtk.Editable.delete_text`.
     public func deleteText(_ deleteText: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.deleteText = deleteText
@@ -454,7 +433,7 @@ if let text, newValue != text.wrappedValue {
     }
 
     /// Emitted with a delay. The length of the delay can be
-    /// changed with the [property@Gtk.SearchEntry:search-delay]
+    /// changed with the ``searchDelay(_:)``
     /// property.
     public func searchChanged(_ searchChanged: @escaping () -> Void) -> Self {
         var newSelf = self

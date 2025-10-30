@@ -2,15 +2,15 @@
 //  ActionRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A [class@Gtk.ListBoxRow] used to present actions.
+/// A `Gtk.ListBoxRow` used to present actions.
 /// 
-/// <picture><source srcset="action-row-dark.png" media="(prefers-color-scheme: dark)"><img src="action-row.png" alt="action-row"></picture>
+/// 
 /// 
 /// The `AdwActionRow` widget can have a title, a subtitle and an icon. The row
 /// can receive additional widgets at its end, or prefix widgets at its start.
@@ -21,35 +21,7 @@ import LevenshteinTransformations
 /// will automatically make it activatable, but unsetting it won't change the
 /// row's activatability.
 /// 
-/// ## AdwActionRow as GtkBuildable
 /// 
-/// The `AdwActionRow` implementation of the [iface@Gtk.Buildable] interface
-/// supports adding a child at its end by specifying “suffix” or omitting the
-/// “type” attribute of a <child> element.
-/// 
-/// It also supports adding a child as a prefix widget by specifying “prefix” as
-/// the “type” attribute of a <child> element.
-/// 
-/// ## CSS nodes
-/// 
-/// `AdwActionRow` has a main CSS node with name `row`.
-/// 
-/// It contains the subnode `box.header` for its main horizontal box, and
-/// `box.title` for the vertical box containing the title and subtitle labels.
-/// 
-/// It contains subnodes `label.title` and `label.subtitle` representing
-/// respectively the title label and subtitle label.
-/// 
-/// ## Style classes
-/// 
-/// `AdwActionRow` can use the [`.property`](style-classes.html#property-rows)
-/// style class to emphasize the row subtitle instead of the row title, which is
-/// useful for displaying read-only properties.
-/// 
-/// <picture><source srcset="property-row-dark.png" media="(prefers-color-scheme: dark)"><img src="property-row.png" alt="property-row"></picture>
-/// 
-/// When used together with the `.monospace` style class, only the subtitle
-/// becomes monospace, not the title or any extra widgets.
 public struct ActionRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -60,17 +32,17 @@ public struct ActionRow: AdwaitaWidget {
     /// The widget to activate when the row is activated.
     /// 
     /// The row can be activated either by clicking on it, calling
-    /// [method@ActionRow.activate], or via mnemonics in the title.
-    /// See the [property@PreferencesRow:use-underline] property to enable
+    /// `ActionRow.activate`, or via mnemonics in the title.
+    /// See the ``useUnderline(_:)`` property to enable
     /// mnemonics.
     /// 
     /// The target widget will be activated by emitting the
-    /// [signal@Gtk.Widget::mnemonic-activate] signal on it.
+    /// `Gtk.Widget::mnemonic-activate` signal on it.
     var activatableWidget: (() -> Body)?
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var subtitle: String?
     /// The number of lines at the end of which the subtitle label will be
     /// ellipsized.
@@ -79,12 +51,12 @@ public struct ActionRow: AdwaitaWidget {
     var subtitleLines: Int?
     /// Whether the user can copy the subtitle from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var subtitleSelectable: Bool?
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var title: String?
     /// The number of lines at the end of which the title label will be ellipsized.
     /// 
@@ -92,13 +64,13 @@ public struct ActionRow: AdwaitaWidget {
     var titleLines: Int?
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var titleSelectable: Bool?
     /// Whether to use Pango markup for the title label.
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// Whether an embedded underline in the title indicates a mnemonic.
     var useUnderline: Bool?
@@ -224,12 +196,12 @@ public struct ActionRow: AdwaitaWidget {
     /// The widget to activate when the row is activated.
     /// 
     /// The row can be activated either by clicking on it, calling
-    /// [method@ActionRow.activate], or via mnemonics in the title.
-    /// See the [property@PreferencesRow:use-underline] property to enable
+    /// `ActionRow.activate`, or via mnemonics in the title.
+    /// See the ``useUnderline(_:)`` property to enable
     /// mnemonics.
     /// 
     /// The target widget will be activated by emitting the
-    /// [signal@Gtk.Widget::mnemonic-activate] signal on it.
+    /// `Gtk.Widget::mnemonic-activate` signal on it.
     public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.activatableWidget = activatableWidget
@@ -239,7 +211,7 @@ public struct ActionRow: AdwaitaWidget {
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
@@ -258,7 +230,7 @@ public struct ActionRow: AdwaitaWidget {
 
     /// Whether the user can copy the subtitle from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.subtitleSelectable = subtitleSelectable
@@ -268,7 +240,7 @@ public struct ActionRow: AdwaitaWidget {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -286,7 +258,7 @@ public struct ActionRow: AdwaitaWidget {
 
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
@@ -297,7 +269,7 @@ public struct ActionRow: AdwaitaWidget {
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup

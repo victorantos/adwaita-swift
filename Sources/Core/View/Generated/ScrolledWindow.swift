@@ -2,7 +2,7 @@
 //  ScrolledWindow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,28 +10,28 @@ import LevenshteinTransformations
 
 /// Makes its child scrollable.
 /// 
-/// <picture><source srcset="scrolledwindow-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkScrolledWindow" src="scrolledwindow.png"></picture>
+/// 
 /// 
 /// It does so using either internally added scrollbars or externally
 /// associated adjustments, and optionally draws a frame around the child.
 /// 
 /// Widgets with native scrolling support, i.e. those whose classes implement
-/// the [iface@Gtk.Scrollable] interface, are added directly. For other types
-/// of widget, the class [class@Gtk.Viewport] acts as an adaptor, giving
-/// scrollability to other widgets. [method@Gtk.ScrolledWindow.set_child]
+/// the `Gtk.Scrollable` interface, are added directly. For other types
+/// of widget, the class `Gtk.Viewport` acts as an adaptor, giving
+/// scrollability to other widgets. `Gtk.ScrolledWindow.set_child`
 /// intelligently accounts for whether or not the added child is a `GtkScrollable`.
 /// If it isn’t, then it wraps the child in a `GtkViewport`. Therefore, you can
 /// just add any child widget and not worry about the details.
 /// 
-/// If [method@Gtk.ScrolledWindow.set_child] has added a `GtkViewport` for you,
+/// If `Gtk.ScrolledWindow.set_child` has added a `GtkViewport` for you,
 /// it will be automatically removed when you unset the child.
-/// Unless [property@Gtk.ScrolledWindow:hscrollbar-policy] and
-/// [property@Gtk.ScrolledWindow:vscrollbar-policy] are %GTK_POLICY_NEVER or
+/// Unless ``hscrollbarPolicy(_:)`` and
+/// ``vscrollbarPolicy(_:)`` are %GTK_POLICY_NEVER or
 /// %GTK_POLICY_EXTERNAL, `GtkScrolledWindow` adds internal `GtkScrollbar` widgets
 /// around its child. The scroll position of the child, and if applicable the
-/// scrollbars, is controlled by the [property@Gtk.ScrolledWindow:hadjustment]
-/// and [property@Gtk.ScrolledWindow:vadjustment] that are associated with the
-/// `GtkScrolledWindow`. See the docs on [class@Gtk.Scrollbar] for the details,
+/// scrollbars, is controlled by the ``hadjustment(_:)``
+/// and ``vadjustment(_:)`` that are associated with the
+/// `GtkScrolledWindow`. See the docs on `Gtk.Scrollbar` for the details,
 /// but note that the “step_increment” and “page_increment” fields are only
 /// effective if the policy causes scrollbars to be present.
 /// 
@@ -39,52 +39,7 @@ import LevenshteinTransformations
 /// doesn’t have exactly the right layout, it’s very possible to set up
 /// your own scrolling with `GtkScrollbar` and for example a `GtkGrid`.
 /// 
-/// # Touch support
 /// 
-/// `GtkScrolledWindow` has built-in support for touch devices. When a
-/// touchscreen is used, swiping will move the scrolled window, and will
-/// expose 'kinetic' behavior. This can be turned off with the
-/// [property@Gtk.ScrolledWindow:kinetic-scrolling] property if it is undesired.
-/// 
-/// `GtkScrolledWindow` also displays visual 'overshoot' indication when
-/// the content is pulled beyond the end, and this situation can be
-/// captured with the [signal@Gtk.ScrolledWindow::edge-overshot] signal.
-/// 
-/// If no mouse device is present, the scrollbars will overlaid as
-/// narrow, auto-hiding indicators over the content. If traditional
-/// scrollbars are desired although no mouse is present, this behaviour
-/// can be turned off with the [property@Gtk.ScrolledWindow:overlay-scrolling]
-/// property.
-/// 
-/// # Shortcuts and Gestures
-/// 
-/// The following signals have default keybindings:
-/// 
-/// - [signal@Gtk.ScrolledWindow::scroll-child]
-/// 
-/// # CSS nodes
-/// 
-/// `GtkScrolledWindow` has a main CSS node with name scrolledwindow.
-/// It gets a .frame style class added when [property@Gtk.ScrolledWindow:has-frame]
-/// is %TRUE.
-/// 
-/// It uses subnodes with names overshoot and undershoot to draw the overflow
-/// and underflow indications. These nodes get the .left, .right, .top or .bottom
-/// style class added depending on where the indication is drawn.
-/// 
-/// `GtkScrolledWindow` also sets the positional style classes (.left, .right,
-/// .top, .bottom) and style classes related to overlay scrolling
-/// (.overlay-indicator, .dragging, .hovering) on its scrollbars.
-/// 
-/// If both scrollbars are visible, the area where they meet is drawn
-/// with a subnode named junction.
-/// 
-/// # Accessibility
-/// 
-/// Until GTK 4.10, `GtkScrolledWindow` used the [enum@Gtk.AccessibleRole.group] role.
-/// 
-/// Starting from GTK 4.12, `GtkScrolledWindow` uses the [enum@Gtk.AccessibleRole.generic]
-/// role.
 public struct ScrolledWindow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -99,14 +54,14 @@ public struct ScrolledWindow: AdwaitaWidget {
     /// The child widget.
     /// 
     /// When setting this property, if the child widget does not implement
-    /// [iface@Gtk.Scrollable], the scrolled window will add the child to
-    /// a [class@Gtk.Viewport] and then set the viewport as the child.
+    /// `Gtk.Scrollable`, the scrolled window will add the child to
+    /// a `Gtk.Viewport` and then set the viewport as the child.
     var child: (() -> Body)?
     /// Whether to draw a frame around the contents.
     var hasFrame: Bool?
     /// When the horizontal scrollbar is displayed.
     /// 
-    /// Use [method@Gtk.ScrolledWindow.set_policy] to set
+    /// Use `Gtk.ScrolledWindow.set_policy` to set
     /// this property.
     var hscrollbarPolicy: ScrollbarVisibility?
     /// Whether kinetic scrolling is enabled or not.
@@ -128,7 +83,7 @@ public struct ScrolledWindow: AdwaitaWidget {
     /// the content, as narrow indicators.
     /// 
     /// Note that overlay scrolling can also be globally disabled, with
-    /// the [property@Gtk.Settings:gtk-overlay-scrolling] setting.
+    /// the ``gtkOverlayScrolling(_:)`` setting.
     var overlayScrolling: Bool?
     /// Whether the natural height of the child should be calculated and propagated
     /// through the scrolled window’s requested natural height.
@@ -144,7 +99,7 @@ public struct ScrolledWindow: AdwaitaWidget {
     var propagateNaturalWidth: Bool?
     /// When the vertical scrollbar is displayed.
     /// 
-    /// Use [method@Gtk.ScrolledWindow.set_policy] to set
+    /// Use `Gtk.ScrolledWindow.set_policy` to set
     /// this property.
     var vscrollbarPolicy: ScrollbarVisibility?
     /// Emitted whenever user initiated scrolling makes the scrolled
@@ -152,7 +107,7 @@ public struct ScrolledWindow: AdwaitaWidget {
     /// in that orientation.
     /// 
     /// A similar behavior without edge resistance is provided by the
-    /// [signal@Gtk.ScrolledWindow::edge-reached] signal.
+    /// `Gtk.ScrolledWindow::edge-reached` signal.
     /// 
     /// Note: The @pos argument is LTR/RTL aware, so callers should be
     /// aware too if intending to provide behavior on horizontal edges.
@@ -162,7 +117,7 @@ public struct ScrolledWindow: AdwaitaWidget {
     /// adjustment in that orientation.
     /// 
     /// A similar behavior with edge resistance is provided by the
-    /// [signal@Gtk.ScrolledWindow::edge-overshot] signal.
+    /// `Gtk.ScrolledWindow::edge-overshot` signal.
     /// 
     /// Note: The @pos argument is LTR/RTL aware, so callers should be
     /// aware too if intending to provide behavior on horizontal edges.
@@ -299,8 +254,8 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// The child widget.
     /// 
     /// When setting this property, if the child widget does not implement
-    /// [iface@Gtk.Scrollable], the scrolled window will add the child to
-    /// a [class@Gtk.Viewport] and then set the viewport as the child.
+    /// `Gtk.Scrollable`, the scrolled window will add the child to
+    /// a `Gtk.Viewport` and then set the viewport as the child.
     public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.child = child
@@ -316,7 +271,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
 
     /// When the horizontal scrollbar is displayed.
     /// 
-    /// Use [method@Gtk.ScrolledWindow.set_policy] to set
+    /// Use `Gtk.ScrolledWindow.set_policy` to set
     /// this property.
     public func hscrollbarPolicy(_ hscrollbarPolicy: ScrollbarVisibility?) -> Self {
         var newSelf = self
@@ -368,7 +323,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// the content, as narrow indicators.
     /// 
     /// Note that overlay scrolling can also be globally disabled, with
-    /// the [property@Gtk.Settings:gtk-overlay-scrolling] setting.
+    /// the ``gtkOverlayScrolling(_:)`` setting.
     public func overlayScrolling(_ overlayScrolling: Bool? = true) -> Self {
         var newSelf = self
         newSelf.overlayScrolling = overlayScrolling
@@ -399,7 +354,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
 
     /// When the vertical scrollbar is displayed.
     /// 
-    /// Use [method@Gtk.ScrolledWindow.set_policy] to set
+    /// Use `Gtk.ScrolledWindow.set_policy` to set
     /// this property.
     public func vscrollbarPolicy(_ vscrollbarPolicy: ScrollbarVisibility?) -> Self {
         var newSelf = self
@@ -412,7 +367,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// in that orientation.
     /// 
     /// A similar behavior without edge resistance is provided by the
-    /// [signal@Gtk.ScrolledWindow::edge-reached] signal.
+    /// `Gtk.ScrolledWindow::edge-reached` signal.
     /// 
     /// Note: The @pos argument is LTR/RTL aware, so callers should be
     /// aware too if intending to provide behavior on horizontal edges.
@@ -427,7 +382,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// adjustment in that orientation.
     /// 
     /// A similar behavior with edge resistance is provided by the
-    /// [signal@Gtk.ScrolledWindow::edge-overshot] signal.
+    /// `Gtk.ScrolledWindow::edge-overshot` signal.
     /// 
     /// Note: The @pos argument is LTR/RTL aware, so callers should be
     /// aware too if intending to provide behavior on horizontal edges.

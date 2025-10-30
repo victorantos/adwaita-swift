@@ -2,7 +2,7 @@
 //  Separator.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,20 +10,13 @@ import LevenshteinTransformations
 
 /// Draws a horizontal or vertical line to separate other widgets.
 /// 
-/// <picture><source srcset="separator-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkSeparator" src="separator.png"></picture>
+/// 
 /// 
 /// A `GtkSeparator` can be used to group the widgets within a window.
 /// It displays a line with a shadow to make it appear sunken into the
 /// interface.
 /// 
-/// # CSS nodes
 /// 
-/// `GtkSeparator` has a single CSS node with name separator. The node
-/// gets one of the .horizontal or .vertical style classes.
-/// 
-/// # Accessibility
-/// 
-/// `GtkSeparator` uses the [enum@Gtk.AccessibleRole.separator] role.
 public struct Separator: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

@@ -2,7 +2,7 @@
 //  LinkButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,43 +10,23 @@ import LevenshteinTransformations
 
 /// A button with a hyperlink.
 /// 
-/// <picture><source srcset="link-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkLinkButton" src="link-button.png"></picture>
+/// 
 /// 
 /// It is useful to show quick links to resources.
 /// 
-/// A link button is created by calling either [ctor@Gtk.LinkButton.new] or
-/// [ctor@Gtk.LinkButton.new_with_label]. If using the former, the URI you
+/// A link button is created by calling either `Gtk.LinkButton.new` or
+/// `Gtk.LinkButton.new_with_label`. If using the former, the URI you
 /// pass to the constructor is used as a label for the widget.
 /// 
 /// The URI bound to a `GtkLinkButton` can be set specifically using
-/// [method@Gtk.LinkButton.set_uri].
+/// `Gtk.LinkButton.set_uri`.
 /// 
-/// By default, `GtkLinkButton` calls [method@Gtk.FileLauncher.launch] when the button
+/// By default, `GtkLinkButton` calls `Gtk.FileLauncher.launch` when the button
 /// is clicked. This behaviour can be overridden by connecting to the
-/// [signal@Gtk.LinkButton::activate-link] signal and returning %TRUE from
+/// `Gtk.LinkButton::activate-link` signal and returning `true` from
 /// the signal handler.
 /// 
-/// # Shortcuts and Gestures
 /// 
-/// `GtkLinkButton` supports the following keyboard shortcuts:
-/// 
-/// - <kbd>Shift</kbd>+<kbd>F10</kbd> or <kbd>Menu</kbd> opens the context menu.
-/// 
-/// # Actions
-/// 
-/// `GtkLinkButton` defines a set of built-in actions:
-/// 
-/// - `clipboard.copy` copies the url to the clipboard.
-/// - `menu.popup` opens the context menu.
-/// 
-/// # CSS nodes
-/// 
-/// `GtkLinkButton` has a single CSS node with name button. To differentiate
-/// it from a plain `GtkButton`, it gets the .link style class.
-/// 
-/// # Accessibility
-/// 
-/// `GtkLinkButton` uses the [enum@Gtk.AccessibleRole.link] role.
 public struct LinkButton: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -88,7 +68,7 @@ public struct LinkButton: AdwaitaWidget {
     /// Emitted to animate press then release.
     /// 
     /// This is an action signal. Applications should never connect
-    /// to this signal, but use the [signal@Gtk.Button::clicked] signal.
+    /// to this signal, but use the `Gtk.Button::clicked` signal.
     /// 
     /// The default bindings for this signal are all forms of the
     /// <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
@@ -262,7 +242,7 @@ public struct LinkButton: AdwaitaWidget {
     /// Emitted to animate press then release.
     /// 
     /// This is an action signal. Applications should never connect
-    /// to this signal, but use the [signal@Gtk.Button::clicked] signal.
+    /// to this signal, but use the `Gtk.Button::clicked` signal.
     /// 
     /// The default bindings for this signal are all forms of the
     /// <kbd>␣</kbd> and <kbd>Enter</kbd> keys.

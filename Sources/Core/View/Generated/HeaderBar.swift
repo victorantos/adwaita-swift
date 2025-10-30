@@ -2,7 +2,7 @@
 //  HeaderBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,95 +10,13 @@ import LevenshteinTransformations
 
 /// A title bar widget.
 /// 
-/// <picture><source srcset="header-bar-dark.png" media="(prefers-color-scheme: dark)"><img src="header-bar.png" alt="header-bar"></picture>
 /// 
-/// `AdwHeaderBar` is similar to [class@Gtk.HeaderBar], but provides additional
+/// 
+/// `AdwHeaderBar` is similar to `Gtk.HeaderBar`, but provides additional
 /// features compared to it. Refer to `GtkHeaderBar` for details. It is typically
-/// used as a top bar within [class@ToolbarView].
+/// used as a top bar within `ToolbarView`.
 /// 
-/// ## Dialog Integration
 /// 
-/// When placed inside an [class@Dialog], `AdwHeaderBar` will display the dialog
-/// title instead of window title. It will also adjust the decoration layout to
-/// ensure it always has a close button and nothing else. Set
-/// [property@HeaderBar:show-start-title-buttons] and
-/// [property@HeaderBar:show-end-title-buttons] to `FALSE` to remove it if it's
-/// unwanted.
-/// 
-/// ## Navigation View Integration
-/// 
-/// When placed inside an [class@NavigationPage], `AdwHeaderBar` will display the
-/// page title instead of window title.
-/// 
-/// When used together with [class@NavigationView] or [class@NavigationSplitView],
-/// it will also display a back button that can be used to go back to the previous
-/// page. The button also has a context menu, allowing to pop multiple pages at
-/// once, potentially across multiple navigation views.
-/// 
-/// Set [property@HeaderBar:show-back-button] to `FALSE` to disable this behavior
-/// in rare scenarios where it's unwanted.
-/// 
-/// ## Split View Integration
-/// 
-/// When placed inside [class@NavigationSplitView] or [class@OverlaySplitView],
-/// `AdwHeaderBar` will automatically hide the title buttons other than at the
-/// edges of the window.
-/// 
-/// ## Bottom Sheet Integration
-/// 
-/// When played inside [class@BottomSheet], `AdwHeaderBar` will not show the title
-/// unless [property@BottomSheet:show-drag-handle] is set to `FALSE`, regardless
-/// of [property@HeaderBar:show-title]. This only applies to the default title,
-/// titles set with [property@HeaderBar:title-widget] will still be shown.
-/// 
-/// ## Centering Policy
-/// 
-/// [property@HeaderBar:centering-policy] allows to enforce strict centering of
-/// the title widget. This can be useful for entries inside [class@Clamp].
-/// 
-/// ## Title Buttons
-/// 
-/// Unlike `GtkHeaderBar`, `AdwHeaderBar` allows to toggle title button
-/// visibility for each side individually, using the
-/// [property@HeaderBar:show-start-title-buttons] and
-/// [property@HeaderBar:show-end-title-buttons] properties.
-/// 
-/// ## CSS nodes
-/// 
-/// ```
-/// headerbar
-/// ╰── windowhandle
-/// ╰── box
-/// ├── widget
-/// │   ╰── box.start
-/// │       ├── windowcontrols.start
-/// │       ├── widget
-/// │       │   ╰── [button.back]
-/// │       ╰── [other children]
-/// ├── widget
-/// │   ╰── [Title Widget]
-/// ╰── widget
-/// ╰── box.end
-/// ├── [other children]
-/// ╰── windowcontrols.end
-/// ```
-/// 
-/// `AdwHeaderBar`'s CSS node is called `headerbar`. It contains a `windowhandle`
-/// subnode, which contains a `box` subnode, which contains three `widget`
-/// subnodes at the start, center and end of the header bar. The start and end
-/// subnodes contain a `box` subnode with the `.start` and `.end` style classes
-/// respectively, and the center node contains a node that represents the title.
-/// 
-/// Each of the boxes contains a `windowcontrols` subnode, see
-/// [class@Gtk.WindowControls] for details, as well as other children.
-/// 
-/// When [property@HeaderBar:show-back-button] is `TRUE`, the start box also
-/// contains a node with the name `widget` that contains a node with the name
-/// `button` and `.back` style class.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwHeaderBar` uses the `GTK_ACCESSIBLE_ROLE_GROUP` role.
 public struct HeaderBar: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -109,7 +27,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// The decoration layout for buttons.
     /// 
     /// If this property is not set, the
-    /// [property@Gtk.Settings:gtk-decoration-layout] setting is used.
+    /// ``gtkDecorationLayout(_:)`` setting is used.
     /// 
     /// The format of the string is button names, separated by commas. A colon
     /// separates the buttons that should appear at the start from those at the
@@ -122,23 +40,23 @@ public struct HeaderBar: AdwaitaWidget {
     /// Whether the header bar can show the back button.
     /// 
     /// The back button will never be shown unless the header bar is placed inside an
-    /// [class@NavigationView]. Usually, there is no reason to set this to `FALSE`.
+    /// `NavigationView`. Usually, there is no reason to set this to `false`.
     var showBackButton: Bool?
     /// Whether to show title buttons at the end of the header bar.
     /// 
-    /// See [property@HeaderBar:show-start-title-buttons] for the other side.
+    /// See ``showStartTitleButtons(_:)`` for the other side.
     /// 
     /// Which buttons are actually shown and where is determined by the
-    /// [property@HeaderBar:decoration-layout] property, and by the state of the
+    /// ``decorationLayout(_:)`` property, and by the state of the
     /// window (e.g. a close button will not be shown if the window can't be
     /// closed).
     var showEndTitleButtons: Bool?
     /// Whether to show title buttons at the start of the header bar.
     /// 
-    /// See [property@HeaderBar:show-end-title-buttons] for the other side.
+    /// See ``showEndTitleButtons(_:)`` for the other side.
     /// 
     /// Which buttons are actually shown and where is determined by the
-    /// [property@HeaderBar:decoration-layout] property, and by the state of the
+    /// ``decorationLayout(_:)`` property, and by the state of the
     /// window (e.g. a close button will not be shown if the window can't be
     /// closed).
     var showStartTitleButtons: Bool?
@@ -149,7 +67,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// When set to `NULL`, the header bar will display the title of the window it
     /// is contained in.
     /// 
-    /// To use a different title, use [class@WindowTitle]:
+    /// To use a different title, use `WindowTitle`:
     /// 
     /// ```xml
     /// <object class="AdwHeaderBar"><property name="title-widget"><object class="AdwWindowTitle"><property name="title" translatable="yes">Title</property></object></property></object>
@@ -261,7 +179,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// The decoration layout for buttons.
     /// 
     /// If this property is not set, the
-    /// [property@Gtk.Settings:gtk-decoration-layout] setting is used.
+    /// ``gtkDecorationLayout(_:)`` setting is used.
     /// 
     /// The format of the string is button names, separated by commas. A colon
     /// separates the buttons that should appear at the start from those at the
@@ -279,7 +197,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// Whether the header bar can show the back button.
     /// 
     /// The back button will never be shown unless the header bar is placed inside an
-    /// [class@NavigationView]. Usually, there is no reason to set this to `FALSE`.
+    /// `NavigationView`. Usually, there is no reason to set this to `false`.
     public func showBackButton(_ showBackButton: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showBackButton = showBackButton
@@ -288,10 +206,10 @@ public struct HeaderBar: AdwaitaWidget {
 
     /// Whether to show title buttons at the end of the header bar.
     /// 
-    /// See [property@HeaderBar:show-start-title-buttons] for the other side.
+    /// See ``showStartTitleButtons(_:)`` for the other side.
     /// 
     /// Which buttons are actually shown and where is determined by the
-    /// [property@HeaderBar:decoration-layout] property, and by the state of the
+    /// ``decorationLayout(_:)`` property, and by the state of the
     /// window (e.g. a close button will not be shown if the window can't be
     /// closed).
     public func showEndTitleButtons(_ showEndTitleButtons: Bool? = true) -> Self {
@@ -302,10 +220,10 @@ public struct HeaderBar: AdwaitaWidget {
 
     /// Whether to show title buttons at the start of the header bar.
     /// 
-    /// See [property@HeaderBar:show-end-title-buttons] for the other side.
+    /// See ``showEndTitleButtons(_:)`` for the other side.
     /// 
     /// Which buttons are actually shown and where is determined by the
-    /// [property@HeaderBar:decoration-layout] property, and by the state of the
+    /// ``decorationLayout(_:)`` property, and by the state of the
     /// window (e.g. a close button will not be shown if the window can't be
     /// closed).
     public func showStartTitleButtons(_ showStartTitleButtons: Bool? = true) -> Self {
@@ -326,7 +244,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// When set to `NULL`, the header bar will display the title of the window it
     /// is contained in.
     /// 
-    /// To use a different title, use [class@WindowTitle]:
+    /// To use a different title, use `WindowTitle`:
     /// 
     /// ```xml
     /// <object class="AdwHeaderBar"><property name="title-widget"><object class="AdwWindowTitle"><property name="title" translatable="yes">Title</property></object></property></object>

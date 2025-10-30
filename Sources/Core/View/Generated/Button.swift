@@ -2,7 +2,7 @@
 //  Button.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,39 +10,13 @@ import LevenshteinTransformations
 
 /// Calls a callback function when the button is clicked.
 /// 
-/// <picture><source srcset="button-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkButton" src="button.png"></picture>
+/// 
 /// 
 /// The `GtkButton` widget can hold any valid child widget. That is, it can hold
 /// almost any other standard `GtkWidget`. The most commonly used child is the
 /// `GtkLabel`.
 /// 
-/// # Shortcuts and Gestures
 /// 
-/// The following signals have default keybindings:
-/// 
-/// - [signal@Gtk.Button::activate]
-/// 
-/// # CSS nodes
-/// 
-/// `GtkButton` has a single CSS node with name button. The node will get the
-/// style classes .image-button or .text-button, if the content is just an
-/// image or label, respectively. It may also receive the .flat style class.
-/// When activating a button via the keyboard, the button will temporarily
-/// gain the .keyboard-activating style class.
-/// 
-/// Other style classes that are commonly used with `GtkButton` include
-/// .suggested-action and .destructive-action. In special cases, buttons
-/// can be made round by adding the .circular style class.
-/// 
-/// Button-like widgets like [class@Gtk.ToggleButton], [class@Gtk.MenuButton],
-/// [class@Gtk.VolumeButton], [class@Gtk.LockButton], [class@Gtk.ColorButton]
-/// or [class@Gtk.FontButton] use style classes such as .toggle, .popup, .scale,
-/// .lock, .color on the button node to differentiate themselves from a plain
-/// `GtkButton`.
-/// 
-/// # Accessibility
-/// 
-/// `GtkButton` uses the [enum@Gtk.AccessibleRole.button] role.
 public struct Button: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -78,7 +52,7 @@ public struct Button: AdwaitaWidget {
     /// Emitted to animate press then release.
     /// 
     /// This is an action signal. Applications should never connect
-    /// to this signal, but use the [signal@Gtk.Button::clicked] signal.
+    /// to this signal, but use the `Gtk.Button::clicked` signal.
     /// 
     /// The default bindings for this signal are all forms of the
     /// <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
@@ -229,7 +203,7 @@ public struct Button: AdwaitaWidget {
     /// Emitted to animate press then release.
     /// 
     /// This is an action signal. Applications should never connect
-    /// to this signal, but use the [signal@Gtk.Button::clicked] signal.
+    /// to this signal, but use the `Gtk.Button::clicked` signal.
     /// 
     /// The default bindings for this signal are all forms of the
     /// <kbd>␣</kbd> and <kbd>Enter</kbd> keys.

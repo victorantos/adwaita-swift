@@ -2,36 +2,34 @@
 //  SwitchRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A [class@Gtk.ListBoxRow] used to represent two states.
+/// A `Gtk.ListBoxRow` used to represent two states.
 /// 
-/// <picture><source srcset="switch-row-dark.png" media="(prefers-color-scheme: dark)"><img src="switch-row.png" alt="switch-row"></picture>
 /// 
-/// The `AdwSwitchRow` widget contains a [class@Gtk.Switch] that allows the user
+/// 
+/// The `AdwSwitchRow` widget contains a `Gtk.Switch` that allows the user
 /// to select between two states: "on" or "off". When activated, the row will
 /// invert its active state.
 /// 
 /// The user can control the switch by activating the row or by dragging on the
 /// switch handle.
 /// 
-/// See [class@Gtk.Switch] for details.
+/// See `Gtk.Switch` for details.
 /// 
 /// Example of an `AdwSwitchRow` UI definition:
 /// ```xml
 /// <object class="AdwSwitchRow"><property name="title" translatable="yes">Switch Row</property><signal name="notify::active" handler="switch_row_notify_active_cb"/></object>
 /// ```
 /// 
-/// The [property@SwitchRow:active] property should be connected to in order to
+/// The ``active(_:)`` property should be connected to in order to
 /// monitor changes to the active state.
 /// 
-/// ## Accessibility
 /// 
-/// `AdwSwitchRow` uses the `GTK_ACCESSIBLE_ROLE_SWITCH` role.
 public struct SwitchRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -42,19 +40,19 @@ public struct SwitchRow: AdwaitaWidget {
     /// The widget to activate when the row is activated.
     /// 
     /// The row can be activated either by clicking on it, calling
-    /// [method@ActionRow.activate], or via mnemonics in the title.
-    /// See the [property@PreferencesRow:use-underline] property to enable
+    /// `ActionRow.activate`, or via mnemonics in the title.
+    /// See the ``useUnderline(_:)`` property to enable
     /// mnemonics.
     /// 
     /// The target widget will be activated by emitting the
-    /// [signal@Gtk.Widget::mnemonic-activate] signal on it.
+    /// `Gtk.Widget::mnemonic-activate` signal on it.
     var activatableWidget: (() -> Body)?
     /// Whether the switch row is in the "on" or "off" position.
     var active: Binding<Bool>?
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var subtitle: String?
     /// The number of lines at the end of which the subtitle label will be
     /// ellipsized.
@@ -63,12 +61,12 @@ public struct SwitchRow: AdwaitaWidget {
     var subtitleLines: Int?
     /// Whether the user can copy the subtitle from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var subtitleSelectable: Bool?
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var title: String?
     /// The number of lines at the end of which the title label will be ellipsized.
     /// 
@@ -76,13 +74,13 @@ public struct SwitchRow: AdwaitaWidget {
     var titleLines: Int?
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var titleSelectable: Bool?
     /// Whether to use Pango markup for the title label.
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// Whether an embedded underline in the title indicates a mnemonic.
     var useUnderline: Bool?
@@ -193,12 +191,12 @@ if let active, newValue != active.wrappedValue {
     /// The widget to activate when the row is activated.
     /// 
     /// The row can be activated either by clicking on it, calling
-    /// [method@ActionRow.activate], or via mnemonics in the title.
-    /// See the [property@PreferencesRow:use-underline] property to enable
+    /// `ActionRow.activate`, or via mnemonics in the title.
+    /// See the ``useUnderline(_:)`` property to enable
     /// mnemonics.
     /// 
     /// The target widget will be activated by emitting the
-    /// [signal@Gtk.Widget::mnemonic-activate] signal on it.
+    /// `Gtk.Widget::mnemonic-activate` signal on it.
     public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.activatableWidget = activatableWidget
@@ -215,7 +213,7 @@ if let active, newValue != active.wrappedValue {
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
@@ -234,7 +232,7 @@ if let active, newValue != active.wrappedValue {
 
     /// Whether the user can copy the subtitle from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.subtitleSelectable = subtitleSelectable
@@ -244,7 +242,7 @@ if let active, newValue != active.wrappedValue {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -262,7 +260,7 @@ if let active, newValue != active.wrappedValue {
 
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
@@ -273,7 +271,7 @@ if let active, newValue != active.wrappedValue {
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup

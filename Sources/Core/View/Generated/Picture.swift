@@ -2,7 +2,7 @@
 //  Picture.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,7 +10,7 @@ import LevenshteinTransformations
 
 /// Displays a `GdkPaintable`.
 /// 
-/// picture><source srcset="picture-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkPicture" src="picture.png"></picture>
+/// 
 /// 
 /// Many convenience functions are provided to make pictures simple to use.
 /// For example, if you want to load an image from a file, and then display
@@ -24,36 +24,18 @@ import LevenshteinTransformations
 /// “broken image” icon similar to that used in many web browsers.
 /// If you want to handle errors in loading the file yourself,
 /// for example by displaying an error message, then load the image with
-/// [ctor@Gdk.Texture.new_from_file], then create the `GtkPicture` with
-/// [ctor@Gtk.Picture.new_for_paintable].
+/// and image loading framework such as libglycin, then create the `GtkPicture`
+/// with `Gtk.Picture.new_for_paintable`.
 /// 
 /// Sometimes an application will want to avoid depending on external data
 /// files, such as image files. See the documentation of `GResource` for details.
-/// In this case, [ctor@Gtk.Picture.new_for_resource] and
-/// [method@Gtk.Picture.set_resource] should be used.
+/// In this case, `Gtk.Picture.new_for_resource` and
+/// `Gtk.Picture.set_resource` should be used.
 /// 
-/// `GtkPicture` displays an image at its natural size. See [class@Gtk.Image]
+/// `GtkPicture` displays an image at its natural size. See `Gtk.Image`
 /// if you want to display a fixed-size image, such as an icon.
 /// 
-/// ## Sizing the paintable
 /// 
-/// You can influence how the paintable is displayed inside the `GtkPicture`
-/// by changing [property@Gtk.Picture:content-fit]. See [enum@Gtk.ContentFit]
-/// for details. [property@Gtk.Picture:can-shrink] can be unset to make sure
-/// that paintables are never made smaller than their ideal size - but
-/// be careful if you do not know the size of the paintable in use (like
-/// when displaying user-loaded images). This can easily cause the picture to
-/// grow larger than the screen. And [property@Gtk.Widget:halign] and
-/// [property@Gtk.Widget:valign] can be used to make sure the paintable doesn't
-/// fill all available space but is instead displayed at its original size.
-/// 
-/// ## CSS nodes
-/// 
-/// `GtkPicture` has a single CSS node with the name `picture`.
-/// 
-/// ## Accessibility
-/// 
-/// `GtkPicture` uses the [enum@Gtk.AccessibleRole.img] role.
 public struct Picture: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

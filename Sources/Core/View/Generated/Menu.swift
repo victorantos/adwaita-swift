@@ -2,7 +2,7 @@
 //  Menu.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,22 +10,22 @@ import LevenshteinTransformations
 
 /// Displays a popup when clicked.
 /// 
-/// <picture><source srcset="menu-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkMenuButton" src="menu-button.png"></picture>
+/// 
 /// 
 /// This popup can be provided either as a `GtkPopover` or as an abstract
 /// `GMenuModel`.
 /// 
 /// The `GtkMenuButton` widget can show either an icon (set with the
-/// [property@Gtk.MenuButton:icon-name] property) or a label (set with the
-/// [property@Gtk.MenuButton:label] property). If neither is explicitly set,
-/// a [class@Gtk.Image] is automatically created, using an arrow image oriented
-/// according to [property@Gtk.MenuButton:direction] or the generic
+/// ``iconName(_:)`` property) or a label (set with the
+/// ``label(_:)`` property). If neither is explicitly set,
+/// a `Gtk.Image` is automatically created, using an arrow image oriented
+/// according to ``direction(_:)`` or the generic
 /// “open-menu-symbolic” icon if the direction is not set.
 /// 
 /// The positioning of the popup is determined by the
-/// [property@Gtk.MenuButton:direction] property of the menu button.
+/// ``direction(_:)`` property of the menu button.
 /// 
-/// For menus, the [property@Gtk.Widget:halign] and [property@Gtk.Widget:valign]
+/// For menus, the ``halign(_:)`` and ``valign(_:)``
 /// properties of the menu are also taken into account. For example, when the
 /// direction is %GTK_ARROW_DOWN and the horizontal alignment is %GTK_ALIGN_START,
 /// the menu will be positioned below the button, with the starting edge
@@ -41,34 +41,7 @@ import LevenshteinTransformations
 /// | **left**  | ![](left-start.png)  | ![](left-center.png)  | ![](left-end.png)  |
 /// | **right** | ![](right-start.png) | ![](right-center.png) | ![](right-end.png) |
 /// 
-/// # CSS nodes
 /// 
-/// ```
-/// menubutton
-/// ╰── button.toggle
-/// ╰── <content>╰── [arrow]
-/// ```
-/// 
-/// `GtkMenuButton` has a single CSS node with name `menubutton`
-/// which contains a `button` node with a `.toggle` style class.
-/// 
-/// If the button contains an icon, it will have the `.image-button` style class,
-/// if it contains text, it will have `.text-button` style class. If an arrow is
-/// visible in addition to an icon, text or a custom child, it will also have
-/// `.arrow-button` style class.
-/// 
-/// Inside the toggle button content, there is an `arrow` node for
-/// the indicator, which will carry one of the `.none`, `.up`, `.down`,
-/// `.left` or `.right` style classes to indicate the direction that
-/// the menu will appear in. The CSS is expected to provide a suitable
-/// image for each of these cases using the `-gtk-icon-source` property.
-/// 
-/// Optionally, the `menubutton` node can carry the `.circular` style class
-/// to request a round appearance.
-/// 
-/// # Accessibility
-/// 
-/// `GtkMenuButton` uses the [enum@Gtk.AccessibleRole.button] role.
 public struct Menu: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -97,8 +70,8 @@ public struct Menu: AdwaitaWidget {
     var label: String?
     /// The `GMenuModel` from which the popup will be created.
     /// 
-    /// See [method@Gtk.MenuButton.set_menu_model] for the interaction
-    /// with the [property@Gtk.MenuButton:popover] property.
+    /// See `Gtk.MenuButton.set_menu_model` for the interaction
+    /// with the ``popover(_:)`` property.
     var menuModel: (() -> Body)?
     /// Whether the menu button acts as a primary menu.
     /// 
@@ -264,8 +237,8 @@ if let active, newValue != active.wrappedValue {
 
     /// The `GMenuModel` from which the popup will be created.
     /// 
-    /// See [method@Gtk.MenuButton.set_menu_model] for the interaction
-    /// with the [property@Gtk.MenuButton:popover] property.
+    /// See `Gtk.MenuButton.set_menu_model` for the interaction
+    /// with the ``popover(_:)`` property.
     public func menuModel(@ViewBuilder _ menuModel: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.menuModel = menuModel

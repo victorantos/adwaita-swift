@@ -2,7 +2,7 @@
 //  Bin.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,9 +10,9 @@ import LevenshteinTransformations
 
 /// A widget with one child.
 /// 
-/// <picture><source srcset="bin-dark.png" media="(prefers-color-scheme: dark)"><img src="bin.png" alt="bin"></picture>
 /// 
-/// The `AdwBin` widget has only one child, set with the [property@Bin:child]
+/// 
+/// The `AdwBin` widget has only one child, set with the ``child(_:)``
 /// property.
 /// 
 /// It is useful for deriving subclasses, since it provides common code needed

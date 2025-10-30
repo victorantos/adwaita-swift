@@ -2,7 +2,7 @@
 //  PreferencesGroup.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,37 +10,18 @@ import LevenshteinTransformations
 
 /// A group of preference rows.
 /// 
-/// <picture><source srcset="preferences-group-dark.png" media="(prefers-color-scheme: dark)"><img src="preferences-group.png" alt="preferences-group"></picture>
+/// 
 /// 
 /// An `AdwPreferencesGroup` represents a group or tightly related preferences,
-/// which in turn are represented by [class@PreferencesRow].
+/// which in turn are represented by `PreferencesRow`.
 /// 
 /// To summarize the role of the preferences it gathers, a group can have both a
-/// title and a description. The title will be used by [class@PreferencesDialog]
+/// title and a description. The title will be used by `PreferencesDialog`
 /// to let the user look for a preference.
 /// 
-/// The [property@PreferencesGroup:separate-rows] property can be used to
+/// The ``separateRows(_:)`` property can be used to
 /// separate the rows within the group, same as when using the
-/// [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
-/// instead of `.boxed-list`.
-/// 
-/// ## AdwPreferencesGroup as GtkBuildable
-/// 
-/// The `AdwPreferencesGroup` implementation of the [iface@Gtk.Buildable] interface
-/// supports adding [class@PreferencesRow]s to the list by omitting "type". If "type"
-/// is omitted and the widget isn't a [class@PreferencesRow] the child is added to
-/// a box below the list.
-/// 
-/// When the "type" attribute of a child is `header-suffix`, the child
-/// is set as the suffix on the end of the title and description.
-/// 
-/// ## CSS nodes
-/// 
-/// `AdwPreferencesGroup` has a single CSS node with name `preferencesgroup`.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwPreferencesGroup` uses the `GTK_ACCESSIBLE_ROLE_GROUP` role.
+/// [`.boxed-list-separate`](style-classes.html
 public struct PreferencesGroup: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -60,8 +41,7 @@ public struct PreferencesGroup: AdwaitaWidget {
     /// Whether to separate rows.
     /// 
     /// Equivalent to using the
-    /// [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
-    /// on a [class@Gtk.ListBox] instead of `.boxed-list`.
+    /// [`.boxed-list-separate`](style-classes.html
     var separateRows: Bool?
     /// The title for this group of preferences.
     var title: String?
@@ -164,8 +144,7 @@ public struct PreferencesGroup: AdwaitaWidget {
     /// Whether to separate rows.
     /// 
     /// Equivalent to using the
-    /// [`.boxed-list-separate`](style-classes.html#boxed-lists-cards) style class
-    /// on a [class@Gtk.ListBox] instead of `.boxed-list`.
+    /// [`.boxed-list-separate`](style-classes.html
     public func separateRows(_ separateRows: Bool? = true) -> Self {
         var newSelf = self
         newSelf.separateRows = separateRows

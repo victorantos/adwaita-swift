@@ -2,7 +2,7 @@
 //  ToolbarView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,7 +10,7 @@ import LevenshteinTransformations
 
 /// A widget containing a page, as well as top and/or bottom bars.
 /// 
-/// <picture><source srcset="toolbar-view-dark.png" media="(prefers-color-scheme: dark)"><img src="toolbar-view.png" alt="toolbar-view"></picture>
+/// 
 /// 
 /// `AdwToolbarView` has a single content widget and one or multiple top and
 /// bottom bars, shown at the top and bottom sides respectively.
@@ -22,60 +22,15 @@ import LevenshteinTransformations
 /// 
 /// The following kinds of top and bottom bars are supported:
 /// 
-/// - [class@HeaderBar]
-/// - [class@TabBar]
-/// - [class@ViewSwitcherBar]
-/// - [class@Gtk.ActionBar]
-/// - [class@Gtk.HeaderBar]
-/// - [class@Gtk.PopoverMenuBar]
-/// - [class@Gtk.SearchBar]
-/// - Any [class@Gtk.Box] or a similar widget with the
-/// [`.toolbar`](style-classes.html#toolbars) style class
-/// 
-/// By default, top and bottom bars are flat and scrolling content has a subtle
-/// undershoot shadow, same as when using the
-/// [`.undershoot-top`](style-classes.html#undershoot-indicators) and
-/// [`.undershoot-bottom`](style-classes.html#undershoot-indicators) style
-/// classes. This works well in most cases, e.g. with [class@StatusPage] or
-/// [class@PreferencesPage], where the background at the top and bottom parts of
-/// the page is uniform. Additionally, windows with sidebars should always use
-/// this style.
-/// 
-/// [property@ToolbarView:top-bar-style] and
-/// [property@ToolbarView:bottom-bar-style] properties can be used add an opaque
-/// background and a persistent shadow to top and bottom bars, this can be useful
-/// for content such as [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
-/// where some elements are adjacent to the top/bottom bars, or [class@TabView],
-/// where each page can have a different background.
-/// 
-/// <picture style="min-width: 33%; display: inline-block;"><source srcset="toolbar-view-flat-1-dark.png" media="(prefers-color-scheme: dark)"><img src="toolbar-view-flat-1.png" alt="toolbar-view-flat-1"></picture><picture style="min-width: 33%; display: inline-block;"><source srcset="toolbar-view-flat-2-dark.png" media="(prefers-color-scheme: dark)"><img src="toolbar-view-flat-2.png" alt="toolbar-view-flat-2"></picture><picture style="min-width: 33%; display: inline-block;"><source srcset="toolbar-view-raised-dark.png" media="(prefers-color-scheme: dark)"><img src="toolbar-view-raised.png" alt="toolbar-view-raised"></picture>
-/// 
-/// `AdwToolbarView` ensures the top and bottom bars have consistent backdrop
-/// styles and vertical spacing. For comparison:
-/// 
-/// <picture style="min-width: 40%; display: inline-block;"><source srcset="toolbar-view-spacing-dark.png" media="(prefers-color-scheme: dark)"><img src="toolbar-view-spacing.png" alt="toolbar-view-spacing"></picture><picture style="min-width: 40%; display: inline-block;"><source srcset="toolbar-view-spacing-box-dark.png" media="(prefers-color-scheme: dark)"><img src="toolbar-view-spacing-box.png" alt="toolbar-view-spacing-box"></picture>
-/// 
-/// Any top and bottom bars can also be dragged to move the window, equivalent
-/// to putting them into a [class@Gtk.WindowHandle].
-/// 
-/// Content is typically place between top and bottom bars, but can also extend
-/// behind them. This is controlled with the
-/// [property@ToolbarView:extend-content-to-top-edge] and
-/// [property@ToolbarView:extend-content-to-bottom-edge] properties.
-/// 
-/// Top and bottom bars can be hidden and revealed with an animation using the
-/// [property@ToolbarView:reveal-top-bars] and
-/// [property@ToolbarView:reveal-bottom-bars] properties.
-/// 
-/// ## `AdwToolbarView` as `GtkBuildable`
-/// 
-/// The `AdwToolbarView` implementation of the [iface@Gtk.Buildable] interface
-/// supports adding a top bar by specifying “top” as the “type” attribute of a
-/// `<child>` element, or adding a bottom bar by specifying “bottom”.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwToolbarView` uses the `GTK_ACCESSIBLE_ROLE_GROUP` role.
+/// - `HeaderBar`
+/// - `TabBar`
+/// - `ViewSwitcherBar`
+/// - `Gtk.ActionBar`
+/// - `Gtk.HeaderBar`
+/// - `Gtk.PopoverMenuBar`
+/// - `Gtk.SearchBar`
+/// - Any `Gtk.Box` or a similar widget with the
+/// [`.toolbar`](style-classes.html
 public struct ToolbarView: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -86,103 +41,65 @@ public struct ToolbarView: AdwaitaWidget {
     /// The current bottom bar height.
     /// 
     /// Bottom bar height does change depending on
-    /// [property@ToolbarView:reveal-bottom-bars], including during the transition.
+    /// ``revealBottomBars(_:)``, including during the transition.
     /// 
-    /// See [property@ToolbarView:top-bar-height].
+    /// See ``topBarHeight(_:)``.
     var bottomBarHeight: Int?
     /// Appearance of the bottom bars.
     /// 
     /// If set to `ADW_TOOLBAR_FLAT`, bottom bars are flat and scrolling content
     /// has a subtle undershoot shadow when touching them, same as the
-    /// [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
-    /// style class. This works well for simple content, e.g. [class@StatusPage] or
-    /// [class@PreferencesPage], where the background at the bottom of the page is
-    /// uniform. Additionally, windows with sidebars should always use this style.
-    /// 
-    /// Undershoot shadow is only present if a bottom bar is actually present and
-    /// visible. It is also never present if
-    /// [property@ToolbarView:extend-content-to-bottom-edge] is set to `TRUE`.
-    /// 
-    /// If set to `ADW_TOOLBAR_RAISED`, bottom bars have an opaque background and a
-    /// persistent shadow, this is suitable for content such as
-    /// [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
-    /// where some elements are directly adjacent to the bottom bars, or
-    /// [class@TabView], where each page can have a different background.
-    /// 
-    /// `ADW_TOOLBAR_RAISED_BORDER` is similar to `ADW_TOOLBAR_RAISED`, but the
-    /// shadow is replaced with a more subtle border. This can be useful for
-    /// applications like image viewers.
-    /// 
-    /// See also [property@ToolbarView:top-bar-style].
+    /// [`.undershoot-bottom`](style-classes.html
     var bottomBarStyle: ToolbarStyle?
     /// The content widget.
     var content: (() -> Body)?
     /// Whether the content widget can extend behind bottom bars.
     /// 
     /// This can be used in combination with
-    /// [property@ToolbarView:reveal-bottom-bars] to show and hide toolbars in
+    /// ``revealBottomBars(_:)`` to show and hide toolbars in
     /// fullscreen.
     /// 
-    /// See [property@ToolbarView:extend-content-to-top-edge].
+    /// See ``extendContentToTopEdge(_:)``.
     var extendContentToBottomEdge: Bool?
     /// Whether the content widget can extend behind top bars.
     /// 
-    /// This can be used in combination with [property@ToolbarView:reveal-top-bars]
+    /// This can be used in combination with ``revealTopBars(_:)``
     /// to show and hide toolbars in fullscreen.
     /// 
-    /// See [property@ToolbarView:extend-content-to-bottom-edge].
+    /// See ``extendContentToBottomEdge(_:)``.
     var extendContentToTopEdge: Bool?
     /// Whether bottom bars are visible.
     /// 
     /// The transition will be animated.
     /// 
     /// This can be used in combination with
-    /// [property@ToolbarView:extend-content-to-bottom-edge] to show and hide
+    /// ``extendContentToBottomEdge(_:)`` to show and hide
     /// toolbars in fullscreen.
     /// 
-    /// See [property@ToolbarView:reveal-top-bars].
+    /// See ``revealTopBars(_:)``.
     var revealBottomBars: Bool?
     /// Whether top bars are revealed.
     /// 
     /// The transition will be animated.
     /// 
     /// This can be used in combination with
-    /// [property@ToolbarView:extend-content-to-top-edge] to show and hide toolbars
+    /// ``extendContentToTopEdge(_:)`` to show and hide toolbars
     /// in fullscreen.
     /// 
-    /// See [property@ToolbarView:reveal-bottom-bars].
+    /// See ``revealBottomBars(_:)``.
     var revealTopBars: Bool?
     /// The current top bar height.
     /// 
-    /// Top bar height does change depending [property@ToolbarView:reveal-top-bars],
+    /// Top bar height does change depending ``revealTopBars(_:)``,
     /// including during the transition.
     /// 
-    /// See [property@ToolbarView:bottom-bar-height].
+    /// See ``bottomBarHeight(_:)``.
     var topBarHeight: Int?
     /// Appearance of the top bars.
     /// 
     /// If set to `ADW_TOOLBAR_FLAT`, top bars are flat and scrolling content has a
     /// subtle undershoot shadow when touching them, same as the
-    /// [`.undershoot-top`](style-classes.html#undershoot-indicators)
-    /// style class. This works well for simple content, e.g. [class@StatusPage] or
-    /// [class@PreferencesPage], where the background at the top of the page is
-    /// uniform. Additionally, windows with sidebars should always use this style.
-    /// 
-    /// Undershoot shadow is only present if a top bar is actually present and
-    /// visible. It is also never present if
-    /// [property@ToolbarView:extend-content-to-top-edge] is set to `TRUE`.
-    /// 
-    /// If set to `ADW_TOOLBAR_RAISED`, top bars have an opaque background and a
-    /// persistent shadow, this is suitable for content such as
-    /// [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
-    /// where some elements are directly adjacent to the top bars, or
-    /// [class@TabView], where each page can have a different background.
-    /// 
-    /// `ADW_TOOLBAR_RAISED_BORDER` is similar to `ADW_TOOLBAR_RAISED`, but the
-    /// shadow is replaced with a more subtle border. This can be useful for
-    /// applications like image viewers.
-    /// 
-    /// See also [property@ToolbarView:bottom-bar-style].
+    /// [`.undershoot-top`](style-classes.html
     var topBarStyle: ToolbarStyle?
     /// The body for the widget "bottom".
     var bottom: () -> Body = { [] }
@@ -293,9 +210,9 @@ public struct ToolbarView: AdwaitaWidget {
     /// The current bottom bar height.
     /// 
     /// Bottom bar height does change depending on
-    /// [property@ToolbarView:reveal-bottom-bars], including during the transition.
+    /// ``revealBottomBars(_:)``, including during the transition.
     /// 
-    /// See [property@ToolbarView:top-bar-height].
+    /// See ``topBarHeight(_:)``.
     public func bottomBarHeight(_ bottomBarHeight: Int?) -> Self {
         var newSelf = self
         newSelf.bottomBarHeight = bottomBarHeight
@@ -306,26 +223,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// If set to `ADW_TOOLBAR_FLAT`, bottom bars are flat and scrolling content
     /// has a subtle undershoot shadow when touching them, same as the
-    /// [`.undershoot-bottom`](style-classes.html#undershoot-indicators)
-    /// style class. This works well for simple content, e.g. [class@StatusPage] or
-    /// [class@PreferencesPage], where the background at the bottom of the page is
-    /// uniform. Additionally, windows with sidebars should always use this style.
-    /// 
-    /// Undershoot shadow is only present if a bottom bar is actually present and
-    /// visible. It is also never present if
-    /// [property@ToolbarView:extend-content-to-bottom-edge] is set to `TRUE`.
-    /// 
-    /// If set to `ADW_TOOLBAR_RAISED`, bottom bars have an opaque background and a
-    /// persistent shadow, this is suitable for content such as
-    /// [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
-    /// where some elements are directly adjacent to the bottom bars, or
-    /// [class@TabView], where each page can have a different background.
-    /// 
-    /// `ADW_TOOLBAR_RAISED_BORDER` is similar to `ADW_TOOLBAR_RAISED`, but the
-    /// shadow is replaced with a more subtle border. This can be useful for
-    /// applications like image viewers.
-    /// 
-    /// See also [property@ToolbarView:top-bar-style].
+    /// [`.undershoot-bottom`](style-classes.html
     public func bottomBarStyle(_ bottomBarStyle: ToolbarStyle?) -> Self {
         var newSelf = self
         newSelf.bottomBarStyle = bottomBarStyle
@@ -342,10 +240,10 @@ public struct ToolbarView: AdwaitaWidget {
     /// Whether the content widget can extend behind bottom bars.
     /// 
     /// This can be used in combination with
-    /// [property@ToolbarView:reveal-bottom-bars] to show and hide toolbars in
+    /// ``revealBottomBars(_:)`` to show and hide toolbars in
     /// fullscreen.
     /// 
-    /// See [property@ToolbarView:extend-content-to-top-edge].
+    /// See ``extendContentToTopEdge(_:)``.
     public func extendContentToBottomEdge(_ extendContentToBottomEdge: Bool? = true) -> Self {
         var newSelf = self
         newSelf.extendContentToBottomEdge = extendContentToBottomEdge
@@ -354,10 +252,10 @@ public struct ToolbarView: AdwaitaWidget {
 
     /// Whether the content widget can extend behind top bars.
     /// 
-    /// This can be used in combination with [property@ToolbarView:reveal-top-bars]
+    /// This can be used in combination with ``revealTopBars(_:)``
     /// to show and hide toolbars in fullscreen.
     /// 
-    /// See [property@ToolbarView:extend-content-to-bottom-edge].
+    /// See ``extendContentToBottomEdge(_:)``.
     public func extendContentToTopEdge(_ extendContentToTopEdge: Bool? = true) -> Self {
         var newSelf = self
         newSelf.extendContentToTopEdge = extendContentToTopEdge
@@ -369,10 +267,10 @@ public struct ToolbarView: AdwaitaWidget {
     /// The transition will be animated.
     /// 
     /// This can be used in combination with
-    /// [property@ToolbarView:extend-content-to-bottom-edge] to show and hide
+    /// ``extendContentToBottomEdge(_:)`` to show and hide
     /// toolbars in fullscreen.
     /// 
-    /// See [property@ToolbarView:reveal-top-bars].
+    /// See ``revealTopBars(_:)``.
     public func revealBottomBars(_ revealBottomBars: Bool? = true) -> Self {
         var newSelf = self
         newSelf.revealBottomBars = revealBottomBars
@@ -384,10 +282,10 @@ public struct ToolbarView: AdwaitaWidget {
     /// The transition will be animated.
     /// 
     /// This can be used in combination with
-    /// [property@ToolbarView:extend-content-to-top-edge] to show and hide toolbars
+    /// ``extendContentToTopEdge(_:)`` to show and hide toolbars
     /// in fullscreen.
     /// 
-    /// See [property@ToolbarView:reveal-bottom-bars].
+    /// See ``revealBottomBars(_:)``.
     public func revealTopBars(_ revealTopBars: Bool? = true) -> Self {
         var newSelf = self
         newSelf.revealTopBars = revealTopBars
@@ -396,10 +294,10 @@ public struct ToolbarView: AdwaitaWidget {
 
     /// The current top bar height.
     /// 
-    /// Top bar height does change depending [property@ToolbarView:reveal-top-bars],
+    /// Top bar height does change depending ``revealTopBars(_:)``,
     /// including during the transition.
     /// 
-    /// See [property@ToolbarView:bottom-bar-height].
+    /// See ``bottomBarHeight(_:)``.
     public func topBarHeight(_ topBarHeight: Int?) -> Self {
         var newSelf = self
         newSelf.topBarHeight = topBarHeight
@@ -410,26 +308,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// If set to `ADW_TOOLBAR_FLAT`, top bars are flat and scrolling content has a
     /// subtle undershoot shadow when touching them, same as the
-    /// [`.undershoot-top`](style-classes.html#undershoot-indicators)
-    /// style class. This works well for simple content, e.g. [class@StatusPage] or
-    /// [class@PreferencesPage], where the background at the top of the page is
-    /// uniform. Additionally, windows with sidebars should always use this style.
-    /// 
-    /// Undershoot shadow is only present if a top bar is actually present and
-    /// visible. It is also never present if
-    /// [property@ToolbarView:extend-content-to-top-edge] is set to `TRUE`.
-    /// 
-    /// If set to `ADW_TOOLBAR_RAISED`, top bars have an opaque background and a
-    /// persistent shadow, this is suitable for content such as
-    /// [utility panes](https://developer.gnome.org/hig/patterns/containers/utility-panes.html),
-    /// where some elements are directly adjacent to the top bars, or
-    /// [class@TabView], where each page can have a different background.
-    /// 
-    /// `ADW_TOOLBAR_RAISED_BORDER` is similar to `ADW_TOOLBAR_RAISED`, but the
-    /// shadow is replaced with a more subtle border. This can be useful for
-    /// applications like image viewers.
-    /// 
-    /// See also [property@ToolbarView:bottom-bar-style].
+    /// [`.undershoot-top`](style-classes.html
     public func topBarStyle(_ topBarStyle: ToolbarStyle?) -> Self {
         var newSelf = self
         newSelf.topBarStyle = topBarStyle

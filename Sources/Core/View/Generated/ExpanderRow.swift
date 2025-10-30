@@ -2,46 +2,21 @@
 //  ExpanderRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A [class@Gtk.ListBoxRow] used to reveal widgets.
+/// A `Gtk.ListBoxRow` used to reveal widgets.
 /// 
-/// <picture><source srcset="expander-row-dark.png" media="(prefers-color-scheme: dark)"><img src="expander-row.png" alt="expander-row"></picture>
+/// 
 /// 
 /// The `AdwExpanderRow` widget allows the user to reveal or hide widgets below
 /// it. It also allows the user to enable the expansion of the row, allowing to
 /// disable all that the row contains.
 /// 
-/// ## AdwExpanderRow as GtkBuildable
 /// 
-/// The `AdwExpanderRow` implementation of the [iface@Gtk.Buildable] interface
-/// supports adding a child as an suffix widget by specifying “suffix” as the
-/// “type” attribute of a <child> element.
-/// 
-/// It also supports adding it as a prefix widget by specifying “prefix” as the
-/// “type” attribute of a <child> element.
-/// 
-/// ## CSS nodes
-/// 
-/// `AdwExpanderRow` has a main CSS node with name `row` and the `.expander`
-/// style class. It has the `.empty` style class when it contains no children.
-/// 
-/// It contains the subnodes `row.header` for its main embedded row,
-/// `list.nested` for the list it can expand, and `image.expander-row-arrow` for
-/// its arrow.
-/// 
-/// ## Style classes
-/// 
-/// `AdwExpanderRow` can use the [`.`](style-classes.html#property-rows)
-/// style class to emphasize the row subtitle instead of the row title, which is
-/// useful for displaying read-only properties.
-/// 
-/// When used together with the `.monospace` style class, only the subtitle
-/// becomes monospace, not the title or any extra widgets.
 public struct ExpanderRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -58,7 +33,7 @@ public struct ExpanderRow: AdwaitaWidget {
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var subtitle: String?
     /// The number of lines at the end of which the subtitle label will be
     /// ellipsized.
@@ -68,7 +43,7 @@ public struct ExpanderRow: AdwaitaWidget {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var title: String?
     /// The number of lines at the end of which the title label will be ellipsized.
     /// 
@@ -76,13 +51,13 @@ public struct ExpanderRow: AdwaitaWidget {
     var titleLines: Int?
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var titleSelectable: Bool?
     /// Whether to use Pango markup for the title label.
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// Whether an embedded underline in the title indicates a mnemonic.
     var useUnderline: Bool?
@@ -253,7 +228,7 @@ if let expanded, newValue != expanded.wrappedValue {
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
@@ -273,7 +248,7 @@ if let expanded, newValue != expanded.wrappedValue {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -291,7 +266,7 @@ if let expanded, newValue != expanded.wrappedValue {
 
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
@@ -302,7 +277,7 @@ if let expanded, newValue != expanded.wrappedValue {
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup

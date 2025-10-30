@@ -2,7 +2,7 @@
 //  DropDown.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,27 +10,27 @@ import LevenshteinTransformations
 
 /// Allows the user to choose an item from a list of options.
 /// 
-/// <picture><source srcset="drop-down-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkDropDown" src="drop-down.png"></picture>
 /// 
-/// The `GtkDropDown` displays the [selected][property@Gtk.DropDown:selected]
+/// 
+/// The `GtkDropDown` displays the [selected]``selected(_:)``
 /// choice.
 /// 
 /// The options are given to `GtkDropDown` in the form of `GListModel`
 /// and how the individual options are represented is determined by
-/// a [class@Gtk.ListItemFactory]. The default factory displays simple strings,
+/// a `Gtk.ListItemFactory`. The default factory displays simple strings,
 /// and adds a checkmark to the selected item in the popup.
 /// 
-/// To set your own factory, use [method@Gtk.DropDown.set_factory]. It is
+/// To set your own factory, use `Gtk.DropDown.set_factory`. It is
 /// possible to use a separate factory for the items in the popup, with
-/// [method@Gtk.DropDown.set_list_factory].
+/// `Gtk.DropDown.set_list_factory`.
 /// 
 /// `GtkDropDown` knows how to obtain strings from the items in a
-/// [class@Gtk.StringList]; for other models, you have to provide an expression
-/// to find the strings via [method@Gtk.DropDown.set_expression].
+/// `Gtk.StringList`; for other models, you have to provide an expression
+/// to find the strings via `Gtk.DropDown.set_expression`.
 /// 
 /// `GtkDropDown` can optionally allow search in the popup, which is
 /// useful if the list of options is long. To enable the search entry,
-/// use [method@Gtk.DropDown.set_enable_search].
+/// use `Gtk.DropDown.set_enable_search`.
 /// 
 /// Here is a UI definition example for `GtkDropDown` with a simple model:
 /// 
@@ -39,20 +39,13 @@ import LevenshteinTransformations
 /// ```
 /// 
 /// If a `GtkDropDown` is created in this manner, or with
-/// [ctor@Gtk.DropDown.new_from_strings], for instance, the object returned from
-/// [method@Gtk.DropDown.get_selected_item] will be a [class@Gtk.StringObject].
+/// `Gtk.DropDown.new_from_strings`, for instance, the object returned from
+/// `Gtk.DropDown.get_selected_item` will be a `Gtk.StringObject`.
 /// 
 /// To learn more about the list widget framework, see the
 /// [overview](section-list-widget.html).
 /// 
-/// ## CSS nodes
 /// 
-/// `GtkDropDown` has a single CSS node with name dropdown,
-/// with the button and popover nodes as children.
-/// 
-/// ## Accessibility
-/// 
-/// `GtkDropDown` uses the [enum@Gtk.AccessibleRole.combo_box] role.
 public struct DropDown: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -66,7 +59,7 @@ public struct DropDown: AdwaitaWidget {
     var accessibleRole: String?
     /// Whether to show a search entry in the popup.
     /// 
-    /// Note that search requires [property@Gtk.DropDown:expression]
+    /// Note that search requires ``expression(_:)``
     /// to be set.
     var enableSearch: Bool?
     /// The position of the selected item.
@@ -153,7 +146,7 @@ if let selected, newValue != selected.wrappedValue {
 
     /// Whether to show a search entry in the popup.
     /// 
-    /// Note that search requires [property@Gtk.DropDown:expression]
+    /// Note that search requires ``expression(_:)``
     /// to be set.
     public func enableSearch(_ enableSearch: Bool? = true) -> Self {
         var newSelf = self

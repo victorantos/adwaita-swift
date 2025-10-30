@@ -2,7 +2,7 @@
 //  ListBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,7 +10,7 @@ import LevenshteinTransformations
 
 /// Shows a vertical list.
 /// 
-/// <picture><source srcset="list-box-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkListBox" src="list-box.png"></picture>
+/// 
 /// 
 /// A `GtkListBox` only contains `GtkListBoxRow` children. These rows can
 /// by dynamically sorted and filtered, and headers can be added dynamically
@@ -23,55 +23,17 @@ import LevenshteinTransformations
 /// button in it).
 /// 
 /// Although a `GtkListBox` must have only `GtkListBoxRow` children, you can
-/// add any kind of widget to it via [method@Gtk.ListBox.prepend],
-/// [method@Gtk.ListBox.append] and [method@Gtk.ListBox.insert] and a
+/// add any kind of widget to it via `Gtk.ListBox.prepend`,
+/// `Gtk.ListBox.append` and `Gtk.ListBox.insert` and a
 /// `GtkListBoxRow` widget will automatically be inserted between the list
 /// and the widget.
 /// 
 /// `GtkListBoxRows` can be marked as activatable or selectable. If a row is
-/// activatable, [signal@Gtk.ListBox::row-activated] will be emitted for it when
+/// activatable, `Gtk.ListBox::row-activated` will be emitted for it when
 /// the user tries to activate it. If it is selectable, the row will be marked
 /// as selected when the user tries to select it.
 /// 
-/// # GtkListBox as GtkBuildable
 /// 
-/// The `GtkListBox` implementation of the `GtkBuildable` interface supports
-/// setting a child as the placeholder by specifying “placeholder” as the “type”
-/// attribute of a `<child>` element. See [method@Gtk.ListBox.set_placeholder]
-/// for info.
-/// 
-/// # Shortcuts and Gestures
-/// 
-/// The following signals have default keybindings:
-/// 
-/// - [signal@Gtk.ListBox::move-cursor]
-/// - [signal@Gtk.ListBox::select-all]
-/// - [signal@Gtk.ListBox::toggle-cursor-row]
-/// - [signal@Gtk.ListBox::unselect-all]
-/// 
-/// # CSS nodes
-/// 
-/// ```
-/// list[.separators][.rich-list][.navigation-sidebar][.boxed-list]
-/// ╰── row[.activatable]
-/// ```
-/// 
-/// `GtkListBox` uses a single CSS node named list. It may carry the .separators
-/// style class, when the [property@Gtk.ListBox:show-separators] property is set.
-/// Each `GtkListBoxRow` uses a single CSS node named row. The row nodes get the
-/// .activatable style class added when appropriate.
-/// 
-/// It may also carry the .boxed-list style class. In this case, the list will be
-/// automatically surrounded by a frame and have separators.
-/// 
-/// The main list node may also carry style classes to select
-/// the style of [list presentation](section-list-widget.html#list-styles):
-/// .rich-list, .navigation-sidebar or .data-table.
-/// 
-/// # Accessibility
-/// 
-/// `GtkListBox` uses the [enum@Gtk.AccessibleRole.list] role and `GtkListBoxRow` uses
-/// the [enum@Gtk.AccessibleRole.list_item] role.
 public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Additional update functions for type extensions.
@@ -111,7 +73,7 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     /// 
     /// When the @box is using %GTK_SELECTION_MULTIPLE, this signal will not
     /// give you the full picture of selection changes, and you should use
-    /// the [signal@Gtk.ListBox::selected-rows-changed] signal instead.
+    /// the `Gtk.ListBox::selected-rows-changed` signal instead.
     var rowSelected: (() -> Void)?
     /// Emitted to select all children of the box, if the selection
     /// mode permits it.
@@ -311,7 +273,7 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     /// 
     /// When the @box is using %GTK_SELECTION_MULTIPLE, this signal will not
     /// give you the full picture of selection changes, and you should use
-    /// the [signal@Gtk.ListBox::selected-rows-changed] signal instead.
+    /// the `Gtk.ListBox::selected-rows-changed` signal instead.
     public func rowSelected(_ rowSelected: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.rowSelected = rowSelected

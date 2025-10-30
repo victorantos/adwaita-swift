@@ -2,7 +2,7 @@
 //  Carousel.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,17 +10,15 @@ import LevenshteinTransformations
 
 /// A paginated scrolling widget.
 /// 
-/// <picture><source srcset="carousel-dark.png" media="(prefers-color-scheme: dark)"><img src="carousel.png" alt="carousel"></picture>
+/// 
 /// 
 /// The `AdwCarousel` widget can be used to display a set of pages with
 /// swipe-based navigation between them.
 /// 
-/// [class@CarouselIndicatorDots] and [class@CarouselIndicatorLines] can be used
+/// `CarouselIndicatorDots` and `CarouselIndicatorLines` can be used
 /// to provide page indicators for `AdwCarousel`.
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwCarousel` has a single CSS node with name `carousel`.
 public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Additional update functions for type extensions.
@@ -30,15 +28,15 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Whether to allow swiping for more than one page at a time.
     /// 
-    /// If the value is `FALSE`, each swipe can only move to the adjacent pages.
+    /// If the value is `false`, each swipe can only move to the adjacent pages.
     var allowLongSwipes: Bool?
     /// Sets whether the `AdwCarousel` can be dragged with mouse pointer.
     /// 
-    /// If the value is `FALSE`, dragging is only available on touch.
+    /// If the value is `false`, dragging is only available on touch.
     var allowMouseDrag: Bool?
     /// Whether the widget will respond to scroll wheel events.
     /// 
-    /// If the value is `FALSE`, wheel events will be ignored.
+    /// If the value is `false`, wheel events will be ignored.
     var allowScrollWheel: Bool?
     /// Whether the carousel can be navigated.
     /// 
@@ -58,8 +56,8 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     /// It can be used to implement "infinite scrolling" by amending the pages
     /// after every scroll.
     /// 
-    /// ::: note
-    /// An empty carousel is indicated by `(int)index == -1`.
+    /// > [!NOTE]
+    /// >     An empty carousel is indicated by `(int)index == -1`.
     var pageChanged: (() -> Void)?
     /// The dynamic widget elements.
     var elements: [Element]
@@ -150,7 +148,7 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Whether to allow swiping for more than one page at a time.
     /// 
-    /// If the value is `FALSE`, each swipe can only move to the adjacent pages.
+    /// If the value is `false`, each swipe can only move to the adjacent pages.
     public func allowLongSwipes(_ allowLongSwipes: Bool? = true) -> Self {
         var newSelf = self
         newSelf.allowLongSwipes = allowLongSwipes
@@ -159,7 +157,7 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Sets whether the `AdwCarousel` can be dragged with mouse pointer.
     /// 
-    /// If the value is `FALSE`, dragging is only available on touch.
+    /// If the value is `false`, dragging is only available on touch.
     public func allowMouseDrag(_ allowMouseDrag: Bool? = true) -> Self {
         var newSelf = self
         newSelf.allowMouseDrag = allowMouseDrag
@@ -168,7 +166,7 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Whether the widget will respond to scroll wheel events.
     /// 
-    /// If the value is `FALSE`, wheel events will be ignored.
+    /// If the value is `false`, wheel events will be ignored.
     public func allowScrollWheel(_ allowScrollWheel: Bool? = true) -> Self {
         var newSelf = self
         newSelf.allowScrollWheel = allowScrollWheel
@@ -213,8 +211,8 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     /// It can be used to implement "infinite scrolling" by amending the pages
     /// after every scroll.
     /// 
-    /// ::: note
-    /// An empty carousel is indicated by `(int)index == -1`.
+    /// > [!NOTE]
+    /// >     An empty carousel is indicated by `(int)index == -1`.
     public func pageChanged(_ pageChanged: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.pageChanged = pageChanged

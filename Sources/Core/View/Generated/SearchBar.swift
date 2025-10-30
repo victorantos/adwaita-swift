@@ -2,7 +2,7 @@
 //  SearchBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,7 +10,7 @@ import LevenshteinTransformations
 
 /// Reveals a search entry when search is started.
 /// 
-/// <picture><source srcset="search-bar-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkSearchBar" src="search-bar.png"></picture>
+/// 
 /// 
 /// It can also contain additional widgets, such as drop-down menus,
 /// or buttons.  The search bar would appear when a search is started
@@ -19,45 +19,15 @@ import LevenshteinTransformations
 /// 
 /// For keyboard presses to start a search, the search bar must be told
 /// of a widget to capture key events from through
-/// [method@Gtk.SearchBar.set_key_capture_widget]. This widget will
+/// `Gtk.SearchBar.set_key_capture_widget`. This widget will
 /// typically be the top-level window, or a parent container of the
 /// search bar. Common shortcuts such as Ctrl+F should be handled as an
 /// application action, or through the menu items.
 /// 
 /// You will also need to tell the search bar about which entry you
-/// are using as your search entry using [method@Gtk.SearchBar.connect_entry].
+/// are using as your search entry using `Gtk.SearchBar.connect_entry`.
 /// 
-/// ## Creating a search bar
 /// 
-/// The following example shows you how to create a more complex search
-/// entry.
-/// 
-/// [A simple example](https://gitlab.gnome.org/GNOME/gtk/tree/main/examples/search-bar.c)
-/// 
-/// # Shortcuts and Gestures
-/// 
-/// `GtkSearchBar` supports the following keyboard shortcuts:
-/// 
-/// - <kbd>Escape</kbd> hides the search bar.
-/// 
-/// # CSS nodes
-/// 
-/// ```
-/// searchbar
-/// ╰── revealer
-/// ╰── box
-/// ├── [child]
-/// ╰── [button.close]
-/// ```
-/// 
-/// `GtkSearchBar` has a main CSS node with name searchbar. It has a child
-/// node with name revealer that contains a node with name box. The box node
-/// contains both the CSS node of the child widget as well as an optional button
-/// node which gets the .close style class applied.
-/// 
-/// # Accessibility
-/// 
-/// `GtkSearchBar` uses the [enum@Gtk.AccessibleRole.search] role.
 public struct SearchBar: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

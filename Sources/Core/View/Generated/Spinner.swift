@@ -2,7 +2,7 @@
 //  Spinner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,14 +10,14 @@ import LevenshteinTransformations
 
 /// A widget showing a loading spinner.
 /// 
-/// <picture><source srcset="spinner-dark.png" media="(prefers-color-scheme: dark)"><img src="spinner.png" alt="spinner"></picture>
+/// 
 /// 
 /// The size of the spinner depends on the available size, never smaller than
 /// 16×16 pixels and never larger than 64×64 pixels.
 /// 
-/// Use the [property@Gtk.Widget:halign] and [property@Gtk.Widget:valign]
-/// properties in combination with [property@Gtk.Widget:width-request] and
-/// [property@Gtk.Widget:height-request] for fine sizing control.
+/// Use the ``halign(_:)`` and ``valign(_:)``
+/// properties in combination with ``widthRequest(_:)`` and
+/// ``heightRequest(_:)`` for fine sizing control.
 /// 
 /// For example, the following snippet shows the spinner at 48×48 pixels:
 /// 
@@ -25,17 +25,10 @@ import LevenshteinTransformations
 /// <object class="AdwSpinner"><property name="halign">center</property><property name="valign">center</property><property name="width-request">48</property><property name="height-request">48</property></object>
 /// ```
 /// 
-/// See [class@SpinnerPaintable] for cases where using a widget is impractical or
-/// impossible, such as [property@StatusPage:paintable].
+/// See `SpinnerPaintable` for cases where using a widget is impractical or
+/// impossible, such as ``paintable(_:)``.
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwSpinner` has a single node with the name `image` and the style class
-/// `.spinner`.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwSpinner` uses the [enum@Gtk.AccessibleRole.progress-bar] role.
 public struct Spinner: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

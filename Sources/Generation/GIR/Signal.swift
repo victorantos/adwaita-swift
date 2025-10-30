@@ -24,7 +24,7 @@ struct Signal: Decodable {
         let name = name.convertDelimitedCasingToCamel(delimiter: "-", configuration: genConfig, unshorten: true)
         return """
 
-        \(doc?.docComment(indent: "    ") ?? "    /// \(name)")
+        \(doc?.docComment(configuration: genConfig, indent: "    ") ?? "    /// \(name)")
             var \(name): (() -> Void)?
         """
     }
@@ -38,7 +38,7 @@ struct Signal: Decodable {
         let name = name.convertDelimitedCasingToCamel(delimiter: "-", configuration: genConfig, unshorten: true)
         return """
 
-        \(doc?.docComment(indent: "    ") ?? "    /// \(name)")
+        \(doc?.docComment(configuration: genConfig, indent: "    ") ?? "    /// \(name)")
             public func \(name)(_ \(name): @escaping () -> Void) -> Self {
                 var newSelf = self
                 newSelf.\(name) = \(name)

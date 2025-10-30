@@ -74,7 +74,7 @@ struct Property: Decodable {
     func generate(config: WidgetConfiguration, genConfig: GenerationConfiguration) -> String {
         """
 
-        \(doc?.docComment(indent: "    ") ?? "/// \(name)")
+        \(doc?.docComment(configuration: genConfig, indent: "    ") ?? "/// \(name)")
             var \(parameter(config: config, genConfig: genConfig))
         """
     }
@@ -91,7 +91,7 @@ struct Property: Decodable {
         let mainParameter = parameter(config: config, genConfig: genConfig, modifier: true, defaultValue: true)
         return """
 
-        \(doc?.docComment(indent: "    ") ?? "/// \(name)")
+        \(doc?.docComment(configuration: genConfig, indent: "    ") ?? "/// \(name)")
             public func \(convertPropertyName(configuration: genConfig))(\(builder)_ \(mainParameter)) -> Self {
                 var newSelf = self
                 newSelf.\(property) = \(property)

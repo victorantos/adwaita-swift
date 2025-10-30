@@ -2,7 +2,7 @@
 //  ButtonContent.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,12 +10,12 @@ import LevenshteinTransformations
 
 /// A helper widget for creating buttons.
 /// 
-/// <picture><source srcset="button-content-dark.png" media="(prefers-color-scheme: dark)"><img src="button-content.png" alt="button-content"></picture>
+/// 
 /// 
 /// `AdwButtonContent` is a box-like widget with an icon and a label.
 /// 
-/// It's intended to be used as a direct child of [class@Gtk.Button],
-/// [class@Gtk.MenuButton] or [class@SplitButton], when they need to have both an
+/// It's intended to be used as a direct child of `Gtk.Button`,
+/// `Gtk.MenuButton` or `SplitButton`, when they need to have both an
 /// icon and a label, as follows:
 /// 
 /// ```xml
@@ -25,25 +25,7 @@ import LevenshteinTransformations
 /// `AdwButtonContent` handles style classes and connecting the mnemonic to the
 /// button automatically.
 /// 
-/// ## CSS nodes
 /// 
-/// ```
-/// buttoncontent
-/// ╰── box
-/// ├── image
-/// ╰── label
-/// ```
-/// 
-/// `AdwButtonContent`'s CSS node is called `buttoncontent`. It contains a `box`
-/// subnode that serves as a container for the  `image` and `label` nodes.
-/// 
-/// When inside a `GtkButton` or `AdwSplitButton`, the button will receive the
-/// `.image-text-button` style class. When inside a `GtkMenuButton`, the
-/// internal `GtkButton` will receive it instead.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwButtonContent` uses the `GTK_ACCESSIBLE_ROLE_GROUP` role.
 public struct ButtonContent: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -53,9 +35,9 @@ public struct ButtonContent: AdwaitaWidget {
 
     /// Whether the button can be smaller than the natural size of its contents.
     /// 
-    /// If set to `TRUE`, the label will ellipsize.
+    /// If set to `true`, the label will ellipsize.
     /// 
-    /// See [property@Gtk.Button:can-shrink].
+    /// See ``canShrink(_:)``.
     var canShrink: Bool?
     /// The name of the displayed icon.
     /// 
@@ -67,7 +49,7 @@ public struct ButtonContent: AdwaitaWidget {
     /// 
     /// The mnemonic can be used to activate the parent button.
     /// 
-    /// See [property@ButtonContent:label].
+    /// See ``label(_:)``.
     var useUnderline: Bool?
 
     /// Initialize `ButtonContent`.
@@ -124,9 +106,9 @@ public struct ButtonContent: AdwaitaWidget {
 
     /// Whether the button can be smaller than the natural size of its contents.
     /// 
-    /// If set to `TRUE`, the label will ellipsize.
+    /// If set to `true`, the label will ellipsize.
     /// 
-    /// See [property@Gtk.Button:can-shrink].
+    /// See ``canShrink(_:)``.
     public func canShrink(_ canShrink: Bool? = true) -> Self {
         var newSelf = self
         newSelf.canShrink = canShrink
@@ -153,7 +135,7 @@ public struct ButtonContent: AdwaitaWidget {
     /// 
     /// The mnemonic can be used to activate the parent button.
     /// 
-    /// See [property@ButtonContent:label].
+    /// See ``label(_:)``.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useUnderline = useUnderline

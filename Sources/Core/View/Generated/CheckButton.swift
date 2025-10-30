@@ -2,7 +2,7 @@
 //  CheckButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,67 +10,16 @@ import LevenshteinTransformations
 
 /// Places a label next to an indicator.
 /// 
-/// <picture><source srcset="check-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="Example GtkCheckButtons" src="check-button.png"></picture>
 /// 
-/// A `GtkCheckButton` is created by calling either [ctor@Gtk.CheckButton.new]
-/// or [ctor@Gtk.CheckButton.new_with_label].
+/// 
+/// A `GtkCheckButton` is created by calling either `Gtk.CheckButton.new`
+/// or `Gtk.CheckButton.new_with_label`.
 /// 
 /// The state of a `GtkCheckButton` can be set specifically using
-/// [method@Gtk.CheckButton.set_active], and retrieved using
-/// [method@Gtk.CheckButton.get_active].
+/// `Gtk.CheckButton.set_active`, and retrieved using
+/// `Gtk.CheckButton.get_active`.
 /// 
-/// # Inconsistent state
 /// 
-/// In addition to "on" and "off", check buttons can be an
-/// "in between" state that is neither on nor off. This can be used
-/// e.g. when the user has selected a range of elements (such as some
-/// text or spreadsheet cells) that are affected by a check button,
-/// and the current values in that range are inconsistent.
-/// 
-/// To set a `GtkCheckButton` to inconsistent state, use
-/// [method@Gtk.CheckButton.set_inconsistent].
-/// 
-/// # Grouping
-/// 
-/// Check buttons can be grouped together, to form mutually exclusive
-/// groups - only one of the buttons can be toggled at a time, and toggling
-/// another one will switch the currently toggled one off.
-/// 
-/// Grouped check buttons use a different indicator, and are commonly referred
-/// to as *radio buttons*.
-/// 
-/// <picture><source srcset="radio-button-dark.png" media="(prefers-color-scheme: dark)"><img alt="Example GtkRadioButtons" src="radio-button.png"></picture>
-/// 
-/// To add a `GtkCheckButton` to a group, use [method@Gtk.CheckButton.set_group].
-/// 
-/// When the code must keep track of the state of a group of radio buttons, it
-/// is recommended to keep track of such state through a stateful
-/// `GAction` with a target for each button. Using the `toggled` signals to keep
-/// track of the group changes and state is discouraged.
-/// 
-/// # Shortcuts and Gestures
-/// 
-/// `GtkCheckButton` supports the following keyboard shortcuts:
-/// 
-/// - <kbd>␣</kbd> or <kbd>Enter</kbd> activates the button.
-/// 
-/// # CSS nodes
-/// 
-/// ```
-/// checkbutton[.text-button][.grouped]
-/// ├── check
-/// ╰── [label]
-/// ```
-/// 
-/// A `GtkCheckButton` has a main node with name checkbutton. If the
-/// [property@Gtk.CheckButton:label] or [property@Gtk.CheckButton:child]
-/// properties are set, it contains a child widget. The indicator node
-/// is named check when no group is set, and radio if the checkbutton
-/// is grouped together with other checkbuttons.
-/// 
-/// # Accessibility
-/// 
-/// `GtkCheckButton` uses the [enum@Gtk.AccessibleRole.checkbox] role.
 public struct CheckButton: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -86,7 +35,7 @@ public struct CheckButton: AdwaitaWidget {
     var actionName: String?
     /// If the check button is active.
     /// 
-    /// Setting `active` to %TRUE will add the `:checked:` state to both
+    /// Setting `active` to `true` will add the `:checked:` state to both
     /// the check button and the indicator CSS node.
     var active: Binding<Bool>?
     /// The child widget.
@@ -107,12 +56,12 @@ public struct CheckButton: AdwaitaWidget {
     /// emitting it causes the button to animate press then release.
     /// 
     /// Applications should never connect to this signal, but use the
-    /// [signal@Gtk.CheckButton::toggled] signal.
+    /// `Gtk.CheckButton::toggled` signal.
     /// 
     /// The default bindings for this signal are all forms of the
     /// <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
     var activate: (() -> Void)?
-    /// Emitted when the buttons's [property@Gtk.CheckButton:active]
+    /// Emitted when the buttons's ``active(_:)``
     /// property changes.
     var toggled: (() -> Void)?
 
@@ -212,7 +161,7 @@ if let active, newValue != active.wrappedValue {
 
     /// If the check button is active.
     /// 
-    /// Setting `active` to %TRUE will add the `:checked:` state to both
+    /// Setting `active` to `true` will add the `:checked:` state to both
     /// the check button and the indicator CSS node.
     public func active(_ active: Binding<Bool>?) -> Self {
         var newSelf = self
@@ -258,7 +207,7 @@ if let active, newValue != active.wrappedValue {
     /// emitting it causes the button to animate press then release.
     /// 
     /// Applications should never connect to this signal, but use the
-    /// [signal@Gtk.CheckButton::toggled] signal.
+    /// `Gtk.CheckButton::toggled` signal.
     /// 
     /// The default bindings for this signal are all forms of the
     /// <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
@@ -268,7 +217,7 @@ if let active, newValue != active.wrappedValue {
         return newSelf
     }
 
-    /// Emitted when the buttons's [property@Gtk.CheckButton:active]
+    /// Emitted when the buttons's ``active(_:)``
     /// property changes.
     public func toggled(_ toggled: @escaping () -> Void) -> Self {
         var newSelf = self

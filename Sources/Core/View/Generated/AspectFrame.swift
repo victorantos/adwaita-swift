@@ -2,7 +2,7 @@
 //  AspectFrame.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -13,15 +13,7 @@ import LevenshteinTransformations
 /// The frame can respect the aspect ratio of the child widget,
 /// or use its own aspect ratio.
 /// 
-/// # CSS nodes
 /// 
-/// `GtkAspectFrame` uses a CSS node with name `aspectframe`.
-/// 
-/// # Accessibility
-/// 
-/// Until GTK 4.10, `GtkAspectFrame` used the [enum@Gtk.AccessibleRole.group] role.
-/// 
-/// Starting from GTK 4.12, `GtkAspectFrame` uses the [enum@Gtk.AccessibleRole.generic] role.
 public struct AspectFrame: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -40,7 +32,7 @@ public struct AspectFrame: AdwaitaWidget {
     /// The aspect ratio to be used by the `GtkAspectFrame`.
     /// 
     /// This property is only used if
-    /// [property@Gtk.AspectFrame:obey-child] is set to %FALSE.
+    /// ``obeyChild(_:)`` is set to `false`.
     var ratio: Float
     /// The horizontal alignment of the child.
     var xalign: Float?
@@ -133,7 +125,7 @@ public struct AspectFrame: AdwaitaWidget {
     /// The aspect ratio to be used by the `GtkAspectFrame`.
     /// 
     /// This property is only used if
-    /// [property@Gtk.AspectFrame:obey-child] is set to %FALSE.
+    /// ``obeyChild(_:)`` is set to `false`.
     public func ratio(_ ratio: Float) -> Self {
         var newSelf = self
         newSelf.ratio = ratio

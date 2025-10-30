@@ -2,7 +2,7 @@
 //  ProgressBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -13,19 +13,19 @@ import LevenshteinTransformations
 /// `GtkProgressBar` provides a visual clue that processing is underway.
 /// It can be used in two different modes: percentage mode and activity mode.
 /// 
-/// <picture><source srcset="progressbar-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkProgressBar" src="progressbar.png"></picture>
+/// 
 /// 
 /// When an application can determine how much work needs to take place
 /// (e.g. read a fixed number of bytes from a file) and can monitor its
 /// progress, it can use the `GtkProgressBar` in percentage mode and the
 /// user sees a growing bar indicating the percentage of the work that
 /// has been completed. In this mode, the application is required to call
-/// [method@Gtk.ProgressBar.set_fraction] periodically to update the progress bar.
+/// `Gtk.ProgressBar.set_fraction` periodically to update the progress bar.
 /// 
 /// When an application has no accurate way of knowing the amount of work
 /// to do, it can use the `GtkProgressBar` in activity mode, which shows
 /// activity by a block moving back and forth within the progress area. In
-/// this mode, the application is required to call [method@Gtk.ProgressBar.pulse]
+/// this mode, the application is required to call `Gtk.ProgressBar.pulse`
 /// periodically to update the progress bar.
 /// 
 /// There is quite a bit of flexibility provided to control the appearance
@@ -33,26 +33,7 @@ import LevenshteinTransformations
 /// of the bar, optional text can be displayed along with the bar, and the
 /// step size used in activity mode can be set.
 /// 
-/// # CSS nodes
 /// 
-/// ```
-/// progressbar[.osd]
-/// ├── [text]
-/// ╰── trough[.empty][.full]
-/// ╰── progress[.pulse]
-/// ```
-/// 
-/// `GtkProgressBar` has a main CSS node with name progressbar and subnodes with
-/// names text and trough, of which the latter has a subnode named progress. The
-/// text subnode is only present if text is shown. The progress subnode has the
-/// style class .pulse when in activity mode. It gets the style classes .left,
-/// .right, .top or .bottom added when the progress 'touches' the corresponding
-/// end of the GtkProgressBar. The .osd class on the progressbar node is for use
-/// in overlays like the one Epiphany has for page loading progress.
-/// 
-/// # Accessibility
-/// 
-/// `GtkProgressBar` uses the [enum@Gtk.AccessibleRole.progress_bar] role.
 public struct ProgressBar: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -73,13 +54,13 @@ public struct ProgressBar: AdwaitaWidget {
     /// Sets whether the progress bar will show a text in addition
     /// to the bar itself.
     /// 
-    /// The shown text is either the value of the [property@Gtk.ProgressBar:text]
-    /// property or, if that is %NULL, the [property@Gtk.ProgressBar:fraction]
+    /// The shown text is either the value of the ``text(_:)``
+    /// property or, if that is %NULL, the ``fraction(_:)``
     /// value, as a percentage.
     /// 
     /// To make a progress bar that is styled and sized suitably for showing text
-    /// (even if the actual text is blank), set [property@Gtk.ProgressBar:show-text]
-    /// to %TRUE and [property@Gtk.ProgressBar:text] to the empty string (not %NULL).
+    /// (even if the actual text is blank), set ``showText(_:)``
+    /// to `true` and ``text(_:)`` to the empty string (not %NULL).
     var showText: Bool?
     /// Text to be displayed in the progress bar.
     var text: String?
@@ -172,13 +153,13 @@ public struct ProgressBar: AdwaitaWidget {
     /// Sets whether the progress bar will show a text in addition
     /// to the bar itself.
     /// 
-    /// The shown text is either the value of the [property@Gtk.ProgressBar:text]
-    /// property or, if that is %NULL, the [property@Gtk.ProgressBar:fraction]
+    /// The shown text is either the value of the ``text(_:)``
+    /// property or, if that is %NULL, the ``fraction(_:)``
     /// value, as a percentage.
     /// 
     /// To make a progress bar that is styled and sized suitably for showing text
-    /// (even if the actual text is blank), set [property@Gtk.ProgressBar:show-text]
-    /// to %TRUE and [property@Gtk.ProgressBar:text] to the empty string (not %NULL).
+    /// (even if the actual text is blank), set ``showText(_:)``
+    /// to `true` and ``text(_:)`` to the empty string (not %NULL).
     public func showText(_ showText: Bool? = true) -> Self {
         var newSelf = self
         newSelf.showText = showText

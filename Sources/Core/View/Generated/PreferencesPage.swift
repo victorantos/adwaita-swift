@@ -2,26 +2,20 @@
 //  PreferencesPage.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A page from [class@PreferencesDialog].
+/// A page from `PreferencesDialog`.
 /// 
-/// <picture><source srcset="preferences-page-dark.png" media="(prefers-color-scheme: dark)"><img src="preferences-page.png" alt="preferences-page"></picture>
+/// 
 /// 
 /// The `AdwPreferencesPage` widget gathers preferences groups into a single page
 /// of a preferences window.
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwPreferencesPage` has a single CSS node with name `preferencespage`.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwPreferencesPage` uses the `GTK_ACCESSIBLE_ROLE_GROUP` role.
 public struct PreferencesPage: AdwaitaWidget {
 
     /// Additional update functions for type extensions.

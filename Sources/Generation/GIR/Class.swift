@@ -80,7 +80,7 @@ struct Class: ClassLike, Decodable {
         import CAdw
         import LevenshteinTransformations
 
-        \(doc.docComment())
+        \(doc.docComment(configuration: genConfig))
         public struct \(definition) {
 
             /// Additional update functions for type extensions.

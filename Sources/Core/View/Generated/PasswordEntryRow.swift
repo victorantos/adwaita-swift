@@ -2,15 +2,15 @@
 //  PasswordEntryRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A [class@EntryRow] tailored for entering secrets.
+/// A `EntryRow` tailored for entering secrets.
 /// 
-/// <picture><source srcset="password-entry-row-dark.png" media="(prefers-color-scheme: dark)"><img src="password-entry-row.png" alt="password-entry-row"></picture>
+/// 
 /// 
 /// It does not show its contents in clear text, does not allow to copy it to the
 /// clipboard, and shows a warning when Caps Lock is engaged. If the underlying
@@ -20,10 +20,7 @@ import LevenshteinTransformations
 /// 
 /// It offer a way to reveal the contents in clear text.
 /// 
-/// ## CSS Nodes
 /// 
-/// `AdwPasswordEntryRow` has a single CSS node with name `row` that carries
-/// `.entry` and `.password` style classes.
 public struct PasswordEntryRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -41,9 +38,9 @@ public struct PasswordEntryRow: AdwaitaWidget {
     var maxLength: Int?
     /// Whether to show the apply button.
     /// 
-    /// When set to `TRUE`, typing text in the entry will reveal an apply button.
+    /// When set to `true`, typing text in the entry will reveal an apply button.
     /// Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-    /// emit the [signal@EntryRow::apply] signal.
+    /// emit the `EntryRow::apply` signal.
     /// 
     /// This is useful if changing the entry contents can trigger an expensive
     /// operation, e.g. network activity, to avoid triggering it after typing every
@@ -54,23 +51,23 @@ public struct PasswordEntryRow: AdwaitaWidget {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var title: String?
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var titleSelectable: Bool?
     /// Whether to use Pango markup for the title label.
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// Whether an embedded underline in the title indicates a mnemonic.
     var useUnderline: Bool?
     /// Emitted when the apply button is pressed.
     /// 
-    /// See [property@EntryRow:show-apply-button].
+    /// See ``showApplyButton(_:)``.
     var apply: (() -> Void)?
     /// Emitted when the embedded entry is activated.
     var entryActivated: (() -> Void)?
@@ -190,9 +187,9 @@ public struct PasswordEntryRow: AdwaitaWidget {
 
     /// Whether to show the apply button.
     /// 
-    /// When set to `TRUE`, typing text in the entry will reveal an apply button.
+    /// When set to `true`, typing text in the entry will reveal an apply button.
     /// Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-    /// emit the [signal@EntryRow::apply] signal.
+    /// emit the `EntryRow::apply` signal.
     /// 
     /// This is useful if changing the entry contents can trigger an expensive
     /// operation, e.g. network activity, to avoid triggering it after typing every
@@ -213,7 +210,7 @@ public struct PasswordEntryRow: AdwaitaWidget {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -222,7 +219,7 @@ public struct PasswordEntryRow: AdwaitaWidget {
 
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
@@ -233,7 +230,7 @@ public struct PasswordEntryRow: AdwaitaWidget {
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
@@ -249,7 +246,7 @@ public struct PasswordEntryRow: AdwaitaWidget {
 
     /// Emitted when the apply button is pressed.
     /// 
-    /// See [property@EntryRow:show-apply-button].
+    /// See ``showApplyButton(_:)``.
     public func apply(_ apply: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.apply = apply

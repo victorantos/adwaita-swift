@@ -2,43 +2,31 @@
 //  EntryRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A [class@Gtk.ListBoxRow] with an embedded text entry.
+/// A `Gtk.ListBoxRow` with an embedded text entry.
 /// 
-/// <picture><source srcset="entry-row-dark.png" media="(prefers-color-scheme: dark)"><img src="entry-row.png" alt="entry-row"></picture>
+/// 
 /// 
 /// `AdwEntryRow` has a title that doubles as placeholder text. It shows an icon
 /// indicating that it's editable and can receive additional widgets before or
 /// after the editable part.
 /// 
-/// If [property@EntryRow:show-apply-button] is set to `TRUE`, `AdwEntryRow` can
+/// If ``showApplyButton(_:)`` is set to `true`, `AdwEntryRow` can
 /// show an apply button when editing its contents. This can be useful if
 /// changing its contents can result in an expensive operation, such as network
 /// activity.
 /// 
 /// `AdwEntryRow` provides only minimal API and should be used with the
-/// [iface@Gtk.Editable] API.
+/// `Gtk.Editable` API.
 /// 
-/// See also [class@PasswordEntryRow].
+/// See also `PasswordEntryRow`.
 /// 
-/// ## AdwEntryRow as GtkBuildable
 /// 
-/// The `AdwEntryRow` implementation of the [iface@Gtk.Buildable] interface
-/// supports adding a child at its end by specifying “suffix” or omitting the
-/// “type” attribute of a <child> element.
-/// 
-/// It also supports adding a child as a prefix widget by specifying “prefix” as
-/// the “type” attribute of a <child> element.
-/// 
-/// ## CSS nodes
-/// 
-/// `AdwEntryRow` has a single CSS node with name `row` and the `.entry` style
-/// class.
 public struct EntryRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -56,9 +44,9 @@ public struct EntryRow: AdwaitaWidget {
     var maxLength: Int?
     /// Whether to show the apply button.
     /// 
-    /// When set to `TRUE`, typing text in the entry will reveal an apply button.
+    /// When set to `true`, typing text in the entry will reveal an apply button.
     /// Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-    /// emit the [signal@EntryRow::apply] signal.
+    /// emit the `EntryRow::apply` signal.
     /// 
     /// This is useful if changing the entry contents can trigger an expensive
     /// operation, e.g. network activity, to avoid triggering it after typing every
@@ -69,23 +57,23 @@ public struct EntryRow: AdwaitaWidget {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var title: String?
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var titleSelectable: Bool?
     /// Whether to use Pango markup for the title label.
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// Whether an embedded underline in the title indicates a mnemonic.
     var useUnderline: Bool?
     /// Emitted when the apply button is pressed.
     /// 
-    /// See [property@EntryRow:show-apply-button].
+    /// See ``showApplyButton(_:)``.
     var apply: (() -> Void)?
     /// Emitted when the embedded entry is activated.
     var entryActivated: (() -> Void)?
@@ -229,9 +217,9 @@ public struct EntryRow: AdwaitaWidget {
 
     /// Whether to show the apply button.
     /// 
-    /// When set to `TRUE`, typing text in the entry will reveal an apply button.
+    /// When set to `true`, typing text in the entry will reveal an apply button.
     /// Clicking it or pressing the <kbd>Enter</kbd> key will hide the button and
-    /// emit the [signal@EntryRow::apply] signal.
+    /// emit the `EntryRow::apply` signal.
     /// 
     /// This is useful if changing the entry contents can trigger an expensive
     /// operation, e.g. network activity, to avoid triggering it after typing every
@@ -252,7 +240,7 @@ public struct EntryRow: AdwaitaWidget {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -261,7 +249,7 @@ public struct EntryRow: AdwaitaWidget {
 
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
@@ -272,7 +260,7 @@ public struct EntryRow: AdwaitaWidget {
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
@@ -288,7 +276,7 @@ public struct EntryRow: AdwaitaWidget {
 
     /// Emitted when the apply button is pressed.
     /// 
-    /// See [property@EntryRow:show-apply-button].
+    /// See ``showApplyButton(_:)``.
     public func apply(_ apply: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.apply = apply

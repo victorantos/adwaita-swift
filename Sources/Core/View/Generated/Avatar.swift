@@ -2,7 +2,7 @@
 //  Avatar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,28 +10,22 @@ import LevenshteinTransformations
 
 /// A widget displaying an image, with a generated fallback.
 /// 
-/// <picture><source srcset="avatar-dark.png" media="(prefers-color-scheme: dark)"><img src="avatar.png" alt="avatar"></picture>
+/// 
 /// 
 /// `AdwAvatar` is a widget that shows a round avatar.
 /// 
 /// `AdwAvatar` generates an avatar with the initials of  the
-/// [property@Avatar:text] on top of a colored background.
+/// ``text(_:)`` on top of a colored background.
 /// 
-/// The color is picked based on the hash of the [property@Avatar:text].
+/// The color is picked based on the hash of the ``text(_:)``.
 /// 
-/// If [property@Avatar:show-initials] is set to `FALSE`,
-/// [property@Avatar:icon-name] or `avatar-default-symbolic` is shown instead of
+/// If ``showInitials(_:)`` is set to `false`,
+/// ``iconName(_:)`` or `avatar-default-symbolic` is shown instead of
 /// the initials.
 /// 
-/// Use [property@Avatar:custom-image] to set a custom image.
+/// Use ``customImage(_:)`` to set a custom image.
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwAvatar` has a single CSS node with name `avatar`.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwAvatar` uses the `GTK_ACCESSIBLE_ROLE_IMG` role.
 public struct Avatar: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -45,14 +39,14 @@ public struct Avatar: AdwaitaWidget {
     var iconName: String?
     /// Whether initials are used instead of an icon on the fallback avatar.
     /// 
-    /// See [property@Avatar:icon-name] for how to change the fallback icon.
+    /// See ``iconName(_:)`` for how to change the fallback icon.
     var showInitials: Bool
     /// The size of the avatar.
     var size: Int
     /// Sets the text used to generate the fallback initials and color.
     /// 
-    /// It's only used to generate the color if [property@Avatar:show-initials] is
-    /// `FALSE`.
+    /// It's only used to generate the color if ``showInitials(_:)`` is
+    /// `false`.
     var text: String?
 
     /// Initialize `Avatar`.
@@ -120,7 +114,7 @@ public struct Avatar: AdwaitaWidget {
 
     /// Whether initials are used instead of an icon on the fallback avatar.
     /// 
-    /// See [property@Avatar:icon-name] for how to change the fallback icon.
+    /// See ``iconName(_:)`` for how to change the fallback icon.
     public func showInitials(_ showInitials: Bool) -> Self {
         var newSelf = self
         newSelf.showInitials = showInitials
@@ -136,8 +130,8 @@ public struct Avatar: AdwaitaWidget {
 
     /// Sets the text used to generate the fallback initials and color.
     /// 
-    /// It's only used to generate the color if [property@Avatar:show-initials] is
-    /// `FALSE`.
+    /// It's only used to generate the color if ``showInitials(_:)`` is
+    /// `false`.
     public func text(_ text: String?) -> Self {
         var newSelf = self
         newSelf.text = text

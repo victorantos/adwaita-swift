@@ -2,7 +2,7 @@
 //  Image.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,11 +10,11 @@ import LevenshteinTransformations
 
 /// Displays an image.
 /// 
-/// picture><source srcset="image-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkImage" src="image.png"></picture>
+/// 
 /// 
 /// Various kinds of object can be displayed as an image; most typically,
 /// you would load a `GdkTexture` from a file, using the convenience function
-/// [ctor@Gtk.Image.new_from_file], for instance:
+/// `Gtk.Image.new_from_file`, for instance:
 /// 
 /// ```c
 /// GtkWidget *image = gtk_image_new_from_file ("myfile.png");
@@ -23,30 +23,22 @@ import LevenshteinTransformations
 /// If the file isn’t loaded successfully, the image will contain a
 /// “broken image” icon similar to that used in many web browsers.
 /// 
-/// If you want to handle errors in loading the file yourself,
-/// for example by displaying an error message, then load the image with
-/// [ctor@Gdk.Texture.new_from_file], then create the `GtkImage` with
-/// [ctor@Gtk.Image.new_from_paintable].
+/// If you want to handle errors in loading the file yourself, for example
+/// by displaying an error message, then load the image with an image
+/// loading framework such as libglycin, then create the `GtkImage` with
+/// `Gtk.Image.new_from_paintable`.
 /// 
 /// Sometimes an application will want to avoid depending on external data
 /// files, such as image files. See the documentation of `GResource` inside
-/// GIO, for details. In this case, [property@Gtk.Image:resource],
-/// [ctor@Gtk.Image.new_from_resource], and [method@Gtk.Image.set_from_resource]
+/// GIO, for details. In this case, ``resource(_:)``,
+/// `Gtk.Image.new_from_resource`, and `Gtk.Image.set_from_resource`
 /// should be used.
 /// 
 /// `GtkImage` displays its image as an icon, with a size that is determined
-/// by the application. See [class@Gtk.Picture] if you want to show an image
+/// by the application. See `Gtk.Picture` if you want to show an image
 /// at is actual size.
 /// 
-/// ## CSS nodes
 /// 
-/// `GtkImage` has a single CSS node with the name `image`. The style classes
-/// `.normal-icons` or `.large-icons` may appear, depending on the
-/// [property@Gtk.Image:icon-size] property.
-/// 
-/// ## Accessibility
-/// 
-/// `GtkImage` uses the [enum@Gtk.AccessibleRole.img] role.
 public struct Image: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -65,7 +57,7 @@ public struct Image: AdwaitaWidget {
     /// The size in pixels to display icons at.
     /// 
     /// If set to a value != -1, this property overrides the
-    /// [property@Gtk.Image:icon-size] property for images of type
+    /// ``iconSize(_:)`` property for images of type
     /// `GTK_IMAGE_ICON_NAME`.
     var pixelSize: Int?
     /// A path to a resource file to display.
@@ -146,7 +138,7 @@ public struct Image: AdwaitaWidget {
     /// The size in pixels to display icons at.
     /// 
     /// If set to a value != -1, this property overrides the
-    /// [property@Gtk.Image:icon-size] property for images of type
+    /// ``iconSize(_:)`` property for images of type
     /// `GTK_IMAGE_ICON_NAME`.
     public func pixelSize(_ pixelSize: Int?) -> Self {
         var newSelf = self

@@ -2,7 +2,7 @@
 //  Entry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,33 +10,33 @@ import LevenshteinTransformations
 
 /// A single-line text entry widget.
 /// 
-/// <picture><source srcset="entry-dark.png" media="(prefers-color-scheme: dark)"><img alt="An example GtkEntry" src="entry.png"></picture>
+/// 
 /// 
 /// A fairly large set of key bindings are supported by default. If the
 /// entered text is longer than the allocation of the widget, the widget
 /// will scroll so that the cursor position is visible.
 /// 
 /// When using an entry for passwords and other sensitive information, it
-/// can be put into “password mode” using [method@Gtk.Entry.set_visibility].
+/// can be put into “password mode” using `Gtk.Entry.set_visibility`.
 /// In this mode, entered text is displayed using a “invisible” character.
 /// By default, GTK picks the best invisible character that is available
 /// in the current font, but it can be changed with
-/// [method@Gtk.Entry.set_invisible_char].
+/// `Gtk.Entry.set_invisible_char`.
 /// 
 /// `GtkEntry` has the ability to display progress or activity
 /// information behind the text. To make an entry display such information,
-/// use [method@Gtk.Entry.set_progress_fraction] or
-/// [method@Gtk.Entry.set_progress_pulse_step].
+/// use `Gtk.Entry.set_progress_fraction` or
+/// `Gtk.Entry.set_progress_pulse_step`.
 /// 
 /// Additionally, `GtkEntry` can show icons at either side of the entry.
 /// These icons can be activatable by clicking, can be set up as drag source
 /// and can have tooltips. To add an icon, use
-/// [method@Gtk.Entry.set_icon_from_gicon] or one of the various other functions
+/// `Gtk.Entry.set_icon_from_gicon` or one of the various other functions
 /// that set an icon from an icon name or a paintable. To trigger an action when
-/// the user clicks an icon, connect to the [signal@Gtk.Entry::icon-press] signal.
+/// the user clicks an icon, connect to the `Gtk.Entry::icon-press` signal.
 /// To allow DND operations from an icon, use
-/// [method@Gtk.Entry.set_icon_drag_source]. To set a tooltip on an icon, use
-/// [method@Gtk.Entry.set_icon_tooltip_text] or the corresponding function
+/// `Gtk.Entry.set_icon_drag_source`. To set a tooltip on an icon, use
+/// `Gtk.Entry.set_icon_tooltip_text` or the corresponding function
 /// for markup.
 /// 
 /// Note that functionality or information that is only available by clicking
@@ -45,51 +45,7 @@ import LevenshteinTransformations
 /// that any such functionality should also be available by other means, e.g.
 /// via the context menu of the entry.
 /// 
-/// # CSS nodes
 /// 
-/// ```
-/// entry[.flat][.warning][.error]
-/// ├── text[.readonly]
-/// ├── image.left
-/// ├── image.right
-/// ╰── [progress[.pulse]]
-/// ```
-/// 
-/// `GtkEntry` has a main node with the name entry. Depending on the properties
-/// of the entry, the style classes .read-only and .flat may appear. The style
-/// classes .warning and .error may also be used with entries.
-/// 
-/// When the entry shows icons, it adds subnodes with the name image and the
-/// style class .left or .right, depending on where the icon appears.
-/// 
-/// When the entry shows progress, it adds a subnode with the name progress.
-/// The node has the style class .pulse when the shown progress is pulsing.
-/// 
-/// For all the subnodes added to the text node in various situations,
-/// see [class@Gtk.Text].
-/// 
-/// # GtkEntry as GtkBuildable
-/// 
-/// The `GtkEntry` implementation of the `GtkBuildable` interface supports a
-/// custom `<attributes>` element, which supports any number of `<attribute>`
-/// elements. The `<attribute>` element has attributes named “name“, “value“,
-/// “start“ and “end“ and allows you to specify `PangoAttribute` values for
-/// this label.
-/// 
-/// An example of a UI definition fragment specifying Pango attributes:
-/// ```xml
-/// <object class="GtkEntry"><attributes><attribute name="weight" value="PANGO_WEIGHT_BOLD"/><attribute name="background" value="red" start="5" end="10"/></attributes></object>
-/// ```
-/// 
-/// The start and end attributes specify the range of characters to which the
-/// Pango attribute applies. If start and end are not specified, the attribute
-/// is applied to the whole text. Note that specifying ranges does not make much
-/// sense with translatable attributes. Use markup embedded in the translatable
-/// content instead.
-/// 
-/// # Accessibility
-/// 
-/// `GtkEntry` uses the [enum@Gtk.AccessibleRole.text_box] role.
 public struct Entry: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -118,10 +74,10 @@ public struct Entry: AdwaitaWidget {
     var hasFrame: Bool?
     /// Which IM (input method) module should be used for this entry.
     /// 
-    /// See [class@Gtk.IMContext].
+    /// See `Gtk.IMContext`.
     /// 
     /// Setting this to a non-%NULL value overrides the system-wide IM
-    /// module setting. See the GtkSettings [property@Gtk.Settings:gtk-im-module]
+    /// module setting. See the GtkSettings ``gtkImModule(_:)``
     /// property.
     var imModule: String?
     /// The character to use when masking entry contents (“password mode”).
@@ -132,6 +88,32 @@ public struct Entry: AdwaitaWidget {
     var maxLength: Int?
     /// The desired maximum width of the entry, in characters.
     var maxWidthChars: Int?
+    /// Text for an item in the context menu to activate the primary icon action.
+    /// 
+    /// When the primary icon is activatable and this property has been set, a new entry
+    /// in the context menu of this GtkEntry will appear with this text. Selecting that
+    /// menu entry will result in the primary icon being activated, exactly in the same way
+    /// as it would be activated from a mouse click.
+    /// 
+    /// This simplifies adding accessibility support to applications using activatable
+    /// icons. The activatable icons aren't focusable when navigating the interface with
+    /// the keyboard This is why Gtk recommends to also add those actions in the context
+    /// menu. This set of methods greatly simplifies this, by adding a menu item that, when
+    /// enabled, calls the same callback than clicking on the icon.
+    var menuEntryIconPrimaryText: String?
+    /// Text for an item in the context menu to activate the secondary icon action.
+    /// 
+    /// When the primary icon is activatable and this property has been set, a new entry
+    /// in the context menu of this GtkEntry will appear with this text. Selecting that
+    /// menu entry will result in the primary icon being activated, exactly in the same way
+    /// as it would be activated from a mouse click.
+    /// 
+    /// This simplifies adding accessibility support to applications using activatable
+    /// icons. The activatable icons aren't focusable when navigating the interface with
+    /// the keyboard This is why Gtk recommends to also add those actions in the context
+    /// menu. This set of methods greatly simplifies this, by adding a menu item that, when
+    /// enabled, calls the same callback than clicking on the icon.
+    var menuEntryIconSecondaryText: String?
     /// If text is overwritten when typing in the `GtkEntry`.
     var overwriteMode: Bool?
     /// The text that will be displayed in the `GtkEntry` when it is empty
@@ -139,8 +121,8 @@ public struct Entry: AdwaitaWidget {
     var placeholderText: String?
     /// Whether the primary icon is activatable.
     /// 
-    /// GTK emits the [signal@Gtk.Entry::icon-press] and
-    /// [signal@Gtk.Entry::icon-release] signals only on sensitive,
+    /// GTK emits the `Gtk.Entry::icon-press` and
+    /// `Gtk.Entry::icon-release` signals only on sensitive,
     /// activatable icons.
     /// 
     /// Sensitive, but non-activatable icons can be used for purely
@@ -151,7 +133,7 @@ public struct Entry: AdwaitaWidget {
     /// Whether the primary icon is sensitive.
     /// 
     /// An insensitive icon appears grayed out. GTK does not emit the
-    /// [signal@Gtk.Entry::icon-press] and [signal@Gtk.Entry::icon-release]
+    /// `Gtk.Entry::icon-press` and `Gtk.Entry::icon-release`
     /// signals and does not allow DND from insensitive icons.
     /// 
     /// An icon should be set insensitive if the action that would trigger
@@ -159,25 +141,25 @@ public struct Entry: AdwaitaWidget {
     var primaryIconSensitive: Bool?
     /// The contents of the tooltip on the primary icon, with markup.
     /// 
-    /// Also see [method@Gtk.Entry.set_icon_tooltip_markup].
+    /// Also see `Gtk.Entry.set_icon_tooltip_markup`.
     var primaryIconTooltipMarkup: String?
     /// The contents of the tooltip on the primary icon.
     /// 
-    /// Also see [method@Gtk.Entry.set_icon_tooltip_text].
+    /// Also see `Gtk.Entry.set_icon_tooltip_text`.
     var primaryIconTooltipText: String?
     /// The current fraction of the task that's been completed.
     var progressFraction: Double?
     /// The fraction of total entry width to move the progress
     /// bouncing block for each pulse.
     /// 
-    /// See [method@Gtk.Entry.progress_pulse].
+    /// See `Gtk.Entry.progress_pulse`.
     var progressPulseStep: Double?
     /// Number of pixels of the entry scrolled off the screen to the left.
     var scrollOffset: Int?
     /// Whether the secondary icon is activatable.
     /// 
-    /// GTK emits the [signal@Gtk.Entry::icon-press] and
-    /// [signal@Gtk.Entry::icon-release] signals only on sensitive,
+    /// GTK emits the `Gtk.Entry::icon-press` and
+    /// `Gtk.Entry::icon-release` signals only on sensitive,
     /// activatable icons.
     /// 
     /// Sensitive, but non-activatable icons can be used for purely
@@ -188,7 +170,7 @@ public struct Entry: AdwaitaWidget {
     /// Whether the secondary icon is sensitive.
     /// 
     /// An insensitive icon appears grayed out. GTK does not emit the
-    /// [signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release]
+    /// `Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
     /// signals and does not allow DND from insensitive icons.
     /// 
     /// An icon should be set insensitive if the action that would trigger
@@ -196,11 +178,11 @@ public struct Entry: AdwaitaWidget {
     var secondaryIconSensitive: Bool?
     /// The contents of the tooltip on the secondary icon, with markup.
     /// 
-    /// Also see [method@Gtk.Entry.set_icon_tooltip_markup].
+    /// Also see `Gtk.Entry.set_icon_tooltip_markup`.
     var secondaryIconTooltipMarkup: String?
     /// The contents of the tooltip on the secondary icon.
     /// 
-    /// Also see [method@Gtk.Entry.set_icon_tooltip_text].
+    /// Also see `Gtk.Entry.set_icon_tooltip_text`.
     var secondaryIconTooltipText: String?
     /// The position of the opposite end of the selection from the cursor in chars.
     var selectionBound: Int?
@@ -211,7 +193,7 @@ public struct Entry: AdwaitaWidget {
     var text: Binding<String>?
     /// The length of the text in the `GtkEntry`.
     var textLength: UInt?
-    /// When %TRUE, pasted multi-line text is truncated to the first line.
+    /// When `true`, pasted multi-line text is truncated to the first line.
     var truncateMultiline: Bool?
     /// Whether the entry should show the “invisible char” instead of the
     /// actual text (“password mode”).
@@ -243,7 +225,7 @@ public struct Entry: AdwaitaWidget {
     /// range of deleted text, or prevent it from being deleted entirely.
     /// 
     /// The @start_pos and @end_pos parameters are interpreted as for
-    /// [method@Gtk.Editable.delete_text].
+    /// `Gtk.Editable.delete_text`.
     var deleteText: (() -> Void)?
     /// This signal is a sign for the cell renderer to update its
     /// value from the @cell_editable.
@@ -484,10 +466,10 @@ if let text, newValue != text.wrappedValue {
 
     /// Which IM (input method) module should be used for this entry.
     /// 
-    /// See [class@Gtk.IMContext].
+    /// See `Gtk.IMContext`.
     /// 
     /// Setting this to a non-%NULL value overrides the system-wide IM
-    /// module setting. See the GtkSettings [property@Gtk.Settings:gtk-im-module]
+    /// module setting. See the GtkSettings ``gtkImModule(_:)``
     /// property.
     public func imModule(_ imModule: String?) -> Self {
         var newSelf = self
@@ -523,6 +505,42 @@ if let text, newValue != text.wrappedValue {
         return newSelf
     }
 
+    /// Text for an item in the context menu to activate the primary icon action.
+    /// 
+    /// When the primary icon is activatable and this property has been set, a new entry
+    /// in the context menu of this GtkEntry will appear with this text. Selecting that
+    /// menu entry will result in the primary icon being activated, exactly in the same way
+    /// as it would be activated from a mouse click.
+    /// 
+    /// This simplifies adding accessibility support to applications using activatable
+    /// icons. The activatable icons aren't focusable when navigating the interface with
+    /// the keyboard This is why Gtk recommends to also add those actions in the context
+    /// menu. This set of methods greatly simplifies this, by adding a menu item that, when
+    /// enabled, calls the same callback than clicking on the icon.
+    public func menuEntryIconPrimaryText(_ menuEntryIconPrimaryText: String?) -> Self {
+        var newSelf = self
+        newSelf.menuEntryIconPrimaryText = menuEntryIconPrimaryText
+        return newSelf
+    }
+
+    /// Text for an item in the context menu to activate the secondary icon action.
+    /// 
+    /// When the primary icon is activatable and this property has been set, a new entry
+    /// in the context menu of this GtkEntry will appear with this text. Selecting that
+    /// menu entry will result in the primary icon being activated, exactly in the same way
+    /// as it would be activated from a mouse click.
+    /// 
+    /// This simplifies adding accessibility support to applications using activatable
+    /// icons. The activatable icons aren't focusable when navigating the interface with
+    /// the keyboard This is why Gtk recommends to also add those actions in the context
+    /// menu. This set of methods greatly simplifies this, by adding a menu item that, when
+    /// enabled, calls the same callback than clicking on the icon.
+    public func menuEntryIconSecondaryText(_ menuEntryIconSecondaryText: String?) -> Self {
+        var newSelf = self
+        newSelf.menuEntryIconSecondaryText = menuEntryIconSecondaryText
+        return newSelf
+    }
+
     /// If text is overwritten when typing in the `GtkEntry`.
     public func overwriteMode(_ overwriteMode: Bool? = true) -> Self {
         var newSelf = self
@@ -540,8 +558,8 @@ if let text, newValue != text.wrappedValue {
 
     /// Whether the primary icon is activatable.
     /// 
-    /// GTK emits the [signal@Gtk.Entry::icon-press] and
-    /// [signal@Gtk.Entry::icon-release] signals only on sensitive,
+    /// GTK emits the `Gtk.Entry::icon-press` and
+    /// `Gtk.Entry::icon-release` signals only on sensitive,
     /// activatable icons.
     /// 
     /// Sensitive, but non-activatable icons can be used for purely
@@ -562,7 +580,7 @@ if let text, newValue != text.wrappedValue {
     /// Whether the primary icon is sensitive.
     /// 
     /// An insensitive icon appears grayed out. GTK does not emit the
-    /// [signal@Gtk.Entry::icon-press] and [signal@Gtk.Entry::icon-release]
+    /// `Gtk.Entry::icon-press` and `Gtk.Entry::icon-release`
     /// signals and does not allow DND from insensitive icons.
     /// 
     /// An icon should be set insensitive if the action that would trigger
@@ -575,7 +593,7 @@ if let text, newValue != text.wrappedValue {
 
     /// The contents of the tooltip on the primary icon, with markup.
     /// 
-    /// Also see [method@Gtk.Entry.set_icon_tooltip_markup].
+    /// Also see `Gtk.Entry.set_icon_tooltip_markup`.
     public func primaryIconTooltipMarkup(_ primaryIconTooltipMarkup: String?) -> Self {
         var newSelf = self
         newSelf.primaryIconTooltipMarkup = primaryIconTooltipMarkup
@@ -584,7 +602,7 @@ if let text, newValue != text.wrappedValue {
 
     /// The contents of the tooltip on the primary icon.
     /// 
-    /// Also see [method@Gtk.Entry.set_icon_tooltip_text].
+    /// Also see `Gtk.Entry.set_icon_tooltip_text`.
     public func primaryIconTooltipText(_ primaryIconTooltipText: String?) -> Self {
         var newSelf = self
         newSelf.primaryIconTooltipText = primaryIconTooltipText
@@ -601,7 +619,7 @@ if let text, newValue != text.wrappedValue {
     /// The fraction of total entry width to move the progress
     /// bouncing block for each pulse.
     /// 
-    /// See [method@Gtk.Entry.progress_pulse].
+    /// See `Gtk.Entry.progress_pulse`.
     public func progressPulseStep(_ progressPulseStep: Double?) -> Self {
         var newSelf = self
         newSelf.progressPulseStep = progressPulseStep
@@ -617,8 +635,8 @@ if let text, newValue != text.wrappedValue {
 
     /// Whether the secondary icon is activatable.
     /// 
-    /// GTK emits the [signal@Gtk.Entry::icon-press] and
-    /// [signal@Gtk.Entry::icon-release] signals only on sensitive,
+    /// GTK emits the `Gtk.Entry::icon-press` and
+    /// `Gtk.Entry::icon-release` signals only on sensitive,
     /// activatable icons.
     /// 
     /// Sensitive, but non-activatable icons can be used for purely
@@ -639,7 +657,7 @@ if let text, newValue != text.wrappedValue {
     /// Whether the secondary icon is sensitive.
     /// 
     /// An insensitive icon appears grayed out. GTK does not emit the
-    /// [signal@Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release]
+    /// `Gtk.Entry::icon-press[ and [signal@Gtk.Entry::icon-release`
     /// signals and does not allow DND from insensitive icons.
     /// 
     /// An icon should be set insensitive if the action that would trigger
@@ -652,7 +670,7 @@ if let text, newValue != text.wrappedValue {
 
     /// The contents of the tooltip on the secondary icon, with markup.
     /// 
-    /// Also see [method@Gtk.Entry.set_icon_tooltip_markup].
+    /// Also see `Gtk.Entry.set_icon_tooltip_markup`.
     public func secondaryIconTooltipMarkup(_ secondaryIconTooltipMarkup: String?) -> Self {
         var newSelf = self
         newSelf.secondaryIconTooltipMarkup = secondaryIconTooltipMarkup
@@ -661,7 +679,7 @@ if let text, newValue != text.wrappedValue {
 
     /// The contents of the tooltip on the secondary icon.
     /// 
-    /// Also see [method@Gtk.Entry.set_icon_tooltip_text].
+    /// Also see `Gtk.Entry.set_icon_tooltip_text`.
     public func secondaryIconTooltipText(_ secondaryIconTooltipText: String?) -> Self {
         var newSelf = self
         newSelf.secondaryIconTooltipText = secondaryIconTooltipText
@@ -697,7 +715,7 @@ if let text, newValue != text.wrappedValue {
         return newSelf
     }
 
-    /// When %TRUE, pasted multi-line text is truncated to the first line.
+    /// When `true`, pasted multi-line text is truncated to the first line.
     public func truncateMultiline(_ truncateMultiline: Bool? = true) -> Self {
         var newSelf = self
         newSelf.truncateMultiline = truncateMultiline
@@ -759,7 +777,7 @@ if let text, newValue != text.wrappedValue {
     /// range of deleted text, or prevent it from being deleted entirely.
     /// 
     /// The @start_pos and @end_pos parameters are interpreted as for
-    /// [method@Gtk.Editable.delete_text].
+    /// `Gtk.Editable.delete_text`.
     public func deleteText(_ deleteText: @escaping () -> Void) -> Self {
         var newSelf = self
         newSelf.deleteText = deleteText

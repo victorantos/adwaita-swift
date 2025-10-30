@@ -2,7 +2,7 @@
 //  Banner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
@@ -10,26 +10,24 @@ import LevenshteinTransformations
 
 /// A bar with contextual information.
 /// 
-/// <picture><source srcset="banner-dark.png" media="(prefers-color-scheme: dark)"><img src="banner.png" alt="banner"></picture>
 /// 
-/// Banners are hidden by default, use [property@Banner:revealed] to show them.
 /// 
-/// Banners have a title, set with [property@Banner:title]. Titles can be marked
-/// up with Pango markup, use [property@Banner:use-markup] to enable it.
+/// Banners are hidden by default, use ``revealed(_:)`` to show them.
+/// 
+/// Banners have a title, set with ``title(_:)``. Titles can be marked
+/// up with Pango markup, use ``useMarkup(_:)`` to enable it.
 /// 
 /// The title will be shown centered or left-aligned depending on available
 /// space.
 /// 
 /// Banners can optionally have a button with text on it, set through
-/// [property@Banner:button-label]. The button can be used with a `GAction`,
-/// or with the [signal@Banner::button-clicked] signal. The button can have
+/// ``buttonLabel(_:)``. The button can be used with a `GAction`,
+/// or with the `Banner::button-clicked` signal. The button can have
 /// different styles, a gray style and a suggested style.
 /// 
-/// <picture><source srcset="banner-suggested-dark.png" media="(prefers-color-scheme: dark)"><img src="banner-suggested.png" alt="banner with suggested button style"></picture>
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwBanner` has a main CSS node with the name `banner`.
+/// 
 public struct Banner: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -42,17 +40,17 @@ public struct Banner: AdwaitaWidget {
     /// If set to `""` or `NULL`, the button won't be shown.
     /// 
     /// The button can be used with a `GAction`, or with the
-    /// [signal@Banner::button-clicked] signal.
+    /// `Banner::button-clicked` signal.
     var buttonLabel: String?
     /// Whether the banner is currently revealed.
     var revealed: Bool?
     /// The title for this banner.
     /// 
-    /// See also: [property@Banner:use-markup].
+    /// See also: ``useMarkup(_:)``.
     var title: String
     /// Whether to use Pango markup for the banner title.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// This signal is emitted after the action button has been clicked.
     /// 
@@ -122,7 +120,7 @@ public struct Banner: AdwaitaWidget {
     /// If set to `""` or `NULL`, the button won't be shown.
     /// 
     /// The button can be used with a `GAction`, or with the
-    /// [signal@Banner::button-clicked] signal.
+    /// `Banner::button-clicked` signal.
     public func buttonLabel(_ buttonLabel: String?) -> Self {
         var newSelf = self
         newSelf.buttonLabel = buttonLabel
@@ -138,7 +136,7 @@ public struct Banner: AdwaitaWidget {
 
     /// The title for this banner.
     /// 
-    /// See also: [property@Banner:use-markup].
+    /// See also: ``useMarkup(_:)``.
     public func title(_ title: String) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -147,7 +145,7 @@ public struct Banner: AdwaitaWidget {
 
     /// Whether to use Pango markup for the banner title.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup

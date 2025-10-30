@@ -2,15 +2,15 @@
 //  ComboRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 23.10.25.
+//  Created by auto-generation on 30.10.25.
 //
 
 import CAdw
 import LevenshteinTransformations
 
-/// A [class@Gtk.ListBoxRow] used to choose from a list of items.
+/// A `Gtk.ListBoxRow` used to choose from a list of items.
 /// 
-/// <picture><source srcset="combo-row-dark.png" media="(prefers-color-scheme: dark)"><img src="combo-row.png" alt="combo-row"></picture>
+/// 
 /// 
 /// The `AdwComboRow` widget allows the user to choose from a list of valid
 /// choices. The row displays the selected choice. When activated, the row
@@ -21,26 +21,15 @@ import LevenshteinTransformations
 /// <object class="AdwComboRow"><property name="title" translatable="yes">Combo Row</property><property name="model"><object class="GtkStringList"><items><item translatable="yes">Foo</item><item translatable="yes">Bar</item><item translatable="yes">Baz</item></items></object></property></object>
 /// ```
 /// 
-/// The [property@ComboRow:selected] and [property@ComboRow:selected-item]
+/// The ``selected(_:)`` and ``selectedItem(_:)``
 /// properties can be used to keep track of the selected item and react to their
 /// changes.
 /// 
-/// `AdwComboRow` mirrors [class@Gtk.DropDown], see that widget for details.
+/// `AdwComboRow` mirrors `Gtk.DropDown`, see that widget for details.
 /// 
-/// `AdwComboRow` is [property@Gtk.ListBoxRow:activatable] if a model is set.
+/// `AdwComboRow` is ``activatable(_:)`` if a model is set.
 /// 
-/// ## CSS nodes
 /// 
-/// `AdwComboRow` has a main CSS node with name `row` and the `.combo` style
-/// class.
-/// 
-/// Its popover has the node named `popover` with the `.menu` style class, it
-/// contains a [class@Gtk.ScrolledWindow], which in turn contains a
-/// [class@Gtk.ListView], both are accessible via their regular nodes.
-/// 
-/// ## Accessibility
-/// 
-/// `AdwComboRow` uses the `GTK_ACCESSIBLE_ROLE_COMBO_BOX` role.
 public struct ComboRow: AdwaitaWidget {
 
     /// Additional update functions for type extensions.
@@ -51,29 +40,29 @@ public struct ComboRow: AdwaitaWidget {
     /// The widget to activate when the row is activated.
     /// 
     /// The row can be activated either by clicking on it, calling
-    /// [method@ActionRow.activate], or via mnemonics in the title.
-    /// See the [property@PreferencesRow:use-underline] property to enable
+    /// `ActionRow.activate`, or via mnemonics in the title.
+    /// See the ``useUnderline(_:)`` property to enable
     /// mnemonics.
     /// 
     /// The target widget will be activated by emitting the
-    /// [signal@Gtk.Widget::mnemonic-activate] signal on it.
+    /// `Gtk.Widget::mnemonic-activate` signal on it.
     var activatableWidget: (() -> Body)?
     /// Whether to show a search entry in the popup.
     /// 
-    /// If set to `TRUE`, a search entry will be shown in the popup that
+    /// If set to `true`, a search entry will be shown in the popup that
     /// allows to search for items in the list.
     /// 
-    /// Search requires [property@ComboRow:expression] to be set.
+    /// Search requires ``expression(_:)`` to be set.
     var enableSearch: Bool?
     /// The position of the selected item.
     /// 
     /// If no item is selected, the property has the value
-    /// [const@Gtk.INVALID_LIST_POSITION]
+    /// `Gtk.INVALID_LIST_POSITION`
     var selected: Binding<UInt>?
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var subtitle: String?
     /// The number of lines at the end of which the subtitle label will be
     /// ellipsized.
@@ -82,12 +71,12 @@ public struct ComboRow: AdwaitaWidget {
     var subtitleLines: Int?
     /// Whether the user can copy the subtitle from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var subtitleSelectable: Bool?
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     var title: String?
     /// The number of lines at the end of which the title label will be ellipsized.
     /// 
@@ -95,23 +84,23 @@ public struct ComboRow: AdwaitaWidget {
     var titleLines: Int?
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     var titleSelectable: Bool?
     /// Whether to use Pango markup for the title label.
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     var useMarkup: Bool?
     /// Whether to use the current value as the subtitle.
     /// 
     /// If you use a custom list item factory, you will need to give the row a
-    /// name conversion expression with [property@ComboRow:expression].
+    /// name conversion expression with ``expression(_:)``.
     /// 
-    /// If set to `TRUE`, you should not access [property@ActionRow:subtitle].
+    /// If set to `true`, you should not access ``subtitle(_:)``.
     /// 
     /// The subtitle is interpreted as Pango markup if
-    /// [property@PreferencesRow:use-markup] is set to `TRUE`.
+    /// ``useMarkup(_:)`` is set to `true`.
     var useSubtitle: Bool?
     /// Whether an embedded underline in the title indicates a mnemonic.
     var useUnderline: Bool?
@@ -228,12 +217,12 @@ if let selected, newValue != selected.wrappedValue {
     /// The widget to activate when the row is activated.
     /// 
     /// The row can be activated either by clicking on it, calling
-    /// [method@ActionRow.activate], or via mnemonics in the title.
-    /// See the [property@PreferencesRow:use-underline] property to enable
+    /// `ActionRow.activate`, or via mnemonics in the title.
+    /// See the ``useUnderline(_:)`` property to enable
     /// mnemonics.
     /// 
     /// The target widget will be activated by emitting the
-    /// [signal@Gtk.Widget::mnemonic-activate] signal on it.
+    /// `Gtk.Widget::mnemonic-activate` signal on it.
     public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
         var newSelf = self
         newSelf.activatableWidget = activatableWidget
@@ -242,10 +231,10 @@ if let selected, newValue != selected.wrappedValue {
 
     /// Whether to show a search entry in the popup.
     /// 
-    /// If set to `TRUE`, a search entry will be shown in the popup that
+    /// If set to `true`, a search entry will be shown in the popup that
     /// allows to search for items in the list.
     /// 
-    /// Search requires [property@ComboRow:expression] to be set.
+    /// Search requires ``expression(_:)`` to be set.
     public func enableSearch(_ enableSearch: Bool? = true) -> Self {
         var newSelf = self
         newSelf.enableSearch = enableSearch
@@ -255,7 +244,7 @@ if let selected, newValue != selected.wrappedValue {
     /// The position of the selected item.
     /// 
     /// If no item is selected, the property has the value
-    /// [const@Gtk.INVALID_LIST_POSITION]
+    /// `Gtk.INVALID_LIST_POSITION`
     public func selected(_ selected: Binding<UInt>?) -> Self {
         var newSelf = self
         newSelf.selected = selected
@@ -265,7 +254,7 @@ if let selected, newValue != selected.wrappedValue {
     /// The subtitle for this row.
     /// 
     /// The subtitle is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func subtitle(_ subtitle: String?) -> Self {
         var newSelf = self
         newSelf.subtitle = subtitle
@@ -284,7 +273,7 @@ if let selected, newValue != selected.wrappedValue {
 
     /// Whether the user can copy the subtitle from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.subtitleSelectable = subtitleSelectable
@@ -294,7 +283,7 @@ if let selected, newValue != selected.wrappedValue {
     /// The title of the preference represented by this row.
     /// 
     /// The title is interpreted as Pango markup unless
-    /// [property@PreferencesRow:use-markup] is set to `FALSE`.
+    /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
         var newSelf = self
         newSelf.title = title
@@ -312,7 +301,7 @@ if let selected, newValue != selected.wrappedValue {
 
     /// Whether the user can copy the title from the label.
     /// 
-    /// See also [property@Gtk.Label:selectable].
+    /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
         var newSelf = self
         newSelf.titleSelectable = titleSelectable
@@ -323,7 +312,7 @@ if let selected, newValue != selected.wrappedValue {
     /// 
     /// Subclasses may also use it for other labels, such as subtitle.
     /// 
-    /// See also [func@Pango.parse_markup].
+    /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useMarkup = useMarkup
@@ -333,12 +322,12 @@ if let selected, newValue != selected.wrappedValue {
     /// Whether to use the current value as the subtitle.
     /// 
     /// If you use a custom list item factory, you will need to give the row a
-    /// name conversion expression with [property@ComboRow:expression].
+    /// name conversion expression with ``expression(_:)``.
     /// 
-    /// If set to `TRUE`, you should not access [property@ActionRow:subtitle].
+    /// If set to `true`, you should not access ``subtitle(_:)``.
     /// 
     /// The subtitle is interpreted as Pango markup if
-    /// [property@PreferencesRow:use-markup] is set to `TRUE`.
+    /// ``useMarkup(_:)`` is set to `true`.
     public func useSubtitle(_ useSubtitle: Bool? = true) -> Self {
         var newSelf = self
         newSelf.useSubtitle = useSubtitle
