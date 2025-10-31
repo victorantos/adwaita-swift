@@ -2,7 +2,7 @@
 //  ExpanderRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -206,23 +206,17 @@ if let expanded, newValue != expanded.wrappedValue {
 
     /// Whether expansion is enabled.
     public func enableExpansion(_ enableExpansion: Binding<Bool>?) -> Self {
-        var newSelf = self
-        newSelf.enableExpansion = enableExpansion
-        return newSelf
+        modify { $0.enableExpansion = enableExpansion }
     }
 
     /// Whether the row is expanded.
     public func expanded(_ expanded: Binding<Bool>?) -> Self {
-        var newSelf = self
-        newSelf.expanded = expanded
-        return newSelf
+        modify { $0.expanded = expanded }
     }
 
     /// Whether the switch enabling the expansion is visible.
     public func showEnableSwitch(_ showEnableSwitch: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showEnableSwitch = showEnableSwitch
-        return newSelf
+        modify { $0.showEnableSwitch = showEnableSwitch }
     }
 
     /// The subtitle for this row.
@@ -230,9 +224,7 @@ if let expanded, newValue != expanded.wrappedValue {
     /// The subtitle is interpreted as Pango markup unless
     /// ``useMarkup(_:)`` is set to `false`.
     public func subtitle(_ subtitle: String?) -> Self {
-        var newSelf = self
-        newSelf.subtitle = subtitle
-        return newSelf
+        modify { $0.subtitle = subtitle }
     }
 
     /// The number of lines at the end of which the subtitle label will be
@@ -240,9 +232,7 @@ if let expanded, newValue != expanded.wrappedValue {
     /// 
     /// If the value is 0, the number of lines won't be limited.
     public func subtitleLines(_ subtitleLines: Int?) -> Self {
-        var newSelf = self
-        newSelf.subtitleLines = subtitleLines
-        return newSelf
+        modify { $0.subtitleLines = subtitleLines }
     }
 
     /// The title of the preference represented by this row.
@@ -250,27 +240,21 @@ if let expanded, newValue != expanded.wrappedValue {
     /// The title is interpreted as Pango markup unless
     /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
-        var newSelf = self
-        newSelf.title = title
-        return newSelf
+        modify { $0.title = title }
     }
 
     /// The number of lines at the end of which the title label will be ellipsized.
     /// 
     /// If the value is 0, the number of lines won't be limited.
     public func titleLines(_ titleLines: Int?) -> Self {
-        var newSelf = self
-        newSelf.titleLines = titleLines
-        return newSelf
+        modify { $0.titleLines = titleLines }
     }
 
     /// Whether the user can copy the title from the label.
     /// 
     /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.titleSelectable = titleSelectable
-        return newSelf
+        modify { $0.titleSelectable = titleSelectable }
     }
 
     /// Whether to use Pango markup for the title label.
@@ -279,16 +263,12 @@ if let expanded, newValue != expanded.wrappedValue {
     /// 
     /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useMarkup = useMarkup
-        return newSelf
+        modify { $0.useMarkup = useMarkup }
     }
 
     /// Whether an embedded underline in the title indicates a mnemonic.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// Set the body for "rows".

@@ -2,7 +2,7 @@
 //  Label.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -64,7 +64,7 @@ public struct Label: AdwaitaWidget {
     /// The mnemonic accelerator key for the label.
     var mnemonicKeyval: UInt?
     /// The widget to be activated when the labels mnemonic key is pressed.
-    var mnemonicWidget: (() -> Body)?
+    var mnemonicWidget: Body?
     /// Whether the label text can be selected with the mouse.
     var selectable: Bool?
     /// Whether the label is in single line mode.
@@ -122,7 +122,7 @@ public struct Label: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let mnemonicWidgetStorage = mnemonicWidget?().storage(data: data, type: type) {
+        if let mnemonicWidgetStorage = mnemonicWidget?.storage(data: data, type: type) {
             storage.content["mnemonicWidget"] = [mnemonicWidgetStorage]
             gtk_label_set_mnemonic_widget(storage.opaquePointer, mnemonicWidgetStorage.opaquePointer?.cast())
         }
@@ -154,7 +154,7 @@ public struct Label: AdwaitaWidget {
                 gtk_label_set_max_width_chars(widget, maxWidthChars.cInt)
             }
             if let widget = storage.content["mnemonicWidget"]?.first {
-                mnemonicWidget?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                mnemonicWidget?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let selectable, updateProperties, (storage.previousState as? Self)?.selectable != selectable {
                 gtk_label_set_selectable(widget, selectable.cBool)
@@ -196,9 +196,7 @@ public struct Label: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The contents of the label.
@@ -214,9 +212,7 @@ public struct Label: AdwaitaWidget {
     /// set the ``useUnderline(_:)`` property to true in order
     /// for the label to display them.
     public func label(_ label: String) -> Self {
-        var newSelf = self
-        newSelf.label = label
-        return newSelf
+        modify { $0.label = label }
     }
 
     /// The number of lines to which an ellipsized, wrapping label
@@ -235,9 +231,7 @@ public struct Label: AdwaitaWidget {
     /// 
     /// Set this property to -1 if you don't want to limit the number of lines.
     public func lines(_ lines: Int?) -> Self {
-        var newSelf = self
-        newSelf.lines = lines
-        return newSelf
+        modify { $0.lines = lines }
     }
 
     /// The desired maximum width of the label, in characters.
@@ -246,30 +240,22 @@ public struct Label: AdwaitaWidget {
     /// 
     /// See the section on [text layout](class.Label.html
     public func maxWidthChars(_ maxWidthChars: Int?) -> Self {
-        var newSelf = self
-        newSelf.maxWidthChars = maxWidthChars
-        return newSelf
+        modify { $0.maxWidthChars = maxWidthChars }
     }
 
     /// The mnemonic accelerator key for the label.
     public func mnemonicKeyval(_ mnemonicKeyval: UInt?) -> Self {
-        var newSelf = self
-        newSelf.mnemonicKeyval = mnemonicKeyval
-        return newSelf
+        modify { $0.mnemonicKeyval = mnemonicKeyval }
     }
 
     /// The widget to be activated when the labels mnemonic key is pressed.
-    public func mnemonicWidget(@ViewBuilder _ mnemonicWidget: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.mnemonicWidget = mnemonicWidget
-        return newSelf
+    public func mnemonicWidget(@ViewBuilder _ mnemonicWidget: () -> Body) -> Self {
+        modify { $0.mnemonicWidget = mnemonicWidget() }
     }
 
     /// Whether the label text can be selected with the mouse.
     public func selectable(_ selectable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.selectable = selectable
-        return newSelf
+        modify { $0.selectable = selectable }
     }
 
     /// Whether the label is in single line mode.
@@ -279,26 +265,20 @@ public struct Label: AdwaitaWidget {
     /// can be an advantage in situations where resizing the label because
     /// of text changes would be distracting, e.g. in a statusbar.
     public func singleLineMode(_ singleLineMode: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.singleLineMode = singleLineMode
-        return newSelf
+        modify { $0.singleLineMode = singleLineMode }
     }
 
     /// True if the text of the label includes Pango markup.
     /// 
     /// See `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useMarkup = useMarkup
-        return newSelf
+        modify { $0.useMarkup = useMarkup }
     }
 
     /// True if the text of the label indicates a mnemonic with an `_`
     /// before the mnemonic character.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// The desired width of the label, in characters.
@@ -307,16 +287,12 @@ public struct Label: AdwaitaWidget {
     /// 
     /// See the section on [text layout](class.Label.html
     public func widthChars(_ widthChars: Int?) -> Self {
-        var newSelf = self
-        newSelf.widthChars = widthChars
-        return newSelf
+        modify { $0.widthChars = widthChars }
     }
 
     /// True if the label text will wrap if it gets too wide.
     public func wrap(_ wrap: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.wrap = wrap
-        return newSelf
+        modify { $0.wrap = wrap }
     }
 
     /// The horizontal alignment of the label text inside its size allocation.
@@ -324,9 +300,7 @@ public struct Label: AdwaitaWidget {
     /// Compare this to ``halign(_:)``, which determines how the
     /// labels size allocation is positioned in the space available for the label.
     public func xalign(_ xalign: Float?) -> Self {
-        var newSelf = self
-        newSelf.xalign = xalign
-        return newSelf
+        modify { $0.xalign = xalign }
     }
 
     /// The vertical alignment of the label text inside its size allocation.
@@ -334,9 +308,7 @@ public struct Label: AdwaitaWidget {
     /// Compare this to ``valign(_:)``, which determines how the
     /// labels size allocation is positioned in the space available for the label.
     public func yalign(_ yalign: Float?) -> Self {
-        var newSelf = self
-        newSelf.yalign = yalign
-        return newSelf
+        modify { $0.yalign = yalign }
     }
 
     /// Gets emitted to copy the selection to the clipboard.

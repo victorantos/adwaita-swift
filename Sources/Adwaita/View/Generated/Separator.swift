@@ -2,7 +2,7 @@
 //  Separator.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -73,9 +73,7 @@ public struct Separator: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
 }

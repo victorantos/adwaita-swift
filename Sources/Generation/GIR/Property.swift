@@ -27,6 +27,10 @@ struct Property: Decodable {
     /// Whether the property is deprecated.
     var deprecated: Bool?
 
+    var isView: Bool {
+        (self.type?.isWidget ?? false) || (self.type?.isMenu ?? false)
+    }
+
     /// Get the Swift property name.
     /// - Parameter configuration: The generation configuration.
     /// - Returns: The name.
@@ -53,11 +57,10 @@ struct Property: Decodable {
         } else {
             type = (try? self.type?.generate(configuration: genConfig)) ?? "String"
         }
-        if (self.type?.isWidget ?? false) || (self.type?.isMenu ?? false) {
-            type = "\(modifier ? "@escaping " : "")(() -> Body)"
+        if isView {
+            type = modifier ? "() -> Body" : "Body"
         }
-        if !config.requiredProperties.contains(name)
-        && !(((self.type?.isWidget ?? false) || (self.type?.isMenu ?? false)) && modifier) {
+        if !config.requiredProperties.contains(name) && !(isView && modifier) {
             type += "?"
         }
         if defaultValue, let value = genConfig.defaultModifierValues[type] {
@@ -93,9 +96,7 @@ struct Property: Decodable {
 
         \(doc?.docComment(configuration: genConfig, indent: "    ") ?? "/// \(name)")
             public func \(convertPropertyName(configuration: genConfig))(\(builder)_ \(mainParameter)) -> Self {
-                var newSelf = self
-                newSelf.\(property) = \(property)
-                return newSelf
+                modify { $0.\(property) = \(property)\(isView ? "()" : "") }
             }
 
         """
@@ -117,7 +118,7 @@ struct Property: Decodable {
         guard !(type?.isWidget ?? false) else {
             return """
                         if let widget = storage.content["\(name)"]?.first {
-                            \(name)?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                            \(name)?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
                         }
 
             """
@@ -125,7 +126,7 @@ struct Property: Decodable {
         guard !(type?.isMenu ?? false) else {
             return """
                         if let menu = storage.content["\(name)"]?.first {
-                            MenuCollection { \(name)?() ?? [] }
+                            MenuCollection { \(name) ?? [] }
                                 .updateStorage(menu, data: data.noModifiers, updateProperties: updateProperties, type: MenuContext.self)
                         }
 
@@ -198,7 +199,7 @@ struct Property: Decodable {
         let name = convertPropertyName(configuration: genConfig)
         let view = (self.cast ?? config.cast) ? "storage.opaquePointer?.cast()" : "storage.opaquePointer"
         return """
-                if let \(name)Storage = \(name)?().storage(data: data, type: type) {
+                if let \(name)Storage = \(name)?.storage(data: data, type: type) {
                     storage.content["\(name)"] = [\(name)Storage]
                     \(setter)(\(view), \(name)Storage.opaquePointer?.cast())
                 }
@@ -224,8 +225,8 @@ struct Property: Decodable {
         let name = convertPropertyName(configuration: genConfig)
         let view = (self.cast ?? config.cast) ? "storage.opaquePointer?.cast()" : "storage.opaquePointer"
         return """
-                if let menu = \(name)?() {
-                    let childStorage = MenuCollection { menu }.getMenu(data: data)
+                if let \(name) {
+                    let childStorage = MenuCollection { \(name) }.getMenu(data: data)
                     storage.content["\(name)"] = [childStorage]
                     \(setter)(\(view), childStorage.opaquePointer?.cast())
                 }

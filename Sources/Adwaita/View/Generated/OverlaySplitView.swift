@@ -2,7 +2,7 @@
 //  OverlaySplitView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -61,7 +61,7 @@ public struct OverlaySplitView: AdwaitaWidget {
     /// content widget, otherwise they are displayed side by side.
     var collapsed: Bool?
     /// The content widget.
-    var content: (() -> Body)?
+    var content: Body?
     /// Whether the sidebar can be closed with a swipe gesture.
     /// 
     /// Only touchscreen swipes are supported.
@@ -95,7 +95,7 @@ public struct OverlaySplitView: AdwaitaWidget {
     /// Whether the sidebar widget is shown.
     var showSidebar: Binding<Bool>?
     /// The sidebar widget.
-    var sidebar: (() -> Body)?
+    var sidebar: Body?
     /// The preferred sidebar width as a fraction of the total width.
     /// 
     /// The preferred width is additionally limited by
@@ -121,11 +121,11 @@ public struct OverlaySplitView: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let contentStorage = content?().storage(data: data, type: type) {
+        if let contentStorage = content?.storage(data: data, type: type) {
             storage.content["content"] = [contentStorage]
             adw_overlay_split_view_set_content(storage.opaquePointer, contentStorage.opaquePointer?.cast())
         }
-        if let sidebarStorage = sidebar?().storage(data: data, type: type) {
+        if let sidebarStorage = sidebar?.storage(data: data, type: type) {
             storage.content["sidebar"] = [sidebarStorage]
             adw_overlay_split_view_set_sidebar(storage.opaquePointer, sidebarStorage.opaquePointer?.cast())
         }
@@ -152,7 +152,7 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
                 adw_overlay_split_view_set_collapsed(widget, collapsed.cBool)
             }
             if let widget = storage.content["content"]?.first {
-                content?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                content?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let enableHideGesture, updateProperties, (storage.previousState as? Self)?.enableHideGesture != enableHideGesture {
                 adw_overlay_split_view_set_enable_hide_gesture(widget, enableHideGesture.cBool)
@@ -173,7 +173,7 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
                 adw_overlay_split_view_set_show_sidebar(storage.opaquePointer, showSidebar.wrappedValue.cBool)
             }
             if let widget = storage.content["sidebar"]?.first {
-                sidebar?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                sidebar?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let sidebarWidthFraction, updateProperties, (storage.previousState as? Self)?.sidebarWidthFraction != sidebarWidthFraction {
                 adw_overlay_split_view_set_sidebar_width_fraction(widget, sidebarWidthFraction)
@@ -195,34 +195,26 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     /// When collapsed, the sidebar widget is presented as an overlay above the
     /// content widget, otherwise they are displayed side by side.
     public func collapsed(_ collapsed: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.collapsed = collapsed
-        return newSelf
+        modify { $0.collapsed = collapsed }
     }
 
     /// The content widget.
-    public func content(@ViewBuilder _ content: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.content = content
-        return newSelf
+    public func content(@ViewBuilder _ content: () -> Body) -> Self {
+        modify { $0.content = content() }
     }
 
     /// Whether the sidebar can be closed with a swipe gesture.
     /// 
     /// Only touchscreen swipes are supported.
     public func enableHideGesture(_ enableHideGesture: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.enableHideGesture = enableHideGesture
-        return newSelf
+        modify { $0.enableHideGesture = enableHideGesture }
     }
 
     /// Whether the sidebar can be opened with an edge swipe gesture.
     /// 
     /// Only touchscreen swipes are supported.
     public func enableShowGesture(_ enableShowGesture: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.enableShowGesture = enableShowGesture
-        return newSelf
+        modify { $0.enableShowGesture = enableShowGesture }
     }
 
     /// The maximum sidebar width.
@@ -233,9 +225,7 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     /// The sidebar widget can still be allocated with larger width if its own
     /// minimum width exceeds it.
     public func maxSidebarWidth(_ maxSidebarWidth: Double?) -> Self {
-        var newSelf = self
-        newSelf.maxSidebarWidth = maxSidebarWidth
-        return newSelf
+        modify { $0.maxSidebarWidth = maxSidebarWidth }
     }
 
     /// The minimum sidebar width.
@@ -246,9 +236,7 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     /// The sidebar widget can still be allocated with larger width if its own
     /// minimum width exceeds it.
     public func minSidebarWidth(_ minSidebarWidth: Double?) -> Self {
-        var newSelf = self
-        newSelf.minSidebarWidth = minSidebarWidth
-        return newSelf
+        modify { $0.minSidebarWidth = minSidebarWidth }
     }
 
     /// Whether the sidebar widget is pinned.
@@ -257,23 +245,17 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     /// uncollapsing it shows the sidebar. If set to `true`, sidebar visibility
     /// never changes on its own.
     public func pinSidebar(_ pinSidebar: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.pinSidebar = pinSidebar
-        return newSelf
+        modify { $0.pinSidebar = pinSidebar }
     }
 
     /// Whether the sidebar widget is shown.
     public func showSidebar(_ showSidebar: Binding<Bool>?) -> Self {
-        var newSelf = self
-        newSelf.showSidebar = showSidebar
-        return newSelf
+        modify { $0.showSidebar = showSidebar }
     }
 
     /// The sidebar widget.
-    public func sidebar(@ViewBuilder _ sidebar: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.sidebar = sidebar
-        return newSelf
+    public func sidebar(@ViewBuilder _ sidebar: () -> Body) -> Self {
+        modify { $0.sidebar = sidebar() }
     }
 
     /// The preferred sidebar width as a fraction of the total width.
@@ -285,9 +267,7 @@ if let showSidebar, newValue != showSidebar.wrappedValue {
     /// The sidebar widget can be allocated with larger width if its own minimum
     /// width exceeds the preferred width.
     public func sidebarWidthFraction(_ sidebarWidthFraction: Double?) -> Self {
-        var newSelf = self
-        newSelf.sidebarWidthFraction = sidebarWidthFraction
-        return newSelf
+        modify { $0.sidebarWidthFraction = sidebarWidthFraction }
     }
 
 }

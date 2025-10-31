@@ -2,7 +2,7 @@
 //  ToastOverlay.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -30,7 +30,7 @@ public struct ToastOverlay: AdwaitaWidget {
     var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
 
     /// The child widget.
-    var child: (() -> Body)?
+    var child: Body?
 
     /// Initialize `ToastOverlay`.
     public init() {
@@ -47,7 +47,7 @@ public struct ToastOverlay: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             adw_toast_overlay_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
@@ -65,7 +65,7 @@ public struct ToastOverlay: AdwaitaWidget {
         storage.modify { widget in
 
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
 
 
@@ -80,10 +80,8 @@ public struct ToastOverlay: AdwaitaWidget {
     }
 
     /// The child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
 }

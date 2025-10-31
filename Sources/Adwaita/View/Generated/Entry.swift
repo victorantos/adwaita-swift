@@ -2,7 +2,7 @@
 //  Entry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -69,7 +69,7 @@ public struct Entry: AdwaitaWidget {
     /// If undo/redo should be enabled for the editable.
     var enableUndo: Bool?
     /// A menu model whose contents will be appended to the context menu.
-    var extraMenu: (() -> Body)?
+    var extraMenu: Body?
     /// Whether the entry should draw a frame.
     var hasFrame: Bool?
     /// Which IM (input method) module should be used for this entry.
@@ -280,8 +280,8 @@ public struct Entry: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let menu = extraMenu?() {
-            let childStorage = MenuCollection { menu }.getMenu(data: data)
+        if let extraMenu {
+            let childStorage = MenuCollection { extraMenu }.getMenu(data: data)
             storage.content["extraMenu"] = [childStorage]
             gtk_entry_set_extra_menu(storage.opaquePointer?.cast(), childStorage.opaquePointer?.cast())
         }
@@ -354,7 +354,7 @@ if let text, newValue != text.wrappedValue {
                 gtk_editable_set_enable_undo(widget, enableUndo.cBool)
             }
             if let menu = storage.content["extraMenu"]?.first {
-                MenuCollection { extraMenu?() ?? [] }
+                MenuCollection { extraMenu ?? [] }
                     .updateStorage(menu, data: data.noModifiers, updateProperties: updateProperties, type: MenuContext.self)
             }
             if let hasFrame, updateProperties, (storage.previousState as? Self)?.hasFrame != hasFrame {
@@ -409,59 +409,43 @@ if let text, newValue != text.wrappedValue {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The current position of the insertion cursor in chars.
     public func cursorPosition(_ cursorPosition: Int?) -> Self {
-        var newSelf = self
-        newSelf.cursorPosition = cursorPosition
-        return newSelf
+        modify { $0.cursorPosition = cursorPosition }
     }
 
     /// Whether the entry contents can be edited.
     public func editable(_ editable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.editable = editable
-        return newSelf
+        modify { $0.editable = editable }
     }
 
     /// Indicates whether editing on the cell has been canceled.
     public func editingCanceled(_ editingCanceled: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.editingCanceled = editingCanceled
-        return newSelf
+        modify { $0.editingCanceled = editingCanceled }
     }
 
     /// Whether to suggest Emoji replacements for :-delimited names
     /// like `:heart:`.
     public func enableEmojiCompletion(_ enableEmojiCompletion: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.enableEmojiCompletion = enableEmojiCompletion
-        return newSelf
+        modify { $0.enableEmojiCompletion = enableEmojiCompletion }
     }
 
     /// If undo/redo should be enabled for the editable.
     public func enableUndo(_ enableUndo: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.enableUndo = enableUndo
-        return newSelf
+        modify { $0.enableUndo = enableUndo }
     }
 
     /// A menu model whose contents will be appended to the context menu.
-    public func extraMenu(@ViewBuilder _ extraMenu: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.extraMenu = extraMenu
-        return newSelf
+    public func extraMenu(@ViewBuilder _ extraMenu: () -> Body) -> Self {
+        modify { $0.extraMenu = extraMenu() }
     }
 
     /// Whether the entry should draw a frame.
     public func hasFrame(_ hasFrame: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.hasFrame = hasFrame
-        return newSelf
+        modify { $0.hasFrame = hasFrame }
     }
 
     /// Which IM (input method) module should be used for this entry.
@@ -472,37 +456,27 @@ if let text, newValue != text.wrappedValue {
     /// module setting. See the GtkSettings ``gtkImModule(_:)``
     /// property.
     public func imModule(_ imModule: String?) -> Self {
-        var newSelf = self
-        newSelf.imModule = imModule
-        return newSelf
+        modify { $0.imModule = imModule }
     }
 
     /// The character to use when masking entry contents (“password mode”).
     public func invisibleCharacter(_ invisibleCharacter: UInt?) -> Self {
-        var newSelf = self
-        newSelf.invisibleCharacter = invisibleCharacter
-        return newSelf
+        modify { $0.invisibleCharacter = invisibleCharacter }
     }
 
     /// Whether the invisible char has been set for the `GtkEntry`.
     public func invisibleCharacterSet(_ invisibleCharacterSet: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.invisibleCharacterSet = invisibleCharacterSet
-        return newSelf
+        modify { $0.invisibleCharacterSet = invisibleCharacterSet }
     }
 
     /// Maximum number of characters for this entry.
     public func maxLength(_ maxLength: Int?) -> Self {
-        var newSelf = self
-        newSelf.maxLength = maxLength
-        return newSelf
+        modify { $0.maxLength = maxLength }
     }
 
     /// The desired maximum width of the entry, in characters.
     public func maxWidthChars(_ maxWidthChars: Int?) -> Self {
-        var newSelf = self
-        newSelf.maxWidthChars = maxWidthChars
-        return newSelf
+        modify { $0.maxWidthChars = maxWidthChars }
     }
 
     /// Text for an item in the context menu to activate the primary icon action.
@@ -518,9 +492,7 @@ if let text, newValue != text.wrappedValue {
     /// menu. This set of methods greatly simplifies this, by adding a menu item that, when
     /// enabled, calls the same callback than clicking on the icon.
     public func menuEntryIconPrimaryText(_ menuEntryIconPrimaryText: String?) -> Self {
-        var newSelf = self
-        newSelf.menuEntryIconPrimaryText = menuEntryIconPrimaryText
-        return newSelf
+        modify { $0.menuEntryIconPrimaryText = menuEntryIconPrimaryText }
     }
 
     /// Text for an item in the context menu to activate the secondary icon action.
@@ -536,24 +508,18 @@ if let text, newValue != text.wrappedValue {
     /// menu. This set of methods greatly simplifies this, by adding a menu item that, when
     /// enabled, calls the same callback than clicking on the icon.
     public func menuEntryIconSecondaryText(_ menuEntryIconSecondaryText: String?) -> Self {
-        var newSelf = self
-        newSelf.menuEntryIconSecondaryText = menuEntryIconSecondaryText
-        return newSelf
+        modify { $0.menuEntryIconSecondaryText = menuEntryIconSecondaryText }
     }
 
     /// If text is overwritten when typing in the `GtkEntry`.
     public func overwriteMode(_ overwriteMode: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.overwriteMode = overwriteMode
-        return newSelf
+        modify { $0.overwriteMode = overwriteMode }
     }
 
     /// The text that will be displayed in the `GtkEntry` when it is empty
     /// and unfocused.
     public func placeholderText(_ placeholderText: String?) -> Self {
-        var newSelf = self
-        newSelf.placeholderText = placeholderText
-        return newSelf
+        modify { $0.placeholderText = placeholderText }
     }
 
     /// Whether the primary icon is activatable.
@@ -565,16 +531,12 @@ if let text, newValue != text.wrappedValue {
     /// Sensitive, but non-activatable icons can be used for purely
     /// informational purposes.
     public func primaryIconActivatable(_ primaryIconActivatable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.primaryIconActivatable = primaryIconActivatable
-        return newSelf
+        modify { $0.primaryIconActivatable = primaryIconActivatable }
     }
 
     /// The icon name to use for the primary icon for the entry.
     public func primaryIconName(_ primaryIconName: String?) -> Self {
-        var newSelf = self
-        newSelf.primaryIconName = primaryIconName
-        return newSelf
+        modify { $0.primaryIconName = primaryIconName }
     }
 
     /// Whether the primary icon is sensitive.
@@ -586,34 +548,26 @@ if let text, newValue != text.wrappedValue {
     /// An icon should be set insensitive if the action that would trigger
     /// when clicked is currently not available.
     public func primaryIconSensitive(_ primaryIconSensitive: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.primaryIconSensitive = primaryIconSensitive
-        return newSelf
+        modify { $0.primaryIconSensitive = primaryIconSensitive }
     }
 
     /// The contents of the tooltip on the primary icon, with markup.
     /// 
     /// Also see `Gtk.Entry.set_icon_tooltip_markup`.
     public func primaryIconTooltipMarkup(_ primaryIconTooltipMarkup: String?) -> Self {
-        var newSelf = self
-        newSelf.primaryIconTooltipMarkup = primaryIconTooltipMarkup
-        return newSelf
+        modify { $0.primaryIconTooltipMarkup = primaryIconTooltipMarkup }
     }
 
     /// The contents of the tooltip on the primary icon.
     /// 
     /// Also see `Gtk.Entry.set_icon_tooltip_text`.
     public func primaryIconTooltipText(_ primaryIconTooltipText: String?) -> Self {
-        var newSelf = self
-        newSelf.primaryIconTooltipText = primaryIconTooltipText
-        return newSelf
+        modify { $0.primaryIconTooltipText = primaryIconTooltipText }
     }
 
     /// The current fraction of the task that's been completed.
     public func progressFraction(_ progressFraction: Double?) -> Self {
-        var newSelf = self
-        newSelf.progressFraction = progressFraction
-        return newSelf
+        modify { $0.progressFraction = progressFraction }
     }
 
     /// The fraction of total entry width to move the progress
@@ -621,16 +575,12 @@ if let text, newValue != text.wrappedValue {
     /// 
     /// See `Gtk.Entry.progress_pulse`.
     public func progressPulseStep(_ progressPulseStep: Double?) -> Self {
-        var newSelf = self
-        newSelf.progressPulseStep = progressPulseStep
-        return newSelf
+        modify { $0.progressPulseStep = progressPulseStep }
     }
 
     /// Number of pixels of the entry scrolled off the screen to the left.
     public func scrollOffset(_ scrollOffset: Int?) -> Self {
-        var newSelf = self
-        newSelf.scrollOffset = scrollOffset
-        return newSelf
+        modify { $0.scrollOffset = scrollOffset }
     }
 
     /// Whether the secondary icon is activatable.
@@ -642,16 +592,12 @@ if let text, newValue != text.wrappedValue {
     /// Sensitive, but non-activatable icons can be used for purely
     /// informational purposes.
     public func secondaryIconActivatable(_ secondaryIconActivatable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.secondaryIconActivatable = secondaryIconActivatable
-        return newSelf
+        modify { $0.secondaryIconActivatable = secondaryIconActivatable }
     }
 
     /// The icon name to use for the secondary icon for the entry.
     public func secondaryIconName(_ secondaryIconName: String?) -> Self {
-        var newSelf = self
-        newSelf.secondaryIconName = secondaryIconName
-        return newSelf
+        modify { $0.secondaryIconName = secondaryIconName }
     }
 
     /// Whether the secondary icon is sensitive.
@@ -663,87 +609,65 @@ if let text, newValue != text.wrappedValue {
     /// An icon should be set insensitive if the action that would trigger
     /// when clicked is currently not available.
     public func secondaryIconSensitive(_ secondaryIconSensitive: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.secondaryIconSensitive = secondaryIconSensitive
-        return newSelf
+        modify { $0.secondaryIconSensitive = secondaryIconSensitive }
     }
 
     /// The contents of the tooltip on the secondary icon, with markup.
     /// 
     /// Also see `Gtk.Entry.set_icon_tooltip_markup`.
     public func secondaryIconTooltipMarkup(_ secondaryIconTooltipMarkup: String?) -> Self {
-        var newSelf = self
-        newSelf.secondaryIconTooltipMarkup = secondaryIconTooltipMarkup
-        return newSelf
+        modify { $0.secondaryIconTooltipMarkup = secondaryIconTooltipMarkup }
     }
 
     /// The contents of the tooltip on the secondary icon.
     /// 
     /// Also see `Gtk.Entry.set_icon_tooltip_text`.
     public func secondaryIconTooltipText(_ secondaryIconTooltipText: String?) -> Self {
-        var newSelf = self
-        newSelf.secondaryIconTooltipText = secondaryIconTooltipText
-        return newSelf
+        modify { $0.secondaryIconTooltipText = secondaryIconTooltipText }
     }
 
     /// The position of the opposite end of the selection from the cursor in chars.
     public func selectionBound(_ selectionBound: Int?) -> Self {
-        var newSelf = self
-        newSelf.selectionBound = selectionBound
-        return newSelf
+        modify { $0.selectionBound = selectionBound }
     }
 
     /// Whether the entry will show an Emoji icon in the secondary icon position
     /// to open the Emoji chooser.
     public func showEmojiIcon(_ showEmojiIcon: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showEmojiIcon = showEmojiIcon
-        return newSelf
+        modify { $0.showEmojiIcon = showEmojiIcon }
     }
 
     /// The contents of the entry.
     public func text(_ text: Binding<String>?) -> Self {
-        var newSelf = self
-        newSelf.text = text
-        return newSelf
+        modify { $0.text = text }
     }
 
     /// The length of the text in the `GtkEntry`.
     public func textLength(_ textLength: UInt?) -> Self {
-        var newSelf = self
-        newSelf.textLength = textLength
-        return newSelf
+        modify { $0.textLength = textLength }
     }
 
     /// When `true`, pasted multi-line text is truncated to the first line.
     public func truncateMultiline(_ truncateMultiline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.truncateMultiline = truncateMultiline
-        return newSelf
+        modify { $0.truncateMultiline = truncateMultiline }
     }
 
     /// Whether the entry should show the “invisible char” instead of the
     /// actual text (“password mode”).
     public func visibility(_ visibility: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.visibility = visibility
-        return newSelf
+        modify { $0.visibility = visibility }
     }
 
     /// Number of characters to leave space for in the entry.
     public func widthChars(_ widthChars: Int?) -> Self {
-        var newSelf = self
-        newSelf.widthChars = widthChars
-        return newSelf
+        modify { $0.widthChars = widthChars }
     }
 
     /// The horizontal alignment, from 0 (left) to 1 (right).
     /// 
     /// Reversed for RTL layouts.
     public func xalign(_ xalign: Float?) -> Self {
-        var newSelf = self
-        newSelf.xalign = xalign
-        return newSelf
+        modify { $0.xalign = xalign }
     }
 
     /// Emitted when the entry is activated.

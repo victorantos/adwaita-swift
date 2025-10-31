@@ -2,7 +2,7 @@
 //  PreferencesPage.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -116,44 +116,32 @@ public struct PreferencesPage: AdwaitaWidget {
 
     /// The description to be displayed at the top of the page.
     public func description(_ description: String?) -> Self {
-        var newSelf = self
-        newSelf.description = description
-        return newSelf
+        modify { $0.description = description }
     }
 
     /// Whether the description should be centered.
     public func descriptionCentered(_ descriptionCentered: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.descriptionCentered = descriptionCentered
-        return newSelf
+        modify { $0.descriptionCentered = descriptionCentered }
     }
 
     /// The icon name for this page.
     public func iconName(_ iconName: String?) -> Self {
-        var newSelf = self
-        newSelf.iconName = iconName
-        return newSelf
+        modify { $0.iconName = iconName }
     }
 
     /// The name of this page.
     public func name(_ name: String?) -> Self {
-        var newSelf = self
-        newSelf.name = name
-        return newSelf
+        modify { $0.name = name }
     }
 
     /// The title for this page.
     public func title(_ title: String?) -> Self {
-        var newSelf = self
-        newSelf.title = title
-        return newSelf
+        modify { $0.title = title }
     }
 
     /// Whether an embedded underline in the title indicates a mnemonic.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// Set the body for "child".

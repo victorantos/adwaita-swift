@@ -2,7 +2,7 @@
 //  Avatar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -107,25 +107,19 @@ public struct Avatar: AdwaitaWidget {
     /// 
     /// If no name is set, `avatar-default-symbolic` will be used.
     public func iconName(_ iconName: String?) -> Self {
-        var newSelf = self
-        newSelf.iconName = iconName
-        return newSelf
+        modify { $0.iconName = iconName }
     }
 
     /// Whether initials are used instead of an icon on the fallback avatar.
     /// 
     /// See ``iconName(_:)`` for how to change the fallback icon.
     public func showInitials(_ showInitials: Bool) -> Self {
-        var newSelf = self
-        newSelf.showInitials = showInitials
-        return newSelf
+        modify { $0.showInitials = showInitials }
     }
 
     /// The size of the avatar.
     public func size(_ size: Int) -> Self {
-        var newSelf = self
-        newSelf.size = size
-        return newSelf
+        modify { $0.size = size }
     }
 
     /// Sets the text used to generate the fallback initials and color.
@@ -133,9 +127,7 @@ public struct Avatar: AdwaitaWidget {
     /// It's only used to generate the color if ``showInitials(_:)`` is
     /// `false`.
     public func text(_ text: String?) -> Self {
-        var newSelf = self
-        newSelf.text = text
-        return newSelf
+        modify { $0.text = text }
     }
 
 }

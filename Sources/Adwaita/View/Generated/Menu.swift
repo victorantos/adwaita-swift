@@ -2,7 +2,7 @@
 //  Menu.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -61,7 +61,7 @@ public struct Menu: AdwaitaWidget {
     /// size of its contents.
     var canShrink: Bool?
     /// The child widget.
-    var child: (() -> Body)?
+    var child: Body?
     /// Whether the button has a frame.
     var hasFrame: Bool?
     /// The name of the icon used to automatically populate the button.
@@ -72,7 +72,7 @@ public struct Menu: AdwaitaWidget {
     /// 
     /// See `Gtk.MenuButton.set_menu_model` for the interaction
     /// with the ``popover(_:)`` property.
-    var menuModel: (() -> Body)?
+    var menuModel: Body?
     /// Whether the menu button acts as a primary menu.
     /// 
     /// Primary menus can be opened using the <kbd>F10</kbd> key
@@ -100,12 +100,12 @@ public struct Menu: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_menu_button_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
-        if let menu = menuModel?() {
-            let childStorage = MenuCollection { menu }.getMenu(data: data)
+        if let menuModel {
+            let childStorage = MenuCollection { menuModel }.getMenu(data: data)
             storage.content["menuModel"] = [childStorage]
             gtk_menu_button_set_menu_model(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
@@ -143,7 +143,7 @@ if let active, newValue != active.wrappedValue {
                 gtk_menu_button_set_can_shrink(widget, canShrink.cBool)
             }
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let hasFrame, updateProperties, (storage.previousState as? Self)?.hasFrame != hasFrame {
                 gtk_menu_button_set_has_frame(widget, hasFrame.cBool)
@@ -155,7 +155,7 @@ if let active, newValue != active.wrappedValue {
                 gtk_menu_button_set_label(widget, label)
             }
             if let menu = storage.content["menuModel"]?.first {
-                MenuCollection { menuModel?() ?? [] }
+                MenuCollection { menuModel ?? [] }
                     .updateStorage(menu, data: data.noModifiers, updateProperties: updateProperties, type: MenuContext.self)
             }
             if let primary, updateProperties, (storage.previousState as? Self)?.primary != primary {
@@ -180,85 +180,63 @@ if let active, newValue != active.wrappedValue {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// Whether the menu button is active.
     public func active(_ active: Binding<Bool>?) -> Self {
-        var newSelf = self
-        newSelf.active = active
-        return newSelf
+        modify { $0.active = active }
     }
 
     /// Whether to show a dropdown arrow even when using an icon or a custom child.
     public func alwaysShowArrow(_ alwaysShowArrow: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.alwaysShowArrow = alwaysShowArrow
-        return newSelf
+        modify { $0.alwaysShowArrow = alwaysShowArrow }
     }
 
     /// Whether the size of the button can be made smaller than the natural
     /// size of its contents.
     public func canShrink(_ canShrink: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.canShrink = canShrink
-        return newSelf
+        modify { $0.canShrink = canShrink }
     }
 
     /// The child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// Whether the button has a frame.
     public func hasFrame(_ hasFrame: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.hasFrame = hasFrame
-        return newSelf
+        modify { $0.hasFrame = hasFrame }
     }
 
     /// The name of the icon used to automatically populate the button.
     public func iconName(_ iconName: String?) -> Self {
-        var newSelf = self
-        newSelf.iconName = iconName
-        return newSelf
+        modify { $0.iconName = iconName }
     }
 
     /// The label for the button.
     public func label(_ label: String?) -> Self {
-        var newSelf = self
-        newSelf.label = label
-        return newSelf
+        modify { $0.label = label }
     }
 
     /// The `GMenuModel` from which the popup will be created.
     /// 
     /// See `Gtk.MenuButton.set_menu_model` for the interaction
     /// with the ``popover(_:)`` property.
-    public func menuModel(@ViewBuilder _ menuModel: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.menuModel = menuModel
-        return newSelf
+    public func menuModel(@ViewBuilder _ menuModel: () -> Body) -> Self {
+        modify { $0.menuModel = menuModel() }
     }
 
     /// Whether the menu button acts as a primary menu.
     /// 
     /// Primary menus can be opened using the <kbd>F10</kbd> key
     public func primary(_ primary: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.primary = primary
-        return newSelf
+        modify { $0.primary = primary }
     }
 
     /// If set an underscore in the text indicates a mnemonic.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// Emitted to when the menu button is activated.

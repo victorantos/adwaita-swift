@@ -2,7 +2,7 @@
 //  ButtonContent.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -110,25 +110,19 @@ public struct ButtonContent: AdwaitaWidget {
     /// 
     /// See ``canShrink(_:)``.
     public func canShrink(_ canShrink: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.canShrink = canShrink
-        return newSelf
+        modify { $0.canShrink = canShrink }
     }
 
     /// The name of the displayed icon.
     /// 
     /// If empty, the icon is not shown.
     public func iconName(_ iconName: String?) -> Self {
-        var newSelf = self
-        newSelf.iconName = iconName
-        return newSelf
+        modify { $0.iconName = iconName }
     }
 
     /// The displayed label.
     public func label(_ label: String?) -> Self {
-        var newSelf = self
-        newSelf.label = label
-        return newSelf
+        modify { $0.label = label }
     }
 
     /// Whether an underline in the text indicates a mnemonic.
@@ -137,9 +131,7 @@ public struct ButtonContent: AdwaitaWidget {
     /// 
     /// See ``label(_:)``.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
 }

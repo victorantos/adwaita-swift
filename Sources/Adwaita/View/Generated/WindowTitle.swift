@@ -2,7 +2,7 @@
 //  WindowTitle.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -85,9 +85,7 @@ public struct WindowTitle: AdwaitaWidget {
     /// 
     /// The subtitle should give the user additional details.
     public func subtitle(_ subtitle: String) -> Self {
-        var newSelf = self
-        newSelf.subtitle = subtitle
-        return newSelf
+        modify { $0.subtitle = subtitle }
     }
 
     /// The title to display.
@@ -95,9 +93,7 @@ public struct WindowTitle: AdwaitaWidget {
     /// The title typically identifies the current view or content item, and
     /// generally does not use the application name.
     public func title(_ title: String) -> Self {
-        var newSelf = self
-        newSelf.title = title
-        return newSelf
+        modify { $0.title = title }
     }
 
 }

@@ -2,7 +2,7 @@
 //  ScrolledWindow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -56,7 +56,7 @@ public struct ScrolledWindow: AdwaitaWidget {
     /// When setting this property, if the child widget does not implement
     /// `Gtk.Scrollable`, the scrolled window will add the child to
     /// a `Gtk.Viewport` and then set the viewport as the child.
-    var child: (() -> Body)?
+    var child: Body?
     /// Whether to draw a frame around the contents.
     var hasFrame: Bool?
     /// When the horizontal scrollbar is displayed.
@@ -154,7 +154,7 @@ public struct ScrolledWindow: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_scrolled_window_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
@@ -192,7 +192,7 @@ public struct ScrolledWindow: AdwaitaWidget {
         storage.modify { widget in
 
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let hasFrame, updateProperties, (storage.previousState as? Self)?.hasFrame != hasFrame {
                 gtk_scrolled_window_set_has_frame(widget, hasFrame.cBool)
@@ -246,9 +246,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The child widget.
@@ -256,17 +254,13 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// When setting this property, if the child widget does not implement
     /// `Gtk.Scrollable`, the scrolled window will add the child to
     /// a `Gtk.Viewport` and then set the viewport as the child.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// Whether to draw a frame around the contents.
     public func hasFrame(_ hasFrame: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.hasFrame = hasFrame
-        return newSelf
+        modify { $0.hasFrame = hasFrame }
     }
 
     /// When the horizontal scrollbar is displayed.
@@ -274,46 +268,34 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// Use `Gtk.ScrolledWindow.set_policy` to set
     /// this property.
     public func hscrollbarPolicy(_ hscrollbarPolicy: ScrollbarVisibility?) -> Self {
-        var newSelf = self
-        newSelf.hscrollbarPolicy = hscrollbarPolicy
-        return newSelf
+        modify { $0.hscrollbarPolicy = hscrollbarPolicy }
     }
 
     /// Whether kinetic scrolling is enabled or not.
     /// 
     /// Kinetic scrolling only applies to devices with source %GDK_SOURCE_TOUCHSCREEN.
     public func kineticScrolling(_ kineticScrolling: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.kineticScrolling = kineticScrolling
-        return newSelf
+        modify { $0.kineticScrolling = kineticScrolling }
     }
 
     /// The maximum content height of @scrolled_window.
     public func maxContentHeight(_ maxContentHeight: Int?) -> Self {
-        var newSelf = self
-        newSelf.maxContentHeight = maxContentHeight
-        return newSelf
+        modify { $0.maxContentHeight = maxContentHeight }
     }
 
     /// The maximum content width of @scrolled_window.
     public func maxContentWidth(_ maxContentWidth: Int?) -> Self {
-        var newSelf = self
-        newSelf.maxContentWidth = maxContentWidth
-        return newSelf
+        modify { $0.maxContentWidth = maxContentWidth }
     }
 
     /// The minimum content height of @scrolled_window.
     public func minContentHeight(_ minContentHeight: Int?) -> Self {
-        var newSelf = self
-        newSelf.minContentHeight = minContentHeight
-        return newSelf
+        modify { $0.minContentHeight = minContentHeight }
     }
 
     /// The minimum content width of @scrolled_window.
     public func minContentWidth(_ minContentWidth: Int?) -> Self {
-        var newSelf = self
-        newSelf.minContentWidth = minContentWidth
-        return newSelf
+        modify { $0.minContentWidth = minContentWidth }
     }
 
     /// Whether overlay scrolling is enabled or not.
@@ -325,9 +307,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// Note that overlay scrolling can also be globally disabled, with
     /// the ``gtkOverlayScrolling(_:)`` setting.
     public func overlayScrolling(_ overlayScrolling: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.overlayScrolling = overlayScrolling
-        return newSelf
+        modify { $0.overlayScrolling = overlayScrolling }
     }
 
     /// Whether the natural height of the child should be calculated and propagated
@@ -336,9 +316,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// This is useful in cases where an attempt should be made to allocate exactly
     /// enough space for the natural size of the child.
     public func propagateNaturalHeight(_ propagateNaturalHeight: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.propagateNaturalHeight = propagateNaturalHeight
-        return newSelf
+        modify { $0.propagateNaturalHeight = propagateNaturalHeight }
     }
 
     /// Whether the natural width of the child should be calculated and propagated
@@ -347,9 +325,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// This is useful in cases where an attempt should be made to allocate exactly
     /// enough space for the natural size of the child.
     public func propagateNaturalWidth(_ propagateNaturalWidth: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.propagateNaturalWidth = propagateNaturalWidth
-        return newSelf
+        modify { $0.propagateNaturalWidth = propagateNaturalWidth }
     }
 
     /// When the vertical scrollbar is displayed.
@@ -357,9 +333,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// Use `Gtk.ScrolledWindow.set_policy` to set
     /// this property.
     public func vscrollbarPolicy(_ vscrollbarPolicy: ScrollbarVisibility?) -> Self {
-        var newSelf = self
-        newSelf.vscrollbarPolicy = vscrollbarPolicy
-        return newSelf
+        modify { $0.vscrollbarPolicy = vscrollbarPolicy }
     }
 
     /// Emitted whenever user initiated scrolling makes the scrolled

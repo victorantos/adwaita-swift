@@ -2,7 +2,7 @@
 //  CheckButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -39,7 +39,7 @@ public struct CheckButton: AdwaitaWidget {
     /// the check button and the indicator CSS node.
     var active: Binding<Bool>?
     /// The child widget.
-    var child: (() -> Body)?
+    var child: Body?
     /// If the check button is in an “in between” state.
     /// 
     /// The inconsistent state only affects visual appearance,
@@ -80,7 +80,7 @@ public struct CheckButton: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_check_button_set_child(storage.opaquePointer?.cast(), childStorage.opaquePointer?.cast())
         }
@@ -120,7 +120,7 @@ if let active, newValue != active.wrappedValue {
                 gtk_check_button_set_active(storage.opaquePointer?.cast(), active.wrappedValue.cBool)
             }
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let inconsistent, updateProperties, (storage.previousState as? Self)?.inconsistent != inconsistent {
                 gtk_check_button_set_inconsistent(widget?.cast(), inconsistent.cBool)
@@ -147,16 +147,12 @@ if let active, newValue != active.wrappedValue {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The name of the action with which this widget should be associated.
     public func actionName(_ actionName: String?) -> Self {
-        var newSelf = self
-        newSelf.actionName = actionName
-        return newSelf
+        modify { $0.actionName = actionName }
     }
 
     /// If the check button is active.
@@ -164,16 +160,12 @@ if let active, newValue != active.wrappedValue {
     /// Setting `active` to `true` will add the `:checked:` state to both
     /// the check button and the indicator CSS node.
     public func active(_ active: Binding<Bool>?) -> Self {
-        var newSelf = self
-        newSelf.active = active
-        return newSelf
+        modify { $0.active = active }
     }
 
     /// The child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// If the check button is in an “in between” state.
@@ -181,24 +173,18 @@ if let active, newValue != active.wrappedValue {
     /// The inconsistent state only affects visual appearance,
     /// not the semantics of the button.
     public func inconsistent(_ inconsistent: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.inconsistent = inconsistent
-        return newSelf
+        modify { $0.inconsistent = inconsistent }
     }
 
     /// Text of the label inside the check button, if it contains a label widget.
     public func label(_ label: String?) -> Self {
-        var newSelf = self
-        newSelf.label = label
-        return newSelf
+        modify { $0.label = label }
     }
 
     /// If set, an underline in the text indicates that the following
     /// character is to be used as mnemonic.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// Emitted to when the check button is activated.

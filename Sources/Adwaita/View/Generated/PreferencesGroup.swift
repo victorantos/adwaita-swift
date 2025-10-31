@@ -2,7 +2,7 @@
 //  PreferencesGroup.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -37,7 +37,7 @@ public struct PreferencesGroup: AdwaitaWidget {
     /// 
     /// Suffixes are commonly used to show a button or a spinner for the whole
     /// group.
-    var headerSuffix: (() -> Body)?
+    var headerSuffix: Body?
     /// Whether to separate rows.
     /// 
     /// Equivalent to using the
@@ -63,7 +63,7 @@ public struct PreferencesGroup: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let headerSuffixStorage = headerSuffix?().storage(data: data, type: type) {
+        if let headerSuffixStorage = headerSuffix?.storage(data: data, type: type) {
             storage.content["headerSuffix"] = [headerSuffixStorage]
             adw_preferences_group_set_header_suffix(storage.opaquePointer?.cast(), headerSuffixStorage.opaquePointer?.cast())
         }
@@ -90,7 +90,7 @@ public struct PreferencesGroup: AdwaitaWidget {
                 adw_preferences_group_set_description(widget?.cast(), description)
             }
             if let widget = storage.content["headerSuffix"]?.first {
-                headerSuffix?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                headerSuffix?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let separateRows, updateProperties, (storage.previousState as? Self)?.separateRows != separateRows {
                 adw_preferences_group_set_separate_rows(widget?.cast(), separateRows.cBool)
@@ -124,9 +124,7 @@ public struct PreferencesGroup: AdwaitaWidget {
 
     /// The description for this group of preferences.
     public func description(_ description: String?) -> Self {
-        var newSelf = self
-        newSelf.description = description
-        return newSelf
+        modify { $0.description = description }
     }
 
     /// The header suffix widget.
@@ -135,10 +133,8 @@ public struct PreferencesGroup: AdwaitaWidget {
     /// 
     /// Suffixes are commonly used to show a button or a spinner for the whole
     /// group.
-    public func headerSuffix(@ViewBuilder _ headerSuffix: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.headerSuffix = headerSuffix
-        return newSelf
+    public func headerSuffix(@ViewBuilder _ headerSuffix: () -> Body) -> Self {
+        modify { $0.headerSuffix = headerSuffix() }
     }
 
     /// Whether to separate rows.
@@ -146,16 +142,12 @@ public struct PreferencesGroup: AdwaitaWidget {
     /// Equivalent to using the
     /// [`.boxed-list-separate`](style-classes.html
     public func separateRows(_ separateRows: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.separateRows = separateRows
-        return newSelf
+        modify { $0.separateRows = separateRows }
     }
 
     /// The title for this group of preferences.
     public func title(_ title: String?) -> Self {
-        var newSelf = self
-        newSelf.title = title
-        return newSelf
+        modify { $0.title = title }
     }
 
     /// Set the body for "child".

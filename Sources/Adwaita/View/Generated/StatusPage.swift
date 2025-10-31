@@ -2,7 +2,7 @@
 //  StatusPage.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -24,7 +24,7 @@ public struct StatusPage: AdwaitaWidget {
     var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
 
     /// The child widget.
-    var child: (() -> Body)?
+    var child: Body?
     /// The description markup to be displayed below the title.
     var description: String?
     /// The name of the icon to be used.
@@ -51,7 +51,7 @@ public struct StatusPage: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             adw_status_page_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
@@ -69,7 +69,7 @@ public struct StatusPage: AdwaitaWidget {
         storage.modify { widget in
 
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let description, updateProperties, (storage.previousState as? Self)?.description != description {
                 adw_status_page_set_description(widget, description)
@@ -93,35 +93,27 @@ public struct StatusPage: AdwaitaWidget {
     }
 
     /// The child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// The description markup to be displayed below the title.
     public func description(_ description: String?) -> Self {
-        var newSelf = self
-        newSelf.description = description
-        return newSelf
+        modify { $0.description = description }
     }
 
     /// The name of the icon to be used.
     /// 
     /// Changing this will set ``paintable(_:)`` to `NULL`.
     public func iconName(_ iconName: String?) -> Self {
-        var newSelf = self
-        newSelf.iconName = iconName
-        return newSelf
+        modify { $0.iconName = iconName }
     }
 
     /// The title to be displayed below the icon.
     /// 
     /// It is not parsed as Pango markup.
     public func title(_ title: String?) -> Self {
-        var newSelf = self
-        newSelf.title = title
-        return newSelf
+        modify { $0.title = title }
     }
 
 }

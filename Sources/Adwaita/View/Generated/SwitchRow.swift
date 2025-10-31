@@ -2,7 +2,7 @@
 //  SwitchRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -46,7 +46,7 @@ public struct SwitchRow: AdwaitaWidget {
     /// 
     /// The target widget will be activated by emitting the
     /// `Gtk.Widget::mnemonic-activate` signal on it.
-    var activatableWidget: (() -> Body)?
+    var activatableWidget: Body?
     /// Whether the switch row is in the "on" or "off" position.
     var active: Binding<Bool>?
     /// The subtitle for this row.
@@ -106,7 +106,7 @@ public struct SwitchRow: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let activatableWidgetStorage = activatableWidget?().storage(data: data, type: type) {
+        if let activatableWidgetStorage = activatableWidget?.storage(data: data, type: type) {
             storage.content["activatableWidget"] = [activatableWidgetStorage]
             adw_action_row_set_activatable_widget(storage.opaquePointer?.cast(), activatableWidgetStorage.opaquePointer?.cast())
         }
@@ -147,7 +147,7 @@ if let active, newValue != active.wrappedValue {
 }
         }
             if let widget = storage.content["activatableWidget"]?.first {
-                activatableWidget?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                activatableWidget?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let active, updateProperties, (adw_switch_row_get_active(storage.opaquePointer) != 0) != active.wrappedValue {
                 adw_switch_row_set_active(storage.opaquePointer, active.wrappedValue.cBool)
@@ -197,17 +197,13 @@ if let active, newValue != active.wrappedValue {
     /// 
     /// The target widget will be activated by emitting the
     /// `Gtk.Widget::mnemonic-activate` signal on it.
-    public func activatableWidget(@ViewBuilder _ activatableWidget: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.activatableWidget = activatableWidget
-        return newSelf
+    public func activatableWidget(@ViewBuilder _ activatableWidget: () -> Body) -> Self {
+        modify { $0.activatableWidget = activatableWidget() }
     }
 
     /// Whether the switch row is in the "on" or "off" position.
     public func active(_ active: Binding<Bool>?) -> Self {
-        var newSelf = self
-        newSelf.active = active
-        return newSelf
+        modify { $0.active = active }
     }
 
     /// The subtitle for this row.
@@ -215,9 +211,7 @@ if let active, newValue != active.wrappedValue {
     /// The subtitle is interpreted as Pango markup unless
     /// ``useMarkup(_:)`` is set to `false`.
     public func subtitle(_ subtitle: String?) -> Self {
-        var newSelf = self
-        newSelf.subtitle = subtitle
-        return newSelf
+        modify { $0.subtitle = subtitle }
     }
 
     /// The number of lines at the end of which the subtitle label will be
@@ -225,18 +219,14 @@ if let active, newValue != active.wrappedValue {
     /// 
     /// If the value is 0, the number of lines won't be limited.
     public func subtitleLines(_ subtitleLines: Int?) -> Self {
-        var newSelf = self
-        newSelf.subtitleLines = subtitleLines
-        return newSelf
+        modify { $0.subtitleLines = subtitleLines }
     }
 
     /// Whether the user can copy the subtitle from the label.
     /// 
     /// See also ``selectable(_:)``.
     public func subtitleSelectable(_ subtitleSelectable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.subtitleSelectable = subtitleSelectable
-        return newSelf
+        modify { $0.subtitleSelectable = subtitleSelectable }
     }
 
     /// The title of the preference represented by this row.
@@ -244,27 +234,21 @@ if let active, newValue != active.wrappedValue {
     /// The title is interpreted as Pango markup unless
     /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
-        var newSelf = self
-        newSelf.title = title
-        return newSelf
+        modify { $0.title = title }
     }
 
     /// The number of lines at the end of which the title label will be ellipsized.
     /// 
     /// If the value is 0, the number of lines won't be limited.
     public func titleLines(_ titleLines: Int?) -> Self {
-        var newSelf = self
-        newSelf.titleLines = titleLines
-        return newSelf
+        modify { $0.titleLines = titleLines }
     }
 
     /// Whether the user can copy the title from the label.
     /// 
     /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.titleSelectable = titleSelectable
-        return newSelf
+        modify { $0.titleSelectable = titleSelectable }
     }
 
     /// Whether to use Pango markup for the title label.
@@ -273,16 +257,12 @@ if let active, newValue != active.wrappedValue {
     /// 
     /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useMarkup = useMarkup
-        return newSelf
+        modify { $0.useMarkup = useMarkup }
     }
 
     /// Whether an embedded underline in the title indicates a mnemonic.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// This signal is emitted after the row has been activated.

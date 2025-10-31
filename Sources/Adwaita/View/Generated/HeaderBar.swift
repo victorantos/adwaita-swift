@@ -2,7 +2,7 @@
 //  HeaderBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -72,7 +72,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// ```xml
     /// <object class="AdwHeaderBar"><property name="title-widget"><object class="AdwWindowTitle"><property name="title" translatable="yes">Title</property></object></property></object>
     /// ```
-    var titleWidget: (() -> Body)?
+    var titleWidget: Body?
     /// The body for the widget "start".
     var start: () -> Body = { [] }
     /// The body for the widget "end".
@@ -93,7 +93,7 @@ public struct HeaderBar: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let titleWidgetStorage = titleWidget?().storage(data: data, type: type) {
+        if let titleWidgetStorage = titleWidget?.storage(data: data, type: type) {
             storage.content["titleWidget"] = [titleWidgetStorage]
             adw_header_bar_set_title_widget(storage.opaquePointer, titleWidgetStorage.opaquePointer?.cast())
         }
@@ -138,7 +138,7 @@ public struct HeaderBar: AdwaitaWidget {
                 adw_header_bar_set_show_title(widget, showTitle.cBool)
             }
             if let widget = storage.content["titleWidget"]?.first {
-                titleWidget?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                titleWidget?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
 
             if let startStorage = storage.content["start"] {
@@ -189,9 +189,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// For example, “icon:minimize,maximize,close” specifies an icon at the start,
     /// and minimize, maximize and close buttons at the end.
     public func decorationLayout(_ decorationLayout: String?) -> Self {
-        var newSelf = self
-        newSelf.decorationLayout = decorationLayout
-        return newSelf
+        modify { $0.decorationLayout = decorationLayout }
     }
 
     /// Whether the header bar can show the back button.
@@ -199,9 +197,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// The back button will never be shown unless the header bar is placed inside an
     /// `NavigationView`. Usually, there is no reason to set this to `false`.
     public func showBackButton(_ showBackButton: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showBackButton = showBackButton
-        return newSelf
+        modify { $0.showBackButton = showBackButton }
     }
 
     /// Whether to show title buttons at the end of the header bar.
@@ -213,9 +209,7 @@ public struct HeaderBar: AdwaitaWidget {
     /// window (e.g. a close button will not be shown if the window can't be
     /// closed).
     public func showEndTitleButtons(_ showEndTitleButtons: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showEndTitleButtons = showEndTitleButtons
-        return newSelf
+        modify { $0.showEndTitleButtons = showEndTitleButtons }
     }
 
     /// Whether to show title buttons at the start of the header bar.
@@ -227,16 +221,12 @@ public struct HeaderBar: AdwaitaWidget {
     /// window (e.g. a close button will not be shown if the window can't be
     /// closed).
     public func showStartTitleButtons(_ showStartTitleButtons: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showStartTitleButtons = showStartTitleButtons
-        return newSelf
+        modify { $0.showStartTitleButtons = showStartTitleButtons }
     }
 
     /// Whether the title widget should be shown.
     public func showTitle(_ showTitle: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showTitle = showTitle
-        return newSelf
+        modify { $0.showTitle = showTitle }
     }
 
     /// The title widget to display.
@@ -249,10 +239,8 @@ public struct HeaderBar: AdwaitaWidget {
     /// ```xml
     /// <object class="AdwHeaderBar"><property name="title-widget"><object class="AdwWindowTitle"><property name="title" translatable="yes">Title</property></object></property></object>
     /// ```
-    public func titleWidget(@ViewBuilder _ titleWidget: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.titleWidget = titleWidget
-        return newSelf
+    public func titleWidget(@ViewBuilder _ titleWidget: () -> Body) -> Self {
+        modify { $0.titleWidget = titleWidget() }
     }
 
     /// Set the body for "start".

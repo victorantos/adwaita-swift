@@ -2,7 +2,7 @@
 //  Picture.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -107,30 +107,22 @@ public struct Picture: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The alternative textual description for the picture.
     public func alternativeText(_ alternativeText: String?) -> Self {
-        var newSelf = self
-        newSelf.alternativeText = alternativeText
-        return newSelf
+        modify { $0.alternativeText = alternativeText }
     }
 
     /// If the `GtkPicture` can be made smaller than the natural size of its contents.
     public func canShrink(_ canShrink: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.canShrink = canShrink
-        return newSelf
+        modify { $0.canShrink = canShrink }
     }
 
     /// How the content should be resized to fit inside the `GtkPicture`.
     public func contentFit(_ contentFit: ContentFit?) -> Self {
-        var newSelf = self
-        newSelf.contentFit = contentFit
-        return newSelf
+        modify { $0.contentFit = contentFit }
     }
 
 }

@@ -2,7 +2,7 @@
 //  SplitButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -37,7 +37,7 @@ public struct SplitButton: AdwaitaWidget {
     /// 
     /// Setting the child widget will set ``label(_:)`` and
     /// ``iconName(_:)`` to `NULL`.
-    var child: (() -> Body)?
+    var child: Body?
     /// The tooltip of the dropdown button.
     /// 
     /// The tooltip can be marked up with the Pango text markup language.
@@ -62,7 +62,7 @@ public struct SplitButton: AdwaitaWidget {
     /// 
     /// If ``popover(_:)`` is already set, it will be dissociated
     /// from the button, and the property is set to `NULL`.
-    var menuModel: (() -> Body)?
+    var menuModel: Body?
     /// Whether an underline in the text indicates a mnemonic.
     /// 
     /// See ``label(_:)``.
@@ -90,12 +90,12 @@ public struct SplitButton: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             adw_split_button_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
-        if let menu = menuModel?() {
-            let childStorage = MenuCollection { menu }.getMenu(data: data)
+        if let menuModel {
+            let childStorage = MenuCollection { menuModel }.getMenu(data: data)
             storage.content["menuModel"] = [childStorage]
             adw_split_button_set_menu_model(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
@@ -126,7 +126,7 @@ public struct SplitButton: AdwaitaWidget {
                 adw_split_button_set_can_shrink(widget, canShrink.cBool)
             }
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let dropdownTooltip, updateProperties, (storage.previousState as? Self)?.dropdownTooltip != dropdownTooltip {
                 adw_split_button_set_dropdown_tooltip(widget, dropdownTooltip)
@@ -138,7 +138,7 @@ public struct SplitButton: AdwaitaWidget {
                 adw_split_button_set_label(widget, label)
             }
             if let menu = storage.content["menuModel"]?.first {
-                MenuCollection { menuModel?() ?? [] }
+                MenuCollection { menuModel ?? [] }
                     .updateStorage(menu, data: data.noModifiers, updateProperties: updateProperties, type: MenuContext.self)
             }
             if let useUnderline, updateProperties, (storage.previousState as? Self)?.useUnderline != useUnderline {
@@ -163,28 +163,22 @@ public struct SplitButton: AdwaitaWidget {
     /// See ``canShrink(_:)`` and
     /// ``canShrink(_:)``.
     public func canShrink(_ canShrink: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.canShrink = canShrink
-        return newSelf
+        modify { $0.canShrink = canShrink }
     }
 
     /// The child widget.
     /// 
     /// Setting the child widget will set ``label(_:)`` and
     /// ``iconName(_:)`` to `NULL`.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// The tooltip of the dropdown button.
     /// 
     /// The tooltip can be marked up with the Pango text markup language.
     public func dropdownTooltip(_ dropdownTooltip: String?) -> Self {
-        var newSelf = self
-        newSelf.dropdownTooltip = dropdownTooltip
-        return newSelf
+        modify { $0.dropdownTooltip = dropdownTooltip }
     }
 
     /// The name of the icon used to automatically populate the button.
@@ -192,9 +186,7 @@ public struct SplitButton: AdwaitaWidget {
     /// Setting the icon name will set ``label(_:)`` and
     /// ``child(_:)`` to `NULL`.
     public func iconName(_ iconName: String?) -> Self {
-        var newSelf = self
-        newSelf.iconName = iconName
-        return newSelf
+        modify { $0.iconName = iconName }
     }
 
     /// The label for the button.
@@ -202,9 +194,7 @@ public struct SplitButton: AdwaitaWidget {
     /// Setting the label will set ``iconName(_:)`` and
     /// ``child(_:)`` to `NULL`.
     public func label(_ label: String?) -> Self {
-        var newSelf = self
-        newSelf.label = label
-        return newSelf
+        modify { $0.label = label }
     }
 
     /// The `GMenuModel` from which the popup will be created.
@@ -217,19 +207,15 @@ public struct SplitButton: AdwaitaWidget {
     /// 
     /// If ``popover(_:)`` is already set, it will be dissociated
     /// from the button, and the property is set to `NULL`.
-    public func menuModel(@ViewBuilder _ menuModel: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.menuModel = menuModel
-        return newSelf
+    public func menuModel(@ViewBuilder _ menuModel: () -> Body) -> Self {
+        modify { $0.menuModel = menuModel() }
     }
 
     /// Whether an underline in the text indicates a mnemonic.
     /// 
     /// See ``label(_:)``.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// Emitted to animate press then release.

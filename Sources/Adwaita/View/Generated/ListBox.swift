@@ -2,7 +2,7 @@
 //  ListBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -208,33 +208,25 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Whether to accept unpaired release events.
     public func acceptUnpairedRelease(_ acceptUnpairedRelease: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.acceptUnpairedRelease = acceptUnpairedRelease
-        return newSelf
+        modify { $0.acceptUnpairedRelease = acceptUnpairedRelease }
     }
 
     /// The accessible role of the given `GtkAccessible` implementation.
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// Determines whether children can be activated with a single
     /// click, or require a double-click.
     public func activateOnSingleClick(_ activateOnSingleClick: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.activateOnSingleClick = activateOnSingleClick
-        return newSelf
+        modify { $0.activateOnSingleClick = activateOnSingleClick }
     }
 
     /// Whether to show separators between rows.
     public func showSeparators(_ showSeparators: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showSeparators = showSeparators
-        return newSelf
+        modify { $0.showSeparators = showSeparators }
     }
 
     /// Emitted when the cursor row is activated.

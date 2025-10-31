@@ -2,7 +2,7 @@
 //  Carousel.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -150,27 +150,21 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     /// 
     /// If the value is `false`, each swipe can only move to the adjacent pages.
     public func allowLongSwipes(_ allowLongSwipes: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.allowLongSwipes = allowLongSwipes
-        return newSelf
+        modify { $0.allowLongSwipes = allowLongSwipes }
     }
 
     /// Sets whether the `AdwCarousel` can be dragged with mouse pointer.
     /// 
     /// If the value is `false`, dragging is only available on touch.
     public func allowMouseDrag(_ allowMouseDrag: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.allowMouseDrag = allowMouseDrag
-        return newSelf
+        modify { $0.allowMouseDrag = allowMouseDrag }
     }
 
     /// Whether the widget will respond to scroll wheel events.
     /// 
     /// If the value is `false`, wheel events will be ignored.
     public func allowScrollWheel(_ allowScrollWheel: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.allowScrollWheel = allowScrollWheel
-        return newSelf
+        modify { $0.allowScrollWheel = allowScrollWheel }
     }
 
     /// Whether the carousel can be navigated.
@@ -178,32 +172,24 @@ public struct Carousel<Element>: AdwaitaWidget where Element: Identifiable {
     /// This can be used to temporarily disable the carousel to only allow
     /// navigating it in a certain state.
     public func interactive(_ interactive: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.interactive = interactive
-        return newSelf
+        modify { $0.interactive = interactive }
     }
 
     /// The number of pages in a `AdwCarousel`.
     public func nPages(_ nPages: UInt?) -> Self {
-        var newSelf = self
-        newSelf.nPages = nPages
-        return newSelf
+        modify { $0.nPages = nPages }
     }
 
     /// Page reveal duration, in milliseconds.
     /// 
     /// Reveal duration is used when animating adding or removing pages.
     public func revealDuration(_ revealDuration: UInt?) -> Self {
-        var newSelf = self
-        newSelf.revealDuration = revealDuration
-        return newSelf
+        modify { $0.revealDuration = revealDuration }
     }
 
     /// Spacing between pages in pixels.
     public func spacing(_ spacing: UInt?) -> Self {
-        var newSelf = self
-        newSelf.spacing = spacing
-        return newSelf
+        modify { $0.spacing = spacing }
     }
 
     /// This signal is emitted after a page has been changed.

@@ -2,7 +2,7 @@
 //  ProgressBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -124,30 +124,22 @@ public struct ProgressBar: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The fraction of total work that has been completed.
     public func fraction(_ fraction: Double?) -> Self {
-        var newSelf = self
-        newSelf.fraction = fraction
-        return newSelf
+        modify { $0.fraction = fraction }
     }
 
     /// Invert the direction in which the progress bar grows.
     public func inverted(_ inverted: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.inverted = inverted
-        return newSelf
+        modify { $0.inverted = inverted }
     }
 
     /// The fraction of total progress to move the bounding block when pulsed.
     public func pulseStep(_ pulseStep: Double?) -> Self {
-        var newSelf = self
-        newSelf.pulseStep = pulseStep
-        return newSelf
+        modify { $0.pulseStep = pulseStep }
     }
 
     /// Sets whether the progress bar will show a text in addition
@@ -161,16 +153,12 @@ public struct ProgressBar: AdwaitaWidget {
     /// (even if the actual text is blank), set ``showText(_:)``
     /// to `true` and ``text(_:)`` to the empty string (not %NULL).
     public func showText(_ showText: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showText = showText
-        return newSelf
+        modify { $0.showText = showText }
     }
 
     /// Text to be displayed in the progress bar.
     public func text(_ text: String?) -> Self {
-        var newSelf = self
-        newSelf.text = text
-        return newSelf
+        modify { $0.text = text }
     }
 
 }

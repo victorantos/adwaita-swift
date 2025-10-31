@@ -2,7 +2,7 @@
 //  AspectFrame.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -26,7 +26,7 @@ public struct AspectFrame: AdwaitaWidget {
     /// The accessible role cannot be changed once set.
     var accessibleRole: String?
     /// The child widget.
-    var child: (() -> Body)?
+    var child: Body?
     /// Whether the `GtkAspectFrame` should use the aspect ratio of its child.
     var obeyChild: Bool?
     /// The aspect ratio to be used by the `GtkAspectFrame`.
@@ -55,7 +55,7 @@ public struct AspectFrame: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_aspect_frame_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
@@ -73,7 +73,7 @@ public struct AspectFrame: AdwaitaWidget {
         storage.modify { widget in
 
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let obeyChild, updateProperties, (storage.previousState as? Self)?.obeyChild != obeyChild {
                 gtk_aspect_frame_set_obey_child(widget, obeyChild.cBool)
@@ -103,23 +103,17 @@ public struct AspectFrame: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// Whether the `GtkAspectFrame` should use the aspect ratio of its child.
     public func obeyChild(_ obeyChild: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.obeyChild = obeyChild
-        return newSelf
+        modify { $0.obeyChild = obeyChild }
     }
 
     /// The aspect ratio to be used by the `GtkAspectFrame`.
@@ -127,23 +121,17 @@ public struct AspectFrame: AdwaitaWidget {
     /// This property is only used if
     /// ``obeyChild(_:)`` is set to `false`.
     public func ratio(_ ratio: Float) -> Self {
-        var newSelf = self
-        newSelf.ratio = ratio
-        return newSelf
+        modify { $0.ratio = ratio }
     }
 
     /// The horizontal alignment of the child.
     public func xalign(_ xalign: Float?) -> Self {
-        var newSelf = self
-        newSelf.xalign = xalign
-        return newSelf
+        modify { $0.xalign = xalign }
     }
 
     /// The vertical alignment of the child.
     public func yalign(_ yalign: Float?) -> Self {
-        var newSelf = self
-        newSelf.yalign = yalign
-        return newSelf
+        modify { $0.yalign = yalign }
     }
 
 }

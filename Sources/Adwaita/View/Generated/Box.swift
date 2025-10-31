@@ -2,7 +2,7 @@
 //  Box.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -148,32 +148,24 @@ public struct Box: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The position of the child that determines the baseline.
     /// 
     /// This is only relevant if the box is in vertical orientation.
     public func baselineChild(_ baselineChild: Int?) -> Self {
-        var newSelf = self
-        newSelf.baselineChild = baselineChild
-        return newSelf
+        modify { $0.baselineChild = baselineChild }
     }
 
     /// Whether the children should all be the same size.
     public func homogeneous(_ homogeneous: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.homogeneous = homogeneous
-        return newSelf
+        modify { $0.homogeneous = homogeneous }
     }
 
     /// The amount of space between children.
     public func spacing(_ spacing: Int) -> Self {
-        var newSelf = self
-        newSelf.spacing = spacing
-        return newSelf
+        modify { $0.spacing = spacing }
     }
 
     /// Set the body for "append".

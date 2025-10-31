@@ -2,7 +2,7 @@
 //  LevelBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -120,9 +120,7 @@ public struct LevelBar: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// Whether the `GtkLeveBar` is inverted.
@@ -130,30 +128,22 @@ public struct LevelBar: AdwaitaWidget {
     /// Level bars normally grow from top to bottom or left to right.
     /// Inverted level bars grow in the opposite direction.
     public func inverted(_ inverted: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.inverted = inverted
-        return newSelf
+        modify { $0.inverted = inverted }
     }
 
     /// Determines the maximum value of the interval that can be displayed by the bar.
     public func maxValue(_ maxValue: Double?) -> Self {
-        var newSelf = self
-        newSelf.maxValue = maxValue
-        return newSelf
+        modify { $0.maxValue = maxValue }
     }
 
     /// Determines the minimum value of the interval that can be displayed by the bar.
     public func minValue(_ minValue: Double?) -> Self {
-        var newSelf = self
-        newSelf.minValue = minValue
-        return newSelf
+        modify { $0.minValue = minValue }
     }
 
     /// Determines the currently filled value of the level bar.
     public func value(_ value: Double?) -> Self {
-        var newSelf = self
-        newSelf.value = value
-        return newSelf
+        modify { $0.value = value }
     }
 
     /// Emitted when an offset specified on the bar changes value.

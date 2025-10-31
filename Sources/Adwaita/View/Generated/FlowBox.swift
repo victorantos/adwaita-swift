@@ -2,7 +2,7 @@
 //  FlowBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -238,49 +238,37 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
 
     /// Whether to accept unpaired release events.
     public func acceptUnpairedRelease(_ acceptUnpairedRelease: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.acceptUnpairedRelease = acceptUnpairedRelease
-        return newSelf
+        modify { $0.acceptUnpairedRelease = acceptUnpairedRelease }
     }
 
     /// The accessible role of the given `GtkAccessible` implementation.
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// Determines whether children can be activated with a single
     /// click, or require a double-click.
     public func activateOnSingleClick(_ activateOnSingleClick: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.activateOnSingleClick = activateOnSingleClick
-        return newSelf
+        modify { $0.activateOnSingleClick = activateOnSingleClick }
     }
 
     /// The amount of horizontal space between two children.
     public func columnSpacing(_ columnSpacing: UInt?) -> Self {
-        var newSelf = self
-        newSelf.columnSpacing = columnSpacing
-        return newSelf
+        modify { $0.columnSpacing = columnSpacing }
     }
 
     /// Determines whether all children should be allocated the
     /// same size.
     public func homogeneous(_ homogeneous: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.homogeneous = homogeneous
-        return newSelf
+        modify { $0.homogeneous = homogeneous }
     }
 
     /// The maximum amount of children to request space for consecutively
     /// in the given orientation.
     public func maxChildrenPerLine(_ maxChildrenPerLine: UInt?) -> Self {
-        var newSelf = self
-        newSelf.maxChildrenPerLine = maxChildrenPerLine
-        return newSelf
+        modify { $0.maxChildrenPerLine = maxChildrenPerLine }
     }
 
     /// The minimum number of children to allocate consecutively
@@ -290,16 +278,12 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     /// that a reasonably small height will be requested
     /// for the overall minimum width of the box.
     public func minChildrenPerLine(_ minChildrenPerLine: UInt?) -> Self {
-        var newSelf = self
-        newSelf.minChildrenPerLine = minChildrenPerLine
-        return newSelf
+        modify { $0.minChildrenPerLine = minChildrenPerLine }
     }
 
     /// The amount of vertical space between two children.
     public func rowSpacing(_ rowSpacing: UInt?) -> Self {
-        var newSelf = self
-        newSelf.rowSpacing = rowSpacing
-        return newSelf
+        modify { $0.rowSpacing = rowSpacing }
     }
 
     /// Emitted when the user activates the @box.

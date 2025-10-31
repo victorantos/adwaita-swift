@@ -2,7 +2,7 @@
 //  Image.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -121,18 +121,14 @@ public struct Image: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The name of the icon in the icon theme.
     /// 
     /// If the icon theme is changed, the image will be updated automatically.
     public func iconName(_ iconName: String?) -> Self {
-        var newSelf = self
-        newSelf.iconName = iconName
-        return newSelf
+        modify { $0.iconName = iconName }
     }
 
     /// The size in pixels to display icons at.
@@ -141,23 +137,17 @@ public struct Image: AdwaitaWidget {
     /// ``iconSize(_:)`` property for images of type
     /// `GTK_IMAGE_ICON_NAME`.
     public func pixelSize(_ pixelSize: Int?) -> Self {
-        var newSelf = self
-        newSelf.pixelSize = pixelSize
-        return newSelf
+        modify { $0.pixelSize = pixelSize }
     }
 
     /// A path to a resource file to display.
     public func resource(_ resource: String?) -> Self {
-        var newSelf = self
-        newSelf.resource = resource
-        return newSelf
+        modify { $0.resource = resource }
     }
 
     /// The representation being used for image data.
     public func storageType(_ storageType: String?) -> Self {
-        var newSelf = self
-        newSelf.storageType = storageType
-        return newSelf
+        modify { $0.storageType = storageType }
     }
 
     /// Whether the icon displayed in the `GtkImage` will use
@@ -166,9 +156,7 @@ public struct Image: AdwaitaWidget {
     /// The value of this property is only relevant for images of type
     /// %GTK_IMAGE_ICON_NAME and %GTK_IMAGE_GICON.
     public func useFallback(_ useFallback: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useFallback = useFallback
-        return newSelf
+        modify { $0.useFallback = useFallback }
     }
 
 }

@@ -2,7 +2,7 @@
 //  SearchEntry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -265,90 +265,66 @@ if let text, newValue != text.wrappedValue {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// Whether to activate the default widget when Enter is pressed.
     public func activatesDefault(_ activatesDefault: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.activatesDefault = activatesDefault
-        return newSelf
+        modify { $0.activatesDefault = activatesDefault }
     }
 
     /// The current position of the insertion cursor in chars.
     public func cursorPosition(_ cursorPosition: Int?) -> Self {
-        var newSelf = self
-        newSelf.cursorPosition = cursorPosition
-        return newSelf
+        modify { $0.cursorPosition = cursorPosition }
     }
 
     /// Whether the entry contents can be edited.
     public func editable(_ editable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.editable = editable
-        return newSelf
+        modify { $0.editable = editable }
     }
 
     /// If undo/redo should be enabled for the editable.
     public func enableUndo(_ enableUndo: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.enableUndo = enableUndo
-        return newSelf
+        modify { $0.enableUndo = enableUndo }
     }
 
     /// The desired maximum width of the entry, in characters.
     public func maxWidthChars(_ maxWidthChars: Int?) -> Self {
-        var newSelf = self
-        newSelf.maxWidthChars = maxWidthChars
-        return newSelf
+        modify { $0.maxWidthChars = maxWidthChars }
     }
 
     /// The text that will be displayed in the `GtkSearchEntry`
     /// when it is empty and unfocused.
     public func placeholderText(_ placeholderText: String?) -> Self {
-        var newSelf = self
-        newSelf.placeholderText = placeholderText
-        return newSelf
+        modify { $0.placeholderText = placeholderText }
     }
 
     /// The delay in milliseconds from last keypress to the search
     /// changed signal.
     public func searchDelay(_ searchDelay: UInt?) -> Self {
-        var newSelf = self
-        newSelf.searchDelay = searchDelay
-        return newSelf
+        modify { $0.searchDelay = searchDelay }
     }
 
     /// The position of the opposite end of the selection from the cursor in chars.
     public func selectionBound(_ selectionBound: Int?) -> Self {
-        var newSelf = self
-        newSelf.selectionBound = selectionBound
-        return newSelf
+        modify { $0.selectionBound = selectionBound }
     }
 
     /// The contents of the entry.
     public func text(_ text: Binding<String>?) -> Self {
-        var newSelf = self
-        newSelf.text = text
-        return newSelf
+        modify { $0.text = text }
     }
 
     /// Number of characters to leave space for in the entry.
     public func widthChars(_ widthChars: Int?) -> Self {
-        var newSelf = self
-        newSelf.widthChars = widthChars
-        return newSelf
+        modify { $0.widthChars = widthChars }
     }
 
     /// The horizontal alignment, from 0 (left) to 1 (right).
     /// 
     /// Reversed for RTL layouts.
     public func xalign(_ xalign: Float?) -> Self {
-        var newSelf = self
-        newSelf.xalign = xalign
-        return newSelf
+        modify { $0.xalign = xalign }
     }
 
     /// Emitted when the entry is activated.

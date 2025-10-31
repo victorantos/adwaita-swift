@@ -2,7 +2,7 @@
 //  NavigationView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -176,9 +176,7 @@ public struct NavigationView: AdwaitaWidget {
     /// 
     /// Gesture-based transitions are always animated.
     public func animateTransitions(_ animateTransitions: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.animateTransitions = animateTransitions
-        return newSelf
+        modify { $0.animateTransitions = animateTransitions }
     }
 
     /// Whether the view is horizontally homogeneous.
@@ -189,9 +187,7 @@ public struct NavigationView: AdwaitaWidget {
     /// If it's not, the page may change width when a different page becomes
     /// visible.
     public func hhomogeneous(_ hhomogeneous: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.hhomogeneous = hhomogeneous
-        return newSelf
+        modify { $0.hhomogeneous = hhomogeneous }
     }
 
     /// Whether pressing Escape pops the current page.
@@ -199,9 +195,7 @@ public struct NavigationView: AdwaitaWidget {
     /// Applications using `AdwNavigationView` to implement a browser may want to
     /// disable it.
     public func popOnEscape(_ popOnEscape: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.popOnEscape = popOnEscape
-        return newSelf
+        modify { $0.popOnEscape = popOnEscape }
     }
 
     /// Whether the view is vertically homogeneous.
@@ -212,16 +206,12 @@ public struct NavigationView: AdwaitaWidget {
     /// If it's not, the view may change height when a different page becomes
     /// visible.
     public func vhomogeneous(_ vhomogeneous: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.vhomogeneous = vhomogeneous
-        return newSelf
+        modify { $0.vhomogeneous = vhomogeneous }
     }
 
     /// The tag of the currently visible page.
     public func visiblePageTag(_ visiblePageTag: String?) -> Self {
-        var newSelf = self
-        newSelf.visiblePageTag = visiblePageTag
-        return newSelf
+        modify { $0.visiblePageTag = visiblePageTag }
     }
 
     /// Emitted when a push shortcut or a gesture is triggered.

@@ -2,7 +2,7 @@
 //  ToolbarView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -52,7 +52,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// [`.undershoot-bottom`](style-classes.html
     var bottomBarStyle: ToolbarStyle?
     /// The content widget.
-    var content: (() -> Body)?
+    var content: Body?
     /// Whether the content widget can extend behind bottom bars.
     /// 
     /// This can be used in combination with
@@ -121,7 +121,7 @@ public struct ToolbarView: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let contentStorage = content?().storage(data: data, type: type) {
+        if let contentStorage = content?.storage(data: data, type: type) {
             storage.content["content"] = [contentStorage]
             adw_toolbar_view_set_content(storage.opaquePointer, contentStorage.opaquePointer?.cast())
         }
@@ -154,7 +154,7 @@ public struct ToolbarView: AdwaitaWidget {
                 adw_toolbar_view_set_bottom_bar_style(widget, bottomBarStyle.gtkValue)
             }
             if let widget = storage.content["content"]?.first {
-                content?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                content?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let extendContentToBottomEdge, updateProperties, (storage.previousState as? Self)?.extendContentToBottomEdge != extendContentToBottomEdge {
                 adw_toolbar_view_set_extend_content_to_bottom_edge(widget, extendContentToBottomEdge.cBool)
@@ -214,9 +214,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// See ``topBarHeight(_:)``.
     public func bottomBarHeight(_ bottomBarHeight: Int?) -> Self {
-        var newSelf = self
-        newSelf.bottomBarHeight = bottomBarHeight
-        return newSelf
+        modify { $0.bottomBarHeight = bottomBarHeight }
     }
 
     /// Appearance of the bottom bars.
@@ -225,16 +223,12 @@ public struct ToolbarView: AdwaitaWidget {
     /// has a subtle undershoot shadow when touching them, same as the
     /// [`.undershoot-bottom`](style-classes.html
     public func bottomBarStyle(_ bottomBarStyle: ToolbarStyle?) -> Self {
-        var newSelf = self
-        newSelf.bottomBarStyle = bottomBarStyle
-        return newSelf
+        modify { $0.bottomBarStyle = bottomBarStyle }
     }
 
     /// The content widget.
-    public func content(@ViewBuilder _ content: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.content = content
-        return newSelf
+    public func content(@ViewBuilder _ content: () -> Body) -> Self {
+        modify { $0.content = content() }
     }
 
     /// Whether the content widget can extend behind bottom bars.
@@ -245,9 +239,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// See ``extendContentToTopEdge(_:)``.
     public func extendContentToBottomEdge(_ extendContentToBottomEdge: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.extendContentToBottomEdge = extendContentToBottomEdge
-        return newSelf
+        modify { $0.extendContentToBottomEdge = extendContentToBottomEdge }
     }
 
     /// Whether the content widget can extend behind top bars.
@@ -257,9 +249,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// See ``extendContentToBottomEdge(_:)``.
     public func extendContentToTopEdge(_ extendContentToTopEdge: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.extendContentToTopEdge = extendContentToTopEdge
-        return newSelf
+        modify { $0.extendContentToTopEdge = extendContentToTopEdge }
     }
 
     /// Whether bottom bars are visible.
@@ -272,9 +262,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// See ``revealTopBars(_:)``.
     public func revealBottomBars(_ revealBottomBars: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.revealBottomBars = revealBottomBars
-        return newSelf
+        modify { $0.revealBottomBars = revealBottomBars }
     }
 
     /// Whether top bars are revealed.
@@ -287,9 +275,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// See ``revealBottomBars(_:)``.
     public func revealTopBars(_ revealTopBars: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.revealTopBars = revealTopBars
-        return newSelf
+        modify { $0.revealTopBars = revealTopBars }
     }
 
     /// The current top bar height.
@@ -299,9 +285,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// 
     /// See ``bottomBarHeight(_:)``.
     public func topBarHeight(_ topBarHeight: Int?) -> Self {
-        var newSelf = self
-        newSelf.topBarHeight = topBarHeight
-        return newSelf
+        modify { $0.topBarHeight = topBarHeight }
     }
 
     /// Appearance of the top bars.
@@ -310,9 +294,7 @@ public struct ToolbarView: AdwaitaWidget {
     /// subtle undershoot shadow when touching them, same as the
     /// [`.undershoot-top`](style-classes.html
     public func topBarStyle(_ topBarStyle: ToolbarStyle?) -> Self {
-        var newSelf = self
-        newSelf.topBarStyle = topBarStyle
-        return newSelf
+        modify { $0.topBarStyle = topBarStyle }
     }
 
     /// Set the body for "bottom".

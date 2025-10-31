@@ -2,7 +2,7 @@
 //  Overlay.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -41,7 +41,7 @@ public struct Overlay: AdwaitaWidget {
     /// The accessible role cannot be changed once set.
     var accessibleRole: String?
     /// The main child widget.
-    var child: (() -> Body)?
+    var child: Body?
     /// Emitted to determine the position and size of any overlay
     /// child widgets.
     /// 
@@ -75,7 +75,7 @@ public struct Overlay: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_overlay_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
@@ -104,7 +104,7 @@ public struct Overlay: AdwaitaWidget {
         storage.modify { widget in
 
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
 
             if let overlayStorage = storage.content["overlay"] {
@@ -134,16 +134,12 @@ public struct Overlay: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The main child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// Emitted to determine the position and size of any overlay

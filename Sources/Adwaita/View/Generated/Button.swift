@@ -2,7 +2,7 @@
 //  Button.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -39,7 +39,7 @@ public struct Button: AdwaitaWidget {
     /// property has no effect.
     var canShrink: Bool?
     /// The child widget.
-    var child: (() -> Body)?
+    var child: Body?
     /// Whether the button has a frame.
     var hasFrame: Bool?
     /// The name of the icon used to automatically populate the button.
@@ -75,7 +75,7 @@ public struct Button: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_button_set_child(storage.opaquePointer?.cast(), childStorage.opaquePointer?.cast())
         }
@@ -109,7 +109,7 @@ public struct Button: AdwaitaWidget {
                 gtk_button_set_can_shrink(widget?.cast(), canShrink.cBool)
             }
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let hasFrame, updateProperties, (storage.previousState as? Self)?.hasFrame != hasFrame {
                 gtk_button_set_has_frame(widget?.cast(), hasFrame.cBool)
@@ -139,16 +139,12 @@ public struct Button: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The name of the action with which this widget should be associated.
     public func actionName(_ actionName: String?) -> Self {
-        var newSelf = self
-        newSelf.actionName = actionName
-        return newSelf
+        modify { $0.actionName = actionName }
     }
 
     /// Whether the size of the button can be made smaller than the natural
@@ -159,45 +155,33 @@ public struct Button: AdwaitaWidget {
     /// If the contents of a button are an icon or a custom widget, setting this
     /// property has no effect.
     public func canShrink(_ canShrink: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.canShrink = canShrink
-        return newSelf
+        modify { $0.canShrink = canShrink }
     }
 
     /// The child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// Whether the button has a frame.
     public func hasFrame(_ hasFrame: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.hasFrame = hasFrame
-        return newSelf
+        modify { $0.hasFrame = hasFrame }
     }
 
     /// The name of the icon used to automatically populate the button.
     public func iconName(_ iconName: String?) -> Self {
-        var newSelf = self
-        newSelf.iconName = iconName
-        return newSelf
+        modify { $0.iconName = iconName }
     }
 
     /// Text of the label inside the button, if the button contains a label widget.
     public func label(_ label: String?) -> Self {
-        var newSelf = self
-        newSelf.label = label
-        return newSelf
+        modify { $0.label = label }
     }
 
     /// If set, an underline in the text indicates that the following character is
     /// to be used as mnemonic.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// Emitted to animate press then release.

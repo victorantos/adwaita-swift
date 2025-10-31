@@ -2,7 +2,7 @@
 //  Banner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -122,34 +122,26 @@ public struct Banner: AdwaitaWidget {
     /// The button can be used with a `GAction`, or with the
     /// `Banner::button-clicked` signal.
     public func buttonLabel(_ buttonLabel: String?) -> Self {
-        var newSelf = self
-        newSelf.buttonLabel = buttonLabel
-        return newSelf
+        modify { $0.buttonLabel = buttonLabel }
     }
 
     /// Whether the banner is currently revealed.
     public func revealed(_ revealed: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.revealed = revealed
-        return newSelf
+        modify { $0.revealed = revealed }
     }
 
     /// The title for this banner.
     /// 
     /// See also: ``useMarkup(_:)``.
     public func title(_ title: String) -> Self {
-        var newSelf = self
-        newSelf.title = title
-        return newSelf
+        modify { $0.title = title }
     }
 
     /// Whether to use Pango markup for the banner title.
     /// 
     /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useMarkup = useMarkup
-        return newSelf
+        modify { $0.useMarkup = useMarkup }
     }
 
     /// This signal is emitted after the action button has been clicked.

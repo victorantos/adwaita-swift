@@ -2,7 +2,7 @@
 //  Clamp.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -34,7 +34,7 @@ public struct Clamp: AdwaitaWidget {
     var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
 
     /// The child widget of the `AdwClamp`.
-    var child: (() -> Body)?
+    var child: Body?
     /// The maximum size allocated to the child.
     /// 
     /// It is the width if the clamp is horizontal, or the height if it is vertical.
@@ -70,7 +70,7 @@ public struct Clamp: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             adw_clamp_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
@@ -88,7 +88,7 @@ public struct Clamp: AdwaitaWidget {
         storage.modify { widget in
 
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let maximumSize, updateProperties, (storage.previousState as? Self)?.maximumSize != maximumSize {
                 adw_clamp_set_maximum_size(widget, maximumSize.cInt)
@@ -109,19 +109,15 @@ public struct Clamp: AdwaitaWidget {
     }
 
     /// The child widget of the `AdwClamp`.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// The maximum size allocated to the child.
     /// 
     /// It is the width if the clamp is horizontal, or the height if it is vertical.
     public func maximumSize(_ maximumSize: Int?) -> Self {
-        var newSelf = self
-        newSelf.maximumSize = maximumSize
-        return newSelf
+        modify { $0.maximumSize = maximumSize }
     }
 
     /// The size above which the child is clamped.
@@ -139,9 +135,7 @@ public struct Clamp: AdwaitaWidget {
     /// Effectively, tightening the grip on the child before it reaches its maximum
     /// size makes transitions to and from the maximum size smoother when resizing.
     public func tighteningThreshold(_ tighteningThreshold: Int?) -> Self {
-        var newSelf = self
-        newSelf.tighteningThreshold = tighteningThreshold
-        return newSelf
+        modify { $0.tighteningThreshold = tighteningThreshold }
     }
 
 }

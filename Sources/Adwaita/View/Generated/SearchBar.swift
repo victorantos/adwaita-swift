@@ -2,7 +2,7 @@
 //  SearchBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -40,9 +40,9 @@ public struct SearchBar: AdwaitaWidget {
     /// The accessible role cannot be changed once set.
     var accessibleRole: String?
     /// The child widget.
-    var child: (() -> Body)?
+    var child: Body?
     /// The key capture widget.
-    var keyCaptureWidget: (() -> Body)?
+    var keyCaptureWidget: Body?
     /// Whether the search mode is on and the search bar shown.
     var searchModeEnabled: Bool?
     /// Whether to show the close button in the search bar.
@@ -63,11 +63,11 @@ public struct SearchBar: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_search_bar_set_child(storage.opaquePointer, childStorage.opaquePointer?.cast())
         }
-        if let keyCaptureWidgetStorage = keyCaptureWidget?().storage(data: data, type: type) {
+        if let keyCaptureWidgetStorage = keyCaptureWidget?.storage(data: data, type: type) {
             storage.content["keyCaptureWidget"] = [keyCaptureWidgetStorage]
             gtk_search_bar_set_key_capture_widget(storage.opaquePointer, keyCaptureWidgetStorage.opaquePointer?.cast())
         }
@@ -85,10 +85,10 @@ public struct SearchBar: AdwaitaWidget {
         storage.modify { widget in
 
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let widget = storage.content["keyCaptureWidget"]?.first {
-                keyCaptureWidget?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                keyCaptureWidget?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let searchModeEnabled, updateProperties, (storage.previousState as? Self)?.searchModeEnabled != searchModeEnabled {
                 gtk_search_bar_set_search_mode(widget, searchModeEnabled.cBool)
@@ -112,37 +112,27 @@ public struct SearchBar: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// The child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// The key capture widget.
-    public func keyCaptureWidget(@ViewBuilder _ keyCaptureWidget: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.keyCaptureWidget = keyCaptureWidget
-        return newSelf
+    public func keyCaptureWidget(@ViewBuilder _ keyCaptureWidget: () -> Body) -> Self {
+        modify { $0.keyCaptureWidget = keyCaptureWidget() }
     }
 
     /// Whether the search mode is on and the search bar shown.
     public func searchModeEnabled(_ searchModeEnabled: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.searchModeEnabled = searchModeEnabled
-        return newSelf
+        modify { $0.searchModeEnabled = searchModeEnabled }
     }
 
     /// Whether to show the close button in the search bar.
     public func showCloseButton(_ showCloseButton: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showCloseButton = showCloseButton
-        return newSelf
+        modify { $0.showCloseButton = showCloseButton }
     }
 
 }

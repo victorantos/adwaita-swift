@@ -42,7 +42,7 @@ extension Toggle {
         if let child {
             return .init()
                 .active(active)
-                .child(child)
+                .child { child }
         } else {
             return .init()
                 .active(active)

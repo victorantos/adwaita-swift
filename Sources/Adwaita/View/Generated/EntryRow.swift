@@ -2,7 +2,7 @@
 //  EntryRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -194,25 +194,19 @@ public struct EntryRow: AdwaitaWidget {
 
     /// Whether activating the embedded entry can activate the default widget.
     public func activatesDefault(_ activatesDefault: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.activatesDefault = activatesDefault
-        return newSelf
+        modify { $0.activatesDefault = activatesDefault }
     }
 
     /// Whether to suggest emoji replacements on the entry row.
     /// 
     /// Emoji replacement is done with :-delimited names, like `:heart:`.
     public func enableEmojiCompletion(_ enableEmojiCompletion: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.enableEmojiCompletion = enableEmojiCompletion
-        return newSelf
+        modify { $0.enableEmojiCompletion = enableEmojiCompletion }
     }
 
     /// Maximum number of characters for the entry.
     public func maxLength(_ maxLength: Int?) -> Self {
-        var newSelf = self
-        newSelf.maxLength = maxLength
-        return newSelf
+        modify { $0.maxLength = maxLength }
     }
 
     /// Whether to show the apply button.
@@ -225,16 +219,12 @@ public struct EntryRow: AdwaitaWidget {
     /// operation, e.g. network activity, to avoid triggering it after typing every
     /// character.
     public func showApplyButton(_ showApplyButton: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showApplyButton = showApplyButton
-        return newSelf
+        modify { $0.showApplyButton = showApplyButton }
     }
 
     /// The length of the text in the entry row.
     public func textLength(_ textLength: UInt?) -> Self {
-        var newSelf = self
-        newSelf.textLength = textLength
-        return newSelf
+        modify { $0.textLength = textLength }
     }
 
     /// The title of the preference represented by this row.
@@ -242,18 +232,14 @@ public struct EntryRow: AdwaitaWidget {
     /// The title is interpreted as Pango markup unless
     /// ``useMarkup(_:)`` is set to `false`.
     public func title(_ title: String?) -> Self {
-        var newSelf = self
-        newSelf.title = title
-        return newSelf
+        modify { $0.title = title }
     }
 
     /// Whether the user can copy the title from the label.
     /// 
     /// See also ``selectable(_:)``.
     public func titleSelectable(_ titleSelectable: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.titleSelectable = titleSelectable
-        return newSelf
+        modify { $0.titleSelectable = titleSelectable }
     }
 
     /// Whether to use Pango markup for the title label.
@@ -262,16 +248,12 @@ public struct EntryRow: AdwaitaWidget {
     /// 
     /// See also `Pango.parse_markup`.
     public func useMarkup(_ useMarkup: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useMarkup = useMarkup
-        return newSelf
+        modify { $0.useMarkup = useMarkup }
     }
 
     /// Whether an embedded underline in the title indicates a mnemonic.
     public func useUnderline(_ useUnderline: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.useUnderline = useUnderline
-        return newSelf
+        modify { $0.useUnderline = useUnderline }
     }
 
     /// Emitted when the apply button is pressed.

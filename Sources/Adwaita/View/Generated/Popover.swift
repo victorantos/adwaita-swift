@@ -2,7 +2,7 @@
 //  Popover.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -51,9 +51,9 @@ public struct Popover: AdwaitaWidget {
     /// This is used to implement the expected behavior of submenus.
     var cascadePopdown: Bool?
     /// The child widget.
-    var child: (() -> Body)?
+    var child: Body?
     /// The default widget inside the popover.
-    var defaultWidget: (() -> Body)?
+    var defaultWidget: Body?
     /// Whether to draw an arrow.
     var hasArrow: Bool?
     /// Whether mnemonics are currently visible in this popover.
@@ -82,11 +82,11 @@ public struct Popover: AdwaitaWidget {
             function(storage, data)
         }
         update(storage, data: data, updateProperties: true, type: type)
-        if let childStorage = child?().storage(data: data, type: type) {
+        if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_popover_set_child(storage.opaquePointer?.cast(), childStorage.opaquePointer?.cast())
         }
-        if let defaultWidgetStorage = defaultWidget?().storage(data: data, type: type) {
+        if let defaultWidgetStorage = defaultWidget?.storage(data: data, type: type) {
             storage.content["defaultWidget"] = [defaultWidgetStorage]
             gtk_popover_set_default_widget(storage.opaquePointer?.cast(), defaultWidgetStorage.opaquePointer?.cast())
         }
@@ -120,10 +120,10 @@ public struct Popover: AdwaitaWidget {
                 gtk_popover_set_cascade_popdown(widget?.cast(), cascadePopdown.cBool)
             }
             if let widget = storage.content["child"]?.first {
-                child?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                child?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let widget = storage.content["defaultWidget"]?.first {
-                defaultWidget?().updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+                defaultWidget?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
             }
             if let hasArrow, updateProperties, (storage.previousState as? Self)?.hasArrow != hasArrow {
                 gtk_popover_set_has_arrow(widget?.cast(), hasArrow.cBool)
@@ -147,53 +147,39 @@ public struct Popover: AdwaitaWidget {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// Whether to dismiss the popover on outside clicks.
     public func autohide(_ autohide: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.autohide = autohide
-        return newSelf
+        modify { $0.autohide = autohide }
     }
 
     /// Whether the popover pops down after a child popover.
     /// 
     /// This is used to implement the expected behavior of submenus.
     public func cascadePopdown(_ cascadePopdown: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.cascadePopdown = cascadePopdown
-        return newSelf
+        modify { $0.cascadePopdown = cascadePopdown }
     }
 
     /// The child widget.
-    public func child(@ViewBuilder _ child: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.child = child
-        return newSelf
+    public func child(@ViewBuilder _ child: () -> Body) -> Self {
+        modify { $0.child = child() }
     }
 
     /// The default widget inside the popover.
-    public func defaultWidget(@ViewBuilder _ defaultWidget: @escaping (() -> Body)) -> Self {
-        var newSelf = self
-        newSelf.defaultWidget = defaultWidget
-        return newSelf
+    public func defaultWidget(@ViewBuilder _ defaultWidget: () -> Body) -> Self {
+        modify { $0.defaultWidget = defaultWidget() }
     }
 
     /// Whether to draw an arrow.
     public func hasArrow(_ hasArrow: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.hasArrow = hasArrow
-        return newSelf
+        modify { $0.hasArrow = hasArrow }
     }
 
     /// Whether mnemonics are currently visible in this popover.
     public func mnemonicsVisible(_ mnemonicsVisible: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.mnemonicsVisible = mnemonicsVisible
-        return newSelf
+        modify { $0.mnemonicsVisible = mnemonicsVisible }
     }
 
     /// Emitted whend the user activates the default widget.

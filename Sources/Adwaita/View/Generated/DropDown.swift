@@ -2,7 +2,7 @@
 //  DropDown.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.10.25.
+//  Created by auto-generation on 31.10.25.
 //
 
 import CAdw
@@ -139,9 +139,7 @@ if let selected, newValue != selected.wrappedValue {
     /// 
     /// The accessible role cannot be changed once set.
     public func accessibleRole(_ accessibleRole: String?) -> Self {
-        var newSelf = self
-        newSelf.accessibleRole = accessibleRole
-        return newSelf
+        modify { $0.accessibleRole = accessibleRole }
     }
 
     /// Whether to show a search entry in the popup.
@@ -149,9 +147,7 @@ if let selected, newValue != selected.wrappedValue {
     /// Note that search requires ``expression(_:)``
     /// to be set.
     public func enableSearch(_ enableSearch: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.enableSearch = enableSearch
-        return newSelf
+        modify { $0.enableSearch = enableSearch }
     }
 
     /// The position of the selected item.
@@ -159,16 +155,12 @@ if let selected, newValue != selected.wrappedValue {
     /// If no item is selected, the property has the value
     /// %GTK_INVALID_LIST_POSITION.
     public func selected(_ selected: Binding<UInt>?) -> Self {
-        var newSelf = self
-        newSelf.selected = selected
-        return newSelf
+        modify { $0.selected = selected }
     }
 
     /// Whether to show an arrow within the GtkDropDown widget.
     public func showArrow(_ showArrow: Bool? = true) -> Self {
-        var newSelf = self
-        newSelf.showArrow = showArrow
-        return newSelf
+        modify { $0.showArrow = showArrow }
     }
 
     /// Emitted to when the drop down is activated.
