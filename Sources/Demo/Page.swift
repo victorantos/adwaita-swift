@@ -35,6 +35,7 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
     case textEditor
     case splitView
     case symbol
+    case toggleGroup
 
     var id: Self {
         self
@@ -56,6 +57,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Text Editor"
         case .splitView:
             return "Split View"
+        case .toggleGroup:
+            return "Toggle Group"
         default:
             return rawValue.capitalized
         }
@@ -118,6 +121,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "A split view whose panes are ajustable in size"
         case .symbol:
             return "Display a symbolic image"
+        case .toggleGroup:
+            return "Select an item"
         }
     }
 
@@ -171,6 +176,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             SplitViewDemo()
         case .symbol:
             SymbolDemo()
+        case .toggleGroup:
+            ToggleGroupDemo()
         }
     }
     // swiftlint:enable cyclomatic_complexity

@@ -162,7 +162,12 @@ struct GenerationConfiguration {
             class: "NavigationView",
             excludeProperties: ["navigation-stack", "visible-page"]
         ),
-        .init(class: "Spinner")
+        .init(class: "Spinner"),
+        .init(
+            class: "ToggleGroup",
+            bindings: [.init(property: "active"), .init(property: "active-name"), .init(property: "n-toggles")],
+            excludeProperties: ["toggles"]
+        )
     ]
 
     /// The Gtk widgets.
