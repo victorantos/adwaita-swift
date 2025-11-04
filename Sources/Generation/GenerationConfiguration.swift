@@ -7,7 +7,7 @@
 
 import Foundation
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length file_length
 
 /// The configuration for the generation.
 struct GenerationConfiguration {
@@ -86,7 +86,8 @@ struct GenerationConfiguration {
             excludeProperties: [
                 "expression", "factory", "list-factory", "model", "selected-item", "header-factory", "search-match-mode"
             ],
-            cast: true
+            cast: true,
+            internalInitializer: true
         ),
         .init(
             class: "ExpanderRow",
@@ -105,12 +106,14 @@ struct GenerationConfiguration {
                 .init(name: "prefix", add: "adw_entry_row_add_prefix")
             ],
             excludeProperties: ["attributes", "input-hints", "input-purpose"],
-            cast: true
+            cast: true,
+            internalInitializer: true
         ),
         .init(
             class: "PasswordEntryRow",
             excludeProperties: ["attributes", "input-hints", "input-purpose"],
-            cast: true
+            cast: true,
+            internalInitializer: true
         ),
         .init(
             class: "SpinRow",
@@ -122,7 +125,8 @@ struct GenerationConfiguration {
         .init(
             class: "PreferencesGroup",
             staticWidgets: [.init(name: "child", add: "adw_preferences_group_add")],
-            cast: true
+            cast: true,
+            internalInitializer: true
         ),
         .init(
             class: "PreferencesPage",
@@ -135,7 +139,8 @@ struct GenerationConfiguration {
         .init(
             class: "OverlaySplitView",
             bindings: [.init(property: "show-sidebar")],
-            excludeProperties: ["sidebar-position", "sidebar-width-unit"]
+            excludeProperties: ["sidebar-position", "sidebar-width-unit"],
+            internalInitializer: true
         ),
         .init(
             class: "HeaderBar",
@@ -152,7 +157,7 @@ struct GenerationConfiguration {
                 .init(name: "top", add: "adw_toolbar_view_add_top_bar")
             ]
         ),
-        .init(class: "ToastOverlay"),
+        .init(class: "ToastOverlay", internalInitializer: true),
         .init(
             class: "SplitButton",
             excludeProperties: ["direction", "popover"],
@@ -160,13 +165,15 @@ struct GenerationConfiguration {
         ),
         .init(
             class: "NavigationView",
-            excludeProperties: ["navigation-stack", "visible-page"]
+            excludeProperties: ["navigation-stack", "visible-page"],
+            internalInitializer: true
         ),
         .init(class: "Spinner"),
         .init(
             class: "ToggleGroup",
             bindings: [.init(property: "active"), .init(property: "active-name"), .init(property: "n-toggles")],
-            excludeProperties: ["toggles"]
+            excludeProperties: ["toggles"],
+            internalInitializer: true
         )
     ]
 
@@ -196,7 +203,8 @@ struct GenerationConfiguration {
             ],
             requiredProperties: ["spacing"],
             excludeProperties: ["baseline-position", "orientation"],
-            cast: true
+            cast: true,
+            internalInitializer: true
         ),
         .init(class: "LevelBar", excludeProperties: ["mode", "orientation"]),
         .init(
@@ -208,19 +216,21 @@ struct GenerationConfiguration {
             ),
             excludeProperties: ["selection-mode", "tab-behavior"]
         ),
-        .init(class: "ProgressBar", excludeProperties: ["ellipsize", "orientation"]),
+        .init(class: "ProgressBar", excludeProperties: ["ellipsize", "orientation"], internalInitializer: true),
         .init(
             class: "Button",
             excludeProperties: excludeButtons,
             cast: true,
-            setConditions: ["label": "storage.content[\"child\"] == nil"]
+            setConditions: ["label": "storage.content[\"child\"] == nil"],
+            internalInitializer: true
         ),
         .init(
             class: "ToggleButton",
             bindings: [.init(property: "active")],
             excludeProperties: ["group"] + excludeButtons,
             cast: true,
-            setConditions: ["label": "storage.content[\"child\"] == nil"]
+            setConditions: ["label": "storage.content[\"child\"] == nil"],
+            internalInitializer: true
         ),
         .init(
             class: "LinkButton",
@@ -255,14 +265,16 @@ struct GenerationConfiguration {
                 "secondary-icon-storage-type",
                 "tabs"
             ],
-            cast: true
+            cast: true,
+            internalInitializer: true
         ),
         .init(
             class: "MenuButton",
             name: "Menu",
             bindings: [.init(property: "active")],
             excludeProperties: ["direction", "popover"] + excludeButtons,
-            setConditions: ["label": "storage.content[\"child\"] == nil"]
+            setConditions: ["label": "storage.content[\"child\"] == nil"],
+            internalInitializer: true
         ),
         .init(
             class: "CenterBox",
@@ -286,7 +298,8 @@ struct GenerationConfiguration {
                     )
                 }
                 """
-            ]
+            ],
+            internalInitializer: true
         ),
         .init(class: "Overlay", staticWidgets: [.init(name: "overlay", add: "gtk_overlay_add_overlay")]),
         .init(class: "Popover", excludeProperties: ["pointing-to", "position"], cast: true),
@@ -330,7 +343,8 @@ struct GenerationConfiguration {
                 "model",
                 "search-match-mode",
                 "selected-item"
-            ]
+            ],
+            internalInitializer: true
         )
     ]
 
@@ -384,4 +398,4 @@ struct GenerationConfiguration {
 
 }
 
-// swiftlint:enable type_body_length
+// swiftlint:enable type_body_length file_length

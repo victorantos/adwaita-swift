@@ -2,7 +2,7 @@
 //  PasswordEntryRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 03.11.25.
+//  Created by auto-generation on 04.11.25.
 //
 
 import CAdw
@@ -77,7 +77,7 @@ public struct PasswordEntryRow: AdwaitaWidget {
     var prefix: () -> Body = { [] }
 
     /// Initialize `PasswordEntryRow`.
-    public init() {
+    init() {
     }
 
     /// The view storage.

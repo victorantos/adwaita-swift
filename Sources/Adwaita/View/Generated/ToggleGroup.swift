@@ -2,7 +2,7 @@
 //  ToggleGroup.swift
 //  Adwaita
 //
-//  Created by auto-generation on 03.11.25.
+//  Created by auto-generation on 04.11.25.
 //
 
 import CAdw
@@ -78,7 +78,7 @@ public struct ToggleGroup: AdwaitaWidget {
     var nToggles: Binding<UInt>?
 
     /// Initialize `ToggleGroup`.
-    public init() {
+    init() {
     }
 
     /// The view storage.

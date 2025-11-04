@@ -2,7 +2,7 @@
 //  PreferencesGroup.swift
 //  Adwaita
 //
-//  Created by auto-generation on 03.11.25.
+//  Created by auto-generation on 04.11.25.
 //
 
 import CAdw
@@ -49,7 +49,7 @@ public struct PreferencesGroup: AdwaitaWidget {
     var child: () -> Body = { [] }
 
     /// Initialize `PreferencesGroup`.
-    public init() {
+    init() {
     }
 
     /// The view storage.

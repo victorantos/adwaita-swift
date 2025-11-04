@@ -27,6 +27,7 @@ struct Property: Decodable {
     /// Whether the property is deprecated.
     var deprecated: Bool?
 
+    /// Whether the property is itself a view.
     var isView: Bool {
         (self.type?.isWidget ?? false) || (self.type?.isMenu ?? false)
     }

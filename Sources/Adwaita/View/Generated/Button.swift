@@ -2,7 +2,7 @@
 //  Button.swift
 //  Adwaita
 //
-//  Created by auto-generation on 03.11.25.
+//  Created by auto-generation on 04.11.25.
 //
 
 import CAdw
@@ -61,7 +61,7 @@ public struct Button: AdwaitaWidget {
     var clicked: (() -> Void)?
 
     /// Initialize `Button`.
-    public init() {
+    init() {
     }
 
     /// The view storage.

@@ -22,7 +22,7 @@ extension Class {
     ) -> String {
         let requiredProperties = properties(namespace: namespace, configurations: configs)
             .filter { config.requiredProperties.contains($0.name) }
-        var initializer = "public init("
+        var initializer = "\(config.internalInitializer ? "" : "public ")init("
         if config.dynamicWidget != nil {
             initializer.append("_ elements: [Element], ")
         }
