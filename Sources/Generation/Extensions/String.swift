@@ -80,7 +80,7 @@ extension String: @retroactive CodingKey {
         return type
     }
 
-    /// Apply the documentation regex.
+    /// Apply the documentation regex.
     /// - Parameter configuration: The generation configuration.
     /// - Returns: The documentation with the regex applied.
     func applyDocRegex(configuration: GenerationConfiguration) -> String {
@@ -99,7 +99,7 @@ extension String: @retroactive CodingKey {
         }
     }
 
-    /// Apply the regex to remove additional documentation content.
+    /// Apply the regex to remove additional documentation content.
     /// - Returns: The documentation with the regex applied.
     func applyExtraContentRegex() throws -> String {
         let extraContent = try Regex("##?(.|\\n)*")
@@ -115,7 +115,7 @@ extension String: @retroactive CodingKey {
         }
     }
 
-    /// Translate property definitions into Swift references.
+    /// Translate property definitions into Swift references.
     /// - Parameter configuration: The generation configuration.
     /// - Returns: The documentation with the regex applied.
     func applyPropertyRegex(configuration: GenerationConfiguration) throws -> String {
@@ -127,7 +127,7 @@ extension String: @retroactive CodingKey {
         }
     }
 
-    /// Translate booleans into inline Markdown code with Swift booleans.
+    /// Translate booleans into inline Markdown code with Swift booleans.
     /// - Returns: The documentation with the regex applied.
     func applyBooleanRegex() throws -> String {
         var modified = self
@@ -138,7 +138,7 @@ extension String: @retroactive CodingKey {
         return modified
     }
 
-    /// Remove broken HTML tags.
+    /// Remove broken HTML tags.
     /// - Returns: The documentation with the regex applied.
     func applyHTMLRegex() throws -> String {
         let picture = try Regex("<picture>.*?</picture>")

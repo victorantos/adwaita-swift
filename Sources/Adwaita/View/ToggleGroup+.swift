@@ -97,7 +97,7 @@ public protocol ToggleGroupItem: Identifiable where Self.ID: CustomStringConvert
 
     /// The item's icon.
     var icon: Icon? { get }
-    /// Whether to show the label in the UI (the identifier's string conversion).
+    /// Whether to show the label in the UI (the identifier's string conversion).
     ///
     /// Otherwise, it will be used as the tooltip.
     var showLabel: Bool { get }

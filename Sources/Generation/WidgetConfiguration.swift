@@ -36,7 +36,7 @@ struct WidgetConfiguration {
     var lastProperties: [String] = []
     /// Manually add setters which do not follow common practices.
     var setters: [String] = []
-    /// Whether the initializer of the widget should not be public in Swift.
+    /// Whether the initializer of the widget should not be public in Swift.
     var internalInitializer = false
 
     /// The configuration for a binding.
