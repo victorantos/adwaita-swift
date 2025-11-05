@@ -90,6 +90,7 @@ struct Demo: App {
         @State private var maximized = false
         @State private var about = false
         @State private var preferences = false
+        @State private var shortcuts = false
         @State private var title: WindowName = .demo
         @State private var closeAlert = false
         @State private var destroy = false
@@ -184,6 +185,18 @@ struct Demo: App {
                 destroy = true
                 window.close()
             }
+            .shortcutsDialog(visible: $shortcuts)
+            .shortcutsSection("Windows") { section in
+                section
+                    .shortcutsItem("New window", accelerator: "n".ctrl())
+                    .shortcutsItem("Close window", accelerator: "w".ctrl())
+            }
+            .shortcutsSection("General") { section in
+                section
+                    .shortcutsItem("Show preferences", accelerator: "comma".ctrl())
+                    .shortcutsItem("Show keyboard shortcuts", accelerator: "question".ctrl())
+            }
+            .shortcutsSection { $0.shortcutsItem("Quit Demo", accelerator: "q".ctrl()) }
         }
 
         var menu: AnyView {
@@ -199,6 +212,8 @@ struct Demo: App {
                 MenuSection {
                     MenuButton("Preferences") { preferences = true }
                         .keyboardShortcut("comma".ctrl())
+                    MenuButton("Keyboard Shortcuts") { shortcuts = true }
+                        .keyboardShortcut("question".ctrl())
                     MenuButton("About") { about = true }
                     MenuButton("Quit", window: false) { app.quit() }
                         .keyboardShortcut("q".ctrl())

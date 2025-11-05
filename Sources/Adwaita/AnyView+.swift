@@ -127,6 +127,22 @@ extension AnyView {
         )
     }
 
+    /// Add a shortcuts dialog to the parent window.
+    /// - Parameters:
+    ///     - visible: Whether the dialog is presented.
+    ///     - id: The dialog's id.
+    /// - Returns: The view.
+    public func shortcutsDialog(
+        visible: Binding<Bool>,
+        id: String? = nil
+    ) -> ShortcutsDialog {
+        .init(
+            visible: visible,
+            child: self,
+            id: id ?? ""
+        )
+    }
+
     /// Create an importer file dialog.
     /// - Parameters:
     ///     - open: The signal to open the dialog.
