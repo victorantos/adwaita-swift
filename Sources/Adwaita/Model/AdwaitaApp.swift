@@ -33,7 +33,7 @@ public class AdwaitaApp: AppStorage {
     /// - Parameter id: The identifier.
     public required init(id: String) {
         pointer = adw_application_new(id, G_APPLICATION_DEFAULT_FLAGS)?.cast()
-        DatabaseInformation.setPath(Self.userDataDir().appendingPathComponent("data.sqlite").path)
+        DatabaseInformation.setPath(Self.userDataDir().appendingPathComponent("\(id).sqlite").path)
     }
 
     /// Copy a string to the clipboard.
