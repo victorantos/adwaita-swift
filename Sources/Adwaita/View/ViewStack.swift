@@ -16,6 +16,8 @@ public struct ViewStack: AdwaitaWidget {
     var id: CustomStringConvertible
     /// Whether the view stack allocates the same height and width for all children.
     var homogeneous: Bool?
+    /// Whether to limit the stack to one child (always redraw the UI when the id changes).
+    var limitChildren: Bool?
 
     /// Initialize the stack.
     /// - Parameters:
@@ -87,14 +89,30 @@ public struct ViewStack: AdwaitaWidget {
             gtk_stack_set_vhomogeneous(storage.opaquePointer, homogeneous.cBool)
             gtk_stack_set_hhomogeneous(storage.opaquePointer, homogeneous.cBool)
         }
+        if let limitChildren, limitChildren {
+            for element in storage.content where element.key != id.description {
+                guard let first = element.value.first else {
+                    continue
+                }
+                gtk_stack_remove(storage.opaquePointer, first.opaquePointer?.cast())
+                storage.content.removeValue(forKey: element.key)
+            }
+        }
         storage.previousState = self
     }
 
     /// Whether the view stack allocates the same height and width for all children.
     /// - Parameter homogeneous: Whether this is enabled.
     /// - Returns: The stack.
-    public func homogeneous(_ homogeneous: Bool? = nil) -> Self {
+    public func homogeneous(_ homogeneous: Bool? = true) -> Self {
         modify { $0.homogeneous = homogeneous }
+    }
+
+    /// Whether to limit the stack to one child (always redraw the UI when the id changes).
+    /// - Parameter limit: Whether to limit the stack to one child.
+    /// - Returns: The stack.
+    public func limitChildren(_ limitChildren: Bool? = true) -> Self {
+        modify { $0.limitChildren = limitChildren }
     }
 
 }

@@ -390,4 +390,11 @@ extension AnyView {
         BreakpointBin(condition: .naturalHeight(padding: padding), matches: matches) { self }
     }
 
+    /// Build the UI from scratch once the identifier changes.
+    /// - Parameter id: The identifier.
+    public func id(_ id: CustomStringConvertible) -> AnyView {
+        ViewStack(id: id) { _ in self }
+            .limitChildren()
+    }
+
 }
