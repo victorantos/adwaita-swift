@@ -21,7 +21,7 @@ extension FlowBox {
     ///   - content: The view for an element.
     public init(
         _ elements: [Element],
-        selection: Binding<Element.ID>?,
+        selection: Binding<Element.ID>? = nil,
         @ViewBuilder content: @escaping (Element) -> Body
     ) {
         self.init(elements, content: content)

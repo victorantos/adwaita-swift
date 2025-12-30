@@ -310,7 +310,8 @@ struct GenerationConfiguration {
                 remove: "gtk_flow_box_remove",
                 getElement: "gtk_flow_box_get_child_at_index(widget, index.cInt)?.cast()"
             ),
-            excludeProperties: ["selection-mode", "orientation"]
+            excludeProperties: ["selection-mode", "orientation"],
+            internalInitializer: true
         ),
         .init(
             class: "SearchEntry",

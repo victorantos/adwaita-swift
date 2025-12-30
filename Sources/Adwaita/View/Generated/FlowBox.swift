@@ -2,7 +2,7 @@
 //  FlowBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 04.11.25.
+//  Created by auto-generation on 30.12.25.
 //
 
 import CAdw
@@ -125,7 +125,7 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     var content: (Element) -> Body
 
     /// Initialize `FlowBox`.
-    public init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
+    init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
         self.elements = elements
         self.content = content
     }
