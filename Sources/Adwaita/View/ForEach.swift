@@ -17,6 +17,8 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
     var content: (Element) -> Body
     /// Whether the list is horizontal.
     var horizontal: Bool
+    /// Whether the children should all be the same size.
+    var homogeneous: Bool?
 
     /// Initialize `ForEach`.
     public init(_ elements: [Element], horizontal: Bool = false, @ViewBuilder content: @escaping (Element) -> Body) {
@@ -73,10 +75,16 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
             }
         )
         if updateProperties {
-            gtk_orientable_set_orientation(
-                widget?.opaque(),
-                horizontal ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL
-            )
+            if (storage.previousState as? Self)?.horizontal != horizontal {
+                gtk_orientable_set_orientation(
+                    widget?.opaque(),
+                    horizontal ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL
+                )
+            }
+            if let homogeneous, (storage.previousState as? Self)?.homogeneous != homogeneous {
+                gtk_box_set_homogeneous(widget?.cast(), homogeneous.cBool)
+            }
+            storage.previousState = self
         }
         storage.fields["element"] = elements
         storage.content[.mainContent] = contentStorage
@@ -89,6 +97,13 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
                     type: type
                 )
         }
+    }
+
+    /// Whether the children should all be the same size.
+    /// - Parameter homogeneous: Whether the children should all be the same size.
+    /// - Returns: The for each view.
+    public func homogeneous(_ homogeneous: Bool? = true) -> Self {
+        modify { $0.homogeneous = homogeneous }
     }
 
 }
