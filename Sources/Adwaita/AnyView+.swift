@@ -252,6 +252,14 @@ extension AnyView {
         ModifierWrapper(content: self, padding: padding, edges: edges)
     }
 
+    /// Add a padding of 10 around a view.
+    /// - Parameters:
+    ///   - edges: The edges which are affected by the padding.
+    /// - Returns: A view.
+    public func padding(_ edges: Set<Edge> = .all) -> AnyView {
+        padding(10, edges)
+    }
+
     /// Enable or disable the horizontal expansion.
     /// - Parameter enabled: Whether it is enabled or disabled.
     /// - Returns: A view.
