@@ -341,6 +341,7 @@ extension AnyView {
     public func css(_ getString: @escaping () -> String) -> AnyView {
         inspect { storage, updateProperties in
             let cssID = "internal-css"
+            let providerID = "internal-css-provider"
             let previous = storage.fields[cssID] as? String
             let string = getString()
             if updateProperties, string != previous {
@@ -357,6 +358,13 @@ extension AnyView {
                 )
                 g_object_unref(provider)
                 storage.fields[cssID] = string
+                if let oldProvider = storage.fields[providerID] as? OpaquePointer {
+                    gtk_style_context_remove_provider_for_display(
+                        display,
+                        oldProvider
+                    )
+                }
+                storage.fields[providerID] = provider?.opaque()
             }
         }
     }
