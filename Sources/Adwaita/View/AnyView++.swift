@@ -271,13 +271,6 @@ extension AnyView {
         style("frame", active: active)
     }
 
-    /// Run a function when the view gets an update.
-    /// - Parameter onUpdate: The function.
-    /// - Returns: A view.
-    public func onUpdate(_ onUpdate: @escaping () -> Void) -> AnyView {
-        inspect { _, _ in onUpdate() }
-    }
-
     /// Bind to the view's focus.
     /// - Parameter focus: Whether the view is focused.
     /// - Returns: A view.
@@ -341,7 +334,7 @@ extension AnyView {
     ///     - getString: Get the CSS.
     /// - Returns: A view.
     public func css(scheme: ColorScheme? = nil, getString: @escaping () -> String) -> AnyView {
-        inspect { storage, updateProperties in
+        wrap { storage, updateProperties in
             let cssID = "internal-css"
             let providerID = "internal-css-provider"
             let previous = storage.fields[cssID] as? String
