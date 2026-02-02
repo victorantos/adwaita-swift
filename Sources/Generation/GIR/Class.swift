@@ -83,10 +83,17 @@ struct Class: ClassLike, Decodable {
         \(doc.docComment(configuration: genConfig))
         public struct \(definition) {
 
+            #if exposeGeneratedAppearUpdateFunctions
+            /// Additional update functions for type extensions.
+            public var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
+            /// Additional appear functions for type extensions.
+            public var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+            #else
             /// Additional update functions for type extensions.
             var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
             /// Additional appear functions for type extensions.
             var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+            #endif
         \(generateProperties(config: config, genConfig: genConfig, namespace: namespace, configs: configs))
 
             /// Initialize `\(widgetName)`.

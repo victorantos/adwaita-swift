@@ -2,7 +2,7 @@
 //  Fixed.swift
 //  Adwaita
 //
-//  Created by auto-generation on 02.02.26.
+//  Created by auto-generation on 03.02.26.
 //
 
 import CAdw
@@ -47,10 +47,17 @@ import LevenshteinTransformations
 /// widget. But you should be aware of the tradeoffs.
 public struct Fixed: AdwaitaWidget {
 
+    #if exposeGeneratedAppearUpdateFunctions
+    /// Additional update functions for type extensions.
+    public var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
+    /// Additional appear functions for type extensions.
+    public var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+    #else
     /// Additional update functions for type extensions.
     var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
     /// Additional appear functions for type extensions.
     var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+    #endif
 
     /// The accessible role of the given `GtkAccessible` implementation.
     /// 

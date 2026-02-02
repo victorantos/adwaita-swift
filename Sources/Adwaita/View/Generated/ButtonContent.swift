@@ -2,7 +2,7 @@
 //  ButtonContent.swift
 //  Adwaita
 //
-//  Created by auto-generation on 02.02.26.
+//  Created by auto-generation on 03.02.26.
 //
 
 import CAdw
@@ -28,10 +28,17 @@ import LevenshteinTransformations
 /// 
 public struct ButtonContent: AdwaitaWidget {
 
+    #if exposeGeneratedAppearUpdateFunctions
+    /// Additional update functions for type extensions.
+    public var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
+    /// Additional appear functions for type extensions.
+    public var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+    #else
     /// Additional update functions for type extensions.
     var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
     /// Additional appear functions for type extensions.
     var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+    #endif
 
     /// Whether the button can be smaller than the natural size of its contents.
     /// 

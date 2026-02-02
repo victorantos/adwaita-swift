@@ -2,7 +2,7 @@
 //  ListBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 02.02.26.
+//  Created by auto-generation on 03.02.26.
 //
 
 import CAdw
@@ -36,10 +36,17 @@ import LevenshteinTransformations
 /// 
 public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
 
+    #if exposeGeneratedAppearUpdateFunctions
+    /// Additional update functions for type extensions.
+    public var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
+    /// Additional appear functions for type extensions.
+    public var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+    #else
     /// Additional update functions for type extensions.
     var updateFunctions: [(ViewStorage, WidgetData, Bool) -> Void] = []
     /// Additional appear functions for type extensions.
     var appearFunctions: [(ViewStorage, WidgetData) -> Void] = []
+    #endif
 
     /// Whether to accept unpaired release events.
     var acceptUnpairedRelease: Bool?

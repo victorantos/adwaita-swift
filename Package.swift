@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.1
 //
 //  Package.swift
 //  Adwaita
@@ -22,6 +22,7 @@ let package = Package(
             targets: ["CAdw"]
         )
     ],
+    traits: [.trait(name: "exposeGeneratedAppearUpdateFunctions")],
     dependencies: [
         .package(url: "https://git.aparoksha.dev/aparoksha/meta", branch: "main"),
         .package(url: "https://github.com/stephencelis/CSQLite", from: "3.50.4"),
