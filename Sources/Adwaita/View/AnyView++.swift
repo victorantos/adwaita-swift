@@ -336,9 +336,11 @@ extension AnyView {
     }
 
     /// Add CSS classes to the app as soon as the view appears.
-    /// - Parameter getString: Get the CSS.
+    /// - Parameters:
+    ///     - scheme: The color scheme.
+    ///     - getString: Get the CSS.
     /// - Returns: A view.
-    public func css(_ getString: @escaping () -> String) -> AnyView {
+    public func css(scheme: ColorScheme? = nil, getString: @escaping () -> String) -> AnyView {
         inspect { storage, updateProperties in
             let cssID = "internal-css"
             let providerID = "internal-css-provider"
@@ -346,6 +348,9 @@ extension AnyView {
             let string = getString()
             if updateProperties, string != previous {
                 let provider = gtk_css_provider_new()
+                if let scheme {
+                    gtui_cssprovider_set_prefers_color_scheme(.init(Int(bitPattern: provider)), scheme.gtkValue)
+                }
                 gtk_css_provider_load_from_string(
                     provider,
                     string

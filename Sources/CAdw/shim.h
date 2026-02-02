@@ -85,3 +85,13 @@ gtui_initialize_boolean (gboolean boolean)
   g_value_set_boolean(&val, boolean);
   return val;
 }
+
+static void
+gtui_cssprovider_set_prefers_color_scheme (uint64_t provider, GtkInterfaceColorScheme scheme)
+{
+  GValue val = G_VALUE_INIT;
+  g_value_init(&val, G_TYPE_ENUM);
+  g_value_set_enum(&val, scheme);
+  g_object_set_property(provider, "prefers-color-scheme", &val);
+  g_value_unset(&val);
+}
