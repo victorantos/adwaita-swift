@@ -111,6 +111,8 @@ extension NavigationView {
             } else { print("Warning: removing the initial view is not allowed.") }
         case let .push(component):
             let contentStorage = views.0(component).storage(data: data, type: AdwaitaMainView.self)
+            views.0(component)
+                .updateStorage(contentStorage, data: data, updateProperties: true, type: AdwaitaMainView.self)
             contentStorage.fields[Self.componentID] = component
             storages.append(contentStorage)
             adw_navigation_view_push(

@@ -130,6 +130,7 @@ struct Dialog: AdwaitaWidget {
         let dialog = ViewStorage(pointer?.opaque())
         storage.content[dialogID + id] = [dialog]
         let contentStorage = content.storage(data: data, type: type)
+        content.updateStorage(contentStorage, data: data, updateProperties: true, type: type)
         adw_dialog_set_child(pointer, contentStorage.opaquePointer?.cast())
         storage.content[contentID + id] = [contentStorage]
         dialog.connectSignal(name: "closed") {

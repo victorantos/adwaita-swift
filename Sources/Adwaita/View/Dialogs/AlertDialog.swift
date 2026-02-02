@@ -215,6 +215,7 @@ public struct AlertDialog: AdwaitaWidget {
         storage.content[Self.dialogID + id] = [dialog]
         if let extraChild {
             let child = extraChild.storage(data: data, type: AdwaitaMainView.self)
+            extraChild.updateStorage(child, data: data, updateProperties: true, type: AdwaitaMainView.self)
             let childPointer = child.pointer as? OpaquePointer
             storage.content["extra-child"] = [child]
             adw_alert_dialog_set_extra_child(pointer?.cast(), childPointer?.cast())
