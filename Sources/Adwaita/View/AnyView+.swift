@@ -5,6 +5,7 @@
 //  Created by david-swift on 16.10.24.
 //
 
+import CAdw
 import Foundation
 
 extension AnyView {
@@ -241,90 +242,6 @@ extension AnyView {
         .init(vertical: true)
             .child { self }
             .maximumSize(maxHeight ?? -1)
-    }
-
-    /// Add padding around a view.
-    /// - Parameters:
-    ///   - padding: The size of the padding.
-    ///   - edges: The edges which are affected by the padding.
-    /// - Returns: A view.
-    public func padding(_ padding: Int = 10, _ edges: Set<Edge> = .all) -> AnyView {
-        ModifierWrapper(content: self, padding: padding, edges: edges)
-    }
-
-    /// Add a padding of 10 around a view.
-    /// - Parameters:
-    ///   - edges: The edges which are affected by the padding.
-    /// - Returns: A view.
-    public func padding(_ edges: Set<Edge> = .all) -> AnyView {
-        padding(10, edges)
-    }
-
-    /// Enable or disable the horizontal expansion.
-    /// - Parameter enabled: Whether it is enabled or disabled.
-    /// - Returns: A view.
-    public func hexpand(_ enabled: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, hexpand: enabled)
-    }
-
-    /// Enable or disable the vertical expansion.
-    /// - Parameter enabled: Whether it is enabled or disabled.
-    /// - Returns: A view.
-    public func vexpand(_ enabled: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, vexpand: enabled)
-    }
-
-    /// Set the horizontal alignment.
-    /// - Parameter align: The alignment.
-    /// - Returns: A view.
-    public func halign(_ align: Alignment) -> AnyView {
-        ModifierWrapper(content: self, halign: align)
-    }
-
-    /// Set the vertical alignment.
-    /// - Parameter align: The alignment.
-    /// - Returns: A view.
-    public func valign(_ align: Alignment) -> AnyView {
-        ModifierWrapper(content: self, valign: align)
-    }
-
-    /// Set the view's minimal width or height.
-    /// - Parameters:
-    ///   - minWidth: The minimal width.
-    ///   - minHeight: The minimal height.
-    /// - Returns: A view.
-    public func frame(minWidth: Int? = nil, minHeight: Int? = nil) -> AnyView {
-        ModifierWrapper(content: self, minWidth: minWidth, minHeight: minHeight)
-    }
-
-    /// Add a style class to the view.
-    /// - Parameters:
-    ///     - style: The style class.
-    ///     - active: Whether the style is currently applied.
-    /// - Returns: A view.
-    public func style(_ style: String, active: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, style: style, styleActive: active)
-    }
-
-    /// Make the view insensitive (useful e.g. in overlays).
-    /// - Parameter insensitive: Whether the view is insensitive.
-    /// - Returns: A view.
-    public func insensitive(_ insensitive: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, insensitive: insensitive)
-    }
-
-    /// Set the view's visibility.
-    /// - Parameter visible: Whether the view is visible.
-    /// - Returns: A view.
-    public func visible(_ visible: Bool = true) -> AnyView {
-        ModifierWrapper(content: self, visible: visible)
-    }
-
-    /// Add a tooltip to the widget.
-    /// - Parameter tooltip: The tooltip text.
-    /// - Returns: A view.
-    public func tooltip(_ tooltip: String) -> AnyView {
-        ModifierWrapper(content: self, tooltip: tooltip)
     }
 
     /// Present a toast when the signal gets activated.

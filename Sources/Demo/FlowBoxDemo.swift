@@ -28,7 +28,7 @@ struct FlowBoxDemo: View {
                 selectedItem = items[safe: index]?.id ?? items[safe: index ?? 0 - 1]?.id ?? items.first?.id ?? ""
             }
         }
-        .linked()
+        .modifyContent(VStack.self) { $0.linked() }
         .padding()
         .halign(.center)
         if !items.isEmpty {

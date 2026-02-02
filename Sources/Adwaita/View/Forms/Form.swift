@@ -15,11 +15,8 @@ public struct Form: SimpleView {
 
     /// The view's body.
     public var view: Body {
-        ModifierWrapper(
-            content: List([Int](content.indices), selection: nil) { index in content[index] },
-            style: "boxed-list",
-            styleActive: true
-        )
+        List([Int](content.indices), selection: nil) { index in content[index] }
+            .style("boxed-list")
     }
 
     /// Initialize a `Form`.
