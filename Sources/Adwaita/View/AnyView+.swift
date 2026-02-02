@@ -382,22 +382,6 @@ extension AnyView {
         BreakpointBin(condition: .minHeight(minHeight), matches: matches) { self }
     }
 
-    /// Whether the view has a width higher or equal to its natural width.
-    /// - Parameters:
-    ///     - matches: Whether the content view matches the breakpoint.
-    ///     - padding: Increase the natural width by a certain padding.
-    public func naturalWidth(matches: Binding<Bool>, padding: Int = 0) -> AnyView {
-        BreakpointBin(condition: .naturalWidth(padding: padding), matches: matches) { self }
-    }
-
-    /// Whether the view has a height higher or equal to its natural height.
-    /// - Parameters:
-    ///     - matches: Whether the content view matches the breakpoint.
-    ///     - padding: Increase the natural height by a certain padding.
-    public func naturalHeight(matches: Binding<Bool>, padding: Int = 0) -> AnyView {
-        BreakpointBin(condition: .naturalHeight(padding: padding), matches: matches) { self }
-    }
-
     /// Build the UI from scratch once the identifier changes.
     /// - Parameter id: The identifier.
     public func id(_ id: CustomStringConvertible) -> AnyView {
