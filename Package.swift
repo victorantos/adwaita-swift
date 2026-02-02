@@ -24,7 +24,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://git.aparoksha.dev/aparoksha/meta", branch: "main"),
-        .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", from: "0.1.0"),
+        .package(url: "https://github.com/stephencelis/CSQLite", from: "3.50.4"),
+        .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", branch: "main"),
         .package(
             url: "https://git.aparoksha.dev/aparoksha/levenshtein-transformations",
             branch: "main"
