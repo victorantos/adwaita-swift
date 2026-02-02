@@ -39,7 +39,6 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
         let switcher = ViewStorage(adw_view_switcher_new()?.opaque())
         let stack = ViewStorage(adw_view_stack_new()?.opaque())
         adw_view_switcher_set_stack(switcher.opaquePointer, stack.opaquePointer)
-        updateSwitcher(switcher: switcher)
         switcher.fields["stack"] = stack
         return switcher
     }

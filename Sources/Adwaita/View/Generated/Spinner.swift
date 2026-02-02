@@ -2,7 +2,7 @@
 //  Spinner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.12.25.
+//  Created by auto-generation on 02.02.26.
 //
 
 import CAdw
@@ -51,7 +51,6 @@ public struct Spinner: AdwaitaWidget {
         for function in appearFunctions {
             function(storage, data)
         }
-        update(storage, data: data, updateProperties: true, type: type)
 
         return storage
     }

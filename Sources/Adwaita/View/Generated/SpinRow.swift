@@ -2,7 +2,7 @@
 //  SpinRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.12.25.
+//  Created by auto-generation on 02.02.26.
 //
 
 import CAdw
@@ -125,7 +125,6 @@ public struct SpinRow: AdwaitaWidget {
         for function in appearFunctions {
             function(storage, data)
         }
-        update(storage, data: data, updateProperties: true, type: type)
         if let activatableWidgetStorage = activatableWidget?.storage(data: data, type: type) {
             storage.content["activatableWidget"] = [activatableWidgetStorage]
             adw_action_row_set_activatable_widget(storage.opaquePointer?.cast(), activatableWidgetStorage.opaquePointer?.cast())

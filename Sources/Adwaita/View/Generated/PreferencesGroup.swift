@@ -2,7 +2,7 @@
 //  PreferencesGroup.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.12.25.
+//  Created by auto-generation on 02.02.26.
 //
 
 import CAdw
@@ -62,7 +62,6 @@ public struct PreferencesGroup: AdwaitaWidget {
         for function in appearFunctions {
             function(storage, data)
         }
-        update(storage, data: data, updateProperties: true, type: type)
         if let headerSuffixStorage = headerSuffix?.storage(data: data, type: type) {
             storage.content["headerSuffix"] = [headerSuffixStorage]
             adw_preferences_group_set_header_suffix(storage.opaquePointer?.cast(), headerSuffixStorage.opaquePointer?.cast())

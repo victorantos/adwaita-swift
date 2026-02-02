@@ -94,9 +94,7 @@ struct ModifierWrapper: AdwaitaWidget {
     /// - Returns: The view storage.
     func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let content = content.storage(data: data, type: type)
-        let storage = ViewStorage(content.pointer, content: [.mainContent: [content]])
-        update(storage, data: data, updateProperties: true, type: type)
-        return storage
+        return .init(content.pointer, content: [.mainContent: [content]])
     }
 
     /// Update the stored content.

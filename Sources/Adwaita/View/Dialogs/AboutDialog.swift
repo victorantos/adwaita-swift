@@ -68,9 +68,7 @@ struct AboutDialog: AdwaitaWidget {
     ///     - type: The view render data type.
     /// - Returns: The view storage.
     func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
-        let storage = child.storage(data: data, type: type)
-        update(storage, data: data, updateProperties: true, type: type)
-        return storage
+        child.storage(data: data, type: type)
     }
 
     /// Update the stored content.

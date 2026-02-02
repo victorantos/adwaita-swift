@@ -58,7 +58,6 @@ public struct NavigationSplitView: AdwaitaWidget {
         content[contentID] = [mainContent]
 
         let storage = ViewStorage(splitView?.opaque(), content: content)
-        update(storage, data: data, updateProperties: true, type: type)
 
         storage.fields["sidebar-page"] = sidebarPage?.opaque()
         storage.fields["main-page"] = mainPage?.opaque()

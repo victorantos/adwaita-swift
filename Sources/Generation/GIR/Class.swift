@@ -102,7 +102,6 @@ struct Class: ClassLike, Decodable {
                 for function in appearFunctions {
                     function(storage, data)
                 }
-                update(storage, data: data, updateProperties: true, type: type)
         \(generateWidgetAssignments(config: config, genConfig: genConfig, namespace: namespace, configs: configs))
                 return storage
             }

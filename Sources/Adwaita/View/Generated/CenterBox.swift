@@ -2,7 +2,7 @@
 //  CenterBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.12.25.
+//  Created by auto-generation on 02.02.26.
 //
 
 import CAdw
@@ -70,7 +70,6 @@ public struct CenterBox: AdwaitaWidget {
         for function in appearFunctions {
             function(storage, data)
         }
-        update(storage, data: data, updateProperties: true, type: type)
         if let centerWidgetStorage = centerWidget?.storage(data: data, type: type) {
             storage.content["centerWidget"] = [centerWidgetStorage]
             gtk_center_box_set_center_widget(storage.opaquePointer, centerWidgetStorage.opaquePointer?.cast())

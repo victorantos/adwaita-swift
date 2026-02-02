@@ -64,9 +64,7 @@ struct Dialog: AdwaitaWidget {
     /// - Returns: The view storage.
     func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
         let child = child.storage(data: data, type: type)
-        let storage = ViewStorage(child.opaquePointer, content: [.mainContent: [child]])
-        update(storage, data: data, updateProperties: true, type: type)
-        return storage
+        return .init(child.opaquePointer, content: [.mainContent: [child]])
     }
 
     /// Update the stored content.

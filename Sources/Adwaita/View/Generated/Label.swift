@@ -2,7 +2,7 @@
 //  Label.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.12.25.
+//  Created by auto-generation on 02.02.26.
 //
 
 import CAdw
@@ -121,7 +121,6 @@ public struct Label: AdwaitaWidget {
         for function in appearFunctions {
             function(storage, data)
         }
-        update(storage, data: data, updateProperties: true, type: type)
         if let mnemonicWidgetStorage = mnemonicWidget?.storage(data: data, type: type) {
             storage.content["mnemonicWidget"] = [mnemonicWidgetStorage]
             gtk_label_set_mnemonic_widget(storage.opaquePointer, mnemonicWidgetStorage.opaquePointer?.cast())

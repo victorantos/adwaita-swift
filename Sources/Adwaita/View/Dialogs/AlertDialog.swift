@@ -106,9 +106,7 @@ public struct AlertDialog: AdwaitaWidget {
         data: WidgetData,
         type: Data.Type
     ) -> ViewStorage where Data: ViewRenderData {
-        let storage = child.storage(data: data, type: type)
-        update(storage, data: data, updateProperties: true, type: type)
-        return storage
+        child.storage(data: data, type: type)
     }
 
     /// Update the stored content.

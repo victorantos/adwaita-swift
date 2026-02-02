@@ -53,9 +53,7 @@ public struct ViewStack: AdwaitaWidget {
         type: Data.Type
     ) -> ViewStorage where Data: ViewRenderData {
         let stack = gtk_stack_new()
-        let storage = ViewStorage(stack?.opaque())
-        update(storage, data: data, updateProperties: true, type: type)
-        return storage
+        return .init(stack?.opaque())
     }
 
     /// Update the stored content.
@@ -74,6 +72,7 @@ public struct ViewStack: AdwaitaWidget {
             content.updateStorage(view, data: data, updateProperties: updateProperties, type: type)
         } else {
             let view = content.storage(data: data, type: type)
+            content.updateStorage(view, data: data, updateProperties: true, type: type)
             gtk_stack_add_named(storage.opaquePointer, view.opaquePointer?.cast(), id.description)
             storage.content[id.description] = [view]
         }

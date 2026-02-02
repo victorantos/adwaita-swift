@@ -2,7 +2,7 @@
 //  CheckButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.12.25.
+//  Created by auto-generation on 02.02.26.
 //
 
 import CAdw
@@ -79,7 +79,6 @@ public struct CheckButton: AdwaitaWidget {
         for function in appearFunctions {
             function(storage, data)
         }
-        update(storage, data: data, updateProperties: true, type: type)
         if let childStorage = child?.storage(data: data, type: type) {
             storage.content["child"] = [childStorage]
             gtk_check_button_set_child(storage.opaquePointer?.cast(), childStorage.opaquePointer?.cast())

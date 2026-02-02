@@ -104,7 +104,6 @@ public struct TextView: AdwaitaWidget {
             content: ["buffer": [buffer]]
         )
         initProperties(editor, data: data, type: type)
-        update(editor, data: data, updateProperties: true, type: type)
         return editor
     }
 

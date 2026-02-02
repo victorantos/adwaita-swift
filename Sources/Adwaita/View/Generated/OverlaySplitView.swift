@@ -2,7 +2,7 @@
 //  OverlaySplitView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 30.12.25.
+//  Created by auto-generation on 02.02.26.
 //
 
 import CAdw
@@ -120,7 +120,6 @@ public struct OverlaySplitView: AdwaitaWidget {
         for function in appearFunctions {
             function(storage, data)
         }
-        update(storage, data: data, updateProperties: true, type: type)
         if let contentStorage = content?.storage(data: data, type: type) {
             storage.content["content"] = [contentStorage]
             adw_overlay_split_view_set_content(storage.opaquePointer, contentStorage.opaquePointer?.cast())

@@ -36,11 +36,9 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
         data: WidgetData,
         type: Data.Type
     ) -> ViewStorage where Data: ViewRenderData {
-        let storage = ViewStorage(
+        .init(
             gtk_box_new(horizontal ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, 0)?.opaque()
         )
-        update(storage, data: data, updateProperties: true, type: type)
-        return storage
     }
 
     /// Update the stored content.
