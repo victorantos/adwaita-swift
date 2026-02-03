@@ -8,6 +8,21 @@
 
 import PackageDescription
 
+/// The dependencies.
+var dependencies: [Package.Dependency] = [
+    .package(url: "https://git.aparoksha.dev/aparoksha/meta", branch: "main"),
+    .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", branch: "main"),
+    .package(
+        url: "https://git.aparoksha.dev/aparoksha/levenshtein-transformations",
+        branch: "main"
+    ),
+    .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1")
+]
+
+#if os(Linux)
+dependencies.append(.package(url: "https://github.com/stephencelis/CSQLite", from: "3.50.4"))
+#endif
+
 /// The Adwaita package.
 let package = Package(
     name: "Adwaita",
@@ -23,16 +38,7 @@ let package = Package(
         )
     ],
     traits: [.trait(name: "exposeGeneratedAppearUpdateFunctions")],
-    dependencies: [
-        .package(url: "https://git.aparoksha.dev/aparoksha/meta", branch: "main"),
-        .package(url: "https://github.com/stephencelis/CSQLite", from: "3.50.4"),
-        .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", branch: "main"),
-        .package(
-            url: "https://git.aparoksha.dev/aparoksha/levenshtein-transformations",
-            branch: "main"
-        ),
-        .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1")
-    ],
+    dependencies: dependencies,
     targets: [
         .systemLibrary(
             name: "CAdw",
