@@ -2,7 +2,7 @@
 //  ListBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 03.02.26.
+//  Created by auto-generation on 04.02.26.
 //
 
 import CAdw
@@ -34,7 +34,7 @@ import LevenshteinTransformations
 /// as selected when the user tries to select it.
 /// 
 /// 
-public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
+public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equatable {
 
     #if exposeGeneratedAppearUpdateFunctions
     /// Additional update functions for type extensions.
@@ -107,11 +107,14 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
     var elements: [Element]
     /// The dynamic widget content.
     var content: (Element) -> Body
+    /// The dynamic widget identifier key path.
+    var id: KeyPath<Element, Identifier>
 
     /// Initialize `ListBox`.
-    public init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
+    public init(_ elements: [Element], id: KeyPath<Element, Identifier>, @ViewBuilder content: @escaping (Element) -> Body) {
         self.elements = elements
         self.content = content
+        self.id = id
     }
 
     /// The view storage.
@@ -186,8 +189,9 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
 
             var contentStorage: [ViewStorage] = storage.content[.mainContent] ?? []
             let old = storage.fields["element"] as? [Element] ?? []
-            old.identifiableTransform(
+            old.transform(
                 to: elements,
+                id: id,
                 functions: .init { index in
                     gtk_list_box_remove(widget, gtk_list_box_get_row_at_index(widget, index.cInt)?.cast())
                     contentStorage.remove(at: index)
@@ -317,6 +321,17 @@ public struct ListBox<Element>: AdwaitaWidget where Element: Identifiable {
         var newSelf = self
         newSelf.unselectAll = unselectAll
         return newSelf
+    }
+
+}
+
+extension ListBox where Element: Identifiable, Identifier == Element.ID {
+
+    /// Initialize `ListBox`.
+    public init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
+        self.elements = elements
+        self.content = content
+        self.id = \.id
     }
 
 }

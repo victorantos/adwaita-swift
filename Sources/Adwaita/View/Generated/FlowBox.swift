@@ -2,7 +2,7 @@
 //  FlowBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 03.02.26.
+//  Created by auto-generation on 04.02.26.
 //
 
 import CAdw
@@ -37,7 +37,7 @@ import LevenshteinTransformations
 /// Also see `Gtk.ListBox`.
 /// 
 /// 
-public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
+public struct FlowBox<Element, Identifier>: AdwaitaWidget where Identifier: Equatable {
 
     #if exposeGeneratedAppearUpdateFunctions
     /// Additional update functions for type extensions.
@@ -130,11 +130,14 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
     var elements: [Element]
     /// The dynamic widget content.
     var content: (Element) -> Body
+    /// The dynamic widget identifier key path.
+    var id: KeyPath<Element, Identifier>
 
     /// Initialize `FlowBox`.
-    init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
+    init(_ elements: [Element], id: KeyPath<Element, Identifier>, @ViewBuilder content: @escaping (Element) -> Body) {
         self.elements = elements
         self.content = content
+        self.id = id
     }
 
     /// The view storage.
@@ -216,8 +219,9 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
 
             var contentStorage: [ViewStorage] = storage.content[.mainContent] ?? []
             let old = storage.fields["element"] as? [Element] ?? []
-            old.identifiableTransform(
+            old.transform(
                 to: elements,
+                id: id,
                 functions: .init { index in
                     gtk_flow_box_remove(widget, gtk_flow_box_get_child_at_index(widget, index.cInt)?.cast())
                     contentStorage.remove(at: index)
@@ -374,6 +378,17 @@ public struct FlowBox<Element>: AdwaitaWidget where Element: Identifiable {
         var newSelf = self
         newSelf.unselectAll = unselectAll
         return newSelf
+    }
+
+}
+
+extension FlowBox where Element: Identifiable, Identifier == Element.ID {
+
+    /// Initialize `FlowBox`.
+    public init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
+        self.elements = elements
+        self.content = content
+        self.id = \.id
     }
 
 }

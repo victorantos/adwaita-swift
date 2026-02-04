@@ -26,11 +26,26 @@ extension ComboRow {
         selection: Binding<Element.ID>,
         values: [Element]
     ) where Element: Identifiable, Element: CustomStringConvertible {
+        self.init(title, selection: selection, values: values, id: \.id, description: \.description)
+    }
+
+    /// Initialize a combo row.
+    /// - Parameters:
+    ///     - title: The row's title.
+    ///     - selection: The selected value.
+    ///     - values: The available values.
+    public init<Element, Identifier>(
+        _ title: String,
+        selection: Binding<Identifier>,
+        values: [Element],
+        id: KeyPath<Element, Identifier>,
+        description: KeyPath<Element, String>
+    ) where Identifier: Equatable {
         self = self.title(title)
         self = self.selected(.init {
-            .init(values.firstIndex { $0.id == selection.wrappedValue } ?? 0)
+            .init(values.firstIndex { $0[keyPath: id] == selection.wrappedValue } ?? 0)
         } set: { index in
-            if let id = values[safe: .init(index)]?.id {
+            if let id = values[safe: .init(index)]?[keyPath: id] {
                 selection.wrappedValue = id
             }
         })
@@ -39,34 +54,10 @@ extension ComboRow {
             storage.fields[Self.stringList] = list
             adw_combo_row_set_model(storage.opaquePointer?.cast(), list)
             g_object_unref(list?.cast())
-            Self.updateContent(storage: storage, values: values, element: Element.self)
+            DropDown.updateContent(storage: storage, values: values, id: id, description: description)
         }
         updateFunctions.append { storage, _, _ in
-            Self.updateContent(storage: storage, values: values, element: Element.self)
-        }
-    }
-
-    /// Update the combo row's content.
-    /// - Parameters:
-    ///     - storage: The view storage.
-    ///     - values: The elements.
-    ///     - element: The type of the elements.
-    static func updateContent<Element>(
-        storage: ViewStorage,
-        values: [Element],
-        element: Element.Type
-    ) where Element: Identifiable, Element: CustomStringConvertible {
-        if let list = storage.fields[Self.stringList] as? OpaquePointer {
-            let old = storage.fields[Self.values] as? [Element] ?? []
-            old.identifiableTransform(
-                to: values,
-                functions: .init { index in
-                    gtk_string_list_remove(list, .init(index))
-                } insert: { _, element in
-                    gtk_string_list_append(list, element.description)
-                }
-            )
-            storage.fields[Self.values] = values
+            DropDown.updateContent(storage: storage, values: values, id: id, description: description)
         }
     }
 

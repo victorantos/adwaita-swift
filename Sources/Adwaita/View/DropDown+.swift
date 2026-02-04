@@ -17,27 +17,40 @@ extension DropDown {
 
     /// Initialize a combo row.
     /// - Parameters:
-    ///     - title: The row's title.
     ///     - selection: The selected value.
     ///     - values: The available values.
     public init<Element>(
         selection: Binding<Element.ID>,
         values: [Element]
     ) where Element: Identifiable, Element: CustomStringConvertible {
+        self.init(selection: selection, values: values, id: \.id, description: \.description)
+    }
+
+    /// Initialize a combo row.
+    /// - Parameters:
+    ///     - title: The row's title.
+    ///     - selection: The selected value.
+    ///     - values: The available values.
+    public init<Element, Identifier>(
+        selection: Binding<Identifier>,
+        values: [Element],
+        id: KeyPath<Element, Identifier>,
+        description: KeyPath<Element, String>
+    ) where Identifier: Equatable {
         self.init()
         self = self.selected(.init {
-            .init(values.firstIndex { $0.id == selection.wrappedValue } ?? 0)
+            .init(values.firstIndex { $0[keyPath: id] == selection.wrappedValue } ?? 0)
         } set: { index in
-            if let id = values[safe: .init(index)]?.id {
+            if let id = values[safe: .init(index)]?[keyPath: id] {
                 selection.wrappedValue = id
             }
         })
         appearFunctions.append { storage, _ in
             storage.fields[Self.stringList] = gtk_drop_down_get_model(storage.opaquePointer)
-            Self.updateContent(storage: storage, values: values, element: Element.self)
+            Self.updateContent(storage: storage, values: values, id: id, description: description)
         }
         updateFunctions.append { storage, _, _ in
-            Self.updateContent(storage: storage, values: values, element: Element.self)
+            Self.updateContent(storage: storage, values: values, id: id, description: description)
         }
     }
 
@@ -45,20 +58,23 @@ extension DropDown {
     /// - Parameters:
     ///     - storage: The view storage.
     ///     - values: The elements.
-    ///     - element: The type of the elements.
-    static func updateContent<Element>(
+    ///     - id: The keypath to the id.
+    ///     - description: The keypath to the description.
+    static func updateContent<Element, Identifier>(
         storage: ViewStorage,
         values: [Element],
-        element: Element.Type
-    ) where Element: Identifiable, Element: CustomStringConvertible {
+        id: KeyPath<Element, Identifier>,
+        description: KeyPath<Element, String>
+    ) where Identifier: Equatable {
         if let list = storage.fields[Self.stringList] as? OpaquePointer {
             let old = storage.fields[Self.values] as? [Element] ?? []
-            old.identifiableTransform(
+            old.transform(
                 to: values,
+                id: id,
                 functions: .init { index in
                     gtk_string_list_remove(list, .init(index))
                 } insert: { _, element in
-                    gtk_string_list_append(list, element.description)
+                    gtk_string_list_append(list, element[keyPath: description])
                 }
             )
             storage.fields[Self.values] = values

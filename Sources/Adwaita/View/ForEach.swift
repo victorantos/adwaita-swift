@@ -9,7 +9,7 @@ import CAdw
 import LevenshteinTransformations
 
 /// A dynamic list but without a list design in the user interface.
-public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
+public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equatable {
 
     /// The dynamic widget elements.
     var elements: [Element]
@@ -19,12 +19,20 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
     var horizontal: Bool
     /// Whether the children should all be the same size.
     var homogeneous: Bool?
+    /// The path to the identifier.
+    var id: KeyPath<Element, Identifier>
 
     /// Initialize `ForEach`.
-    public init(_ elements: [Element], horizontal: Bool = false, @ViewBuilder content: @escaping (Element) -> Body) {
+    public init(
+        _ elements: [Element],
+        id: KeyPath<Element, Identifier>,
+        horizontal: Bool = false,
+        @ViewBuilder content: @escaping (Element) -> Body
+    ) {
         self.elements = elements
         self.content = content
         self.horizontal = horizontal
+        self.id = id
     }
 
     /// The view storage.
@@ -56,8 +64,9 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
         var contentStorage: [ViewStorage] = storage.content[.mainContent] ?? []
         let old = storage.fields["element"] as? [Element] ?? []
         let widget: UnsafeMutablePointer<GtkBox>? = storage.opaquePointer?.cast()
-        old.identifiableTransform(
+        old.transform(
             to: elements,
+            id: id,
             functions: .init { index in
                 let child = contentStorage[safe: index]?.opaquePointer
                 gtk_box_remove(widget, child?.cast())
@@ -102,6 +111,18 @@ public struct ForEach<Element>: AdwaitaWidget where Element: Identifiable {
     /// - Returns: The for each view.
     public func homogeneous(_ homogeneous: Bool? = true) -> Self {
         modify { $0.homogeneous = homogeneous }
+    }
+
+}
+
+extension ForEach where Element: Identifiable, Identifier == Element.ID {
+
+    /// Initialize `ForEach`.
+    public init(_ elements: [Element], horizontal: Bool = false, @ViewBuilder content: @escaping (Element) -> Body) {
+        self.elements = elements
+        self.content = content
+        self.horizontal = horizontal
+        self.id = \.id
     }
 
 }

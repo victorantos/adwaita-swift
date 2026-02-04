@@ -24,7 +24,7 @@ extension Class {
             .filter { config.requiredProperties.contains($0.name) }
         var initializer = "\(config.internalInitializer ? "" : "public ")init("
         if config.dynamicWidget != nil {
-            initializer.append("_ elements: [Element], ")
+            initializer.append("_ elements: [Element], id: KeyPath<Element, Identifier>, ")
         }
         for property in requiredProperties {
             initializer.append("\(property.parameter(config: config, genConfig: genConfig)), ")
@@ -46,6 +46,7 @@ extension Class {
 
                         self.elements = elements
                         self.content = content
+                        self.id = id
                 """
             )
         }
@@ -167,6 +168,8 @@ extension Class {
                 var elements: [Element]
                 /// The dynamic widget content.
                 var content: (Element) -> Body
+                /// The dynamic widget identifier key path.
+                var id: KeyPath<Element, Identifier>
             """
         }
         content += staticWidgetProperties(namespace: namespace, configs: configs)
@@ -226,8 +229,9 @@ extension Class {
             return """
                         var contentStorage: [ViewStorage] = storage.content[.mainContent] ?? []
                         let old = storage.fields["element"] as? [Element] ?? []
-                        old.identifiableTransform(
+                        old.transform(
                             to: elements,
+                            id: id,
                             functions: .init { index in
                                 \(dynamicWidget.remove)(\(widget), \(dynamicWidget.getElement))
                                 contentStorage.remove(at: index)

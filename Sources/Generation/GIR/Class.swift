@@ -64,10 +64,25 @@ struct Class: ClassLike, Decodable {
         dateFormatter.dateFormat = "dd.MM.yy"
         let widgetName = config.name ?? config.class
         let definition: String
+        var extensions = ""
         if config.dynamicWidget == nil {
             definition = "\(widgetName): AdwaitaWidget"
         } else {
-            definition = "\(widgetName)<Element>: AdwaitaWidget where Element: Identifiable"
+            definition = "\(widgetName)<Element, Identifier>: AdwaitaWidget where Identifier: Equatable"
+            extensions += """
+
+            extension \(widgetName) where Element: Identifiable, Identifier == Element.ID {
+
+                /// Initialize `\(widgetName)`.
+                public init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
+                    self.elements = elements
+                    self.content = content
+                    self.id = \\.id
+                }
+
+            }
+
+            """
         }
         return """
         //
@@ -135,7 +150,7 @@ struct Class: ClassLike, Decodable {
             }
         \(generateModifiers(config: config, genConfig: genConfig, namespace: namespace, configs: configs))
         }
-
+        \(extensions)
         """
     }
     // swiftlint:enable function_body_length line_length

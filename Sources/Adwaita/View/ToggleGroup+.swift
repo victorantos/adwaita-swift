@@ -23,72 +23,103 @@ extension ToggleGroup {
         selection: Binding<Element.ID>,
         values: [Element]
     ) where Element: ToggleGroupItem {
+        self.init(
+            selection: selection,
+            values: values,
+            id: \.id,
+            label: \.id.description,
+            icon: \.icon,
+            showLabel: \.showLabel
+        )
+    }
+
+    /// Initialize a toggle group.
+    /// - Parameters:
+    ///     - selection: The selected value.
+    ///     - values: The available values.
+    ///     - id: The path to the identifier.
+    ///     - label: The path to the label.
+    ///     - icon: The path to the icon.
+    ///     - showLabel: The path to the boolean that defines whether to show an element's label.
+    public init<Element, Identifier>(
+        selection: Binding<Identifier>,
+        values: [Element],
+        id: KeyPath<Element, Identifier>,
+        label: KeyPath<Element, String>,
+        icon: KeyPath<Element, Icon?>? = nil,
+        showLabel: KeyPath<Element, Bool>? = nil
+    ) where Identifier: Equatable {
         self.init()
         appearFunctions.append { storage, _ in
             storage.notify(name: "active-name", id: "init") {
                 if let name = adw_toggle_group_get_active_name(storage.opaquePointer),
                 let values = storage.fields[Self.values] as? [Element],
-                let value = values.first(where: { $0.id.description == String(cString: name) }) {
-                    selection.wrappedValue = value.id
+                let identifier = values
+                    .map({ $0[keyPath: label] }).first(where: { $0.description == String(cString: name) }),
+                let value = values.first(where: { $0[keyPath: label] == identifier }) {
+                    selection.wrappedValue = value[keyPath: id]
                 }
             }
-            Self.updateContent(
-                storage: storage,
-                selection: selection.wrappedValue,
-                values: values,
-                updateProperties: true
-            )
         }
         updateFunctions.append { storage, _, updateProperties in
             Self.updateContent(
                 storage: storage,
                 selection: selection.wrappedValue,
                 values: values,
+                id: id,
+                label: label,
+                icon: icon,
+                showLabel: showLabel,
                 updateProperties: updateProperties
             )
         }
     }
 
+    // swiftlint:disable function_parameter_count
     /// Update the combo row's content.
-    /// - Parameters:
-    ///     - storage: The view storage.
-    ///     - values: The elements.
-    ///     - updateProperties: Whether to update the properties.
-    static func updateContent<Element>(
+    static func updateContent<Element, Identifier>(
         storage: ViewStorage,
-        selection: Element.ID,
+        selection: Identifier,
         values: [Element],
+        id: KeyPath<Element, Identifier>,
+        label: KeyPath<Element, String>,
+        icon: KeyPath<Element, Icon?>?,
+        showLabel: KeyPath<Element, Bool>?,
         updateProperties: Bool
-    ) where Element: ToggleGroupItem {
+    ) where Identifier: Equatable {
         guard updateProperties else {
             return
         }
         let old = storage.fields[Self.values] as? [Element] ?? []
-        old.identifiableTransform(
+        old.transform(
             to: values,
+            id: id,
             functions: .init { index in
-                if let id = old[safe: index]?.id.description,
+                if let id = old[safe: index]?[keyPath: label],
                 let toggle = storage.fields[Self.toggle + id] as? OpaquePointer {
                     adw_toggle_group_remove(storage.opaquePointer, toggle)
                 }
             } insert: { _, element in
                 let toggle = adw_toggle_new()
-                adw_toggle_set_name(toggle, element.id.description)
-                if element.showLabel {
-                    adw_toggle_set_label(toggle, element.id.description)
+                adw_toggle_set_name(toggle, element[keyPath: label])
+                if let showLabel, !element[keyPath: showLabel] {
+                    adw_toggle_set_tooltip(toggle, element[keyPath: label])
                 } else {
-                    adw_toggle_set_tooltip(toggle, element.id.description)
+                    adw_toggle_set_label(toggle, element[keyPath: label])
                 }
-                if let icon = element.icon {
+                if let icon, let icon = element[keyPath: icon] {
                     adw_toggle_set_icon_name(toggle, icon.string)
                 }
-                storage.fields[Self.toggle + element.id.description] = toggle
+                storage.fields[Self.toggle + element[keyPath: label]] = toggle
                 adw_toggle_group_add(storage.opaquePointer, toggle)
             }
         )
         storage.fields[Self.values] = values
-        adw_toggle_group_set_active_name(storage.opaquePointer, selection.description)
+        if let selection = values.first(where: { $0[keyPath: id] == selection }) {
+            adw_toggle_group_set_active_name(storage.opaquePointer, selection[keyPath: label])
+        }
     }
+    // swiftlint:enable function_parameter_count
 
 }
 

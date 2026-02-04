@@ -15,8 +15,13 @@ struct ToggleGroupDemo: View {
     @State private var selection: Subview = .view1
 
     var view: Body {
-        ToggleGroup(selection: $selection, values: Subview.allCases)
-            .padding()
+        ToggleGroup(
+            selection: $selection,
+            values: Subview.allCases,
+            id: \.self,
+            label: \.rawValue
+        )
+        .padding()
         VStack {
             Text(selection.rawValue)
                 .padding()
@@ -26,18 +31,10 @@ struct ToggleGroupDemo: View {
         .padding()
     }
 
-    enum Subview: String, ToggleGroupItem, CaseIterable, CustomStringConvertible {
+    enum Subview: String, CaseIterable, Equatable {
 
         case view1 = "View 1"
         case view2 = "View 2"
-
-        var id: Self { self }
-
-        var description: String { rawValue }
-
-        var icon: Icon? { nil }
-
-        var showLabel: Bool { true }
 
     }
 
