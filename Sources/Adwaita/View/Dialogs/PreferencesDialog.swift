@@ -65,12 +65,15 @@ public struct PreferencesDialog: AdwaitaWidget {
             let page = Adwaita.PreferencesPage()
                 .title(title)
                 .iconName(icon.string)
-                .storage(data: data.noModifiers, type: AdwaitaMainView.self)
-            let groups = content.map { $0.gtkPreferencesGroup(data: data) }
-            for group in groups {
-                adw_preferences_page_add(page.opaquePointer?.cast(), group.opaquePointer?.cast())
+            let pageStorage = page.storage(data: data.noModifiers, type: AdwaitaMainView.self)
+            page.update(pageStorage, data: data, updateProperties: true, type: AdwaitaMainView.self)
+            let groups = content.map { item in
+                let storage = item.gtkPreferencesGroup(data: data)
+                item.update(group: storage, data: data, updateProperties: true)
+                adw_preferences_page_add(pageStorage.opaquePointer?.cast(), storage.opaquePointer?.cast())
+                return storage
             }
-            return (page.opaquePointer, groups)
+            return (pageStorage.opaquePointer, groups)
         }
 
         /// Update the page.

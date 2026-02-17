@@ -175,6 +175,9 @@ struct Demo: App {
                             .title("Extra Action")
                     }
             }
+            .preferencesPage("Page 2", icon: .default(icon: .faceEmbarrassed)) { page in
+                page
+            }
             .alertDialog(
                 visible: $closeAlert,
                 heading: "Close this Window?",
