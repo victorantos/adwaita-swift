@@ -143,7 +143,7 @@ public class SignalData {
             callback,
             Unmanaged.passUnretained(self).toOpaque().cast(),
             destroy,
-            G_CONNECT_AFTER
+            GConnectFlags(rawValue: 1)
         )
     }
 
