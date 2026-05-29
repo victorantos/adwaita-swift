@@ -32,7 +32,7 @@ public class AdwaitaApp: AppStorage {
     /// Initialize the app storage.
     /// - Parameter id: The identifier.
     public required init(id: String) {
-        pointer = adw_application_new(id, G_APPLICATION_DEFAULT_FLAGS)?.cast()
+        pointer = adw_application_new(id, GApplicationFlags(rawValue: 0))?.cast()
         DatabaseInformation.setPath(Self.userDataDir().appendingPathComponent("\(id).sqlite").path)
     }
 
@@ -91,7 +91,7 @@ public class AdwaitaApp: AppStorage {
             unsafeBitCast(data.threeParamsHandler, to: GCallback.self),
             Unmanaged.passUnretained(data).toOpaque().cast(),
             nil,
-            G_CONNECT_AFTER
+            GConnectFlags(rawValue: 1)
         )
         if let window {
             g_action_map_add_action(.init(window.pointer), action)
