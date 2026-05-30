@@ -22,7 +22,6 @@ struct Demo: App {
         Window(id: "main") { window in
             DemoContent(window: window, app: app, pictureURL: pictureURL)
         }
-        .devel()
         helperWindows
     }
 
