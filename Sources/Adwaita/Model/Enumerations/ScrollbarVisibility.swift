@@ -8,7 +8,7 @@
 import CAdw
 
 /// The visibility of a scroll bar.
-public enum ScrollbarVisibility: UInt32 {
+public enum ScrollbarVisibility {
 
     /// The scrollbar is always visible. The view size is independent of the content.
     case alwaysVisible
@@ -21,7 +21,16 @@ public enum ScrollbarVisibility: UInt32 {
 
     /// The ScrollbarVisibility value as a GtkPolicyType value.
     var gtkValue: GtkPolicyType {
-        .init(rawValue)
+        switch self {
+        case .alwaysVisible:
+            .GTK_POLICY_ALWAYS
+        case .automatic:
+            .GTK_POLICY_AUTOMATIC
+        case .never:
+            .GTK_POLICY_NEVER
+        case .external:
+            .GTK_POLICY_EXTERNAL
+        }
     }
 
 }

@@ -181,19 +181,19 @@ public struct AlertDialog: AdwaitaWidget {
                 adw_alert_dialog_set_response_appearance(
                     pointer?.cast(),
                     responseID(element.id),
-                    ADW_RESPONSE_DEFAULT
+                    .ADW_RESPONSE_DEFAULT
                 )
             case .suggested:
                 adw_alert_dialog_set_response_appearance(
                     pointer?.cast(),
                     responseID(element.id),
-                    ADW_RESPONSE_SUGGESTED
+                    .ADW_RESPONSE_SUGGESTED
                 )
             case .destructive:
                 adw_alert_dialog_set_response_appearance(
                     pointer?.cast(),
                     responseID(element.id),
-                    ADW_RESPONSE_DESTRUCTIVE
+                    .ADW_RESPONSE_DESTRUCTIVE
                 )
             }
         }

@@ -53,7 +53,7 @@ extension FlowBox {
             }
         } else {
             appearFunctions.append { storage, _ in
-                gtk_flow_box_set_selection_mode(storage.opaquePointer, GTK_SELECTION_NONE)
+                gtk_flow_box_set_selection_mode(storage.opaquePointer, .GTK_SELECTION_NONE)
             }
         }
     }

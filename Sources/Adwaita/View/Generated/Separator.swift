@@ -2,7 +2,7 @@
 //  Separator.swift
 //  Adwaita
 //
-//  Created by auto-generation on 04.02.26.
+//  Created by auto-generation on 31.05.26.
 //
 
 import CAdw
@@ -46,7 +46,7 @@ public struct Separator: AdwaitaWidget {
     ///     - type: The view render data type.
     /// - Returns: The view storage.
     public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
-        let storage = ViewStorage(gtk_separator_new(GTK_ORIENTATION_VERTICAL)?.opaque())
+        let storage = ViewStorage(gtk_separator_new(.GTK_ORIENTATION_VERTICAL)?.opaque())
         for function in appearFunctions {
             function(storage, data)
         }

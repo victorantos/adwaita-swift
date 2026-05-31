@@ -8,16 +8,21 @@
 import CAdw
 
 /// The system color scheme.
-public enum ColorScheme: UInt32 {
+public enum ColorScheme {
 
     /// The dark color scheme.
-    case dark = 2
+    case dark
     /// The light color scheme.
-    case light = 3
+    case light
 
     /// The ColorScheme value as GtkInterfaceColorScheme.
     var gtkValue: GtkInterfaceColorScheme {
-        .init(rawValue)
+        switch self {
+        case .light:
+            .GTK_INTERFACE_COLOR_SCHEME_LIGHT
+        case .dark:
+            .GTK_INTERFACE_COLOR_SCHEME_DARK
+        }
     }
 
 }

@@ -27,17 +27,17 @@ public enum Alignment: Int {
     public var cAlign: GtkAlign {
         switch self {
         case .fill:
-            return GTK_ALIGN_FILL
+            .GTK_ALIGN_FILL
         case .start:
-            return GTK_ALIGN_START
+            .GTK_ALIGN_START
         case .end:
-            return GTK_ALIGN_END
+            .GTK_ALIGN_END
         case .center:
-            return GTK_ALIGN_CENTER
+            .GTK_ALIGN_CENTER
         case .baselineFill:
-            return GTK_ALIGN_BASELINE_FILL
+            .GTK_ALIGN_BASELINE_FILL
         case .baselineCenter:
-            return GTK_ALIGN_BASELINE_CENTER
+            .GTK_ALIGN_BASELINE_CENTER
         }
     }
 

@@ -73,7 +73,7 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
         if (switcher.previousState as? Self)?.wide != wide {
             adw_view_switcher_set_policy(
                 switcher.opaquePointer,
-                wide ? ADW_VIEW_SWITCHER_POLICY_WIDE : ADW_VIEW_SWITCHER_POLICY_NARROW
+                wide ? .ADW_VIEW_SWITCHER_POLICY_WIDE : .ADW_VIEW_SWITCHER_POLICY_NARROW
             )
         }
         let adwStack = adw_view_switcher_get_stack(switcher.opaquePointer)

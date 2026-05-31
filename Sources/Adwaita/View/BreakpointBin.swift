@@ -16,8 +16,8 @@ public struct BreakpointBin: AdwaitaWidget {
         set: { bin, view in
             var width: Int32 = 0
             var height: Int32 = 0
-            gtk_widget_measure(view.cast(), GTK_ORIENTATION_VERTICAL, -1, &height, nil, nil, nil)
-            gtk_widget_measure(view.cast(), GTK_ORIENTATION_HORIZONTAL, -1, &width, nil, nil, nil)
+            gtk_widget_measure(view.cast(), .GTK_ORIENTATION_VERTICAL, -1, &height, nil, nil, nil)
+            gtk_widget_measure(view.cast(), .GTK_ORIENTATION_HORIZONTAL, -1, &width, nil, nil, nil)
             gtk_widget_set_size_request(bin.cast(), width, height)
             adw_breakpoint_bin_set_child(bin.cast(), view.cast())
         },
@@ -35,12 +35,12 @@ public struct BreakpointBin: AdwaitaWidget {
             case let .naturalWidth(padding):
                 let child = adw_breakpoint_bin_get_child(bin.cast())
                 var size: Int32 = 0
-                gtk_widget_measure(child, GTK_ORIENTATION_HORIZONTAL, -1, nil, &size, nil, nil)
+                gtk_widget_measure(child, .GTK_ORIENTATION_HORIZONTAL, -1, nil, &size, nil, nil)
                 condition = .minWidth(.init(size) + padding)
             case let .naturalHeight(padding):
                 let child = adw_breakpoint_bin_get_child(bin.cast())
                 var size: Int32 = 0
-                gtk_widget_measure(child, GTK_ORIENTATION_VERTICAL, -1, nil, &size, nil, nil)
+                gtk_widget_measure(child, .GTK_ORIENTATION_VERTICAL, -1, nil, &size, nil, nil)
                 condition = .minHeight(.init(size) + padding)
             default:
                 break

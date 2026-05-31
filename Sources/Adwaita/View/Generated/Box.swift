@@ -2,7 +2,7 @@
 //  Box.swift
 //  Adwaita
 //
-//  Created by auto-generation on 04.02.26.
+//  Created by auto-generation on 31.05.26.
 //
 
 import CAdw
@@ -76,7 +76,7 @@ public struct Box: AdwaitaWidget {
     ///     - type: The view render data type.
     /// - Returns: The view storage.
     public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
-        let storage = ViewStorage(gtk_box_new(GTK_ORIENTATION_VERTICAL, spacing.cInt)?.opaque())
+        let storage = ViewStorage(gtk_box_new(.GTK_ORIENTATION_VERTICAL, spacing.cInt)?.opaque())
         for function in appearFunctions {
             function(storage, data)
         }

@@ -196,7 +196,7 @@ struct GenerationConfiguration {
         ),
         .init(
             class: "Box",
-            initializer: "gtk_box_new(GTK_ORIENTATION_VERTICAL, spacing.cInt)",
+            initializer: "gtk_box_new(.GTK_ORIENTATION_VERTICAL, spacing.cInt)",
             staticWidgets: [
                 .init(name: "append", add: "gtk_box_append"),
                 .init(name: "prepend", add: "gtk_box_prepend")
@@ -328,7 +328,7 @@ struct GenerationConfiguration {
         ),
         .init(
             class: "Separator",
-            initializer: "gtk_separator_new(GTK_ORIENTATION_VERTICAL)",
+            initializer: "gtk_separator_new(.GTK_ORIENTATION_VERTICAL)",
             excludeProperties: ["orientation"]
         ),
         .init(class: "Fixed"),

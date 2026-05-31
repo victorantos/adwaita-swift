@@ -2,7 +2,7 @@
 //  SearchEntry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 04.02.26.
+//  Created by auto-generation on 31.05.26.
 //
 
 import CAdw
@@ -65,6 +65,10 @@ public struct SearchEntry: AdwaitaWidget {
     var editable: Bool?
     /// If undo/redo should be enabled for the editable.
     var enableUndo: Bool?
+    /// The widget that the entry will use to capture key events.
+    /// 
+    /// Key events are consumed by the search entry to start or continue a search.
+    var keyCaptureWidget: Body?
     /// The desired maximum width of the entry, in characters.
     var maxWidthChars: Int?
     /// The text that will be displayed in the `GtkSearchEntry`
@@ -164,6 +168,10 @@ public struct SearchEntry: AdwaitaWidget {
         for function in appearFunctions {
             function(storage, data)
         }
+        if let keyCaptureWidgetStorage = keyCaptureWidget?.storage(data: data, type: type) {
+            storage.content["keyCaptureWidget"] = [keyCaptureWidgetStorage]
+            gtk_search_entry_set_key_capture_widget(storage.opaquePointer, keyCaptureWidgetStorage.opaquePointer?.cast())
+        }
 
         return storage
     }
@@ -237,6 +245,9 @@ if let text, newValue != text.wrappedValue {
             if let enableUndo, updateProperties, (storage.previousState as? Self)?.enableUndo != enableUndo {
                 gtk_editable_set_enable_undo(widget, enableUndo.cBool)
             }
+            if let widget = storage.content["keyCaptureWidget"]?.first {
+                keyCaptureWidget?.updateStorage(widget, data: data, updateProperties: updateProperties, type: type)
+            }
             if let maxWidthChars, updateProperties, (storage.previousState as? Self)?.maxWidthChars != maxWidthChars {
                 gtk_editable_set_max_width_chars(widget, maxWidthChars.cInt)
             }
@@ -292,6 +303,13 @@ if let text, newValue != text.wrappedValue {
     /// If undo/redo should be enabled for the editable.
     public func enableUndo(_ enableUndo: Bool? = true) -> Self {
         modify { $0.enableUndo = enableUndo }
+    }
+
+    /// The widget that the entry will use to capture key events.
+    /// 
+    /// Key events are consumed by the search entry to start or continue a search.
+    public func keyCaptureWidget(@ViewBuilder _ keyCaptureWidget: () -> Body) -> Self {
+        modify { $0.keyCaptureWidget = keyCaptureWidget() }
     }
 
     /// The desired maximum width of the entry, in characters.

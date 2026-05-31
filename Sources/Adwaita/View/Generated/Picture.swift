@@ -2,7 +2,7 @@
 //  Picture.swift
 //  Adwaita
 //
-//  Created by auto-generation on 04.02.26.
+//  Created by auto-generation on 31.05.26.
 //
 
 import CAdw
@@ -60,6 +60,8 @@ public struct Picture: AdwaitaWidget {
     var canShrink: Bool?
     /// How the content should be resized to fit inside the `GtkPicture`.
     var contentFit: ContentFit?
+    /// If the rendering of the contents is isolated from the rest of the widget tree.
+    var isolateContents: Bool?
 
     /// Initialize `Picture`.
     public init() {
@@ -97,6 +99,9 @@ public struct Picture: AdwaitaWidget {
             if let contentFit, updateProperties, (storage.previousState as? Self)?.contentFit != contentFit {
                 gtk_picture_set_content_fit(widget, contentFit.gtkValue)
             }
+            if let isolateContents, updateProperties, (storage.previousState as? Self)?.isolateContents != isolateContents {
+                gtk_picture_set_isolate_contents(widget, isolateContents.cBool)
+            }
 
 
 
@@ -129,6 +134,11 @@ public struct Picture: AdwaitaWidget {
     /// How the content should be resized to fit inside the `GtkPicture`.
     public func contentFit(_ contentFit: ContentFit?) -> Self {
         modify { $0.contentFit = contentFit }
+    }
+
+    /// If the rendering of the contents is isolated from the rest of the widget tree.
+    public func isolateContents(_ isolateContents: Bool? = true) -> Self {
+        modify { $0.isolateContents = isolateContents }
     }
 
 }

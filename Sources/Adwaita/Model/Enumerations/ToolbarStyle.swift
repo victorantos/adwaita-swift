@@ -8,7 +8,7 @@
 import CAdw
 
 /// The top and bottom bar styles.
-public enum ToolbarStyle: UInt32 {
+public enum ToolbarStyle {
 
     /// No background, shadow only for scrolled content.
     case flat
@@ -19,7 +19,14 @@ public enum ToolbarStyle: UInt32 {
 
     /// The ToolbarStyle value as an AdwToolbarStyle value.
     var gtkValue: AdwToolbarStyle {
-        .init(rawValue)
+        switch self {
+        case .flat:
+            .ADW_TOOLBAR_FLAT
+        case .raised:
+            .ADW_TOOLBAR_RAISED
+        case .raisedBorder:
+            .ADW_TOOLBAR_RAISED_BORDER
+        }
     }
 
 }

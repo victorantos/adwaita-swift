@@ -56,7 +56,7 @@ extension List {
             }
         } else {
             appearFunctions.append { storage, _ in
-                gtk_list_box_set_selection_mode(storage.opaquePointer, GTK_SELECTION_NONE)
+                gtk_list_box_set_selection_mode(storage.opaquePointer, .GTK_SELECTION_NONE)
             }
         }
     }

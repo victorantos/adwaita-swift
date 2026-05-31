@@ -13,7 +13,7 @@ extension GtkWrapMode: @retroactive ExpressibleByIntegerLiteral {
 
     /// Initialize from an integer literal.
     public init(integerLiteral value: Int) {
-        self.init(UInt32(value))
+        self = Self(rawValue: UInt32(value)) ?? .GTK_WRAP_NONE
     }
 
 }

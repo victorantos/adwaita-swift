@@ -2,7 +2,7 @@
 //  Avatar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 04.02.26.
+//  Created by auto-generation on 31.05.26.
 //
 
 import CAdw
@@ -20,8 +20,8 @@ import LevenshteinTransformations
 /// The color is picked based on the hash of the ``text(_:)``.
 /// 
 /// If ``showInitials(_:)`` is set to `false`,
-/// ``iconName(_:)`` or `avatar-default-symbolic` is shown instead of
-/// the initials.
+/// ``iconName(_:)`` or `adw-avatar-default-symbolic` is shown instead
+/// of the initials.
 /// 
 /// Use ``customImage(_:)`` to set a custom image.
 /// 
@@ -42,7 +42,7 @@ public struct Avatar: AdwaitaWidget {
 
     /// The name of an icon to use as a fallback.
     /// 
-    /// If no name is set, `avatar-default-symbolic` will be used.
+    /// If no name is set, `adw-avatar-default-symbolic` will be used.
     var iconName: String?
     /// Whether initials are used instead of an icon on the fallback avatar.
     /// 
@@ -111,7 +111,7 @@ public struct Avatar: AdwaitaWidget {
 
     /// The name of an icon to use as a fallback.
     /// 
-    /// If no name is set, `avatar-default-symbolic` will be used.
+    /// If no name is set, `adw-avatar-default-symbolic` will be used.
     public func iconName(_ iconName: String?) -> Self {
         modify { $0.iconName = iconName }
     }

@@ -45,7 +45,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
         type: Data.Type
     ) -> ViewStorage where Data: ViewRenderData {
         .init(
-            gtk_box_new(horizontal ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL, 0)?.opaque()
+            gtk_box_new(horizontal ? .GTK_ORIENTATION_HORIZONTAL : .GTK_ORIENTATION_VERTICAL, 0)?.opaque()
         )
     }
 
@@ -85,7 +85,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
             if (storage.previousState as? Self)?.horizontal != horizontal {
                 gtk_orientable_set_orientation(
                     widget?.opaque(),
-                    horizontal ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL
+                    horizontal ? .GTK_ORIENTATION_HORIZONTAL : .GTK_ORIENTATION_VERTICAL
                 )
             }
             if let homogeneous, (storage.previousState as? Self)?.homogeneous != homogeneous {

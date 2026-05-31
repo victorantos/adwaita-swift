@@ -1,0 +1,27 @@
+---
+Name: CAdw
+Tags:
+- Name: GtkAlign
+  EnumExtensibility: closed
+- Name: GtkInterfaceColorScheme
+  EnumExtensibility: closed
+- Name: GtkContentFit
+  EnumExtensibility: closed
+- Name: GtkPolicyType
+  EnumExtensibility: closed
+- Name: AdwToolbarStyle
+  EnumExtensibility: closed
+- Name: GtkStackTransitionType
+  EnumExtensibility: closed
+- Name: GtkWrapMode
+  EnumExtensibility: closed
+- Name: GtkOrientation
+  EnumExtensibility: closed
+- Name: GtkSelectionMode
+  EnumExtensibility: closed
+- Name: GtkPackType
+  EnumExtensibility: closed
+- Name: AdwResponseAppearance
+  EnumExtensibility: closed
+- Name: AdwViewSwitcherPolicy
+  EnumExtensibility: closed

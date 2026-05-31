@@ -61,7 +61,7 @@ struct SplitView: AdwaitaWidget {
 
     /// Initialize the widget.
     func initializeWidget() -> Any {
-        gtk_paned_new(vertical ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL).opaque() as Any
+        gtk_paned_new(vertical ? .GTK_ORIENTATION_VERTICAL : .GTK_ORIENTATION_HORIZONTAL).opaque() as Any
     }
 
 }

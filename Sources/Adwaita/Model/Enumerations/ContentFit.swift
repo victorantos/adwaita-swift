@@ -8,7 +8,7 @@
 import CAdw
 
 /// Control how a content should be made to fit inside an allocation.
-public enum ContentFit: UInt32 {
+public enum ContentFit {
 
     /// Make the content fill the entire allocation,
     /// without taking its aspect ratio in consideration.
@@ -25,7 +25,16 @@ public enum ContentFit: UInt32 {
 
     /// The ContentFit value as a GtkContentFit value.
     var gtkValue: GtkContentFit {
-        .init(rawValue)
+        switch self {
+        case .fill:
+            .GTK_CONTENT_FIT_FILL
+        case .contain:
+            .GTK_CONTENT_FIT_CONTAIN
+        case .cover:
+            .GTK_CONTENT_FIT_COVER
+        case .scaleDown:
+            .GTK_CONTENT_FIT_SCALE_DOWN
+        }
     }
 
 }

@@ -2,7 +2,7 @@
 //  ToolbarView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 04.02.26.
+//  Created by auto-generation on 31.05.26.
 //
 
 import CAdw
@@ -54,8 +54,8 @@ public struct ToolbarView: AdwaitaWidget {
     var bottomBarHeight: Int?
     /// Appearance of the bottom bars.
     /// 
-    /// If set to `ADW_TOOLBAR_FLAT`, bottom bars are flat and scrolling content
-    /// has a subtle undershoot shadow when touching them, same as the
+    /// If set to [enum@Adw.ToolbarStyle.flat], bottom bars are flat and scrolling
+    /// content has a subtle undershoot shadow when touching them, same as the
     /// [`.undershoot-bottom`](style-classes.html
     var bottomBarStyle: ToolbarStyle?
     /// The content widget.
@@ -104,8 +104,8 @@ public struct ToolbarView: AdwaitaWidget {
     var topBarHeight: Int?
     /// Appearance of the top bars.
     /// 
-    /// If set to `ADW_TOOLBAR_FLAT`, top bars are flat and scrolling content has a
-    /// subtle undershoot shadow when touching them, same as the
+    /// If set to [enum@Adw.ToolbarStyle.flat], top bars are flat and scrolling
+    /// content has a subtle undershoot shadow when touching them, same as the
     /// [`.undershoot-top`](style-classes.html
     var topBarStyle: ToolbarStyle?
     /// The body for the widget "bottom".
@@ -225,8 +225,8 @@ public struct ToolbarView: AdwaitaWidget {
 
     /// Appearance of the bottom bars.
     /// 
-    /// If set to `ADW_TOOLBAR_FLAT`, bottom bars are flat and scrolling content
-    /// has a subtle undershoot shadow when touching them, same as the
+    /// If set to [enum@Adw.ToolbarStyle.flat], bottom bars are flat and scrolling
+    /// content has a subtle undershoot shadow when touching them, same as the
     /// [`.undershoot-bottom`](style-classes.html
     public func bottomBarStyle(_ bottomBarStyle: ToolbarStyle?) -> Self {
         modify { $0.bottomBarStyle = bottomBarStyle }
@@ -296,8 +296,8 @@ public struct ToolbarView: AdwaitaWidget {
 
     /// Appearance of the top bars.
     /// 
-    /// If set to `ADW_TOOLBAR_FLAT`, top bars are flat and scrolling content has a
-    /// subtle undershoot shadow when touching them, same as the
+    /// If set to [enum@Adw.ToolbarStyle.flat], top bars are flat and scrolling
+    /// content has a subtle undershoot shadow when touching them, same as the
     /// [`.undershoot-top`](style-classes.html
     public func topBarStyle(_ topBarStyle: ToolbarStyle?) -> Self {
         modify { $0.topBarStyle = topBarStyle }

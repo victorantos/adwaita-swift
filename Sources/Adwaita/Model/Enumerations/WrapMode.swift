@@ -25,30 +25,28 @@ public enum WrapMode: GtkWrapMode, RawRepresentable {
     public var rawValue: GtkWrapMode {
         switch self {
         case .none:
-            GTK_WRAP_NONE
+            .GTK_WRAP_NONE
         case .char:
-            GTK_WRAP_CHAR
+            .GTK_WRAP_CHAR
         case .word:
-            GTK_WRAP_WORD
+            .GTK_WRAP_WORD
         case .wordChar:
-            GTK_WRAP_WORD_CHAR
+            .GTK_WRAP_WORD_CHAR
         }
     }
 
     /// Initialize from the GtkWrapMode.
     /// - Parameter rawValue: The GtkWrapMode.
-    public init?(rawValue: GtkWrapMode) {
+    public init(rawValue: GtkWrapMode) {
         switch rawValue {
-        case GTK_WRAP_NONE:
+        case .GTK_WRAP_NONE:
             self = .none
-        case GTK_WRAP_CHAR:
+        case .GTK_WRAP_CHAR:
             self = .char
-        case GTK_WRAP_WORD:
+        case .GTK_WRAP_WORD:
             self = .word
-        case GTK_WRAP_WORD_CHAR:
+        case .GTK_WRAP_WORD_CHAR:
             self = .wordChar
-        default:
-            return nil
         }
     }
 }

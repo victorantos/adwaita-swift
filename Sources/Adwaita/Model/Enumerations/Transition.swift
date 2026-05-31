@@ -24,51 +24,51 @@ public enum Transition: Int {
     public var cTransition: GtkStackTransitionType {
         switch self {
         case .none:
-            return GTK_STACK_TRANSITION_TYPE_NONE
+            .GTK_STACK_TRANSITION_TYPE_NONE
         case .crossfade:
-            return GTK_STACK_TRANSITION_TYPE_CROSSFADE
+            .GTK_STACK_TRANSITION_TYPE_CROSSFADE
         case .slideRight:
-            return GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT
+            .GTK_STACK_TRANSITION_TYPE_SLIDE_RIGHT
         case .slideLeft:
-            return GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT
+            .GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT
         case .slideUp:
-            return GTK_STACK_TRANSITION_TYPE_SLIDE_UP
+            .GTK_STACK_TRANSITION_TYPE_SLIDE_UP
         case .slideDown:
-            return GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN
+            .GTK_STACK_TRANSITION_TYPE_SLIDE_DOWN
         case .slideLeftRight:
-            return GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT
+            .GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT
         case .slideUpDown:
-            return GTK_STACK_TRANSITION_TYPE_SLIDE_UP_DOWN
+            .GTK_STACK_TRANSITION_TYPE_SLIDE_UP_DOWN
         case .coverUp:
-            return GTK_STACK_TRANSITION_TYPE_OVER_UP
+            .GTK_STACK_TRANSITION_TYPE_OVER_UP
         case .coverDown:
-            return GTK_STACK_TRANSITION_TYPE_OVER_DOWN
+            .GTK_STACK_TRANSITION_TYPE_OVER_DOWN
         case .coverLeft:
-            return GTK_STACK_TRANSITION_TYPE_OVER_LEFT
+            .GTK_STACK_TRANSITION_TYPE_OVER_LEFT
         case .coverRight:
-            return GTK_STACK_TRANSITION_TYPE_OVER_RIGHT
+            .GTK_STACK_TRANSITION_TYPE_OVER_RIGHT
         case .uncoverUp:
-            return GTK_STACK_TRANSITION_TYPE_UNDER_UP
+            .GTK_STACK_TRANSITION_TYPE_UNDER_UP
         case .uncoverDown:
-            return GTK_STACK_TRANSITION_TYPE_UNDER_DOWN
+            .GTK_STACK_TRANSITION_TYPE_UNDER_DOWN
         case .uncoverLeft:
-            return GTK_STACK_TRANSITION_TYPE_UNDER_LEFT
+            .GTK_STACK_TRANSITION_TYPE_UNDER_LEFT
         case .uncoverRight:
-            return GTK_STACK_TRANSITION_TYPE_UNDER_RIGHT
+            .GTK_STACK_TRANSITION_TYPE_UNDER_RIGHT
         case .coverUpDown:
-            return GTK_STACK_TRANSITION_TYPE_OVER_UP_DOWN
+            .GTK_STACK_TRANSITION_TYPE_OVER_UP_DOWN
         case .coverDownUp:
-            return GTK_STACK_TRANSITION_TYPE_OVER_DOWN_UP
+            .GTK_STACK_TRANSITION_TYPE_OVER_DOWN_UP
         case .coverLeftRight:
-            return GTK_STACK_TRANSITION_TYPE_OVER_LEFT_RIGHT
+            .GTK_STACK_TRANSITION_TYPE_OVER_LEFT_RIGHT
         case .coverRightLeft:
-            return GTK_STACK_TRANSITION_TYPE_OVER_RIGHT_LEFT
+            .GTK_STACK_TRANSITION_TYPE_OVER_RIGHT_LEFT
         case .rotateLeft:
-            return GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT
+            .GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT
         case .rotateRight:
-            return GTK_STACK_TRANSITION_TYPE_ROTATE_RIGHT
+            .GTK_STACK_TRANSITION_TYPE_ROTATE_RIGHT
         case .rotateLeftRight:
-            return GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT_RIGHT
+            .GTK_STACK_TRANSITION_TYPE_ROTATE_LEFT_RIGHT
         }
     }
 
