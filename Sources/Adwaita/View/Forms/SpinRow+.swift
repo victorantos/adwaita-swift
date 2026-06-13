@@ -32,19 +32,26 @@ extension SpinRow {
     ///     - max: The maximum value.
     public init(_ title: String, value: Binding<Double>, min: Double, max: Double) {
         self.init(climbRate: 1, digits: 0)
-        self = self.title(title)
-        self = self.value(value)
         self = self.step(1)
-        updateFunctions.append { storage, _, _ in
-            let label = "spin-row-min-max-internal"
+                   .title(title)
+                   .value(value)
+
+        let label = "spin-row-min-max-internal"
+
+        func updateRange(storage: ViewStorage) {
             let (intMin, intMax) = storage.fields[label] as? (Double, Double) ?? (0, 0)
             if intMin != min || intMax != max {
-                StateManager.blockUpdates = true
                 adw_spin_row_set_range(storage.opaquePointer, min, max)
                 adw_spin_row_set_value(storage.opaquePointer, value.wrappedValue)
-                StateManager.blockUpdates = false
                 storage.fields[label] = (min, max)
             }
+        }
+
+        appearFunctions.append { storage, _ in
+            updateRange(storage: storage)
+        }
+        updateFunctions.append { storage, _, _ in
+            updateRange(storage: storage)
         }
     }
 
