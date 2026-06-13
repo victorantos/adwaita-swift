@@ -36,7 +36,15 @@ extension SpinRow {
         self = self.value(value)
         self = self.step(1)
         updateFunctions.append { storage, _, _ in
-            adw_spin_row_set_range(storage.opaquePointer, min, max)
+            let label = "spin-row-min-max-internal"
+            let (intMin, intMax) = storage.fields[label] as? (Double, Double) ?? (0, 0)
+            if intMin != min || intMax != max {
+                StateManager.blockUpdates = true
+                adw_spin_row_set_range(storage.opaquePointer, min, max)
+                adw_spin_row_set_value(storage.opaquePointer, value.wrappedValue)
+                StateManager.blockUpdates = false
+                storage.fields[label] = (min, max)
+            }
         }
     }
 
