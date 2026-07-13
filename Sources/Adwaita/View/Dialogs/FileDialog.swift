@@ -159,14 +159,15 @@ struct FileDialog: AdwaitaWidget {
             callbacks.onCancel = { (storage.fields["cancel"] as? () -> Void)?(); unrefClosure() }
             callbacks.reset = { storage.fields["callbacks"] = nil }
             storage.fields["callbacks"] = callbacks
-            let ptr = UInt64(Int(bitPattern: pointer))
-            let window = UInt64(Int(bitPattern: gtk_widget_get_root(mainStorage.opaquePointer?.cast())))
+            let windowPointer = (data.sceneStorage.pointer as? AdwaitaWindow)?.pointer
+            let window: UnsafeMutablePointer<GtkWindow>? = windowPointer?.cast()
+            let data = UnsafeMutableRawPointer(bitPattern: unsafeBitCast(callbacks, to: UInt.self))
             if self.type.isImporter && self.type.folder {
-                gtui_filedialog_open_folder(ptr, unsafeBitCast(callbacks, to: UInt64.self), window)
+                gtui_filedialog_open_folder(pointer, data, window)
             } else if self.type.isImporter {
-                gtui_filedialog_open(ptr, unsafeBitCast(callbacks, to: UInt64.self), window)
+                gtui_filedialog_open(pointer, data, window)
             } else {
-                gtui_filedialog_save(ptr, unsafeBitCast(callbacks, to: UInt64.self), window)
+                gtui_filedialog_save(pointer, data, window)
             }
         }
     }

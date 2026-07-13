@@ -349,7 +349,7 @@ extension AnyView {
             if updateProperties, string != previous {
                 let provider = gtk_css_provider_new()
                 if let scheme {
-                    gtui_cssprovider_set_prefers_color_scheme(.init(Int(bitPattern: provider)), scheme.gtkValue)
+                    gtui_cssprovider_set_prefers_color_scheme(provider?.cast(), scheme.gtkValue)
                 }
                 gtk_css_provider_load_from_string(
                     provider,

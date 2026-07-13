@@ -158,9 +158,9 @@ public struct AlertDialog: AdwaitaWidget {
             responsesCosmetics(pointer: pointer)
             if present {
                 gtui_alertdialog_choose(
-                    .init(Int(bitPattern: pointer)),
-                    unsafeBitCast(storage, to: UInt64.self),
-                    .init(Int(bitPattern: storage.opaquePointer))
+                    pointer?.cast(),
+                    .init(bitPattern: unsafeBitCast(storage, to: UInt.self)),
+                    storage.opaquePointer?.cast()
                 )
             }
         } else {

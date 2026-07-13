@@ -41,8 +41,13 @@ let package = Package(
     dependencies: dependencies,
     targets: [
         .systemLibrary(
-            name: "CAdw",
+            name: "CAdwLib",
             pkgConfig: "libadwaita-1"
+        ),
+        .target(
+            name: "CAdw",
+            dependencies: ["CAdwLib"],
+            cxxSettings: [.unsafeFlags(["-Wno-implicit-function-declaration"])]
         ),
         .target(
             name: "Adwaita",
