@@ -46,8 +46,7 @@ let package = Package(
         ),
         .target(
             name: "CAdw",
-            dependencies: ["CAdwLib"],
-            cxxSettings: [.unsafeFlags(["-Wno-implicit-function-declaration"])]
+            dependencies: ["CAdwLib"]
         ),
         .target(
             name: "Adwaita",

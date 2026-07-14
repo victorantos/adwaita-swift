@@ -13,7 +13,6 @@ void gtui_filedialog_save_finish (GObject * dialog, GAsyncResult * result, void 
 
 void gtui_filedialog_save (GtkFileDialog * dialog, gpointer data, GtkWindow * window)
 {
-  swift_retain (data);
   gtk_file_dialog_save (dialog, window, NULL, gtui_filedialog_save_finish, (void *)data);
 }
 
@@ -31,7 +30,6 @@ void gtui_filedialog_open_finish (GObject * dialog, GAsyncResult * result, void 
 
 void gtui_filedialog_open (GtkFileDialog * dialog, gpointer data, GtkWindow * window)
 {
-  swift_retain (data);
   gtk_file_dialog_open (dialog, window, NULL, gtui_filedialog_open_finish, (void *)data);
 }
 
@@ -49,7 +47,6 @@ void gtui_filedialog_open_folder_finish (GObject * dialog, GAsyncResult * result
 
 void gtui_filedialog_open_folder (GtkFileDialog * dialog, gpointer data, GtkWindow * window)
 {
-  swift_retain (data);
   gtk_file_dialog_select_folder (dialog, window, NULL, gtui_filedialog_open_folder_finish, (void *)data);
 }
 

@@ -187,8 +187,6 @@ class AdwaitaFileDialog {
     /// Initialize the window callback.
     init() { }
 
-    deinit { print("DEINIT fd") }
-
     /// Run this when a file gets opened.
     /// - Parameter path: The file path.
     func onOpen(_ path: String) {
