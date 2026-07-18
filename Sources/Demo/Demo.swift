@@ -122,7 +122,7 @@ struct Demo: App {
                     selection.label,
                     icon: selection.icon,
                     description: selection.description
-                ) { selection.view(app: app, window: window, toast: toast) }
+                ) { selection.view(app: app, window: window, toast: $toast) }
                 .topToolbar {
                     HeaderBar {
                         Toggle(icon: .default(icon: .sidebarShow), isOn: $sidebarVisible)

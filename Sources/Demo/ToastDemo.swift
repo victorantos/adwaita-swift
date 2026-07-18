@@ -11,7 +11,7 @@ import Adwaita
 
 struct ToastDemo: View {
 
-    var toast: Signal
+    @Binding var toast: Signal
 
     var view: Body {
         VStack {

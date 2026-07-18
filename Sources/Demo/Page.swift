@@ -128,7 +128,7 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
 
     // swiftlint:disable cyclomatic_complexity
     @ViewBuilder
-    func view(app: AdwaitaApp!, window: AdwaitaWindow, toast: Signal) -> Body {
+    func view(app: AdwaitaApp!, window: AdwaitaWindow, toast: Binding<Signal>) -> Body {
         switch self {
         case .welcome:
             []
