@@ -149,7 +149,7 @@ public struct Window: AdwaitaSceneElement {
             gtk_widget_set_size_request(window.pointer?.cast(), .init(minWidth ?? -1), .init(minHeight ?? -1))
         }
         storage.connectSignal(name: "close-request", id: "on-close", return: .bool) {
-            (storage.fields["on-close"] as? (() -> Bool))?() ?? false
+            (storage.fields[.windowClose] as? (() -> Bool))?() ?? false
         }
         update(storage, app: app, updateProperties: true)
         return storage
@@ -262,7 +262,7 @@ public struct Window: AdwaitaSceneElement {
             }
         }
         if let onClose {
-            storage.fields["on-close"] = { onClose() == .cancel } as (() -> Bool)
+            storage.fields[.windowClose] = { onClose() == .cancel } as (() -> Bool)
         }
         storage.previousState = self
     }

@@ -329,7 +329,7 @@ extension AnyView {
         inspectOnAppear { storage in
             let controller = ViewStorage(gtk_gesture_click_new())
             gtk_widget_add_controller(storage.opaquePointer?.cast(), controller.opaquePointer)
-            storage.fields["controller"] = controller
+            storage.fields[.clickController] = controller
             let argCount = 3
             controller.connectSignal(name: "released", argCount: argCount, handler: handler)
         }

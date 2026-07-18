@@ -124,7 +124,7 @@ public struct AlertDialog: AdwaitaWidget {
         storage.fields[Self.visibleID + id] = _visible
         child.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
         defer {
-            if let storage = storage.content["extra-child"]?.first, visible {
+            if let storage = storage.content[.extraChild]?.first, visible {
                 extraChild?.updateStorage(storage, data: data, updateProperties: updateProperties, type: type)
             }
         }
@@ -217,7 +217,7 @@ public struct AlertDialog: AdwaitaWidget {
             let child = extraChild.storage(data: data, type: AdwaitaMainView.self)
             extraChild.updateStorage(child, data: data, updateProperties: true, type: AdwaitaMainView.self)
             let childPointer = child.pointer as? OpaquePointer
-            storage.content["extra-child"] = [child]
+            storage.content[.extraChild] = [child]
             adw_alert_dialog_set_extra_child(pointer?.cast(), childPointer?.cast())
         }
     }

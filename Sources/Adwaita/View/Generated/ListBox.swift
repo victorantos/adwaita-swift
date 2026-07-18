@@ -2,7 +2,7 @@
 //  ListBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 31.05.26.
+//  Created by auto-generation on 18.07.26.
 //
 
 import CAdw
@@ -188,7 +188,7 @@ public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
             }
 
             var contentStorage: [ViewStorage] = storage.content[.mainContent] ?? []
-            let old = storage.fields["element"] as? [Element] ?? []
+            let old = storage.fields[.element] as? [Element] ?? []
             old.transform(
                 to: elements,
                 id: id,
@@ -201,7 +201,7 @@ public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
                     contentStorage.insert(child, at: index)
                 }
             )
-            storage.fields["element"] = elements
+            storage.fields[.element] = elements
             storage.content[.mainContent] = contentStorage
             for (index, element) in elements.enumerated() {
                 content(element).updateStorage(contentStorage[index], data: data, updateProperties: updateProperties, type: type)

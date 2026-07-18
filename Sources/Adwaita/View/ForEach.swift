@@ -62,7 +62,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
         type: Data.Type
     ) where Data: ViewRenderData {
         var contentStorage: [ViewStorage] = storage.content[.mainContent] ?? []
-        let old = storage.fields["element"] as? [Element] ?? []
+        let old = storage.fields[.element] as? [Element] ?? []
         let widget: UnsafeMutablePointer<GtkBox>? = storage.opaquePointer?.cast()
         old.transform(
             to: elements,
@@ -93,7 +93,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
             }
             storage.previousState = self
         }
-        storage.fields["element"] = elements
+        storage.fields[.element] = elements
         storage.content[.mainContent] = contentStorage
         for (index, element) in elements.enumerated() {
             content(element)

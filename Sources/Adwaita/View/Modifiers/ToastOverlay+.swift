@@ -20,8 +20,8 @@ extension ToastOverlay {
             if signal.update {
                 let toast = ViewStorage(adw_toast_new(title))
                 storage.fields[UUID().uuidString] = toast
-                if let button = storage.fields["button"] as? String,
-                let handler = storage.fields["handler"] as? () -> Void {
+                if let button = storage.fields[.toastButton] as? String,
+                let handler = storage.fields[.toastHandler] as? () -> Void {
                     adw_toast_set_button_label(toast.opaquePointer, button)
                     toast.connectSignal(name: "button-clicked", handler: handler)
                 }
@@ -38,8 +38,8 @@ extension ToastOverlay {
     public func action(button: String, handler: @escaping () -> Void) -> Self {
         var newSelf = self
         let action: (ViewStorage, WidgetData, Bool) -> Void = { storage, _, _ in
-            storage.fields["button"] = button
-            storage.fields["handler"] = handler
+            storage.fields[.toastButton] = button
+            storage.fields[.toastHandler] = handler
         }
         newSelf.updateFunctions.insert(action, at: 0)
         return newSelf

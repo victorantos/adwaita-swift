@@ -144,9 +144,9 @@ public struct ShortcutsDialog: AdwaitaWidget {
                 adw_dialog_close(dialog?.cast())
                 g_object_unref(dialog?.cast())
                 for index in sections.indices {
-                    let container = storage.content["shortcuts-\(index)"]?.map { $0.opaquePointer }
+                    let container = storage.content[.shortcutsDialogIndex(index: index)]?.map { $0.opaquePointer }
                     container?.forEach { g_object_unref($0?.cast()) }
-                    g_object_unref((storage.fields["shortcuts-\(index)"] as? OpaquePointer)?.cast())
+                    g_object_unref((storage.fields[.shortcutsDialogIndex(index: index)] as? OpaquePointer)?.cast())
                 }
             }
         }
@@ -173,8 +173,8 @@ public struct ShortcutsDialog: AdwaitaWidget {
             }
         }
         for (index, section) in sections.map({ $0.gtkShortcutsSection(data: data) }).enumerated() {
-            storage.content["shortcuts-\(index)"] = section.1
-            storage.fields["shortcuts-\(index)"] = section.0
+            storage.content[.shortcutsDialogIndex(index: index)] = section.1
+            storage.fields[.shortcutsDialogIndex(index: index)] = section.0
             adw_shortcuts_dialog_add(pointer?.opaque(), section.0)
         }
     }

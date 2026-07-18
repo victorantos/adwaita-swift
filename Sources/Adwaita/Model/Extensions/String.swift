@@ -11,6 +11,56 @@ extension String {
     public static var transition: Self { "transition" }
     /// A label for the navigation label in a widget's fields.
     public static var navigationLabel: Self { "navigation-label" }
+    /// A field label for bindings.
+    public static var binding: Self { "binding" }
+    /// A field label for callbacks.
+    public static var callbacks: Self { "callbacks" }
+    /// A field label for elements.
+    public static var element: Self { "element" }
+    /// A field label for a child.
+    public static var child: Self { "child" }
+    /// A field label for an extra child.
+    public static var extraChild: Self { "extra-child" }
+    /// A field label for a suffix.
+    public static var suffix: Self { "suffix" }
+    /// A field label for a prefix.
+    public static var prefix: Self { "prefix" }
+    /// A field label for a buffer.
+    public static var buffer: Self { "buffer" }
+    /// A label for the ``AnyView/onClick`` controller.
+    static var clickController: Self { "controller" }
+    /// A label for the breakpoint bin condition.
+    static var binCondition: Self { "condition" }
+    /// A label for the breakpoint bin's breakpoint.
+    static var binBreakpoint: Self { "breakpoint" }
+    /// A label for the dialog result.
+    static var dialogResult: Self { "result" }
+    /// A label for the dialog cancel action.
+    static var dialogCancel: Self { "cancel" }
+    /// A label for the toast button.
+    static var toastButton: Self { "button" }
+    /// A label for the toast handler.
+    static var toastHandler: Self { "handler" }
+    /// A label for the sidebar page.
+    static var sidebarPage: Self { "sidebar-page" }
+    /// A label for the main page.
+    static var mainPage: Self { "main-page" }
+    /// A label for the switcher stack.
+    static var switcherStack: Self { "switcher-stack" }
+    /// A label for the window close action.
+    static var windowClose: Self { "on-close" }
+    /// A label for the activatable widget.
+    static var activatableWidget: Self { "activatable-widget" }
+
+    /// A label for the preferences dialog.
+    static func preferencesDialogIndex(index: Int) -> Self {
+        "preferences-\(index)"
+    }
+
+    /// A label for the shortcuts dialog.
+    static func shortcutsDialogIndex(index: Int) -> Self {
+        "shortcuts-\(index)"
+    }
 
     /// Add the Ctrl key to a shortcut.
     /// - Returns: The shortcut.

@@ -39,7 +39,7 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
         let switcher = ViewStorage(adw_view_switcher_new()?.opaque())
         let stack = ViewStorage(adw_view_stack_new()?.opaque())
         adw_view_switcher_set_stack(switcher.opaquePointer, stack.opaquePointer)
-        switcher.fields["stack"] = stack
+        switcher.fields[.switcherStack] = stack
         return switcher
     }
 
@@ -63,7 +63,7 @@ public struct ViewSwitcher<Element>: AdwaitaWidget where Element: ViewSwitcherOp
     /// Update a view switcher's style and selection.
     /// - Parameter switcher: The view switcher.
     func updateSwitcher(switcher: ViewStorage) {
-        let stack = switcher.fields["stack"] as? ViewStorage
+        let stack = switcher.fields[.switcherStack] as? ViewStorage
         stack?.notify(name: "visible-child") {
             if let title = adw_view_stack_get_visible_child_name(stack?.opaquePointer),
             let option = elements.first(where: { $0.title == .init(cString: title) }) {

@@ -177,7 +177,7 @@ public struct PreferencesDialog: AdwaitaWidget {
         defer {
             if visible {
                 for (index, page) in pages.enumerated() {
-                    if let preferences = storage.content["preferences-\(index)"] {
+                    if let preferences = storage.content[.preferencesDialogIndex(index: index)] {
                         page.update(groups: preferences, data: data, updateProperties: updateProperties)
                     }
                 }
@@ -200,9 +200,9 @@ public struct PreferencesDialog: AdwaitaWidget {
                 adw_dialog_close(dialog?.cast())
                 g_object_unref(dialog?.cast())
                 for index in pages.indices {
-                    let container = storage.content["preferences-\(index)"]?.map { $0.opaquePointer }
+                    let container = storage.content[.preferencesDialogIndex(index: index)]?.map { $0.opaquePointer }
                     container?.forEach { g_object_unref($0?.cast()) }
-                    g_object_unref((storage.fields["preferences-\(index)"] as? OpaquePointer)?.cast())
+                    g_object_unref((storage.fields[.preferencesDialogIndex(index: index)] as? OpaquePointer)?.cast())
                 }
             }
         }
@@ -230,8 +230,8 @@ public struct PreferencesDialog: AdwaitaWidget {
             }
         }
         for (index, page) in pages.map({ $0.gtkPreferencesPage(data: data) }).enumerated() {
-            storage.content["preferences-\(index)"] = page.1
-            storage.fields["preferences-\(index)"] = page.0
+            storage.content[.preferencesDialogIndex(index: index)] = page.1
+            storage.fields[.preferencesDialogIndex(index: index)] = page.0
             adw_preferences_dialog_add(pointer?.cast(), page.0?.cast())
         }
     }

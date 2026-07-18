@@ -59,8 +59,8 @@ public struct NavigationSplitView: AdwaitaWidget {
 
         let storage = ViewStorage(splitView?.opaque(), content: content)
 
-        storage.fields["sidebar-page"] = sidebarPage?.opaque()
-        storage.fields["main-page"] = mainPage?.opaque()
+        storage.fields[.sidebarPage] = sidebarPage?.opaque()
+        storage.fields[.mainPage] = mainPage?.opaque()
 
         storage.notify(name: "show-content") {
             showContent?.wrappedValue = adw_navigation_split_view_get_show_content(storage.opaquePointer) != 0
@@ -84,14 +84,14 @@ public struct NavigationSplitView: AdwaitaWidget {
         if let cStorage = storage.content[contentID]?[safe: 0] {
             content
                 .updateStorage(cStorage, data: data, updateProperties: updateProperties, type: type)
-            if updateProperties, let mainPage = storage.fields["main-page"] as? OpaquePointer {
+            if updateProperties, let mainPage = storage.fields[.mainPage] as? OpaquePointer {
                 adw_navigation_page_set_title(mainPage.cast(), cStorage.fields[.navigationLabel] as? String ?? "")
             }
         }
         if let sStorage = storage.content[sidebarID]?[safe: 0] {
             sidebar
                 .updateStorage(sStorage, data: data, updateProperties: updateProperties, type: type)
-            if updateProperties, let sidebarPage = storage.fields["sidebar-page"] as? OpaquePointer {
+            if updateProperties, let sidebarPage = storage.fields[.sidebarPage] as? OpaquePointer {
                 adw_navigation_page_set_title(sidebarPage.cast(), sStorage.fields[.navigationLabel] as? String ?? "")
             }
         }

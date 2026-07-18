@@ -45,16 +45,16 @@ public struct BreakpointBin: AdwaitaWidget {
             default:
                 break
             }
-            storage.fields["condition"] = condition
+            storage.fields[.binCondition] = condition
             let string = adw_breakpoint_condition_parse(condition.condition)
-            if let breakpoint = storage.fields["breakpoint"] as? OpaquePointer {
+            if let breakpoint = storage.fields[.binBreakpoint] as? OpaquePointer {
                 g_object_unref(adw_breakpoint_get_condition(breakpoint)?.cast())
                 adw_breakpoint_set_condition(breakpoint, string)
             } else {
                 let breakpoint = adw_breakpoint_new(string)
                 adw_breakpoint_bin_add_breakpoint(bin.cast(), breakpoint)
-                storage.fields["breakpoint"] = breakpoint
-                if let matches = storage.fields["binding"] as? Binding<Bool> {
+                storage.fields[.binBreakpoint] = breakpoint
+                if let matches = storage.fields[.binding] as? Binding<Bool> {
                     Idle {
                         condition.initialize(child: adw_breakpoint_bin_get_child(bin.cast()), matches: matches)
                     }
@@ -71,7 +71,7 @@ public struct BreakpointBin: AdwaitaWidget {
             storage.notify(name: "current-breakpoint") {
                 matches.wrappedValue = adw_breakpoint_bin_get_current_breakpoint(bin.cast()) != nil
             }
-            storage.fields["binding"] = matches
+            storage.fields[.binding] = matches
         },
         set: { _, _, _ in },
         pointer: OpaquePointer.self

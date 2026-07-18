@@ -120,13 +120,13 @@ struct FileDialog: AdwaitaWidget {
         updateProperties: Bool,
         type: Data.Type
     ) where Data: ViewRenderData {
-        storage.fields["result"] = result
-        storage.fields["cancel"] = cancel
+        storage.fields[.dialogResult] = result
+        storage.fields[.dialogCancel] = cancel
         guard let mainStorage = storage.content[.mainContent]?.first else {
             return
         }
         child.updateStorage(mainStorage, data: data, updateProperties: updateProperties, type: type)
-        if open.update, storage.fields["callbacks"] == nil {
+        if open.update, storage.fields[.callbacks] == nil {
             var unref: [OpaquePointer?] = []
             let pointer = gtk_file_dialog_new()
             unref.append(pointer)
@@ -153,12 +153,12 @@ struct FileDialog: AdwaitaWidget {
                 for ref in unref {
                     g_object_unref(ref?.cast())
                 }
-                storage.fields["callbacks"] = nil
+                storage.fields[.callbacks] = nil
             }
-            callbacks.onResult = { (storage.fields["result"] as? (URL) -> Void)?($0); unrefClosure() }
-            callbacks.onCancel = { (storage.fields["cancel"] as? () -> Void)?(); unrefClosure() }
-            callbacks.reset = { storage.fields["callbacks"] = nil }
-            storage.fields["callbacks"] = callbacks
+            callbacks.onResult = { (storage.fields[.dialogResult] as? (URL) -> Void)?($0); unrefClosure() }
+            callbacks.onCancel = { (storage.fields[.dialogCancel] as? () -> Void)?(); unrefClosure() }
+            callbacks.reset = { storage.fields[.callbacks] = nil }
+            storage.fields[.callbacks] = callbacks
             let windowPointer = (data.sceneStorage.pointer as? AdwaitaWindow)?.pointer
             let window: UnsafeMutablePointer<GtkWindow>? = windowPointer?.cast()
             let data = UnsafeMutableRawPointer(bitPattern: unsafeBitCast(callbacks, to: UInt.self))

@@ -16,7 +16,7 @@ public struct TextView: AdwaitaWidget {
     /// The editor's content.
     @BindingProperty(
         observe: { _, text, storage in
-            if let buffer = storage.content["buffer"]?.first {
+            if let buffer = storage.content[.buffer]?.first {
                 buffer.connectSignal(name: "changed") {
                     let currentText = Self.getText(buffer: buffer)
                     if text.wrappedValue != currentText {
@@ -26,7 +26,7 @@ public struct TextView: AdwaitaWidget {
             }
         },
         set: { _, text, storage in
-            if let buffer = storage.content["buffer"]?.first, Self.getText(buffer: buffer) != text {
+            if let buffer = storage.content[.buffer]?.first, Self.getText(buffer: buffer) != text {
                 gtk_text_buffer_set_text(buffer.opaquePointer?.cast(), text, -1)
             }
         },
