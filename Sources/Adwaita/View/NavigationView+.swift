@@ -122,7 +122,9 @@ extension NavigationView {
         default:
             break
         }
-        StateManager.blockUpdates = true; stack.wrappedValue.action = nil; StateManager.blockUpdates = false
+        data.stateManager.withBlockedUpdates {
+            stack.wrappedValue.action = nil
+        }
         storage.fields[.mainContent] = storages
         for storage in storages {
             if let component = storage.fields[Self.componentID] as? Component {
