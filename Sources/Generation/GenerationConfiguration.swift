@@ -346,6 +346,14 @@ struct GenerationConfiguration {
                 "selected-item"
             ],
             internalInitializer: true
+        ),
+        .init(
+            class: "Viewport",
+            initializer: "gtk_viewport_new(nil, nil)",
+            excludeProperties: [
+                "hadjustment",
+                "vadjustment"
+            ]
         )
     ]
 
@@ -372,7 +380,8 @@ struct GenerationConfiguration {
         "NavigationPage": "NavigationPage",
         "ContentFit": "ContentFit",
         "PolicyType": "ScrollbarVisibility",
-        "ToolbarStyle": "ToolbarStyle"
+        "ToolbarStyle": "ToolbarStyle",
+        "ScrollablePolicy": "ScrollablePolicy"
     ]
 
     /// Modifications for converting a Swift into a C type.
@@ -382,7 +391,8 @@ struct GenerationConfiguration {
         "UInt": "cInt",
         "ContentFit": "gtkValue",
         "ScrollbarVisibility": "gtkValue",
-        "ToolbarStyle": "gtkValue"
+        "ToolbarStyle": "gtkValue",
+        "ScrollablePolicy": "gtkValue"
     ]
 
     /// Default values for modifiers with a certain type.

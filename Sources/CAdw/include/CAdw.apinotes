@@ -21,6 +21,8 @@ Tags:
   EnumExtensibility: closed
 - Name: GtkPackType
   EnumExtensibility: closed
+- Name: GtkScrollablePolicy
+  EnumExtensibility: closed
 - Name: AdwResponseAppearance
   EnumExtensibility: closed
 - Name: AdwViewSwitcherPolicy
