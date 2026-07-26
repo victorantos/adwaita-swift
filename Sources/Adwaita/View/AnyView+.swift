@@ -306,4 +306,26 @@ extension AnyView {
             .limitChildren()
     }
 
+    /// Run a function when the widget gets clicked.
+    /// - Parameter handler: The function.
+    /// - Returns: A view.
+    public func onClick(handler: @escaping () -> Void) -> AnyView {
+        onClick { _, _ in handler() }
+    }
+
+    /// Run a function when the widget gets clicked.
+    /// - Parameter handler: The function. The parameters are the x and y coordinates of the click.
+    /// - Returns: A view.
+    public func onClick(handler: @escaping (Double, Double) -> Void) -> AnyView {
+        inspectOnAppear { storage in
+            let controller = ViewStorage(gtk_gesture_click_new())
+            gtk_widget_add_controller(storage.opaquePointer?.cast(), controller.opaquePointer)
+            storage.fields[.clickController] = controller
+            let argCount = 3
+            controller.connectSignal(name: "released", argCount: argCount) { args in
+                handler(args[1] as? Double ?? 0, args[2] as? Double ?? 0)
+            }
+        }
+    }
+
 }
