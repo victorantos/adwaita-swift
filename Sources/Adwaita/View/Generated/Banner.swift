@@ -2,7 +2,7 @@
 //  Banner.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -91,7 +91,7 @@ public struct Banner: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let buttonClicked {
-            storage.connectSignal(name: "button-clicked", argCount: 0) {
+            storage.connectSignal(name: "button-clicked", type: .noArgs) {
                 buttonClicked()
             }
         }
@@ -154,9 +154,7 @@ public struct Banner: AdwaitaWidget {
     /// 
     /// It can be used as an alternative to setting an action.
     public func buttonClicked(_ buttonClicked: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.buttonClicked = buttonClicked
-        return newSelf
+        modify { $0.buttonClicked = buttonClicked }
     }
 
 }

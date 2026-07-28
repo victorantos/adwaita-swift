@@ -2,7 +2,7 @@
 //  DropDown.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -108,7 +108,7 @@ public struct DropDown: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activate {
-            storage.connectSignal(name: "activate", argCount: 0) {
+            storage.connectSignal(name: "activate", type: .noArgs) {
                 activate()
             }
         }
@@ -174,9 +174,7 @@ if let selected, newValue != selected.wrappedValue {
     /// The `::activate` signal on `GtkDropDown` is an action signal and
     /// emitting it causes the drop down to pop up its dropdown.
     public func activate(_ activate: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activate = activate
-        return newSelf
+        modify { $0.activate = activate }
     }
 
 }

@@ -2,7 +2,7 @@
 //  EntryRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -127,12 +127,12 @@ public struct EntryRow: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let apply {
-            storage.connectSignal(name: "apply", argCount: 0) {
+            storage.connectSignal(name: "apply", type: .noArgs) {
                 apply()
             }
         }
         if let entryActivated {
-            storage.connectSignal(name: "entry-activated", argCount: 0) {
+            storage.connectSignal(name: "entry-activated", type: .noArgs) {
                 entryActivated()
             }
         }
@@ -266,16 +266,12 @@ public struct EntryRow: AdwaitaWidget {
     /// 
     /// See ``showApplyButton(_:)``.
     public func apply(_ apply: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.apply = apply
-        return newSelf
+        modify { $0.apply = apply }
     }
 
     /// Emitted when the embedded entry is activated.
     public func entryActivated(_ entryActivated: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.entryActivated = entryActivated
-        return newSelf
+        modify { $0.entryActivated = entryActivated }
     }
 
     /// Set the body for "suffix".

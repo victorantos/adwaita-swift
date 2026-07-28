@@ -55,7 +55,7 @@ public class AdwaitaApp: AppStorage {
             setup()
         }
         runSignal = data
-        data.connect(pointer: pointer, signal: "activate")
+        data.connect(pointer: pointer, signal: "activate", type: .noArgs)
         g_application_run(pointer?.cast(), 0, nil)
     }
 
@@ -88,7 +88,7 @@ public class AdwaitaApp: AppStorage {
         g_signal_connect_data(
             action?.cast(),
             "activate",
-            unsafeBitCast(data.threeParamsHandler, to: GCallback.self),
+            SignalData.HandlerType.oneArg.callback,
             Unmanaged.passUnretained(data).toOpaque().cast(),
             nil,
             GConnectFlags(rawValue: 1)

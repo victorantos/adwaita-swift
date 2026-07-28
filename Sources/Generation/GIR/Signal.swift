@@ -15,6 +15,15 @@ struct Signal: Decodable {
     /// The signal's parameters.
     var parameters: Parameters?
 
+    /// Get the signal's SignalData.HandlerType value.
+    /// - Parameter genConfig: The generation configuration.
+    /// - Returns: The value as a string.
+    func getSignalType(genConfig: GenerationConfiguration) -> String {
+        let id = parameters?.parameters.map { $0.type.sType }.joined(separator: ", ") ?? ""
+        print(id)
+        return genConfig.signalTypeReplacements[id] ?? "noArgs"
+    }
+
     /// Generate the signal's property.
     /// - Parameters:
     ///     - config: The widget configuration.
@@ -40,9 +49,7 @@ struct Signal: Decodable {
 
         \(doc?.docComment(configuration: genConfig, indent: "    ") ?? "    /// \(name)")
             public func \(name)(_ \(name): @escaping () -> Void) -> Self {
-                var newSelf = self
-                newSelf.\(name) = \(name)
-                return newSelf
+                modify { $0.\(name) = \(name) }
             }
 
         """
@@ -58,7 +65,7 @@ struct Signal: Decodable {
         return """
 
                 if let \(name) {
-                    storage.connectSignal(name: "\(self.name)", argCount: \(parameters?.parameters.count ?? 0)) {
+                    storage.connectSignal(name: "\(self.name)", type: .\(getSignalType(genConfig: genConfig))) {
                         \(name)()
                     }
                 }

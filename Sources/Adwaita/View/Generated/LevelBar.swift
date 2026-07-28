@@ -2,7 +2,7 @@
 //  LevelBar.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -92,7 +92,7 @@ public struct LevelBar: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let offsetChanged {
-            storage.connectSignal(name: "offset-changed", argCount: 1) {
+            storage.connectSignal(name: "offset-changed", type: .oneArg) {
                 offsetChanged()
             }
         }
@@ -161,9 +161,7 @@ public struct LevelBar: AdwaitaWidget {
     /// detailed signal "changed::x" in order to only receive callbacks when
     /// the value of offset "x" changes.
     public func offsetChanged(_ offsetChanged: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.offsetChanged = offsetChanged
-        return newSelf
+        modify { $0.offsetChanged = offsetChanged }
     }
 
 }

@@ -139,7 +139,7 @@ public struct Window: AdwaitaSceneElement {
         } destroy: {
             window.signals[observeID] = nil
         }
-        data.connect(pointer: window.pointer, signal: observeID)
+        data.connect(pointer: window.pointer, signal: observeID, type: .noArgs)
         window.signals[observeID] = data
         let template = getTemplate(content: content)
         let width = template.width?.wrappedValue ?? template.defaultWidth ?? -1
@@ -148,7 +148,7 @@ public struct Window: AdwaitaSceneElement {
         if minWidth != nil || minHeight != nil {
             gtk_widget_set_size_request(window.pointer?.cast(), .init(minWidth ?? -1), .init(minHeight ?? -1))
         }
-        storage.connectSignal(name: "close-request", id: "on-close", return: .bool) {
+        storage.connectSignal(name: "close-request", id: "on-close", type: .noArgsReturnsBool) {
             (storage.fields[.windowClose] as? (() -> Bool))?() ?? false
         }
         update(storage, app: app, updateProperties: true)

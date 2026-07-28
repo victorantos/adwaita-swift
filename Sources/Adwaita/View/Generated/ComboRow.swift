@@ -2,7 +2,7 @@
 //  ComboRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -160,7 +160,7 @@ public struct ComboRow: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activated {
-            storage.connectSignal(name: "activated", argCount: 0) {
+            storage.connectSignal(name: "activated", type: .noArgs) {
                 activated()
             }
         }
@@ -325,9 +325,7 @@ if let selected, newValue != selected.wrappedValue {
 
     /// This signal is emitted after the row has been activated.
     public func activated(_ activated: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activated = activated
-        return newSelf
+        modify { $0.activated = activated }
     }
 
     /// Set the body for "suffix".

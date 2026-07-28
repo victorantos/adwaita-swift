@@ -55,7 +55,7 @@ extension String: @retroactive CodingKey {
         configuration: GenerationConfiguration,
         unshorten: Bool = false
     ) -> String {
-        var parts = split(separator: delimiter).map(String.init)
+        var parts = split(separator: delimiter).map(Self.init)
         for (index, part) in parts.enumerated() {
             if let replacement = configuration.unshorteningMap[part] {
                 parts[index] = replacement

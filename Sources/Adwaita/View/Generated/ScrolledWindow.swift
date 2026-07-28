@@ -2,7 +2,7 @@
 //  ScrolledWindow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -176,22 +176,22 @@ public struct ScrolledWindow: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let edgeOvershot {
-            storage.connectSignal(name: "edge-overshot", argCount: 1) {
+            storage.connectSignal(name: "edge-overshot", type: .oneArg) {
                 edgeOvershot()
             }
         }
         if let edgeReached {
-            storage.connectSignal(name: "edge-reached", argCount: 1) {
+            storage.connectSignal(name: "edge-reached", type: .oneArg) {
                 edgeReached()
             }
         }
         if let moveFocusOut {
-            storage.connectSignal(name: "move-focus-out", argCount: 1) {
+            storage.connectSignal(name: "move-focus-out", type: .oneArg) {
                 moveFocusOut()
             }
         }
         if let scrollChild {
-            storage.connectSignal(name: "scroll-child", argCount: 2) {
+            storage.connectSignal(name: "scroll-child", type: .twoArgs) {
                 scrollChild()
             }
         }
@@ -352,9 +352,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// Note: The @pos argument is LTR/RTL aware, so callers should be
     /// aware too if intending to provide behavior on horizontal edges.
     public func edgeOvershot(_ edgeOvershot: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.edgeOvershot = edgeOvershot
-        return newSelf
+        modify { $0.edgeOvershot = edgeOvershot }
     }
 
     /// Emitted whenever user-initiated scrolling makes the scrolled
@@ -367,9 +365,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// Note: The @pos argument is LTR/RTL aware, so callers should be
     /// aware too if intending to provide behavior on horizontal edges.
     public func edgeReached(_ edgeReached: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.edgeReached = edgeReached
-        return newSelf
+        modify { $0.edgeReached = edgeReached }
     }
 
     /// Emitted when focus is moved away from the scrolled window by a
@@ -381,9 +377,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// <kbd>Ctrl</kbd>+<kbd>Tab</kbd> to move forward and
     /// <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>` to move backward.
     public func moveFocusOut(_ moveFocusOut: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.moveFocusOut = moveFocusOut
-        return newSelf
+        modify { $0.moveFocusOut = moveFocusOut }
     }
 
     /// Emitted when a keybinding that scrolls is pressed.
@@ -393,9 +387,7 @@ if hscrollbarPolicy != (storage.previousState as? Self)?.hscrollbarPolicy
     /// The horizontal or vertical adjustment is updated which triggers a
     /// signal that the scrolled window’s child may listen to and scroll itself.
     public func scrollChild(_ scrollChild: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.scrollChild = scrollChild
-        return newSelf
+        modify { $0.scrollChild = scrollChild }
     }
 
 }

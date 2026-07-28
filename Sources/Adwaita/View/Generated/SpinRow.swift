@@ -2,7 +2,7 @@
 //  SpinRow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -160,22 +160,22 @@ public struct SpinRow: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activated {
-            storage.connectSignal(name: "activated", argCount: 0) {
+            storage.connectSignal(name: "activated", type: .noArgs) {
                 activated()
             }
         }
         if let input {
-            storage.connectSignal(name: "input", argCount: 1) {
+            storage.connectSignal(name: "input", type: .oneArg) {
                 input()
             }
         }
         if let output {
-            storage.connectSignal(name: "output", argCount: 0) {
+            storage.connectSignal(name: "output", type: .noArgs) {
                 output()
             }
         }
         if let wrapped {
-            storage.connectSignal(name: "wrapped", argCount: 0) {
+            storage.connectSignal(name: "wrapped", type: .noArgs) {
                 wrapped()
             }
         }
@@ -348,9 +348,7 @@ if let value, newValue != value.wrappedValue {
 
     /// This signal is emitted after the row has been activated.
     public func activated(_ activated: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activated = activated
-        return newSelf
+        modify { $0.activated = activated }
     }
 
     /// Emitted to convert the user's input into a double value.
@@ -362,27 +360,21 @@ if let value, newValue != value.wrappedValue {
     /// 
     /// See `Gtk.SpinButton::input`.
     public func input(_ input: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.input = input
-        return newSelf
+        modify { $0.input = input }
     }
 
     /// Emitted to tweak the formatting of the value for display.
     /// 
     /// See `Gtk.SpinButton::output`.
     public func output(_ output: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.output = output
-        return newSelf
+        modify { $0.output = output }
     }
 
     /// Emitted right after the spinbutton wraps.
     /// 
     /// See `Gtk.SpinButton::wrapped`.
     public func wrapped(_ wrapped: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.wrapped = wrapped
-        return newSelf
+        modify { $0.wrapped = wrapped }
     }
 
     /// Set the body for "suffix".

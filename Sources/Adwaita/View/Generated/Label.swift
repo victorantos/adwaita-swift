@@ -2,7 +2,7 @@
 //  Label.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -144,7 +144,7 @@ public struct Label: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let copyClipboard {
-            storage.connectSignal(name: "copy-clipboard", argCount: 0) {
+            storage.connectSignal(name: "copy-clipboard", type: .noArgs) {
                 copyClipboard()
             }
         }
@@ -323,9 +323,7 @@ public struct Label: AdwaitaWidget {
     /// 
     /// The default binding for this signal is <kbd>Ctrl</kbd>+<kbd>c</kbd>.
     public func copyClipboard(_ copyClipboard: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.copyClipboard = copyClipboard
-        return newSelf
+        modify { $0.copyClipboard = copyClipboard }
     }
 
 }

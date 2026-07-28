@@ -2,7 +2,7 @@
 //  Carousel.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -102,7 +102,7 @@ public struct Carousel<Element, Identifier>: AdwaitaWidget where Identifier: Equ
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let pageChanged {
-            storage.connectSignal(name: "page-changed", argCount: 1) {
+            storage.connectSignal(name: "page-changed", type: .guint) {
                 pageChanged()
             }
         }
@@ -210,9 +210,7 @@ public struct Carousel<Element, Identifier>: AdwaitaWidget where Identifier: Equ
     /// > [!NOTE]
     /// >     An empty carousel is indicated by `(int)index == -1`.
     public func pageChanged(_ pageChanged: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.pageChanged = pageChanged
-        return newSelf
+        modify { $0.pageChanged = pageChanged }
     }
 
 }

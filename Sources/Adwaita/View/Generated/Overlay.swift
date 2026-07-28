@@ -2,7 +2,7 @@
 //  Overlay.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -103,7 +103,7 @@ public struct Overlay: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let getChildPosition {
-            storage.connectSignal(name: "get-child-position", argCount: 2) {
+            storage.connectSignal(name: "get-child-position", type: .twoArgs) {
                 getChildPosition()
             }
         }
@@ -163,9 +163,7 @@ public struct Overlay: AdwaitaWidget {
     /// `GtkScrolledWindow`, the overlays are placed relative
     /// to its contents.
     public func getChildPosition(_ getChildPosition: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.getChildPosition = getChildPosition
-        return newSelf
+        modify { $0.getChildPosition = getChildPosition }
     }
 
     /// Set the body for "overlay".

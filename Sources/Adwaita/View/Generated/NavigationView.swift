@@ -2,7 +2,7 @@
 //  NavigationView.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -133,22 +133,22 @@ public struct NavigationView: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let getNextPage {
-            storage.connectSignal(name: "get-next-page", argCount: 0) {
+            storage.connectSignal(name: "get-next-page", type: .noArgs) {
                 getNextPage()
             }
         }
         if let popped {
-            storage.connectSignal(name: "popped", argCount: 1) {
+            storage.connectSignal(name: "popped", type: .oneArg) {
                 popped()
             }
         }
         if let pushed {
-            storage.connectSignal(name: "pushed", argCount: 0) {
+            storage.connectSignal(name: "pushed", type: .noArgs) {
                 pushed()
             }
         }
         if let replaced {
-            storage.connectSignal(name: "replaced", argCount: 0) {
+            storage.connectSignal(name: "replaced", type: .noArgs) {
                 replaced()
             }
         }
@@ -232,9 +232,7 @@ public struct NavigationView: AdwaitaWidget {
     /// 
     /// Instead, it should be done in the `NavigationView::pushed` handler.
     public func getNextPage(_ getNextPage: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.getNextPage = getNextPage
-        return newSelf
+        modify { $0.getNextPage = getNextPage }
     }
 
     /// Emitted after @page has been popped from the navigation stack.
@@ -245,27 +243,21 @@ public struct NavigationView: AdwaitaWidget {
     /// `NavigationView.pop_to_tag`, this signal is emitted for each of the
     /// popped pages.
     public func popped(_ popped: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.popped = popped
-        return newSelf
+        modify { $0.popped = popped }
     }
 
     /// Emitted after a page has been pushed to the navigation stack.
     /// 
     /// See `NavigationView.push`.
     public func pushed(_ pushed: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.pushed = pushed
-        return newSelf
+        modify { $0.pushed = pushed }
     }
 
     /// Emitted after the navigation stack has been replaced.
     /// 
     /// See `NavigationView.replace`.
     public func replaced(_ replaced: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.replaced = replaced
-        return newSelf
+        modify { $0.replaced = replaced }
     }
 
 }

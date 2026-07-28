@@ -2,7 +2,7 @@
 //  LinkButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -114,12 +114,12 @@ public struct LinkButton: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activate {
-            storage.connectSignal(name: "activate", argCount: 0) {
+            storage.connectSignal(name: "activate", type: .noArgs) {
                 activate()
             }
         }
         if let clicked {
-            storage.connectSignal(name: "clicked", argCount: 0) {
+            storage.connectSignal(name: "clicked", type: .noArgs) {
                 clicked()
             }
         }
@@ -233,16 +233,12 @@ public struct LinkButton: AdwaitaWidget {
     /// The default bindings for this signal are all forms of the
     /// <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
     public func activate(_ activate: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activate = activate
-        return newSelf
+        modify { $0.activate = activate }
     }
 
     /// Emitted when the button has been activated (pressed and released).
     public func clicked(_ clicked: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.clicked = clicked
-        return newSelf
+        modify { $0.clicked = clicked }
     }
 
 }

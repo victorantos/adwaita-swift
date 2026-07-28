@@ -38,3 +38,19 @@ struct GIRType: Decodable {
     }
 
 }
+
+extension GIRType? {
+
+    /// A simple type representation.
+    var sType: String {
+        self?.cType ?? "gpointer"
+    }
+
+}
+
+// TODO: Once args are implemented:
+// [gchar*, gint, gpointer] -> [gchar*, gint, gpointer] SearchEntry/insertText
+// [gint, gint] -> [gint, gint] SearchEntry/deleteText
+// [nil, gboolean] -> [gpointer, gboolean] ScrolledWindow/scrollChild
+// [nil, gint, gboolean, gboolean] -> [gpointer, gint, gboolean, gboolean] ListBox/moveCursor
+// [gchar*] -> [gchar*] LevelBar/offsetChanged

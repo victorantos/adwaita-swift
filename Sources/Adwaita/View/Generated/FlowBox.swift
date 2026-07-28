@@ -2,7 +2,7 @@
 //  FlowBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -162,37 +162,37 @@ public struct FlowBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activateCursorChild {
-            storage.connectSignal(name: "activate-cursor-child", argCount: 0) {
+            storage.connectSignal(name: "activate-cursor-child", type: .noArgs) {
                 activateCursorChild()
             }
         }
         if let childActivated {
-            storage.connectSignal(name: "child-activated", argCount: 1) {
+            storage.connectSignal(name: "child-activated", type: .oneArg) {
                 childActivated()
             }
         }
         if let moveCursor {
-            storage.connectSignal(name: "move-cursor", argCount: 4) {
+            storage.connectSignal(name: "move-cursor", type: .noArgs) {
                 moveCursor()
             }
         }
         if let selectAll {
-            storage.connectSignal(name: "select-all", argCount: 0) {
+            storage.connectSignal(name: "select-all", type: .noArgs) {
                 selectAll()
             }
         }
         if let selectedChildrenChanged {
-            storage.connectSignal(name: "selected-children-changed", argCount: 0) {
+            storage.connectSignal(name: "selected-children-changed", type: .noArgs) {
                 selectedChildrenChanged()
             }
         }
         if let toggleCursorChild {
-            storage.connectSignal(name: "toggle-cursor-child", argCount: 0) {
+            storage.connectSignal(name: "toggle-cursor-child", type: .noArgs) {
                 toggleCursorChild()
             }
         }
         if let unselectAll {
-            storage.connectSignal(name: "unselect-all", argCount: 0) {
+            storage.connectSignal(name: "unselect-all", type: .noArgs) {
                 unselectAll()
             }
         }
@@ -300,16 +300,12 @@ public struct FlowBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// 
     /// This is a [keybinding signal](class.SignalAction.html).
     public func activateCursorChild(_ activateCursorChild: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activateCursorChild = activateCursorChild
-        return newSelf
+        modify { $0.activateCursorChild = activateCursorChild }
     }
 
     /// Emitted when a child has been activated by the user.
     public func childActivated(_ childActivated: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.childActivated = childActivated
-        return newSelf
+        modify { $0.childActivated = childActivated }
     }
 
     /// Emitted when the user initiates a cursor movement.
@@ -329,9 +325,7 @@ public struct FlowBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// - <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
     /// - <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
     public func moveCursor(_ moveCursor: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.moveCursor = moveCursor
-        return newSelf
+        modify { $0.moveCursor = moveCursor }
     }
 
     /// Emitted to select all children of the box,
@@ -341,9 +335,7 @@ public struct FlowBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// 
     /// The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
     public func selectAll(_ selectAll: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.selectAll = selectAll
-        return newSelf
+        modify { $0.selectAll = selectAll }
     }
 
     /// Emitted when the set of selected children changes.
@@ -352,9 +344,7 @@ public struct FlowBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// `Gtk.FlowBox.get_selected_children` to obtain the
     /// selected children.
     public func selectedChildrenChanged(_ selectedChildrenChanged: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.selectedChildrenChanged = selectedChildrenChanged
-        return newSelf
+        modify { $0.selectedChildrenChanged = selectedChildrenChanged }
     }
 
     /// Emitted to toggle the selection of the child that has the focus.
@@ -363,9 +353,7 @@ public struct FlowBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// 
     /// The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>Space</kbd>.
     public func toggleCursorChild(_ toggleCursorChild: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.toggleCursorChild = toggleCursorChild
-        return newSelf
+        modify { $0.toggleCursorChild = toggleCursorChild }
     }
 
     /// Emitted to unselect all children of the box,
@@ -375,9 +363,7 @@ public struct FlowBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// 
     /// The default bindings for this signal is <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
     public func unselectAll(_ unselectAll: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.unselectAll = unselectAll
-        return newSelf
+        modify { $0.unselectAll = unselectAll }
     }
 
 }

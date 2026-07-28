@@ -17,11 +17,12 @@ public struct TextView: AdwaitaWidget {
     @BindingProperty(
         observe: { _, text, storage in
             if let buffer = storage.content[.buffer]?.first {
-                buffer.connectSignal(name: "changed") {
+                buffer.connectSignal(name: "changed", type: .noArgs) { _ in
                     let currentText = Self.getText(buffer: buffer)
                     if text.wrappedValue != currentText {
                         text.wrappedValue = currentText
                     }
+                    return nil
                 }
             }
         },

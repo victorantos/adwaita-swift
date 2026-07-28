@@ -39,6 +39,7 @@ struct CarouselDemo: View {
             .frame(maxWidth: 500)
         }
         .longSwipes()
+        .pageChanged { print("Page changed") } // TODO: Add fetching args to autogen
     }
 
 }

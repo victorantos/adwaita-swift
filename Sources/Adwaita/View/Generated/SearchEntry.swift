@@ -2,7 +2,7 @@
 //  SearchEntry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -184,47 +184,47 @@ public struct SearchEntry: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activate {
-            storage.connectSignal(name: "activate", argCount: 0) {
+            storage.connectSignal(name: "activate", type: .noArgs) {
                 activate()
             }
         }
         if let changed {
-            storage.connectSignal(name: "changed", argCount: 0) {
+            storage.connectSignal(name: "changed", type: .noArgs) {
                 changed()
             }
         }
         if let deleteText {
-            storage.connectSignal(name: "delete-text", argCount: 2) {
+            storage.connectSignal(name: "delete-text", type: .twoArgs) {
                 deleteText()
             }
         }
         if let insertText {
-            storage.connectSignal(name: "insert-text", argCount: 3) {
+            storage.connectSignal(name: "insert-text", type: .noArgs) {
                 insertText()
             }
         }
         if let nextMatch {
-            storage.connectSignal(name: "next-match", argCount: 0) {
+            storage.connectSignal(name: "next-match", type: .noArgs) {
                 nextMatch()
             }
         }
         if let previousMatch {
-            storage.connectSignal(name: "previous-match", argCount: 0) {
+            storage.connectSignal(name: "previous-match", type: .noArgs) {
                 previousMatch()
             }
         }
         if let searchChanged {
-            storage.connectSignal(name: "search-changed", argCount: 0) {
+            storage.connectSignal(name: "search-changed", type: .noArgs) {
                 searchChanged()
             }
         }
         if let searchStarted {
-            storage.connectSignal(name: "search-started", argCount: 0) {
+            storage.connectSignal(name: "search-started", type: .noArgs) {
                 searchStarted()
             }
         }
         if let stopSearch {
-            storage.connectSignal(name: "stop-search", argCount: 0) {
+            storage.connectSignal(name: "stop-search", type: .noArgs) {
                 stopSearch()
             }
         }
@@ -355,9 +355,7 @@ if let text, newValue != text.wrappedValue {
     /// 
     /// The keybindings for this signal are all forms of the <kbd>Enter</kbd> key.
     public func activate(_ activate: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activate = activate
-        return newSelf
+        modify { $0.activate = activate }
     }
 
     /// Emitted at the end of a single user-visible operation on the
@@ -369,9 +367,7 @@ if let text, newValue != text.wrappedValue {
     /// the new content, and may cause multiple ::notify::text signals
     /// to be emitted).
     public func changed(_ changed: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.changed = changed
-        return newSelf
+        modify { $0.changed = changed }
     }
 
     /// Emitted when text is deleted from the widget by the user.
@@ -384,9 +380,7 @@ if let text, newValue != text.wrappedValue {
     /// The @start_pos and @end_pos parameters are interpreted as for
     /// `Gtk.Editable.delete_text`.
     public func deleteText(_ deleteText: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.deleteText = deleteText
-        return newSelf
+        modify { $0.deleteText = deleteText }
     }
 
     /// Emitted when text is inserted into the widget by the user.
@@ -396,9 +390,7 @@ if let text, newValue != text.wrappedValue {
     /// stopping the signal with g_signal_stop_emission(), it is possible
     /// to modify the inserted text, or prevent it from being inserted entirely.
     public func insertText(_ insertText: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.insertText = insertText
-        return newSelf
+        modify { $0.insertText = insertText }
     }
 
     /// Emitted when the user initiates a move to the next match
@@ -411,9 +403,7 @@ if let text, newValue != text.wrappedValue {
     /// 
     /// The default bindings for this signal is <kbd>Ctrl</kbd>+<kbd>g</kbd>.
     public func nextMatch(_ nextMatch: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.nextMatch = nextMatch
-        return newSelf
+        modify { $0.nextMatch = nextMatch }
     }
 
     /// Emitted when the user initiates a move to the previous match
@@ -427,25 +417,19 @@ if let text, newValue != text.wrappedValue {
     /// The default bindings for this signal is
     /// <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>g</kbd>.
     public func previousMatch(_ previousMatch: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.previousMatch = previousMatch
-        return newSelf
+        modify { $0.previousMatch = previousMatch }
     }
 
     /// Emitted with a delay. The length of the delay can be
     /// changed with the ``searchDelay(_:)``
     /// property.
     public func searchChanged(_ searchChanged: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.searchChanged = searchChanged
-        return newSelf
+        modify { $0.searchChanged = searchChanged }
     }
 
     /// Emitted when the user initiated a search on the entry.
     public func searchStarted(_ searchStarted: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.searchStarted = searchStarted
-        return newSelf
+        modify { $0.searchStarted = searchStarted }
     }
 
     /// Emitted when the user stops a search via keyboard input.
@@ -457,9 +441,7 @@ if let text, newValue != text.wrappedValue {
     /// 
     /// The default bindings for this signal is <kbd>Escape</kbd>.
     public func stopSearch(_ stopSearch: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.stopSearch = stopSearch
-        return newSelf
+        modify { $0.stopSearch = stopSearch }
     }
 
 }

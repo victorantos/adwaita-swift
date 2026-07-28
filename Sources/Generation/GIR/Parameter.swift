@@ -6,4 +6,9 @@
 //
 
 /// A parameter.
-struct Parameter: Decodable { }
+struct Parameter: Decodable {
+
+    /// The parameter's type.
+    var type: GIRType?
+
+}

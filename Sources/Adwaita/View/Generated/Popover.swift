@@ -2,7 +2,7 @@
 //  Popover.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -108,12 +108,12 @@ public struct Popover: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activateDefault {
-            storage.connectSignal(name: "activate-default", argCount: 0) {
+            storage.connectSignal(name: "activate-default", type: .noArgs) {
                 activateDefault()
             }
         }
         if let closed {
-            storage.connectSignal(name: "closed", argCount: 0) {
+            storage.connectSignal(name: "closed", type: .noArgs) {
                 closed()
             }
         }
@@ -194,16 +194,12 @@ public struct Popover: AdwaitaWidget {
     /// 
     /// The default binding for this signal is <kbd>Enter</kbd>.
     public func activateDefault(_ activateDefault: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activateDefault = activateDefault
-        return newSelf
+        modify { $0.activateDefault = activateDefault }
     }
 
     /// Emitted when the popover is closed.
     public func closed(_ closed: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.closed = closed
-        return newSelf
+        modify { $0.closed = closed }
     }
 
 }

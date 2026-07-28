@@ -2,7 +2,7 @@
 //  Menu.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -127,7 +127,7 @@ public struct Menu: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activate {
-            storage.connectSignal(name: "activate", argCount: 0) {
+            storage.connectSignal(name: "activate", type: .noArgs) {
                 activate()
             }
         }
@@ -250,9 +250,7 @@ if let active, newValue != active.wrappedValue {
     /// The `::activate` signal on `GtkMenuButton` is an action signal and
     /// emitting it causes the button to pop up its menu.
     public func activate(_ activate: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activate = activate
-        return newSelf
+        modify { $0.activate = activate }
     }
 
 }

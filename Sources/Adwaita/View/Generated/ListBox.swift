@@ -2,7 +2,7 @@
 //  ListBox.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -139,42 +139,42 @@ public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activateCursorRow {
-            storage.connectSignal(name: "activate-cursor-row", argCount: 0) {
+            storage.connectSignal(name: "activate-cursor-row", type: .noArgs) {
                 activateCursorRow()
             }
         }
         if let moveCursor {
-            storage.connectSignal(name: "move-cursor", argCount: 4) {
+            storage.connectSignal(name: "move-cursor", type: .noArgs) {
                 moveCursor()
             }
         }
         if let rowActivated {
-            storage.connectSignal(name: "row-activated", argCount: 1) {
+            storage.connectSignal(name: "row-activated", type: .oneArg) {
                 rowActivated()
             }
         }
         if let rowSelected {
-            storage.connectSignal(name: "row-selected", argCount: 1) {
+            storage.connectSignal(name: "row-selected", type: .oneArg) {
                 rowSelected()
             }
         }
         if let selectAll {
-            storage.connectSignal(name: "select-all", argCount: 0) {
+            storage.connectSignal(name: "select-all", type: .noArgs) {
                 selectAll()
             }
         }
         if let selectedRowsChanged {
-            storage.connectSignal(name: "selected-rows-changed", argCount: 0) {
+            storage.connectSignal(name: "selected-rows-changed", type: .noArgs) {
                 selectedRowsChanged()
             }
         }
         if let toggleCursorRow {
-            storage.connectSignal(name: "toggle-cursor-row", argCount: 0) {
+            storage.connectSignal(name: "toggle-cursor-row", type: .noArgs) {
                 toggleCursorRow()
             }
         }
         if let unselectAll {
-            storage.connectSignal(name: "unselect-all", argCount: 0) {
+            storage.connectSignal(name: "unselect-all", type: .noArgs) {
                 unselectAll()
             }
         }
@@ -241,9 +241,7 @@ public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
 
     /// Emitted when the cursor row is activated.
     public func activateCursorRow(_ activateCursorRow: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activateCursorRow = activateCursorRow
-        return newSelf
+        modify { $0.activateCursorRow = activateCursorRow }
     }
 
     /// Emitted when the user initiates a cursor movement.
@@ -258,16 +256,12 @@ public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// - <kbd>Home</kbd>, <kbd>End</kbd> move to the ends of the box
     /// - <kbd>PgUp</kbd>, <kbd>PgDn</kbd> move vertically by pages
     public func moveCursor(_ moveCursor: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.moveCursor = moveCursor
-        return newSelf
+        modify { $0.moveCursor = moveCursor }
     }
 
     /// Emitted when a row has been activated by the user.
     public func rowActivated(_ rowActivated: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.rowActivated = rowActivated
-        return newSelf
+        modify { $0.rowActivated = rowActivated }
     }
 
     /// Emitted when a new row is selected, or (with a %NULL @row)
@@ -277,9 +271,7 @@ public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// give you the full picture of selection changes, and you should use
     /// the `Gtk.ListBox::selected-rows-changed` signal instead.
     public func rowSelected(_ rowSelected: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.rowSelected = rowSelected
-        return newSelf
+        modify { $0.rowSelected = rowSelected }
     }
 
     /// Emitted to select all children of the box, if the selection
@@ -289,25 +281,19 @@ public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// 
     /// The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
     public func selectAll(_ selectAll: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.selectAll = selectAll
-        return newSelf
+        modify { $0.selectAll = selectAll }
     }
 
     /// Emitted when the set of selected rows changes.
     public func selectedRowsChanged(_ selectedRowsChanged: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.selectedRowsChanged = selectedRowsChanged
-        return newSelf
+        modify { $0.selectedRowsChanged = selectedRowsChanged }
     }
 
     /// Emitted when the cursor row is toggled.
     /// 
     /// The default bindings for this signal is <kbd>Ctrl</kbd>+<kbd>␣</kbd>.
     public func toggleCursorRow(_ toggleCursorRow: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.toggleCursorRow = toggleCursorRow
-        return newSelf
+        modify { $0.toggleCursorRow = toggleCursorRow }
     }
 
     /// Emitted to unselect all children of the box, if the selection
@@ -318,9 +304,7 @@ public struct ListBox<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// The default binding for this signal is
     /// <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
     public func unselectAll(_ unselectAll: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.unselectAll = unselectAll
-        return newSelf
+        modify { $0.unselectAll = unselectAll }
     }
 
 }

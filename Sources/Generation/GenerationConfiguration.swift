@@ -395,6 +395,14 @@ struct GenerationConfiguration {
         "ScrollablePolicy": "gtkValue"
     ]
 
+    /// The SignalData.HandlerType replacement for a signal type.
+    var signalTypeReplacements = [
+        "": "noArgs",
+        "gpointer": "oneArg",
+        "gpointer, gpointer": "twoArgs",
+        "guint": "guint"
+    ]
+
     /// Default values for modifiers with a certain type.
     var defaultModifierValues = [
         "Bool?": "true"

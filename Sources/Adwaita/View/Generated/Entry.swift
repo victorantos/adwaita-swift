@@ -2,7 +2,7 @@
 //  Entry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 26.07.26.
+//  Created by auto-generation on 28.07.26.
 //
 
 import CAdw
@@ -303,42 +303,42 @@ public struct Entry: AdwaitaWidget {
     ///     - type: The view render data type.
     public func update<Data>(_ storage: ViewStorage, data: WidgetData, updateProperties: Bool, type: Data.Type) where Data: ViewRenderData {
         if let activate {
-            storage.connectSignal(name: "activate", argCount: 0) {
+            storage.connectSignal(name: "activate", type: .noArgs) {
                 activate()
             }
         }
         if let changed {
-            storage.connectSignal(name: "changed", argCount: 0) {
+            storage.connectSignal(name: "changed", type: .noArgs) {
                 changed()
             }
         }
         if let deleteText {
-            storage.connectSignal(name: "delete-text", argCount: 2) {
+            storage.connectSignal(name: "delete-text", type: .twoArgs) {
                 deleteText()
             }
         }
         if let editingDone {
-            storage.connectSignal(name: "editing-done", argCount: 0) {
+            storage.connectSignal(name: "editing-done", type: .noArgs) {
                 editingDone()
             }
         }
         if let iconPress {
-            storage.connectSignal(name: "icon-press", argCount: 1) {
+            storage.connectSignal(name: "icon-press", type: .oneArg) {
                 iconPress()
             }
         }
         if let iconRelease {
-            storage.connectSignal(name: "icon-release", argCount: 1) {
+            storage.connectSignal(name: "icon-release", type: .oneArg) {
                 iconRelease()
             }
         }
         if let insertText {
-            storage.connectSignal(name: "insert-text", argCount: 3) {
+            storage.connectSignal(name: "insert-text", type: .noArgs) {
                 insertText()
             }
         }
         if let removeWidget {
-            storage.connectSignal(name: "remove-widget", argCount: 0) {
+            storage.connectSignal(name: "remove-widget", type: .noArgs) {
                 removeWidget()
             }
         }
@@ -680,9 +680,7 @@ if let text, newValue != text.wrappedValue {
     /// 
     /// The keybindings for this signal are all forms of the Enter key.
     public func activate(_ activate: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.activate = activate
-        return newSelf
+        modify { $0.activate = activate }
     }
 
     /// Emitted at the end of a single user-visible operation on the
@@ -694,9 +692,7 @@ if let text, newValue != text.wrappedValue {
     /// the new content, and may cause multiple ::notify::text signals
     /// to be emitted).
     public func changed(_ changed: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.changed = changed
-        return newSelf
+        modify { $0.changed = changed }
     }
 
     /// Emitted when text is deleted from the widget by the user.
@@ -709,9 +705,7 @@ if let text, newValue != text.wrappedValue {
     /// The @start_pos and @end_pos parameters are interpreted as for
     /// `Gtk.Editable.delete_text`.
     public func deleteText(_ deleteText: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.deleteText = deleteText
-        return newSelf
+        modify { $0.deleteText = deleteText }
     }
 
     /// This signal is a sign for the cell renderer to update its
@@ -726,24 +720,18 @@ if let text, newValue != text.wrappedValue {
     /// gtk_cell_editable_editing_done() is a convenience method
     /// for emitting `GtkCellEditable::editing-done`.
     public func editingDone(_ editingDone: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.editingDone = editingDone
-        return newSelf
+        modify { $0.editingDone = editingDone }
     }
 
     /// Emitted when an activatable icon is clicked.
     public func iconPress(_ iconPress: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.iconPress = iconPress
-        return newSelf
+        modify { $0.iconPress = iconPress }
     }
 
     /// Emitted on the button release from a mouse click
     /// over an activatable icon.
     public func iconRelease(_ iconRelease: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.iconRelease = iconRelease
-        return newSelf
+        modify { $0.iconRelease = iconRelease }
     }
 
     /// Emitted when text is inserted into the widget by the user.
@@ -753,9 +741,7 @@ if let text, newValue != text.wrappedValue {
     /// stopping the signal with g_signal_stop_emission(), it is possible
     /// to modify the inserted text, or prevent it from being inserted entirely.
     public func insertText(_ insertText: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.insertText = insertText
-        return newSelf
+        modify { $0.insertText = insertText }
     }
 
     /// This signal is meant to indicate that the cell is finished
@@ -771,9 +757,7 @@ if let text, newValue != text.wrappedValue {
     /// gtk_cell_editable_remove_widget() is a convenience method
     /// for emitting `GtkCellEditable::remove-widget`.
     public func removeWidget(_ removeWidget: @escaping () -> Void) -> Self {
-        var newSelf = self
-        newSelf.removeWidget = removeWidget
-        return newSelf
+        modify { $0.removeWidget = removeWidget }
     }
 
 }
