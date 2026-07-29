@@ -5,6 +5,8 @@
 //  Created by david-swift on 30.10.25.
 //
 
+import Foundation
+
 extension Window {
 
     /// Add a keyboard shortcut.
@@ -32,6 +34,15 @@ extension Window {
     public func appKeyboardShortcut(_ shortcut: String, action: @escaping (AdwaitaApp) -> Void) -> Self {
         var newSelf = self
         newSelf.appShortcuts[shortcut] = action
+        return newSelf
+    }
+
+    /// Add a handler for opening files.
+    /// - Parameter action: Handle the opening of files.
+    /// - Returns: The app.
+    public func onOpen(action: @escaping ([URL]) -> Void) -> Self {
+        var newSelf = self
+        newSelf.onOpen = action
         return newSelf
     }
 

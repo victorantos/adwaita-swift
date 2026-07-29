@@ -28,11 +28,14 @@ public class AdwaitaApp: AppStorage {
     var pointer: UnsafeMutablePointer<GtkApplication>?
     /// Fields for storing closure data.
     var signals: [String: SignalData] = [:]
+    /// The action to run when opening files.
+    var onOpen: (([URL]) -> Void)?
 
     /// Initialize the app storage.
     /// - Parameter id: The identifier.
     public required init(id: String) {
-        pointer = adw_application_new(id, GApplicationFlags(rawValue: 0))?.cast()
+        let flag = GApplicationFlags.APPLICATION_HANDLES_OPEN
+        pointer = adw_application_new(id, flag)?.cast()
         DatabaseInformation.setPath(Self.userDataDir().appendingPathComponent("\(id).sqlite").path)
     }
 
@@ -53,10 +56,39 @@ public class AdwaitaApp: AppStorage {
     public func run(setup: @escaping () -> Void) {
         let data = SignalData {
             setup()
+            let app = SimpleStorage(self.pointer?.opaque())
+            app.connectSignal(
+                name: "open",
+                id: "internal-on-open",
+                type: .pointerIntPointer,
+                handler: self.onOpenClosure
+            )
         }
         runSignal = data
         data.connect(pointer: pointer, signal: "activate", type: .noArgs)
         g_application_run(pointer?.cast(), 0, nil)
+    }
+
+    /// The closure to execute when the open signal is being called.
+    /// - Paramter args: The closure's arguments.
+    func onOpenClosure(args: [Any?]) {
+        guard let startPtr = args[safe: 0] as? UnsafeMutableRawPointer,
+              let start = startPtr.cast() as UnsafeMutablePointer<UnsafeMutablePointer<OpaquePointer>?>?,
+              let count = args[safe: 1] as? Int32 else {
+            return
+        }
+        let buffer = UnsafeBufferPointer(start: start, count: .init(count))
+        var urls: [URL] = []
+        for file in buffer {
+            guard let cPath = g_file_get_path(file?.opaque()) else {
+                continue
+            }
+            let path = String(cString: cPath)
+            if let url = URL(string: path) {
+                urls.append(url)
+            }
+        }
+        self.onOpen?(urls)
     }
 
     /// Quit the app.

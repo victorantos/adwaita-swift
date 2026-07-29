@@ -22,6 +22,7 @@ struct Demo: App {
         Window(id: "main") { window in
             DemoContent(window: window, app: app, pictureURL: pictureURL)
         }
+        .onOpen { print($0) }
         helperWindows
     }
 

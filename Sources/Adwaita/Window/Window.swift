@@ -25,6 +25,8 @@ public struct Window: AdwaitaSceneElement {
     var shortcuts: [String: (AdwaitaWindow) -> Void] = [:]
     /// The keyboard shortcuts on the app level.
     var appShortcuts: [String: (AdwaitaApp) -> Void] = [:]
+    /// The action to run when a file opening request has to be handled.
+    var onOpen: (([URL]) -> Void)?
     /// The window's title.
     var title: String?
     /// Whether the window is resizable.
@@ -204,6 +206,7 @@ public struct Window: AdwaitaSceneElement {
             for shortcut in template.appShortcuts {
                 app.addKeyboardShortcut(shortcut.key, id: shortcut.key) { shortcut.value(app) }
             }
+            app.onOpen = onOpen
         }
         if template.width != nil {
             storage.notify(name: "default-width", pointer: window.pointer?.opaque()) {
