@@ -25,7 +25,7 @@ public class AdwaitaApp: AppStorage {
     /// The signal data for running.
     var runSignal: SignalData?
     /// The application's pointer.
-    var pointer: UnsafeMutablePointer<GtkApplication>?
+    public var pointer: UnsafeMutablePointer<GtkApplication>?
     /// Fields for storing closure data.
     var signals: [String: SignalData] = [:]
     /// The action to run when opening files.
