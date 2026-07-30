@@ -56,14 +56,14 @@ public class AdwaitaApp: AppStorage {
     public func run(setup: @escaping () -> Void) {
         let data = SignalData {
             setup()
-            let app = SimpleStorage(self.pointer?.opaque())
-            app.connectSignal(
-                name: "open",
-                id: "internal-on-open",
-                type: .pointerIntPointer,
-                handler: self.onOpenClosure
-            )
         }
+        let app = SimpleStorage(self.pointer?.opaque())
+        app.connectSignal(
+            name: "open",
+            id: "internal-on-open",
+            type: .pointerIntPointer,
+            handler: self.onOpenClosure
+        )
         runSignal = data
         data.connect(pointer: pointer, signal: "activate", type: .noArgs)
         g_application_run(pointer?.cast(), 0, nil)
