@@ -24,6 +24,8 @@ public class AdwaitaApp: AppStorage {
     public var storage: StandardAppStorage = .init()
     /// The signal data for running.
     var runSignal: SignalData?
+    /// The signal data for opening.
+    var openSignal: SignalData?
     /// The application's pointer.
     public var pointer: UnsafeMutablePointer<GtkApplication>?
     /// Fields for storing closure data.
@@ -57,15 +59,11 @@ public class AdwaitaApp: AppStorage {
         let data = SignalData {
             setup()
         }
-        let app = SimpleStorage(self.pointer?.opaque())
-        app.connectSignal(
-            name: "open",
-            id: "internal-on-open",
-            type: .pointerIntPointer,
-            handler: self.onOpenClosure
-        )
+        let openData = SignalData(closure: onOpenClosure)
         runSignal = data
+        openSignal = openData
         data.connect(pointer: pointer, signal: "activate", type: .noArgs)
+        openData.connect(pointer: pointer, signal: "open", type: .pointerIntPointer)
         g_application_run(pointer?.cast(), CommandLine.argc, CommandLine.unsafeArgv)
     }
 
