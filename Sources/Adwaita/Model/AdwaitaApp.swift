@@ -66,7 +66,7 @@ public class AdwaitaApp: AppStorage {
         )
         runSignal = data
         data.connect(pointer: pointer, signal: "activate", type: .noArgs)
-        g_application_run(pointer?.cast(), 0, nil)
+        g_application_run(pointer?.cast(), CommandLine.argc, CommandLine.unsafeArgv)
     }
 
     /// The closure to execute when the open signal is being called.
