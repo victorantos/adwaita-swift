@@ -84,9 +84,8 @@ public class AdwaitaApp: AppStorage {
                 continue
             }
             let path = String(cString: cPath)
-            if let url = URL(string: path) {
-                urls.append(url)
-            }
+            let url = URL(fileURLWithPath: path)
+            urls.append(url)
         }
         if let onOpen = self.onOpen {
             onOpen(urls)
