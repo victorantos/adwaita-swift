@@ -113,6 +113,12 @@ public struct Window: AdwaitaSceneElement {
     /// Set up the initial scene storages.
     /// - Parameter app: The app storage.
     public func setupInitialContainers<Storage>(app: Storage) where Storage: AppStorage {
+        if let app = (app as? AdwaitaApp), app.blockInitialWindows {
+            if let onOpen {
+                app.onOpen = onOpen
+            }
+            return
+        }
         for _ in 0..<open {
             let container = container(app: app)
             container.show()

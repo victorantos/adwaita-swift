@@ -32,6 +32,8 @@ public class AdwaitaApp: AppStorage {
     var signals: [String: SignalData] = [:]
     /// The action to run when opening files.
     var onOpen: (([URL]) -> Void)?
+    /// Block the opening of initial windows (when opening from file).
+    var blockInitialWindows = false
 
     /// Initialize the app storage.
     /// - Parameter id: The identifier.
@@ -86,7 +88,13 @@ public class AdwaitaApp: AppStorage {
                 urls.append(url)
             }
         }
-        self.onOpen?(urls)
+        if let onOpen = self.onOpen {
+            onOpen(urls)
+        } else {
+            self.blockInitialWindows = true
+            _ = self.runSignal?.closure([])
+            self.onOpen?(urls)
+        }
     }
 
     /// Quit the app.

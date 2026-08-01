@@ -38,6 +38,9 @@ extension Window {
     }
 
     /// Add a handler for opening files.
+    ///
+    /// Make sure to add/show in general at least one window in this closure.
+    ///
     /// - Parameter action: Handle the opening of files.
     /// - Returns: The app.
     public func onOpen(action: @escaping ([URL]) -> Void) -> Self {
