@@ -173,11 +173,26 @@ public struct Window: AdwaitaSceneElement {
         app: Storage,
         updateProperties: Bool
     ) where Storage: AppStorage {
+        self.update(storage, app: app, updateProperties: updateProperties, id: nil)
+    }
+
+    /// Update the stored content.
+    /// - Parameters:
+    ///     - storage: The storage to update.
+    ///     - app: The app storage.
+    ///     - updateProperties: Whether to update the view's properties.
+    ///     - id: The update id.
+    public func update<Storage>(
+        _ storage: SceneStorage,
+        app: Storage,
+        updateProperties: Bool,
+        id: String?
+    ) where Storage: AppStorage {
         if Thread.isMainThread {
-            privateUpdate(storage, app: app, updateProperties: updateProperties)
+            privateUpdate(storage, app: app, updateProperties: updateProperties, id: id)
         } else {
             Idle {
-                privateUpdate(storage, app: app, updateProperties: updateProperties)
+                privateUpdate(storage, app: app, updateProperties: updateProperties, id: id)
             }
         }
     }
@@ -187,10 +202,12 @@ public struct Window: AdwaitaSceneElement {
     ///     - storage: The storage to update.
     ///     - app: The app storage.
     ///     - updateProperties: Whether to update the view's properties.
+    ///     - id: The update id.
     private func privateUpdate<Storage>(
         _ storage: SceneStorage,
         app: Storage,
-        updateProperties: Bool
+        updateProperties: Bool,
+        id: String?
     ) where Storage: AppStorage {
         guard let window = storage.pointer as? AdwaitaWindow,
               let viewStorage = storage.content[.mainContent]?.first else {
@@ -200,7 +217,7 @@ public struct Window: AdwaitaSceneElement {
         content
             .updateStorage(
                 viewStorage,
-                data: .init(sceneStorage: storage, appStorage: app),
+                data: .init(sceneStorage: storage, appStorage: app, id: id),
                 updateProperties: updateProperties,
                 type: AdwaitaMainView.self
             )
