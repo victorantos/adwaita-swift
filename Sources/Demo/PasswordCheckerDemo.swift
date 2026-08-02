@@ -113,7 +113,7 @@ struct PasswordCheckerDemo: View {
                 }
             }
             .padding()
-            .toast("Copied to clipboard", signal: copied)
+            .toast("Copied to clipboard", signal: $copied)
             .frame(minWidth: 340, minHeight: 400)
             .topToolbar {
                 HeaderBar.empty()

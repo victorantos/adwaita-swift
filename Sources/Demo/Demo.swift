@@ -146,7 +146,7 @@ struct Demo: App {
                         }
                     }
                 }
-                .toast("This is a toast!", signal: toast)
+                .toast("This is a toast!", signal: $toast)
             }
             .collapsed(!wide)
             .breakpoint(minWidth: 550, matches: $wide)

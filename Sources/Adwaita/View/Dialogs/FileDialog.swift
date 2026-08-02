@@ -14,7 +14,7 @@ struct FileDialog: AdwaitaWidget {
     /// The dialog type.
     var type: DialogType
     /// Whether the dialog should open.
-    var open: Signal
+    var open: Binding<Signal>
     /// The dialog's child.
     var child: AnyView
     /// The initial folder.
@@ -34,7 +34,7 @@ struct FileDialog: AdwaitaWidget {
     ///     - initialFolder: The initial folder.
     init(
         type: DialogType,
-        `open`: Signal,
+        `open`: Binding<Signal>,
         child: AnyView,
         result: @escaping (URL) -> Void,
         cancel: @escaping () -> Void,
@@ -126,49 +126,59 @@ struct FileDialog: AdwaitaWidget {
             return
         }
         child.updateStorage(mainStorage, data: data, updateProperties: updateProperties, type: type)
-        if open.update, storage.fields[.callbacks] == nil {
-            var unref: [OpaquePointer?] = []
-            let pointer = gtk_file_dialog_new()
-            unref.append(pointer)
-            if let initialName = self.type.initialName {
-                gtk_file_dialog_set_initial_name(pointer, initialName)
+        data.stateManager.withBlockedUpdates {
+            if open.wrappedValue.update, storage.fields[.callbacks] == nil {
+                showDialog(storage, data: data)
             }
-            if let extensions = self.type.extensions {
-                let filter = gtk_file_filter_new()
-                for name in extensions {
-                    gtk_file_filter_add_suffix(filter, name)
-                }
-                gtk_file_dialog_set_default_filter(pointer, filter)
-                unref.append(filter)
-            } else {
-                gtk_file_dialog_set_default_filter(pointer, nil)
+        }
+    }
+
+    /// Show the dialog.
+    /// - Parameters:
+    ///     - storage: The view storage.
+    ///     - data: The view data.
+    func showDialog(_ storage: ViewStorage, data: WidgetData) {
+        var unref: [OpaquePointer?] = []
+        let pointer = gtk_file_dialog_new()
+        unref.append(pointer)
+        if let initialName = self.type.initialName {
+            gtk_file_dialog_set_initial_name(pointer, initialName)
+        }
+        if let extensions = self.type.extensions {
+            let filter = gtk_file_filter_new()
+            for name in extensions {
+                gtk_file_filter_add_suffix(filter, name)
             }
-            if let initialFolder {
-                let file = g_file_new_for_path(initialFolder.absoluteString)
-                gtk_file_dialog_set_initial_folder(pointer, file)
-                unref.append(file)
+            gtk_file_dialog_set_default_filter(pointer, filter)
+            unref.append(filter)
+        } else {
+            gtk_file_dialog_set_default_filter(pointer, nil)
+        }
+        if let initialFolder {
+            let file = g_file_new_for_path(initialFolder.absoluteString)
+            gtk_file_dialog_set_initial_folder(pointer, file)
+            unref.append(file)
+        }
+        let callbacks = AdwaitaFileDialog()
+        let unrefClosure = {
+            for ref in unref {
+                g_object_unref(ref?.cast())
             }
-            let callbacks = AdwaitaFileDialog()
-            let unrefClosure = {
-                for ref in unref {
-                    g_object_unref(ref?.cast())
-                }
-                storage.fields[.callbacks] = nil
-            }
-            callbacks.onResult = { (storage.fields[.dialogResult] as? (URL) -> Void)?($0); unrefClosure() }
-            callbacks.onCancel = { (storage.fields[.dialogCancel] as? () -> Void)?(); unrefClosure() }
-            callbacks.reset = { storage.fields[.callbacks] = nil }
-            storage.fields[.callbacks] = callbacks
-            let windowPointer = (data.sceneStorage.pointer as? AdwaitaWindow)?.pointer
-            let window: UnsafeMutablePointer<GtkWindow>? = windowPointer?.cast()
-            let data = UnsafeMutableRawPointer(bitPattern: unsafeBitCast(callbacks, to: UInt.self))
-            if self.type.isImporter && self.type.folder {
-                gtui_filedialog_open_folder(pointer, data, window)
-            } else if self.type.isImporter {
-                gtui_filedialog_open(pointer, data, window)
-            } else {
-                gtui_filedialog_save(pointer, data, window)
-            }
+            storage.fields[.callbacks] = nil
+        }
+        callbacks.onResult = { (storage.fields[.dialogResult] as? (URL) -> Void)?($0); unrefClosure() }
+        callbacks.onCancel = { (storage.fields[.dialogCancel] as? () -> Void)?(); unrefClosure() }
+        callbacks.reset = { storage.fields[.callbacks] = nil }
+        storage.fields[.callbacks] = callbacks
+        let windowPointer = (data.sceneStorage.pointer as? AdwaitaWindow)?.pointer
+        let window: UnsafeMutablePointer<GtkWindow>? = windowPointer?.cast()
+        let data = UnsafeMutableRawPointer(bitPattern: unsafeBitCast(callbacks, to: UInt.self))
+        if self.type.isImporter && self.type.folder {
+            gtui_filedialog_open_folder(pointer, data, window)
+        } else if self.type.isImporter {
+            gtui_filedialog_open(pointer, data, window)
+        } else {
+            gtui_filedialog_save(pointer, data, window)
         }
     }
 

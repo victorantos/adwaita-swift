@@ -307,9 +307,9 @@ extension AnyView {
     /// Bind a signal that focuses the view.
     /// - Parameter focus: Whether the view is focused.
     /// - Returns: A view.
-    public func focus(_ signal: Signal) -> AnyView {
+    public func focus(_ signal: Binding<Signal>) -> AnyView {
         inspect { storage, _ in
-            if signal.update {
+            if signal.wrappedValue.update {
                 gtk_widget_grab_focus(storage.opaquePointer?.cast())
             }
         }

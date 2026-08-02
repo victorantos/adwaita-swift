@@ -152,7 +152,7 @@ extension AnyView {
     ///     - onOpen: Run this when a file for importing has been chosen.
     ///     - onClose: Run this when the user cancelled the action.
     public func fileImporter(
-        open: Signal,
+        open: Binding<Signal>,
         initialFolder: URL? = nil,
         extensions: [String]? = nil,
         onOpen: @escaping (URL) -> Void,
@@ -175,7 +175,7 @@ extension AnyView {
     ///     - onOpen: Run this when a file for importing has been chosen.
     ///     - onClose: Run this when the user cancelled the action.
     public func folderImporter(
-        open: Signal,
+        open: Binding<Signal>,
         initialFolder: URL? = nil,
         onOpen: @escaping (URL) -> Void,
         onClose: @escaping () -> Void = { }
@@ -198,7 +198,7 @@ extension AnyView {
     ///     - onSave: Run this when a path for exporting has been chosen.
     ///     - onClose: Run this when the user cancelled the action.
     public func fileExporter(
-        open: Signal,
+        open: Binding<Signal>,
         initialFolder: URL? = nil,
         initialName: String? = nil,
         onSave: @escaping (URL) -> Void,
@@ -249,7 +249,7 @@ extension AnyView {
     ///     - title: The title of the toast.
     ///     - signal: The signal which activates the presentation of a toast.
     /// - Returns: A view.
-    public func toast(_ title: String, signal: Signal) -> ToastOverlay {
+    public func toast(_ title: String, signal: Binding<Signal>) -> ToastOverlay {
         .init(title, signal: signal)
             .child { self }
     }
@@ -261,7 +261,12 @@ extension AnyView {
     ///     - button: The button's label.
     ///     - handler: The handler for the button.
     /// - Returns: A view.
-    public func toast(_ title: String, signal: Signal, button: String, handler: @escaping () -> Void) -> ToastOverlay {
+    public func toast(
+        _ title: String,
+        signal: Binding<Signal>,
+        button: String,
+        handler: @escaping () -> Void
+    ) -> ToastOverlay {
         .init(title, signal: signal)
             .child { self }
             .action(button: button, handler: handler)

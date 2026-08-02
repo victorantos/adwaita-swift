@@ -34,7 +34,7 @@ struct PictureDemo: View {
         .pill()
         .suggested()
         .padding()
-        .fileImporter(open: fileDialog, extensions: ["jpg", "jpeg", "png", "svg"]) { url = $0 } onClose: { }
+        .fileImporter(open: $fileDialog, extensions: ["jpg", "jpeg", "png", "svg"]) { url = $0 } onClose: { }
     }
 
 }

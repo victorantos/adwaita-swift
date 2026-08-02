@@ -15,17 +15,19 @@ extension ToastOverlay {
     /// - Parameters:
     ///     - title: The toast's title.
     ///     - signal: The signal for adding a toast.
-    public init(_ title: String, signal: Signal) {
-        updateFunctions.append { storage, _, _ in
-            if signal.update {
-                let toast = ViewStorage(adw_toast_new(title))
-                storage.fields[UUID().uuidString] = toast
-                if let button = storage.fields[.toastButton] as? String,
-                let handler = storage.fields[.toastHandler] as? () -> Void {
-                    adw_toast_set_button_label(toast.opaquePointer, button)
-                    toast.connectSignal(name: "button-clicked", handler: handler)
+    public init(_ title: String, signal: Binding<Signal>) {
+        updateFunctions.append { storage, data, _ in
+            data.stateManager.withBlockedUpdates {
+                if signal.wrappedValue.update {
+                    let toast = ViewStorage(adw_toast_new(title))
+                    storage.fields[UUID().uuidString] = toast
+                    if let button = storage.fields[.toastButton] as? String,
+                    let handler = storage.fields[.toastHandler] as? () -> Void {
+                        adw_toast_set_button_label(toast.opaquePointer, button)
+                        toast.connectSignal(name: "button-clicked", handler: handler)
+                    }
+                    adw_toast_overlay_add_toast(storage.opaquePointer, toast.opaquePointer)
                 }
-                adw_toast_overlay_add_toast(storage.opaquePointer, toast.opaquePointer)
             }
         }
     }
