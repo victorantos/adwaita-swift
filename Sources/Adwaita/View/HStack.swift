@@ -12,8 +12,6 @@ public struct HStack: SimpleView {
     var content: () -> Body
     /// The spacing between elements.
     var spacing: Int
-    /// Whether the linked style should be used.
-    var linked = false
 
     /// The view's body.
     public var view: Body {
@@ -30,10 +28,8 @@ public struct HStack: SimpleView {
     }
 
     /// Link the children.
-    public func linked(_ active: Bool = true) -> Self {
-        var newSelf = self
-        newSelf.linked = active
-        return newSelf
+    public func linked(_ active: Bool = true) -> AnyView {
+        style("linked", active: active)
     }
 
 }
