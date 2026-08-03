@@ -29,4 +29,15 @@ extension Text {
         }
     }
 
+    /// Sets the alignment of lines in the text relative to each other.
+    /// - Parameter justify: The justification of the text.
+    /// - Returns: The text widget.
+    public func justify(_ justify: Justification = .left) -> AnyView {
+        inspect { storage, update in
+            if update {
+                gtk_label_set_justify(storage.opaquePointer, justify.gtkValue)
+            }
+        }
+    }
+
 }
