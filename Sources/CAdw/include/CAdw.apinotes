@@ -27,3 +27,5 @@ Tags:
   EnumExtensibility: closed
 - Name: AdwViewSwitcherPolicy
   EnumExtensibility: closed
+- Name: GtkJustification
+  EnumExtensibility: closed
