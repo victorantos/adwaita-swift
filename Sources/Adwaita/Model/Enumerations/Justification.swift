@@ -8,7 +8,7 @@
 import CAdw
 
 /// Justifying the text inside a GtkLabel widget.
-public enum Justification {
+public enum Justification: String, CaseIterable {
 
     /// The text is placed at the left edge of the label.
     case left

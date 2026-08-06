@@ -32,6 +32,7 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
     case picture
     case idle
     case fixed
+    case textLabel
     case textEditor
     case splitView
     case symbol
@@ -53,6 +54,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Alert Dialog"
         case .passwordChecker:
             return "Password Checker"
+        case .textLabel:
+            return "Text Label"
         case .textEditor:
             return "Text Editor"
         case .splitView:
@@ -115,6 +118,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Update UI from an asynchronous context"
         case .fixed:
             return "Place widgets in a coordinate system"
+        case .textLabel:
+            return "Ellipse or wrap and justify a text label"
         case .textEditor:
             return "A simple text editor"
         case .splitView:
@@ -170,6 +175,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             IdleDemo()
         case .fixed:
             FixedDemo()
+        case .textLabel:
+            TextLabelDemo()
         case .textEditor:
             TextEditorDemo()
         case .splitView:

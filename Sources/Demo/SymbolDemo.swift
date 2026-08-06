@@ -17,6 +17,9 @@ struct SymbolDemo: View {
                 .pixelSize(64)
             Symbol(icon: .default(icon: .goPrevious))
                 .pixelSize(64)
+            Separator()
+                .spacer()
+                .padding(.horizontal)
             Symbol(icon: .default(icon: .airplaneMode))
                 .pixelSize(64)
         }
