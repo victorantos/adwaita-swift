@@ -28,6 +28,8 @@ public struct HStack: SimpleView {
     }
 
     /// Link the children.
+    /// - Parameter active: Whether the style is currently applied.
+    /// - Returns: A view.
     public func linked(_ active: Bool = true) -> AnyView {
         style("linked", active: active)
     }
