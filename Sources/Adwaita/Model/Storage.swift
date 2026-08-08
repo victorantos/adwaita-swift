@@ -74,7 +74,7 @@ extension Storage {
     ) {
         connectSignal(name: name, id: id, type: type, pointer: pointer) {
             handler()
-            return nil
+            return nil as Bool? as Any
         }
     }
 
@@ -114,7 +114,7 @@ extension Storage {
         id: String = "",
         type: SignalData.HandlerType,
         pointer: OpaquePointer? = nil,
-        handler: @escaping () -> Any?
+        handler: @escaping () -> Any
     ) {
         connectSignal(name: name, id: id, type: type, pointer: pointer) { _ in
             handler()
@@ -158,7 +158,7 @@ extension Storage {
     ) {
         connectSignal(name: name, id: id, type: type, pointer: pointer) { args in
             handler(args)
-            return nil
+            return nil as Bool? as Any
         }
     }
 
@@ -200,7 +200,7 @@ extension Storage {
         id: String = "",
         type: SignalData.HandlerType,
         pointer: OpaquePointer? = nil,
-        handler: @escaping ([Any]) -> Any?
+        handler: @escaping ([Any]) -> Any
     ) {
         if let data = fields[name + id] as? SignalData {
             data.closure = handler

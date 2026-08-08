@@ -39,7 +39,7 @@ extension List {
         }
         if let selection {
             updateFunctions.append { storage, _, _ in
-                storage.connectSignal(name: "selected_rows_changed", id: Self.selectionField) {
+                storage.connectSignal(name: "selected_rows_changed", id: Self.selectionField, type: .noArgs) {
                     if let elements = storage.fields[Self.elementsField] as? [Element],
                        let id = getID(storage, elements),
                        selection.wrappedValue != id {

@@ -22,7 +22,6 @@ public struct TextView: AdwaitaWidget {
                     if text.wrappedValue != currentText {
                         text.wrappedValue = currentText
                     }
-                    return nil
                 }
             }
         },

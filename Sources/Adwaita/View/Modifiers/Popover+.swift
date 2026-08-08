@@ -14,7 +14,7 @@ extension Popover {
     public init(visible: Binding<Bool>) {
         self.init()
         updateFunctions.append { storage, _, _ in
-            storage.connectSignal(name: "closed", id: "visible") {
+            storage.connectSignal(name: "closed", id: "visible", type: .noArgs) {
                 if visible.wrappedValue {
                     visible.wrappedValue = false
                 }

@@ -222,7 +222,7 @@ public struct PreferencesDialog: AdwaitaWidget {
         adw_preferences_dialog_set_search_enabled(pointer?.cast(), 1)
         let dialog = ViewStorage(pointer?.opaque())
         storage.content[dialogID + id] = [dialog]
-        dialog.connectSignal(name: "closed") {
+        dialog.connectSignal(name: "closed", type: .noArgs) {
             storage.content[dialogID + id] = []
             storage.content[contentID + id] = []
             if visible {

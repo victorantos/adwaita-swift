@@ -165,7 +165,7 @@ public struct ShortcutsDialog: AdwaitaWidget {
         let pointer = adw_shortcuts_dialog_new()
         let dialog = ViewStorage(pointer?.opaque())
         storage.content[dialogID + id] = [dialog]
-        dialog.connectSignal(name: "closed") {
+        dialog.connectSignal(name: "closed", type: .noArgs) {
             storage.content[dialogID + id] = []
             storage.content[contentID + id] = []
             if visible {

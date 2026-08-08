@@ -32,7 +32,7 @@ extension NavigationView {
                 storage.opaquePointer,
                 adw_navigation_page_new(initialStorage.opaquePointer?.cast(), initialTitle)
             )
-            storage.connectSignal(name: "popped", id: "components", argCount: 1) { args in
+            storage.connectSignal(name: "popped", id: "components", type: .oneArg) { args in
                 guard var storages = storage.fields[.mainContent] as? [ViewStorage],
                 let arg = args.first as? UnsafeRawPointer else {
                     return

@@ -24,7 +24,7 @@ extension ToastOverlay {
                     if let button = storage.fields[.toastButton] as? String,
                     let handler = storage.fields[.toastHandler] as? () -> Void {
                         adw_toast_set_button_label(toast.opaquePointer, button)
-                        toast.connectSignal(name: "button-clicked", handler: handler)
+                        toast.connectSignal(name: "button-clicked", type: .noArgs, handler: handler)
                     }
                     adw_toast_overlay_add_toast(storage.opaquePointer, toast.opaquePointer)
                 }

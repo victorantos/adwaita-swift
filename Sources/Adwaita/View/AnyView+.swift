@@ -326,8 +326,7 @@ extension AnyView {
             let controller = ViewStorage(gtk_gesture_click_new())
             gtk_widget_add_controller(storage.opaquePointer?.cast(), controller.opaquePointer)
             storage.fields[.clickController] = controller
-            let argCount = 3
-            controller.connectSignal(name: "released", argCount: argCount) { args in
+            controller.connectSignal(name: "released", type: .pointerDoubleDouble) { args in
                 if let handler = storage.fields[.clickHandler] as? (Double, Double) -> Void {
                     handler(args[1] as? Double ?? 0, args[2] as? Double ?? 0)
                 }

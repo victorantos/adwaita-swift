@@ -130,7 +130,7 @@ struct AboutDialog: AdwaitaWidget {
         let pointer = adw_about_dialog_new()
         let dialog = ViewStorage(pointer?.opaque())
         storage.content[dialogID] = [dialog]
-        dialog.connectSignal(name: "closed") {
+        dialog.connectSignal(name: "closed", type: .noArgs) {
             storage.content[dialogID] = []
             if visible {
                 visible = false
