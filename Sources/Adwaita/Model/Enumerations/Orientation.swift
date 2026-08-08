@@ -18,7 +18,7 @@ public enum Orientation: String, CaseIterable {
     /// The orientation value as GtkOrientation.
     var gtkValue: GtkOrientation {
         switch self {
-        case .horiontal:
+        case .horizontal:
             .GTK_ORIENTATION_HORIZONTAL
         case .vertical:
             .GTK_ORIENTATION_VERTICAL
