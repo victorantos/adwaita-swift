@@ -2,7 +2,7 @@
 //  Entry.swift
 //  Adwaita
 //
-//  Created by auto-generation on 28.07.26.
+//  Created by auto-generation on 08.08.26.
 //
 
 import CAdw
@@ -313,7 +313,7 @@ public struct Entry: AdwaitaWidget {
             }
         }
         if let deleteText {
-            storage.connectSignal(name: "delete-text", type: .twoArgs) {
+            storage.connectSignal(name: "delete-text", type: .noArgs) {
                 deleteText()
             }
         }

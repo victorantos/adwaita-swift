@@ -5,7 +5,7 @@
 //  Created by david-swift on 25.09.23.
 //
 
-// swiftlint:disable missing_docs implicitly_unwrapped_optional
+// swiftlint:disable missing_docs implicitly_unwrapped_optional function_body_length
 
 import Adwaita
 import Foundation
@@ -37,6 +37,7 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
     case splitView
     case symbol
     case toggleGroup
+    case bottomSheet
 
     var id: Self {
         self
@@ -62,6 +63,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Split View"
         case .toggleGroup:
             return "Toggle Group"
+        case .bottomSheet:
+            return "Bottom Sheet"
         default:
             return rawValue.capitalized
         }
@@ -128,6 +131,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Display a symbolic image"
         case .toggleGroup:
             return "Select an item"
+        case .bottomSheet:
+            return "Show a bottom sheet"
         }
     }
 
@@ -185,10 +190,12 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             SymbolDemo()
         case .toggleGroup:
             ToggleGroupDemo()
+        case .bottomSheet:
+            BottomSheetDemo(app: app)
         }
     }
     // swiftlint:enable cyclomatic_complexity
 
 }
 
-// swiftlint:enable missing_docs implicitly_unwrapped_optional
+// swiftlint:enable missing_docs implicitly_unwrapped_optional function_body_length

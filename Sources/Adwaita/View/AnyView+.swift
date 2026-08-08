@@ -328,9 +328,42 @@ extension AnyView {
             storage.fields[.clickController] = controller
             let argCount = 3
             controller.connectSignal(name: "released", argCount: argCount) { args in
-                handler(args[1] as? Double ?? 0, args[2] as? Double ?? 0)
+                if let handler = storage.fields[.clickHandler] as? (Double, Double) -> Void {
+                    handler(args[1] as? Double ?? 0, args[2] as? Double ?? 0)
+                }
             }
         }
+        .inspect { storage, _, updateProperties in
+            if updateProperties {
+                storage.fields[.clickHandler] = handler
+            }
+        }
+    }
+
+    /// Overlay a bottom sheet with a bottom bar.
+    /// - Parameters:
+    ///     - title: The content.
+    ///     - visible: Whether the banner is visible.
+    public func bottomSheet(
+        @ViewBuilder sheet: () -> Body,
+        @ViewBuilder bottomBar: () -> Body
+    ) -> BottomSheet {
+        .init()
+            .content { self }
+            .sheet(sheet)
+            .bottomBar(bottomBar)
+    }
+
+    /// Overlay a bottom sheet.
+    /// - Parameters:
+    ///     - title: The content.
+    ///     - visible: Whether the banner is visible.
+    public func bottomSheet(
+        @ViewBuilder sheet: () -> Body
+    ) -> BottomSheet {
+        .init()
+            .content { self }
+            .sheet(sheet)
     }
 
 }

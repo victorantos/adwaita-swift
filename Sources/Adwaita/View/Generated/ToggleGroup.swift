@@ -2,7 +2,7 @@
 //  ToggleGroup.swift
 //  Adwaita
 //
-//  Created by auto-generation on 28.07.26.
+//  Created by auto-generation on 08.08.26.
 //
 
 import CAdw

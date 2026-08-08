@@ -174,6 +174,11 @@ struct GenerationConfiguration {
             bindings: [.init(property: "active"), .init(property: "active-name"), .init(property: "n-toggles")],
             excludeProperties: ["toggles"],
             internalInitializer: true
+        ),
+        .init(
+            class: "BottomSheet",
+            bindings: [.init(property: "open")],
+            internalInitializer: true
         )
     ]
 

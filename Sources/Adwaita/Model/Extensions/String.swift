@@ -29,6 +29,8 @@ extension String {
     public static var buffer: Self { "buffer" }
     /// A label for the ``AnyView/onClick`` controller.
     static var clickController: Self { "controller" }
+    /// A label for the ``AnyView/onClick`` handler.
+    static var clickHandler: Self { "click-handler" }
     /// A label for the breakpoint bin condition.
     static var binCondition: Self { "condition" }
     /// A label for the breakpoint bin's breakpoint.

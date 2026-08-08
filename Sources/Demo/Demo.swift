@@ -63,6 +63,12 @@ struct Demo: App {
         }
         .closeShortcut()
         .title("Navigation View Demo")
+        Window(id: "bottom-sheet", open: 0) { _ in
+            BottomSheetDemo.WindowContent()
+        }
+        .closeShortcut()
+        .defaultSize(width: 400, height: 250)
+        .title("Bottom Sheet Demo")
     }
 
     enum WindowName: String, CaseIterable, CustomStringConvertible, Identifiable {

@@ -2,7 +2,7 @@
 //  ScrolledWindow.swift
 //  Adwaita
 //
-//  Created by auto-generation on 28.07.26.
+//  Created by auto-generation on 08.08.26.
 //
 
 import CAdw
@@ -191,7 +191,7 @@ public struct ScrolledWindow: AdwaitaWidget {
             }
         }
         if let scrollChild {
-            storage.connectSignal(name: "scroll-child", type: .twoArgs) {
+            storage.connectSignal(name: "scroll-child", type: .noArgs) {
                 scrollChild()
             }
         }
