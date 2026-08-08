@@ -5,7 +5,7 @@
 //  Created by david-swift on 25.09.23.
 //
 
-// swiftlint:disable missing_docs implicitly_unwrapped_optional
+// swiftlint:disable missing_docs implicitly_unwrapped_optional function_body_length
 
 import Adwaita
 import Foundation
@@ -28,6 +28,7 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
     case passwordChecker
     case popover
     case flowBox
+    case wrapBox
     case navigationView
     case picture
     case idle
@@ -48,6 +49,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "View Switcher"
         case .flowBox:
             return "Flow Box"
+        case .wrapBox:
+            return "Wrap Box"
         case .navigationView:
             return "Navigation View"
         case .alertDialog:
@@ -110,6 +113,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             return "Present content in a bubble-like context popup"
         case .flowBox:
             return "Display views in a reflowing grid"
+        case .wrapBox:
+            return "A box-like widget that can wrap into multiple lines"
         case .navigationView:
             return "A page-based navigation container"
         case .picture:
@@ -167,6 +172,8 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
             PopoverDemo()
         case .flowBox:
             FlowBoxDemo()
+        case .wrapBox:
+            WrapBoxDemo()
         case .navigationView:
             NavigationViewDemo(app: app)
         case .picture:
@@ -191,4 +198,4 @@ enum Page: String, Identifiable, CaseIterable, Codable, CustomStringConvertible 
 
 }
 
-// swiftlint:enable missing_docs implicitly_unwrapped_optional
+// swiftlint:enable missing_docs implicitly_unwrapped_optional function_body_length

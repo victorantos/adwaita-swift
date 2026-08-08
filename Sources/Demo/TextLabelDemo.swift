@@ -5,7 +5,6 @@
 //  Created by desbeers on 06.08.26.
 //
 
-
 // swiftlint:disable missing_docs
 
 import Adwaita

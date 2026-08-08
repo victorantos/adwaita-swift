@@ -29,3 +29,11 @@ Tags:
   EnumExtensibility: closed
 - Name: GtkJustification
   EnumExtensibility: closed
+- Name: AdwJustifyMode
+  EnumExtensibility: closed
+- Name: AdwWrapPolicy
+  EnumExtensibility: closed
+- Name: AdwPackDirection
+  EnumExtensibility: closed
+- Name: AdwLengthUnit
+  EnumExtensibility: closed
