@@ -102,11 +102,12 @@ extension ToggleGroup {
             } insert: { _, element in
                 let toggle = adw_toggle_new()
                 adw_toggle_set_name(toggle, element[keyPath: label])
-                if let showLabel, !element[keyPath: showLabel] {
-                    adw_toggle_set_tooltip(toggle, element[keyPath: label])
+                let showLabel: Bool? = if let showLabel {
+                    element[keyPath: showLabel]
                 } else {
-                    adw_toggle_set_label(toggle, element[keyPath: label])
+                    nil
                 }
+                setShowLabel(showLabel, toggle: toggle, label: element[keyPath: label])
                 if let icon, let icon = element[keyPath: icon] {
                     adw_toggle_set_icon_name(toggle, icon.string)
                 }
@@ -118,8 +119,46 @@ extension ToggleGroup {
         if let selection = values.first(where: { $0[keyPath: id] == selection }) {
             adw_toggle_group_set_active_name(storage.opaquePointer, selection[keyPath: label])
         }
+        let previousShowLabel = storage.fields["previous-show-label"] as? Bool
+        if let showLabel = storage.fields["show-label"] as? Bool, showLabel != previousShowLabel {
+            for value in values {
+                guard let toggle = storage.fields[Self.toggle + value[keyPath: label]] as? OpaquePointer else {
+                    continue
+                }
+                setShowLabel(showLabel, toggle: toggle, label: value[keyPath: label])
+            }
+            storage.fields["previous-show-label"] = showLabel
+        }
     }
     // swiftlint:enable function_parameter_count
+
+    /// Set whether to show the label on a toggle.
+    /// - Parameters:
+    ///     - showLabel: Whether to show the label.
+    ///     - toggle: The toggle's pointer.
+    ///     - label: The toggle's label.
+    static func setShowLabel(_ showLabel: Bool?, toggle: OpaquePointer?, label: String) {
+        if let showLabel, !showLabel {
+            adw_toggle_set_tooltip(toggle, label)
+            adw_toggle_set_label(toggle, nil)
+        } else {
+            adw_toggle_set_label(toggle, label)
+            adw_toggle_set_tooltip(toggle, nil)
+        }
+    }
+
+    /// Overwrite the show label value added via the type.
+    /// - Parameter showLabel: Whether to show the labels.
+    /// - Returns: The toggle group.
+    public func showLabel(_ showLabel: Bool) -> Self {
+        modify { group in
+            group.updateFunctions.insert({ storage, _, updateProperties in
+                if updateProperties {
+                    storage.fields["show-label"] = showLabel
+                }
+            }, at: 0)
+        }
+    }
 
 }
 

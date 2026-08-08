@@ -19,8 +19,10 @@ struct ToggleGroupDemo: View {
             selection: $selection,
             values: Subview.allCases,
             id: \.self,
-            label: \.rawValue
+            label: \.rawValue,
+            icon: \.icon
         )
+        .showLabel(selection == .view1)
         .padding()
         VStack {
             Text(selection.rawValue)
@@ -35,6 +37,8 @@ struct ToggleGroupDemo: View {
 
         case view1 = "View 1"
         case view2 = "View 2"
+
+        var icon: Icon? { .default(icon: .listAdd) }
 
     }
 
