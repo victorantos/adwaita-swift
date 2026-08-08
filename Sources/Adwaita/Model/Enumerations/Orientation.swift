@@ -11,7 +11,7 @@ import CAdw
 public enum Orientation: String, CaseIterable {
 
     /// The element is in horizontal orientation.
-    case horiontal
+    case horizontal
     /// The element is in vertical orientation.
     case vertical
 
