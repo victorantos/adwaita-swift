@@ -295,7 +295,7 @@ extension WrapBox where Element: Identifiable, Identifier == Element.ID {
 extension WrapBox {
 
     /// The orientation of the `WrapBox`.
-    /// - Parameter orientation: Orientate horizontal or vertical.
+    /// - Parameter orientation: Set the orientation to horizontal or vertical.
     /// - Returns: A modified `WrapBox`.
     public func orientation( _ orientation: Orientation) -> WrapBox {
         var newSelf = self
