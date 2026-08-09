@@ -239,7 +239,7 @@ extension AnyView {
     /// - Parameter maxHeight: The maximum height.
     /// - Returns: A view.
     public func frame(maxHeight: Int? = nil) -> Clamp {
-        .init(vertical: true)
+        .init(orientation: .vertical)
             .child { self }
             .maximumSize(maxHeight ?? -1)
     }

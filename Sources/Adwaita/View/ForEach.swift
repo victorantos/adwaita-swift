@@ -15,14 +15,36 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     var elements: [Element]
     /// The dynamic widget content.
     var content: (Element) -> Body
-    /// Whether the list is horizontal.
-    var horizontal: Bool
+    /// The orientation of the widget.
+    var orientation: Orientation
     /// Whether the children should all be the same size.
     var homogeneous: Bool?
     /// The path to the identifier.
     var id: KeyPath<Element, Identifier>
 
+
     /// Initialize `ForEach`.
+    /// - Parameters:
+    ///   - elements: The dynamic widget elements.
+    ///   - id: The path to the identifier.
+    ///   - content: The dynamic widget content.
+    /// 
+    /// - Note: The orientation of the widget can be set with
+    ///         the `.orientation( _:)` modifier.
+    ///         The default is a vertical orientation.
+    public init(
+        _ elements: [Element],
+        id: KeyPath<Element, Identifier>,
+        @ViewBuilder content: @escaping (Element) -> Body
+    ) {
+        self.elements = elements
+        self.orientation = .vertical
+        self.content = content
+        self.id = id
+    }
+
+    /// Initialize `ForEach`.
+    @available(*, deprecated)
     public init(
         _ elements: [Element],
         id: KeyPath<Element, Identifier>,
@@ -31,7 +53,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     ) {
         self.elements = elements
         self.content = content
-        self.horizontal = horizontal
+        self.orientation = horizontal ? .horizontal : .vertical
         self.id = id
     }
 
@@ -45,7 +67,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
         type: Data.Type
     ) -> ViewStorage where Data: ViewRenderData {
         .init(
-            gtk_box_new(horizontal ? .GTK_ORIENTATION_HORIZONTAL : .GTK_ORIENTATION_VERTICAL, 0)?.opaque()
+            gtk_box_new(orientation.gtkValue, 0)?.opaque()
         )
     }
 
@@ -82,10 +104,10 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
             }
         )
         if updateProperties {
-            if (storage.previousState as? Self)?.horizontal != horizontal {
+            if (storage.previousState as? Self)?.orientation != orientation {
                 gtk_orientable_set_orientation(
                     widget?.opaque(),
-                    horizontal ? .GTK_ORIENTATION_HORIZONTAL : .GTK_ORIENTATION_VERTICAL
+                    orientation.gtkValue
                 )
             }
             if let homogeneous, (storage.previousState as? Self)?.homogeneous != homogeneous {
@@ -113,15 +135,31 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
         modify { $0.homogeneous = homogeneous }
     }
 
+    /// The orientation of the `ForEach` elements.
+    /// - Parameter orientation: Set the orientation to horizontal or vertical.
+    /// - Returns: A modified `ForEach`.
+    public func orientation( _ orientation: Orientation) -> Self {
+        modify { $0.orientation = orientation }
+    }
+
 }
 
 extension ForEach where Element: Identifiable, Identifier == Element.ID {
 
     /// Initialize `ForEach`.
+    public init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
+        self.elements = elements
+        self.orientation = .vertical
+        self.content = content
+        self.id = \.id
+    }
+
+    /// Initialize `ForEach`.
+    @available(*, deprecated)
     public init(_ elements: [Element], horizontal: Bool = false, @ViewBuilder content: @escaping (Element) -> Body) {
         self.elements = elements
         self.content = content
-        self.horizontal = horizontal
+        self.orientation = horizontal ? .horizontal : .vertical
         self.id = \.id
     }
 

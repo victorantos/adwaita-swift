@@ -10,13 +10,11 @@ import CAdw
 extension Clamp {
 
     /// Initialize either a horizontal or vertical clamp.
-    /// - Parameter vertical: Whether it is a vertical clamp.
-    public init(vertical: Bool) {
+    /// - Parameter orientation: The orientation of the clamp.
+    public init(orientation: Orientation) {
         self.init()
-        if vertical {
-            appearFunctions.append { storage, _ in
-                gtk_orientable_set_orientation(storage.opaquePointer, .GTK_ORIENTATION_VERTICAL)
-            }
+        appearFunctions.append { storage, _ in
+            gtk_orientable_set_orientation(storage.opaquePointer, orientation.gtkValue)
         }
     }
 

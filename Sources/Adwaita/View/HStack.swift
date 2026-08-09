@@ -15,7 +15,7 @@ public struct HStack: SimpleView {
 
     /// The view's body.
     public var view: Body {
-        VStack(horizontal: true, spacing: spacing, content: content)
+        Box(orientation: .horizontal, spacing: spacing, content: content)
     }
 
     /// Initialize a `HStack`.

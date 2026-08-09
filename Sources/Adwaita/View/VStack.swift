@@ -17,20 +17,18 @@ extension VStack {
     ///     - spacing: The spacing between elements.
     ///     - content: The view content.
     public init(spacing: Int = 0, @ViewBuilder content: @escaping () -> Body) {
-        self.init(horizontal: false, spacing: spacing, content: content)
+        self.init(orientation: .vertical, spacing: spacing, content: content)
     }
 
     /// Initialize a `VStack`.
     /// - Parameters:
-    ///     - horizontal: Whether the box is horizontal.
+    ///     - orientation: The orientation of the box.
     ///     - content: The view content.
-    init(horizontal: Bool, spacing: Int, @ViewBuilder content: @escaping () -> Body) {
+    init(orientation: Orientation, spacing: Int, @ViewBuilder content: @escaping () -> Body) {
         self.init(spacing: spacing)
         self = self.append(content)
-        if horizontal {
-            appearFunctions.append { storage, _ in
-                gtk_orientable_set_orientation(storage.opaquePointer, .GTK_ORIENTATION_HORIZONTAL)
-            }
+        appearFunctions.append { storage, _ in
+            gtk_orientable_set_orientation(storage.opaquePointer, orientation.gtkValue)
         }
     }
 

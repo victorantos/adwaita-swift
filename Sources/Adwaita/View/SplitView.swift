@@ -38,22 +38,22 @@ struct SplitView: AdwaitaWidget {
         pointer: OpaquePointer.self
     )
     var splitter: Binding<Int> = .constant(0)
-    /// Whether the split view is vertical.
-    var vertical: Bool
+    /// The orientation of the split view.
+    var orientation: Orientation
 
     /// Initialize a split view.
     /// - Parameters:
     ///     - splitter: The position of the splitter.
-    ///     - vertical: Whether to make the splitter vertical.
+    ///     - orientation: The orientation of the split view.
     ///     - start: The start widget.
     ///     - end: The end widget.
     init(
         splitter: Binding<Int>,
-        vertical: Bool,
+        orientation: Orientation,
         start: Body,
         end: Body
     ) {
-        self.vertical = vertical
+        self.orientation = orientation
         self.splitter = splitter
         self.start = start
         self.end = end
@@ -61,7 +61,7 @@ struct SplitView: AdwaitaWidget {
 
     /// Initialize the widget.
     func initializeWidget() -> Any {
-        gtk_paned_new(vertical ? .GTK_ORIENTATION_VERTICAL : .GTK_ORIENTATION_HORIZONTAL).opaque() as Any
+        gtk_paned_new(orientation.gtkValue).opaque() as Any
     }
 
 }
@@ -78,7 +78,7 @@ public struct HSplitView: SimpleView {
 
     /// The view.
     public var view: Body {
-        SplitView(splitter: $splitter, vertical: false, start: start, end: end)
+        SplitView(splitter: $splitter, orientation: .horizontal, start: start, end: end)
     }
 
     /// Initialize a horizontal split view.
@@ -110,7 +110,7 @@ public struct VSplitView: SimpleView {
 
     /// The view.
     public var view: Body {
-        SplitView(splitter: $splitter, vertical: true, start: start, end: end)
+        SplitView(splitter: $splitter, orientation: .vertical, start: start, end: end)
     }
 
     /// Initialize a vertical split view.
