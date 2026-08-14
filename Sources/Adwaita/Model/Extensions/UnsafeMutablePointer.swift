@@ -16,8 +16,7 @@ extension UnsafeMutablePointer {
     /// Convert into an unsafe mutable pointer of another type.
     /// - Returns: The unsafe mutable pointer.
     public func cast<T>() -> UnsafeMutablePointer<T> {
-        let pointer = UnsafeMutableRawPointer(self).bindMemory(to: T.self, capacity: 1)
-        return UnsafeMutablePointer<T>(mutating: pointer)
+        UnsafeMutableRawPointer(self).assumingMemoryBound(to: T.self)
     }
 
 }
