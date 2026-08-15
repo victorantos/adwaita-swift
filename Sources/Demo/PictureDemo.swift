@@ -27,14 +27,23 @@ struct PictureDemo: View {
     var view: Body {
         Picture()
             .data(data)
-        Button("Import") {
+        Button("Open") {
             fileDialog.signal()
         }
         .halign(.center)
         .pill()
         .suggested()
         .padding()
-        .fileImporter(open: $fileDialog, extensions: ["jpg", "jpeg", "png", "svg"]) { url = $0 } onClose: { }
+        .fileImporter(
+            open: $fileDialog,
+            initialFolder: FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask).first,
+            filters: [
+                .extensions(["jpg", "jpeg"], name: "JPG Images"),
+                .mimeType("image/*", name: "All Images")
+            ],
+            title: "Pick an Image",
+            acceptLabel: "Open Image"
+        ) { url = $0 } onClose: { }
     }
 
 }
