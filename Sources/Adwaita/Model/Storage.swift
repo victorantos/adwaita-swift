@@ -15,8 +15,6 @@ public protocol Storage: AnyObject {
 
 }
 
-// swiftlint:disable function_default_parameter_at_end
-
 extension Storage {
 
     /// Connect a handler to the observer of a property.
@@ -40,35 +38,13 @@ extension Storage {
     ///     - name: The signal's name.
     ///     - id: The handlers id to separate form others connecting to the signal.
     ///     - connectFlags: The GConnectFlags.
-    ///     - argCount: The number of additional arguments (without the first and the last one).
-    ///     - pointer: A custom pointer instead of the stored one.
-    ///     - handler: The signal's handler.
-    @available(*, deprecated)
-    public func connectSignal(
-        name: String,
-        id: String = "",
-        argCount: Int = 0,
-        pointer: OpaquePointer? = nil,
-        handler: @escaping () -> Void
-    ) {
-        connectSignal(name: name, id: id, argCount: argCount, pointer: pointer) {
-            handler()
-            return nil
-        }
-    }
-
-    /// Connect a handler to a signal.
-    /// - Parameters:
-    ///     - name: The signal's name.
-    ///     - id: The handlers id to separate form others connecting to the signal.
-    ///     - connectFlags: The GConnectFlags.
     ///     - type: The handler type.
     ///     - pointer: A custom pointer instead of the stored one.
     ///     - handler: The signal's handler.
     public func connectSignal(
         name: String,
         id: String = "",
-        type: SignalData.HandlerType,
+        type: SignalData.HandlerType = .noArgs,
         pointer: OpaquePointer? = nil,
         handler: @escaping () -> Void
     ) {
@@ -83,62 +59,18 @@ extension Storage {
     ///     - name: The signal's name.
     ///     - id: The handlers id to separate form others connecting to the signal.
     ///     - connectFlags: The GConnectFlags.
-    ///     - argCount: The number of additional arguments (without the first and the last one).
-    ///     - return: The return type.
-    ///     - pointer: A custom pointer instead of the stored one.
-    ///     - handler: The signal's handler.
-    @available(*, deprecated)
-    public func connectSignal(
-        name: String,
-        id: String = "",
-        argCount: Int = 0,
-        return: SignalData.ReturnType? = nil,
-        pointer: OpaquePointer? = nil,
-        handler: @escaping () -> Any?
-    ) {
-        connectSignal(name: name, id: id, argCount: argCount, return: `return`, pointer: pointer) { _ in
-            handler()
-        }
-    }
-
-    /// Connect a handler to a signal.
-    /// - Parameters:
-    ///     - name: The signal's name.
-    ///     - id: The handlers id to separate form others connecting to the signal.
-    ///     - connectFlags: The GConnectFlags.
     ///     - type: The handler type.
     ///     - pointer: A custom pointer instead of the stored one.
     ///     - handler: The signal's handler.
     public func connectSignal(
         name: String,
         id: String = "",
-        type: SignalData.HandlerType,
+        type: SignalData.HandlerType = .noArgs,
         pointer: OpaquePointer? = nil,
         handler: @escaping () -> Any
     ) {
         connectSignal(name: name, id: id, type: type, pointer: pointer) { _ in
             handler()
-        }
-    }
-
-    /// Connect a handler to a signal.
-    /// - Parameters:
-    ///     - name: The signal's name.
-    ///     - id: The handlers id to separate form others connecting to the signal.
-    ///     - argCount: The number of additional arguments (without the first and the last one).
-    ///     - pointer: A custom pointer instead of the stored one.
-    ///     - handler: The signal's handler.
-    @available(*, deprecated)
-    public func connectSignal(
-        name: String,
-        id: String = "",
-        argCount: Int = 0,
-        pointer: OpaquePointer? = nil,
-        handler: @escaping ([Any]) -> Void
-    ) {
-        connectSignal(name: name, id: id, argCount: argCount, pointer: pointer) { args in
-            handler(args)
-            return nil
         }
     }
 
@@ -152,7 +84,7 @@ extension Storage {
     public func connectSignal(
         name: String,
         id: String = "",
-        type: SignalData.HandlerType,
+        type: SignalData.HandlerType = .noArgs,
         pointer: OpaquePointer? = nil,
         handler: @escaping ([Any]) -> Void
     ) {
@@ -166,39 +98,13 @@ extension Storage {
     /// - Parameters:
     ///     - name: The signal's name.
     ///     - id: The handlers id to separate form others connecting to the signal.
-    ///     - argCount: The number of additional arguments (without the first and the last one).
-    ///     - return: The return type.
-    ///     - pointer: A custom pointer instead of the stored one.
-    ///     - handler: The signal's handler.
-    @available(*, deprecated)
-    public func connectSignal(
-        name: String,
-        id: String = "",
-        argCount: Int = 0,
-        return: SignalData.ReturnType? = nil,
-        pointer: OpaquePointer? = nil,
-        handler: @escaping ([Any]) -> Any?
-    ) {
-        connectSignal(
-            name: name,
-            id: id,
-            type: .init(argCount: argCount, return: `return`),
-            pointer: pointer,
-            handler: handler
-        )
-    }
-
-    /// Connect a handler to a signal.
-    /// - Parameters:
-    ///     - name: The signal's name.
-    ///     - id: The handlers id to separate form others connecting to the signal.
     ///     - type: The type of the handler.
     ///     - pointer: A custom pointer instead of the stored one.
     ///     - handler: The signal's handler.
     public func connectSignal(
         name: String,
         id: String = "",
-        type: SignalData.HandlerType,
+        type: SignalData.HandlerType = .noArgs,
         pointer: OpaquePointer? = nil,
         handler: @escaping ([Any]) -> Any
     ) {
@@ -218,8 +124,6 @@ extension Storage {
     }
 
 }
-
-// swiftlint:enable function_default_parameter_at_end
 
 extension ViewStorage: Storage { }
 extension SceneStorage: Storage { }

@@ -155,57 +155,12 @@ public class SignalData {
             }
         }
 
-        /// Initialize from the deprecated argCount and return type concept.
-        /// Available for compatibility.
-        @available(*, deprecated)
-        init(argCount: Int, return: ReturnType?) {
-            self = if `return` == .bool {
-                .noArgsReturnsBool
-            } else {
-                switch argCount {
-                case 0:
-                    .noArgs
-                case 1:
-                    .oneArg
-                case 2:
-                    .twoArgs
-                default:
-                    .pointerDoubleDouble
-                }
-            }
-        }
-
         /// Cast the pointer to the signal data.
         /// - Returns: The signal data.
         static func cast(_ data: UnsafeMutableRawPointer) -> SignalData {
             unsafeBitCast(data, to: SignalData.self)
         }
 
-    }
-
-    /// The return type.
-    @available(*, deprecated)
-    public enum ReturnType {
-
-        /// Returns a boolean.
-        case bool
-
-    }
-
-    /// Connect the signal data to a signal.
-    /// - Parameters:
-    ///     - pointer: The pointer to the object which holds the signal.
-    ///     - signal: The signal's name.
-    ///     - argCount: The number of arguments.
-    ///     - return: The return type.
-    @available(*, deprecated)
-    public func connect(
-        pointer: UnsafeMutableRawPointer?,
-        signal: String,
-        argCount: Int = 0,
-        return: ReturnType? = nil
-    ) {
-        connect(pointer: pointer, signal: signal, type: .init(argCount: argCount, return: `return`))
     }
 
     /// Connect the signal data to a signal.

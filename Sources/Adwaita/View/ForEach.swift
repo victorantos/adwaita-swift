@@ -22,7 +22,6 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// The path to the identifier.
     var id: KeyPath<Element, Identifier>
 
-
     /// Initialize `ForEach`.
     /// - Parameters:
     ///   - elements: The dynamic widget elements.
@@ -40,20 +39,6 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
         self.elements = elements
         self.orientation = .vertical
         self.content = content
-        self.id = id
-    }
-
-    /// Initialize `ForEach`.
-    @available(*, deprecated)
-    public init(
-        _ elements: [Element],
-        id: KeyPath<Element, Identifier>,
-        horizontal: Bool = false,
-        @ViewBuilder content: @escaping (Element) -> Body
-    ) {
-        self.elements = elements
-        self.content = content
-        self.orientation = horizontal ? .horizontal : .vertical
         self.id = id
     }
 
@@ -151,15 +136,6 @@ extension ForEach where Element: Identifiable, Identifier == Element.ID {
         self.elements = elements
         self.orientation = .vertical
         self.content = content
-        self.id = \.id
-    }
-
-    /// Initialize `ForEach`.
-    @available(*, deprecated)
-    public init(_ elements: [Element], horizontal: Bool = false, @ViewBuilder content: @escaping (Element) -> Body) {
-        self.elements = elements
-        self.content = content
-        self.orientation = horizontal ? .horizontal : .vertical
         self.id = \.id
     }
 
