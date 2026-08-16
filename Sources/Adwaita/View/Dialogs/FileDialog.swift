@@ -19,6 +19,10 @@ struct FileDialog: AdwaitaWidget {
     var child: AnyView
     /// The initial folder.
     var initialFolder: URL?
+    /// The title of the dialog.
+    var title: String?
+    /// The label shown on the accept button.
+    var acceptLabel: String?
     /// The closure to run when the import or export is successful.
     var result: (URL) -> Void
     /// The closure to run when the import or export is not successful.
@@ -32,6 +36,8 @@ struct FileDialog: AdwaitaWidget {
     ///     - result: Run when the import or export succeeds.
     ///     - cancel: Run when the import or export is not successful.
     ///     - initialFolder: The initial folder.
+    ///     - title: The title of the dialog.
+    ///     - acceptLabel: The label shown on the accept button.
     init(
         type: DialogType,
         `open`: Binding<Signal>,
@@ -39,6 +45,8 @@ struct FileDialog: AdwaitaWidget {
         result: @escaping (URL) -> Void,
         cancel: @escaping () -> Void,
         initialFolder: URL? = nil,
+        title: String? = nil,
+        acceptLabel: String? = nil
     ) {
         self.type = type
         self.open = open
@@ -46,13 +54,15 @@ struct FileDialog: AdwaitaWidget {
         self.result = result
         self.cancel = cancel
         self.initialFolder = initialFolder
+        self.title = title
+        self.acceptLabel = acceptLabel
     }
 
     /// The different types of dialogs and their properties.
     enum DialogType {
 
         /// An importer dialog.
-        case importer(folder: Bool, extensions: [String]?)
+        case importer(folder: Bool, filters: [FileDialogFilter]?)
         /// An exporter dialog.
         case exporter(initialName: String?)
 
@@ -66,11 +76,11 @@ struct FileDialog: AdwaitaWidget {
             }
         }
 
-        /// The supported extensions.
-        var extensions: [String]? {
+        /// The optional file filters
+        var filters: [FileDialogFilter]? {
             switch self {
-            case let .importer(folder: _, extensions: extensions):
-                extensions
+            case let .importer(folder: _, filters: filters):
+                filters
             default:
                 nil
             }
@@ -79,7 +89,7 @@ struct FileDialog: AdwaitaWidget {
         /// Whether to import folders.
         var folder: Bool {
             switch self {
-            case let .importer(folder: folder, extensions: _):
+            case let .importer(folder: folder, filters: _):
                 folder
             default:
                 false
@@ -144,20 +154,40 @@ struct FileDialog: AdwaitaWidget {
         if let initialName = self.type.initialName {
             gtk_file_dialog_set_initial_name(pointer, initialName)
         }
-        if let extensions = self.type.extensions {
-            let filter = gtk_file_filter_new()
-            for name in extensions {
-                gtk_file_filter_add_suffix(filter, name)
+        if let filters = self.type.filters {
+            let filterStore: OpaquePointer? = g_list_store_new(gtk_file_filter_get_type())
+            for filter in filters {
+                let fileFilter = gtk_file_filter_new()
+                switch filter {
+                case let .extensions(extensions, name):
+                    for fileExtension in extensions {
+                        gtk_file_filter_add_suffix(fileFilter, fileExtension)
+                    }
+                    if let name {
+                        gtk_file_filter_set_name(fileFilter, name)
+                    }
+                case let .mimeType(mimeType, name):
+                    gtk_file_filter_add_mime_type(fileFilter, mimeType)
+                    if let name {
+                        gtk_file_filter_set_name(fileFilter, name)
+                    }
+                }
+                g_list_store_append(filterStore, fileFilter?.cast())
+                unref.append(fileFilter)
             }
-            gtk_file_dialog_set_default_filter(pointer, filter)
-            unref.append(filter)
-        } else {
-            gtk_file_dialog_set_default_filter(pointer, nil)
+            gtk_file_dialog_set_filters(pointer, filterStore)
+            unref.append(filterStore)
         }
         if let initialFolder {
-            let file = g_file_new_for_path(initialFolder.absoluteString)
+            let file = g_file_new_for_path(initialFolder.path)
             gtk_file_dialog_set_initial_folder(pointer, file)
             unref.append(file)
+        }
+        if let title {
+            gtk_file_dialog_set_title(pointer, title)
+        }
+        if let acceptLabel {
+            gtk_file_dialog_set_accept_label(pointer, acceptLabel)
         }
         let callbacks = AdwaitaFileDialog()
         let unrefClosure = {
@@ -182,6 +212,14 @@ struct FileDialog: AdwaitaWidget {
         }
     }
 
+}
+
+/// Filter options for the file dialog 
+public enum FileDialogFilter {
+    /// Filter by file extensions
+    case extensions([String], name: String? = nil)
+    /// Filter by mime type
+    case mimeType(String, name: String? = nil)
 }
 
 /// An Adwaita file dialog window callback.

@@ -148,23 +148,29 @@ extension AnyView {
     /// - Parameters:
     ///     - open: The signal to open the dialog.
     ///     - initialFolder: The URL to the folder open when being opened.
-    ///     - extensions: The accepted file extensions.
+    ///     - filters: Optional file filters.
+    ///     - title: The title of the dialog.
+    ///     - acceptLabel: The label shown on the accept button.
     ///     - onOpen: Run this when a file for importing has been chosen.
     ///     - onClose: Run this when the user cancelled the action.
     public func fileImporter(
         open: Binding<Signal>,
         initialFolder: URL? = nil,
-        extensions: [String]? = nil,
+        filters: [FileDialogFilter]? = nil,
+        title: String? = nil,
+        acceptLabel: String? = nil,
         onOpen: @escaping (URL) -> Void,
         onClose: @escaping () -> Void = { }
     ) -> AnyView {
         FileDialog(
-            type: .importer(folder: false, extensions: extensions),
+            type: .importer(folder: false, filters: filters),
             open: open,
             child: self,
             result: onOpen,
             cancel: onClose,
-            initialFolder: initialFolder
+            initialFolder: initialFolder,
+            title: title,
+            acceptLabel: acceptLabel
         )
     }
 
@@ -172,21 +178,27 @@ extension AnyView {
     /// - Parameters:
     ///     - open: The signal to open the dialog.
     ///     - initialFolder: The URL to the folder open when being opened.
+    ///     - title: The title of the dialog.
+    ///     - acceptLabel: The label shown on the accept button.
     ///     - onOpen: Run this when a file for importing has been chosen.
     ///     - onClose: Run this when the user cancelled the action.
     public func folderImporter(
         open: Binding<Signal>,
         initialFolder: URL? = nil,
+        title: String? = nil,
+        acceptLabel: String? = nil,
         onOpen: @escaping (URL) -> Void,
         onClose: @escaping () -> Void = { }
     ) -> AnyView {
         FileDialog(
-            type: .importer(folder: true, extensions: nil),
+            type: .importer(folder: true, filters: nil),
             open: open,
             child: self,
             result: onOpen,
             cancel: onClose,
-            initialFolder: initialFolder
+            initialFolder: initialFolder,
+            title: title,
+            acceptLabel: acceptLabel
         )
     }
 
@@ -195,12 +207,16 @@ extension AnyView {
     ///     - exporter: The signal to open the dialog.
     ///     - initialFolder: The URL to the folder open when being opened.
     ///     - initialName: The default file name.
+    ///     - title: The title of the dialog.
+    ///     - acceptLabel: The label shown on the accept button.
     ///     - onSave: Run this when a path for exporting has been chosen.
     ///     - onClose: Run this when the user cancelled the action.
     public func fileExporter(
         open: Binding<Signal>,
         initialFolder: URL? = nil,
         initialName: String? = nil,
+        title: String? = nil,
+        acceptLabel: String? = nil,
         onSave: @escaping (URL) -> Void,
         onClose: @escaping () -> Void = { }
     ) -> AnyView {
@@ -210,7 +226,9 @@ extension AnyView {
             child: self,
             result: onSave,
             cancel: onClose,
-            initialFolder: initialFolder
+            initialFolder: initialFolder,
+            title: title,
+            acceptLabel: acceptLabel
         )
     }
 
