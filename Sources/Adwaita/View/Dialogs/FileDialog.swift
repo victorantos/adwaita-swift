@@ -155,28 +155,7 @@ struct FileDialog: AdwaitaWidget {
             gtk_file_dialog_set_initial_name(pointer, initialName)
         }
         if let filters = self.type.filters {
-            let filterStore: OpaquePointer? = g_list_store_new(gtk_file_filter_get_type())
-            for filter in filters {
-                let fileFilter = gtk_file_filter_new()
-                switch filter {
-                case let .extensions(extensions, name):
-                    for fileExtension in extensions {
-                        gtk_file_filter_add_suffix(fileFilter, fileExtension)
-                    }
-                    if let name {
-                        gtk_file_filter_set_name(fileFilter, name)
-                    }
-                case let .mimeType(mimeType, name):
-                    gtk_file_filter_add_mime_type(fileFilter, mimeType)
-                    if let name {
-                        gtk_file_filter_set_name(fileFilter, name)
-                    }
-                }
-                g_list_store_append(filterStore, fileFilter?.cast())
-                unref.append(fileFilter)
-            }
-            gtk_file_dialog_set_filters(pointer, filterStore)
-            unref.append(filterStore)
+            setFilters(pointer, filters: filters, unref: &unref)
         }
         if let initialFolder {
             let file = g_file_new_for_path(initialFolder.path)
@@ -211,6 +190,36 @@ struct FileDialog: AdwaitaWidget {
             gtui_filedialog_save(pointer, data, window)
         }
     }
+
+    /// Assign the filters to the dialog.
+    /// - Parameters:
+    ///     - dialog: The file dialog.
+    ///     - filters: The filters.
+    ///     - unref: A list storing the objects to g_object_unref.
+    func setFilters(_ dialog: OpaquePointer?, filters: [FileDialogFilter], unref: inout [OpaquePointer?]) {
+        let filterStore: OpaquePointer? = g_list_store_new(gtk_file_filter_get_type())
+        for filter in filters {
+            let fileFilter = gtk_file_filter_new()
+            switch filter {
+            case let .extensions(extensions, name):
+                for fileExtension in extensions {
+                    gtk_file_filter_add_suffix(fileFilter, fileExtension)
+                }
+                if let name {
+                    gtk_file_filter_set_name(fileFilter, name)
+                }
+            case let .mimeType(mimeType, name):
+                gtk_file_filter_add_mime_type(fileFilter, mimeType)
+                if let name {
+                    gtk_file_filter_set_name(fileFilter, name)
+                }
+            }
+            g_list_store_append(filterStore, fileFilter?.cast())
+            unref.append(fileFilter)
+        }
+        gtk_file_dialog_set_filters(dialog, filterStore)
+        unref.append(filterStore)
+}
 
 }
 
