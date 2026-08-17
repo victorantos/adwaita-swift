@@ -17,16 +17,16 @@ extension AnyView {
     ///     - developer: The developer's name.
     ///     - version: The version string.
     ///     - icon: The app icon.
-    ///     - website: The app's website.
-    ///     - issues: Website for reporting issues.
+    ///     - details: Details of the app.
+    ///     - links: Links.
     public func aboutDialog(
         visible: Binding<Bool>,
         app: String? = nil,
         developer: String? = nil,
         version: String? = nil,
         icon: Icon? = nil,
-        website: URL? = nil,
-        issues: URL? = nil
+        details: [AboutDialogDetail]? = nil,
+        links: [AboutDialogLink]? = nil
     ) -> AnyView {
         AboutDialog(
             visible: visible,
@@ -35,8 +35,8 @@ extension AnyView {
             developer: developer,
             version: version,
             icon: icon,
-            website: website,
-            issues: issues
+            details: details,
+            links: links
         )
     }
 
