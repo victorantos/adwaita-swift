@@ -160,10 +160,44 @@ struct Demo: App {
                 visible: $about,
                 app: "Demo",
                 developer: "david-swift",
-                version: "Test",
+                version: "3.14159",
                 icon: .default(icon: .applicationXExecutable),
-                website: .init(string: "https://adwaita-swift.aparoksha.dev/"),
-                issues: .init(string: "https://git.aparoksha.dev/aparoksha/adwaita-swift/issues")
+                details: [
+                    // swiftlint:disable:next line_length
+                    .comment("<a href=\"https://adwaita-swift.aparoksha.dev/\">Adwaita for Swift</a> is a framework for creating user interfaces for GNOME with an API similar to SwiftUI."),
+                    .copyright("© 2026"),
+                    .developers(["david-swift"]),
+                    .designers(["Antoni Gaudí"]),
+                    .artists(["Vincent van Gogh"]),
+                    .documenters(["William Shakespeare"]),
+                    .translators(["Tower of Babel"]),
+                    .creditSection(
+                        [
+                            "GTK https://gtk.org/",
+                            "libadwaita https://gnome.pages.gitlab.gnome.org/libadwaita/",
+                            "Swift https://swift.org"
+                        ],
+                        label: "Built with"
+                    ),
+                    .acknowledgementSection(
+                        [
+                            "GNOME https://www.gnome.org/",
+                            "Swift Community https://www.swift.org/community/"
+                        ],
+                        label: "Thanks to"
+                    ),
+                    .licenseType(.mitX11),
+                    .debugInfo("\(Date.now.formatted())\n\nThis application has no bugs."),
+                    .debugInfoFilename("Debug Sample.txt"),
+                    .releaseNotes("<p>Another great release!</p>"),
+                    .releaseNotesVersion("π")
+                ],
+                links: [
+                    .website(URL(string: "https://adwaita-swift.aparoksha.dev/")),
+                    .support(URL(string: "https://forums.aparoksha.dev/")),
+                    .issues(URL(string: "https://codeberg.org/aparoksha/adwaita-swift/issues")),
+                    .add(URL(string: "https://swift.org"), title: "Swift")
+                ]
             )
             .preferencesDialog(visible: $preferences)
             .preferencesPage("Page 1", icon: .default(icon: .audioHeadset)) { page in

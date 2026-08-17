@@ -26,3 +26,22 @@ extension Array where Element == String {
     }
 
 }
+
+extension Array where Element == String {
+
+    /// Use the C version of the array.
+    func withCArray<Result>(
+        _ body: (UnsafeMutablePointer<UnsafePointer<CChar>?>?) throws -> Result
+    ) rethrows -> Result {
+        let cStrings = map(\.utf8CString)
+        var pointers: [UnsafePointer<CChar>?] = cStrings.map { array in
+            array.withUnsafeBufferPointer { pointer in
+                pointer.baseAddress
+            }
+        }
+        pointers.append(nil)
+        return try pointers.withUnsafeMutableBufferPointer { buffer in
+            try body(buffer.baseAddress)
+        }
+    }
+}

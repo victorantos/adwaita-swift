@@ -24,10 +24,10 @@ struct AboutDialog: AdwaitaWidget {
     var version: String?
     /// The app icon.
     var icon: Icon?
-    /// The app's website.
-    var website: URL?
-    /// The link for opening issues.
-    var issues: URL?
+    /// Details.
+    var details: [AboutDialogDetail]?
+    /// Links.
+    var links: [AboutDialogLink]?
 
     /// The ID for the dialog's storage.
     let dialogID = "dialog"
@@ -40,8 +40,8 @@ struct AboutDialog: AdwaitaWidget {
     ///     - developer: The developer's name.
     ///     - version: The version.
     ///     - icon: The icon.
-    ///     - website: The website's URL.
-    ///     - issues: The link for opening issues.
+    ///     - details: Details of the app.
+    ///     - links: Links.
     init(
         visible: Binding<Bool>,
         child: AnyView,
@@ -49,8 +49,8 @@ struct AboutDialog: AdwaitaWidget {
         developer: String? = nil,
         version: String? = nil,
         icon: Icon? = nil,
-        website: URL? = nil,
-        issues: URL? = nil
+        details: [AboutDialogDetail]? = nil,
+        links: [AboutDialogLink]? = nil
     ) {
         self._visible = visible
         self.child = child
@@ -58,8 +58,8 @@ struct AboutDialog: AdwaitaWidget {
         self.developer = developer
         self.version = version
         self.icon = icon
-        self.website = website
-        self.issues = issues
+        self.details = details
+        self.links = links
     }
 
     /// The view storage.
@@ -108,11 +108,11 @@ struct AboutDialog: AdwaitaWidget {
             if let icon {
                 adw_about_dialog_set_application_icon(dialog, icon.string)
             }
-            if let website {
-                adw_about_dialog_set_website(dialog, website.absoluteString)
+            if let links {
+                setLinks(dialog, links: links)
             }
-            if let issues {
-                adw_about_dialog_set_issue_url(dialog, issues.absoluteString)
+            if let details {
+                setDetails(dialog, details: details)
             }
             adw_dialog_set_content_height(dialog?.cast(), -1)
         } else {
@@ -120,6 +120,78 @@ struct AboutDialog: AdwaitaWidget {
                 let dialog = storage.content[dialogID]?.first?.opaquePointer
                 adw_dialog_close(dialog?.cast())
                 storage.content[dialogID] = []
+            }
+        }
+    }
+
+    /// Assign the links to the dialog.
+    /// - Parameters:
+    ///     - dialog: The about dialog.
+    ///     - links: The links.
+    func setLinks(_ dialog: OpaquePointer?, links: [AboutDialogLink]) {
+        for link in links {
+            switch link {
+            case let .website(url):
+                adw_about_dialog_set_website(dialog, url?.absoluteString)
+            case let .support(url):
+                adw_about_dialog_set_support_url(dialog, url?.absoluteString)
+            case let .issues(url):
+                adw_about_dialog_set_issue_url(dialog, url?.absoluteString)
+            case let .add(url, title):
+                adw_about_dialog_add_link(dialog, title, url?.absoluteString)
+            }
+        }
+    }
+
+    /// Assign the details to the dialog.
+    /// - Parameters:
+    ///     - dialog: The about dialog.
+    ///     - details: The details.
+    func setDetails(_ dialog: OpaquePointer?, details: [AboutDialogDetail]) {
+        for detail in details {
+            switch detail {
+            case let .comment(text):
+                adw_about_dialog_set_comments(dialog, text)
+            case let .copyright(text):
+                adw_about_dialog_set_copyright(dialog, text)
+            case let .developers(names):
+                names.withCArray { names in
+                    adw_about_dialog_set_developers(dialog, names)
+                }
+            case let .designers(names):
+                names.withCArray { names in
+                    adw_about_dialog_set_designers(dialog, names)
+                }
+            case let .artists(names):
+                names.withCArray { names in
+                    adw_about_dialog_set_artists(dialog, names)
+                }
+            case let .documenters(names):
+                names.withCArray { names in
+                    adw_about_dialog_set_documenters(dialog, names)
+                }
+            case let .translators(names):
+                adw_about_dialog_set_translator_credits(dialog, names.joined(separator: "\n"))
+            case let .creditSection(items, label):
+                items.withCArray { items in
+                    adw_about_dialog_add_credit_section(dialog, label, items)
+                }
+            case let .acknowledgementSection(items, label):
+                items.withCArray { items in
+                    adw_about_dialog_add_acknowledgement_section(dialog, label, items)
+                }
+            case let .licenseType(type):
+                adw_about_dialog_set_license_type(dialog, type.gtkValue)
+            case let .license(text):
+                adw_about_dialog_set_license(dialog, text)
+            case let .debugInfo(text):
+                adw_about_dialog_set_debug_info(dialog, text)
+            case let .debugInfoFilename(text):
+                adw_about_dialog_set_debug_info_filename(dialog, text)
+            case let .releaseNotes(text):
+                adw_about_dialog_set_release_notes(dialog, text)
+            case let .releaseNotesVersion(text):
+                adw_about_dialog_set_release_notes_version(dialog, text)
             }
         }
     }
@@ -137,5 +209,73 @@ struct AboutDialog: AdwaitaWidget {
             }
         }
     }
+
+}
+
+/// Links to show in the About Dialog.
+public enum AboutDialogLink {
+
+    /// The application website.
+    case website(URL?)
+    /// Support questions.
+    case support(URL?)
+    /// Issue reporting.
+    case issues(URL?)
+    /// Any link with a title.
+    case add(URL?, title: String)
+
+}
+
+/// Details to show in the About Dialog.
+public enum AboutDialogDetail {
+
+    /// A comment about the application.
+    /// - Note: The comment will be shown on the Details page, above links.
+    case comment(String)
+    /// The copyright information.
+    /// - Note: The copyright information will be displayed on the Legal page, above the application license.
+    case copyright(String)
+    /// The list of developers of the application.
+    /// - Note: It will be displayed on the Credits page.
+    case developers([String])
+    /// The list of designers of the application.
+    /// - Note: It will be displayed on the Credits page.
+    case designers([String])
+    /// The list of artists of the application.
+    /// - Note: It will be displayed on the Credits page.
+    case artists([String])
+    /// The list of documenters of the application.
+    /// - Note: It will be displayed on the Credits page.
+    case documenters([String])
+    ///  The list of translators of the application.
+    /// - Note: It will be displayed on the Credits page.
+    case translators([String])
+    /// An extra section to the Credits page.
+    /// - Note: Extra sections are displayed below the standard categories.
+    case creditSection([String], label: String)
+    /// Add a section to the acknowledgements page
+    case acknowledgementSection([String], label: String)
+    /// The license type from a list of known licenses.
+    /// - Note: The license description will be displayed on the Legal page, below the copyright information.
+    case licenseType(License)
+    /// A custom text for the license if it can’t be set from the list of known licenses.
+    /// - Note: The license text will be displayed on the Legal page, below the copyright information.
+    case license(String)
+    /// The debug information for the application.
+    /// - Note: Debug information will be shown on the Troubleshooting page.
+    case debugInfo(String)
+    /// The debug information filename.
+    /// - Note: It will be used as the suggested filename when saving debug information to a file.
+    case debugInfoFilename(String)
+    /// The release notes of the application.
+    /// - Note: Release notes are displayed on the the What’s New page.
+    case releaseNotes(String)
+    /// Set the version described by the application’s release notes.
+    ///
+    /// If not set, AdwAboutDialog:version will be used instead.
+    ///
+    /// For example, an application with the current version 2.0.2 might want to keep
+    /// the release notes from 2.0.0, and set the release notes version accordingly.
+    case releaseNotesVersion(String)
 
 }
