@@ -143,6 +143,7 @@ struct AboutDialog: AdwaitaWidget {
         }
     }
 
+    // swiftlint:disable cyclomatic_complexity
     /// Assign the details to the dialog.
     /// - Parameters:
     ///     - dialog: The about dialog.
@@ -195,6 +196,7 @@ struct AboutDialog: AdwaitaWidget {
             }
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 
     /// Create a new instance of the dialog.
     /// - Parameter storage: The wrapped view's storage.
@@ -216,11 +218,11 @@ struct AboutDialog: AdwaitaWidget {
 public enum AboutDialogLink {
 
     /// The application website.
-    case website(URL?)
+    case website(_: URL?)
     /// Support questions.
-    case support(URL?)
+    case support(_: URL?)
     /// Issue reporting.
-    case issues(URL?)
+    case issues(_: URL?)
     /// Any link with a title.
     case add(URL?, title: String)
 
@@ -231,51 +233,51 @@ public enum AboutDialogDetail {
 
     /// A comment about the application.
     /// - Note: The comment will be shown on the Details page, above links.
-    case comment(String)
+    case comment(_: String)
     /// The copyright information.
     /// - Note: The copyright information will be displayed on the Legal page, above the application license.
-    case copyright(String)
+    case copyright(_: String)
     /// The list of developers of the application.
     /// - Note: It will be displayed on the Credits page.
-    case developers([String])
+    case developers(_: [String])
     /// The list of designers of the application.
     /// - Note: It will be displayed on the Credits page.
-    case designers([String])
+    case designers(_: [String])
     /// The list of artists of the application.
     /// - Note: It will be displayed on the Credits page.
-    case artists([String])
+    case artists(_: [String])
     /// The list of documenters of the application.
     /// - Note: It will be displayed on the Credits page.
-    case documenters([String])
+    case documenters(_: [String])
     ///  The list of translators of the application.
     /// - Note: It will be displayed on the Credits page.
-    case translators([String])
+    case translators(_: [String])
     /// An extra section to the Credits page.
     /// - Note: Extra sections are displayed below the standard categories.
-    case creditSection([String], label: String)
+    case creditSection(_: [String], label: String)
     /// Add a section to the acknowledgements page
-    case acknowledgementSection([String], label: String)
+    case acknowledgementSection(_: [String], label: String)
     /// The license type from a list of known licenses.
     /// - Note: The license description will be displayed on the Legal page, below the copyright information.
-    case licenseType(License)
+    case licenseType(_: License)
     /// A custom text for the license if it can’t be set from the list of known licenses.
     /// - Note: The license text will be displayed on the Legal page, below the copyright information.
-    case license(String)
+    case license(_: String)
     /// The debug information for the application.
     /// - Note: Debug information will be shown on the Troubleshooting page.
-    case debugInfo(String)
+    case debugInfo(_: String)
     /// The debug information filename.
     /// - Note: It will be used as the suggested filename when saving debug information to a file.
-    case debugInfoFilename(String)
+    case debugInfoFilename(_: String)
     /// The release notes of the application.
     /// - Note: Release notes are displayed on the the What’s New page.
-    case releaseNotes(String)
+    case releaseNotes(_: String)
     /// Set the version described by the application’s release notes.
     ///
     /// If not set, AdwAboutDialog:version will be used instead.
     ///
     /// For example, an application with the current version 2.0.2 might want to keep
     /// the release notes from 2.0.0, and set the release notes version accordingly.
-    case releaseNotesVersion(String)
+    case releaseNotesVersion(_: String)
 
 }
