@@ -16,17 +16,10 @@ struct PictureDemo: View {
     @State private var url: URL?
     var app: AdwaitaApp
     var window: AdwaitaWindow
-
-    var data: Data {
-        guard let url, let data = try? Data(contentsOf: url) else {
-            return .init()
-        }
-        return data
-    }
-
     var view: Body {
-        Picture()
-            .data(data)
+        if let url {
+            Picture(url: url)
+        }
         Button("Open") {
             fileDialog.signal()
         }
@@ -43,7 +36,9 @@ struct PictureDemo: View {
             ],
             title: "Pick an Image",
             acceptLabel: "Open Image"
-        ) { url = $0 } onClose: { }
+        ) { url in
+            self.url = url
+        }
     }
 
 }

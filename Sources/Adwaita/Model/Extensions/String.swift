@@ -27,6 +27,10 @@ extension String {
     public static var prefix: Self { "prefix" }
     /// A field label for a buffer.
     public static var buffer: Self { "buffer" }
+    /// A field label for data.
+    public static var data: Self { "data" }
+    /// A field label for a file path.
+    public static var filePath: Self { "file-path" }
     /// A label for the ``AnyView/onClick`` controller.
     static var clickController: Self { "controller" }
     /// A label for the ``AnyView/onClick`` handler.
