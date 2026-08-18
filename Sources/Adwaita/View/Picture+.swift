@@ -10,23 +10,35 @@ import Foundation
 
 extension Picture {
 
-    /// Load the picture from Foundation's `Data`.
+    /// Init the picture with an URL.
+    /// - Parameter url: The URL of the picture.
+    public init(url: URL) {
+        updateFunctions.append { storage, _, updateProperties in
+            if updateProperties {
+                guard url.path != storage.fields[.filePath] as? String else {
+                    return
+                }
+                gtk_picture_set_filename(storage.opaquePointer, url.path)
+                storage.fields[.filePath] = url.path
+            }
+        }
+    }
+
+    /// Init the picture with Foundation's `Data`.
     /// - Parameter data: The data.
-    /// - Returns: The view.
-    public func data(_ data: Data?) -> AnyView {
-        let oldData = "old-data"
-        return inspect { storage, updateProperties in
+    public init(data: Data?) {
+        updateFunctions.append { storage, _, updateProperties in
             if updateProperties {
                 let pointer = storage.opaquePointer
                 guard let data else {
-                    if storage.fields[oldData] != nil {
+                    if storage.fields[.data] != nil {
                         g_object_unref(gtk_picture_get_paintable(pointer)?.cast())
                         gtk_picture_set_paintable(pointer, gdk_paintable_new_empty(0, 0))
-                        storage.fields[oldData] = nil
+                        storage.fields[.data] = nil
                     }
                     return
                 }
-                guard data != storage.fields[oldData] as? Data else {
+                guard data != storage.fields[.data] as? Data else {
                     return
                 }
                 let bytes = data.withUnsafeBytes { ptr in
@@ -37,7 +49,7 @@ extension Picture {
                     g_object_unref(paintable.cast())
                 }
                 gtk_picture_set_paintable(pointer, texture)
-                storage.fields[oldData] = data
+                storage.fields[.data] = data
             }
         }
     }
