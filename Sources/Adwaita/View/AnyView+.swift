@@ -244,6 +244,18 @@ extension AnyView {
         }
     }
 
+    /// Add a menu popover on top of the view.
+    /// - Parameters:
+    ///     - visible: Whether the popover is displayed.
+    ///     - content: The popover's menu content.
+    /// - Returns: The view.
+    public func menuPopover(visible: Binding<Bool>, @ViewBuilder content: @escaping () -> Body) -> Overlay {
+        overlay {
+            PopoverMenu(visible: visible)
+                .menuModel(content)
+        }
+    }
+
     /// Set the view's maximum width.
     /// - Parameter maxWidth: The maximum width.
     /// - Returns: A view.

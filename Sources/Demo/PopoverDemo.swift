@@ -12,19 +12,28 @@ import Adwaita
 struct PopoverDemo: View {
 
     @State private var visible = false
+    @State private var menuVisible = false
 
     var view: Body {
-        VStack {
+        VStack(spacing: 10) {
             Button("Present Popover") {
                 visible = true
             }
             .suggested()
             .pill()
-            .frame(maxWidth: 100)
             .popover(visible: $visible) {
                 CounterDemo()
             }
+            Button("Present Menu Popover") {
+                menuVisible = true
+            }
+            .pill()
+            .menuPopover(visible: $menuVisible) {
+                MenuButton("Test") { print("Test") }
+                Submenu("Hello") { MenuButton("Cool") { print("Cool") } }
+            }
         }
+        .frame(maxWidth: 100)
     }
 
 }

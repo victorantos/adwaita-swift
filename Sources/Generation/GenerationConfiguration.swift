@@ -359,6 +359,11 @@ struct GenerationConfiguration {
                 "hadjustment",
                 "vadjustment"
             ]
+        ),
+        .init(
+            class: "PopoverMenu",
+            initializer: "gtk_popover_menu_new_from_model(nil)",
+            excludeProperties: ["flags", "pointing-to", "position"]
         )
     ]
 
