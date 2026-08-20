@@ -201,13 +201,14 @@ struct GenerationConfiguration {
         ),
         .init(
             class: "Box",
-            initializer: "gtk_box_new(.GTK_ORIENTATION_VERTICAL, spacing.cInt)",
+            initializer: """
+            gtk_box_new(data.getOrientation(data: orientation).gtkValue, data.getSpacing(data: spacing).cInt)
+            """,
             staticWidgets: [
                 .init(name: "append", add: "gtk_box_append"),
                 .init(name: "prepend", add: "gtk_box_prepend")
             ],
-            requiredProperties: ["spacing"],
-            excludeProperties: ["baseline-position", "orientation"],
+            excludeProperties: ["baseline-position"],
             cast: true,
             internalInitializer: true
         ),
@@ -391,7 +392,8 @@ struct GenerationConfiguration {
         "ContentFit": "ContentFit",
         "PolicyType": "ScrollbarVisibility",
         "ToolbarStyle": "ToolbarStyle",
-        "ScrollablePolicy": "ScrollablePolicy"
+        "ScrollablePolicy": "ScrollablePolicy",
+        "Orientation": "Orientation"
     ]
 
     /// Modifications for converting a Swift into a C type.
@@ -402,7 +404,8 @@ struct GenerationConfiguration {
         "ContentFit": "gtkValue",
         "ScrollbarVisibility": "gtkValue",
         "ToolbarStyle": "gtkValue",
-        "ScrollablePolicy": "gtkValue"
+        "ScrollablePolicy": "gtkValue",
+        "Orientation": "gtkValue"
     ]
 
     /// The SignalData.HandlerType replacement for a signal type.

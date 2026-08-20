@@ -57,6 +57,10 @@ extension String {
     static var windowClose: Self { "on-close" }
     /// A label for the activatable widget.
     static var activatableWidget: Self { "activatable-widget" }
+    /// The widget orientation label.
+    static var orientation: Self { "orientation" }
+    /// The widget spacing label.
+    static var spacing: Self { "spacing" }
 
     /// A label for the preferences dialog.
     static func preferencesDialogIndex(index: Int) -> Self {

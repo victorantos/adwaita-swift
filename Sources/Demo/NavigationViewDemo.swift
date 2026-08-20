@@ -32,7 +32,7 @@ struct NavigationViewDemo: View {
 
         var view: Body {
             NavigationView($stack, "Initial View") { component in
-                VStack {
+                VStack(spacing: spacing) {
                     Button("Add Next View") {
                         stack.push(component + 1)
                     }
@@ -40,7 +40,6 @@ struct NavigationViewDemo: View {
                         stack.pop()
                     }
                 }
-                .spacing(spacing)
                 .padding()
                 .topToolbar {
                     HeaderBar.empty()

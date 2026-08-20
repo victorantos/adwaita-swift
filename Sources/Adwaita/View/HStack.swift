@@ -15,7 +15,7 @@ public struct HStack: SimpleView {
 
     /// The view's body.
     public var view: Body {
-        Box(orientation: .horizontal, spacing: spacing, content: content)
+        VStack(orientation: .horizontal, spacing: spacing, content: content)
     }
 
     /// Initialize a `HStack`.
@@ -31,7 +31,7 @@ public struct HStack: SimpleView {
     /// - Parameter active: Whether the style is currently applied.
     /// - Returns: A view.
     public func linked(_ active: Bool = true) -> AnyView {
-        style("linked", active: active)
+        Box.linked(active, content: self)
     }
 
 }

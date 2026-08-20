@@ -20,9 +20,9 @@ public struct EitherView: SimpleView, Meta.EitherView {
     /// The view's content.
     public var view: Body {
         if condition {
-            return [ViewStack(id: true) { _ in view1 }.homogeneous(false)]
+            return [ViewStack(id: true) { _ in BoxWrapper { view1 }.inspect(addTransition) }.homogeneous(false)]
         } else {
-            return [ViewStack(id: false) { _ in view2 }.homogeneous(false)]
+            return [ViewStack(id: false) { _ in BoxWrapper { view2 }.inspect(addTransition) }.homogeneous(false)]
         }
     }
 
@@ -39,6 +39,18 @@ public struct EitherView: SimpleView, Meta.EitherView {
         self.condition = condition
         self.view1 = view1()
         self.view2 = view2()
+    }
+
+    /// Add the transition in the content view to the box wrappers.
+    /// - Parameters:
+    ///     - storage: The wrapper box storage.
+    ///     - data: The widget data.
+    ///     - updateProperties: Whether to update the properties.
+    func addTransition(storage: ViewStorage, data: WidgetData, updateProperties: Bool) {
+        if updateProperties,
+           let transition = storage.content["append"]?.first?.fields[.transition] {
+            storage.fields[.transition] = transition
+        }
     }
 
 }

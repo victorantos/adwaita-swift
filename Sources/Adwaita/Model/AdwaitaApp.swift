@@ -15,10 +15,6 @@ public class AdwaitaApp: AppStorage {
 
     /// The scene element type of the Adwaita backend.
     public typealias SceneElementType = AdwaitaSceneElement
-    /// The widget type of the Adwaita backend.
-    public typealias WidgetType = AdwaitaWidget
-    /// The wrapper type of the Adwaita backend.
-    public typealias WrapperType = VStack
 
     /// The app storage.
     public var storage: StandardAppStorage = .init()

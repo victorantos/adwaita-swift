@@ -16,7 +16,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// The dynamic widget content.
     var content: (Element) -> Body
     /// The orientation of the widget.
-    var orientation: Orientation
+    var orientation: Orientation?
     /// Whether the children should all be the same size.
     var homogeneous: Bool?
     /// The path to the identifier.
@@ -37,7 +37,6 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
         @ViewBuilder content: @escaping (Element) -> Body
     ) {
         self.elements = elements
-        self.orientation = .vertical
         self.content = content
         self.id = id
     }
@@ -52,7 +51,10 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
         type: Data.Type
     ) -> ViewStorage where Data: ViewRenderData {
         .init(
-            gtk_box_new(orientation.gtkValue, 0)?.opaque()
+            gtk_box_new(
+                data.getOrientation(data: orientation).gtkValue,
+                data.getSpacing(data: nil).cInt
+            )?.opaque()
         )
     }
 
@@ -92,7 +94,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
             if (storage.previousState as? Self)?.orientation != orientation {
                 gtk_orientable_set_orientation(
                     widget?.opaque(),
-                    orientation.gtkValue
+                    data.getOrientation(data: orientation).gtkValue
                 )
             }
             if let homogeneous, (storage.previousState as? Self)?.homogeneous != homogeneous {
@@ -123,7 +125,7 @@ public struct ForEach<Element, Identifier>: AdwaitaWidget where Identifier: Equa
     /// The orientation of the `ForEach` elements.
     /// - Parameter orientation: Set the orientation to horizontal or vertical.
     /// - Returns: A modified `ForEach`.
-    public func orientation( _ orientation: Orientation) -> Self {
+    public func orientation( _ orientation: Orientation?) -> Self {
         modify { $0.orientation = orientation }
     }
 
@@ -134,7 +136,6 @@ extension ForEach where Element: Identifiable, Identifier == Element.ID {
     /// Initialize `ForEach`.
     public init(_ elements: [Element], @ViewBuilder content: @escaping (Element) -> Body) {
         self.elements = elements
-        self.orientation = .vertical
         self.content = content
         self.id = \.id
     }

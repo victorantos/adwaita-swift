@@ -58,16 +58,17 @@ public struct Box: AdwaitaWidget {
     var baselineChild: Int?
     /// Whether the children should all be the same size.
     var homogeneous: Bool?
+    /// The orientation of the orientable.
+    var orientation: Orientation?
     /// The amount of space between children.
-    var spacing: Int
+    var spacing: Int?
     /// The body for the widget "append".
     var append: () -> Body = { [] }
     /// The body for the widget "prepend".
     var prepend: () -> Body = { [] }
 
     /// Initialize `Box`.
-    init(spacing: Int) {
-        self.spacing = spacing
+    init() {
     }
 
     /// The view storage.
@@ -76,7 +77,7 @@ public struct Box: AdwaitaWidget {
     ///     - type: The view render data type.
     /// - Returns: The view storage.
     public func container<Data>(data: WidgetData, type: Data.Type) -> ViewStorage where Data: ViewRenderData {
-        let storage = ViewStorage(gtk_box_new(.GTK_ORIENTATION_VERTICAL, spacing.cInt)?.opaque())
+        let storage = ViewStorage(gtk_box_new(data.getOrientation(data: orientation).gtkValue, data.getSpacing(data: spacing).cInt)?.opaque())
         for function in appearFunctions {
             function(storage, data)
         }
@@ -111,7 +112,10 @@ public struct Box: AdwaitaWidget {
             if let homogeneous, updateProperties, (storage.previousState as? Self)?.homogeneous != homogeneous {
                 gtk_box_set_homogeneous(widget?.cast(), homogeneous.cBool)
             }
-            if updateProperties, (storage.previousState as? Self)?.spacing != spacing {
+            if let orientation, updateProperties, (storage.previousState as? Self)?.orientation != orientation {
+                gtk_orientable_set_orientation(widget, orientation.gtkValue)
+            }
+            if let spacing, updateProperties, (storage.previousState as? Self)?.spacing != spacing {
                 gtk_box_set_spacing(widget?.cast(), spacing.cInt)
             }
 
@@ -169,8 +173,13 @@ public struct Box: AdwaitaWidget {
         modify { $0.homogeneous = homogeneous }
     }
 
+    /// The orientation of the orientable.
+    public func orientation(_ orientation: Orientation?) -> Self {
+        modify { $0.orientation = orientation }
+    }
+
     /// The amount of space between children.
-    public func spacing(_ spacing: Int) -> Self {
+    public func spacing(_ spacing: Int?) -> Self {
         modify { $0.spacing = spacing }
     }
 

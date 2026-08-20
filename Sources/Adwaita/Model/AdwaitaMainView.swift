@@ -11,7 +11,7 @@ public enum AdwaitaMainView: ViewRenderData {
     /// The type of the widgets.
     public typealias WidgetType = AdwaitaWidget
     /// The wrapper type.
-    public typealias WrapperType = VStackWrapper
+    public typealias WrapperType = BoxWrapper
     /// The either view type.
     public typealias EitherViewType = EitherView
 
