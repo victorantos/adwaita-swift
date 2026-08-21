@@ -179,6 +179,9 @@ struct GenerationConfiguration {
             class: "BottomSheet",
             bindings: [.init(property: "open")],
             internalInitializer: true
+        ),
+        .init(
+            class: "ButtonRow"
         )
     ]
 

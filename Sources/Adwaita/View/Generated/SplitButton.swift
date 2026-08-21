@@ -2,7 +2,7 @@
 //  SplitButton.swift
 //  Adwaita
 //
-//  Created by auto-generation on 19.08.26.
+//  Created by auto-generation on 21.08.26.
 //
 
 import CAdw

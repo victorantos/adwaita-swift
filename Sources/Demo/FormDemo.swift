@@ -61,6 +61,7 @@ struct FormDemo: View {
                         ActionRow("Hello")
                         ActionRow("World")
                     })
+                    rowDemo("Button Row", row: ButtonRow().title("Hello World").activated { print("Button Row") })
                 }
                 .padding()
                 .frame(maxWidth: 400)
