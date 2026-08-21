@@ -219,7 +219,7 @@ struct FileDialog: AdwaitaWidget {
         }
         gtk_file_dialog_set_filters(dialog, filterStore)
         unref.append(filterStore)
-}
+    }
 
 }
 
@@ -229,6 +229,15 @@ public enum FileDialogFilter {
     case extensions([String], name: String? = nil)
     /// Filter by mime type
     case mimeType(String, name: String? = nil)
+    /// The optional name of the filter
+    var name: String? {
+        switch self {
+        case let .extensions(_, name):
+            name
+        case let .mimeType(_, name):
+            name
+        }
+    }
 }
 
 /// An Adwaita file dialog window callback.

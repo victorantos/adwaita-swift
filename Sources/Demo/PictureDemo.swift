@@ -14,19 +14,40 @@ struct PictureDemo: View {
 
     @State private var fileDialog = Signal()
     @State private var url: URL?
+    @State private var showToast = Signal()
     var app: AdwaitaApp
     var window: AdwaitaWindow
     var view: Body {
-        if let url {
-            Picture(url: url)
+        Box {
+            if let url {
+                Picture(url: url)
+            } else {
+                StatusPage(
+                    "Drop Area",
+                    icon: .default(icon: .folderPictures)
+                )
+                .compact()
+            }
+        }
+        .fileDropTarget(
+            filter: .mimeType("image/*", name: "Drop an image here"),
+        ) { urls in
+            handleDrop(urls)
         }
         Button("Open") {
             fileDialog.signal()
         }
+        .fileDropTarget(
+            filter: .mimeType("image/*")
+        ) { urls in
+            handleDrop(urls)
+        }
         .halign(.center)
+        .valign(.center)
         .pill()
         .suggested()
         .padding()
+        .toast("This is not an image", signal: $showToast)
         .fileImporter(
             open: $fileDialog,
             initialFolder: FileManager.default.urls(for: .picturesDirectory, in: .userDomainMask).first,
@@ -38,6 +59,14 @@ struct PictureDemo: View {
             acceptLabel: "Open Image"
         ) { url in
             self.url = url
+        }
+    }
+
+    private func handleDrop(_ urls: [URL]?) {
+        if let urls, let dropped = urls.first {
+            url = dropped
+        } else {
+            showToast.signal()
         }
     }
 

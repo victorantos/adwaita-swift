@@ -39,3 +39,5 @@ Tags:
   EnumExtensibility: closed
 - Name: GtkLicense
   EnumExtensibility: closed
+- Name: GdkDragAction
+  EnumExtensibility: closed
