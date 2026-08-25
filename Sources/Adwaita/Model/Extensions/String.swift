@@ -35,6 +35,10 @@ extension String {
     static var clickController: Self { "controller" }
     /// A label for the ``AnyView/onClick`` handler.
     static var clickHandler: Self { "click-handler" }
+    /// A label for the ``AnyView/dropTarget`` controller.
+    static var dropTargetController: Self { "drop-target-controller" }
+    /// A label for the ``AnyView/dropTarget`` handler.
+    static var dropTargetHandler: Self { "drop-target-handler" }
     /// A label for the breakpoint bin condition.
     static var binCondition: Self { "condition" }
     /// A label for the breakpoint bin's breakpoint.
