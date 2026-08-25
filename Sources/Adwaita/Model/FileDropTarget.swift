@@ -29,7 +29,7 @@ enum FileDropTarget {
             if let data = current.pointee.data,
                 let uri = g_file_get_uri(OpaquePointer(data)),
                 let url = URL(string: String(cString: uri)),
-                filterFile(data, url: url, filter: filter) {
+                filterDroppedFile(data, url: url, filter: filter) {
                 // Accept this drop
                 result.append(url)
             }
@@ -40,71 +40,36 @@ enum FileDropTarget {
 
     /// Filter a dropped file URL.
     /// - Parameters:
-    ///   - gpointer: Pointer to the file.
+    ///   - gpointer: The pointer to the file.
     ///   - url: The URL of the file.
     ///   - filter: The optional filter.
-    /// - Returns: True if the file is valid; else false
-    static func filterFile(_ gpointer: gpointer, url: URL, filter: FileDialogFilter?) -> Bool {
-        if let filter {
-            switch filter {
-            case let .extensions(extensions, _):
-                return extensions.contains(url.pathExtension)
-            case let .mimeType(mimeType, _):
-                var result = ""
-                let info = g_file_query_info(
-                    OpaquePointer(gpointer),
-                    "standard::content-type",
-                    .FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
-                    nil,
-                    nil
-                )
-                let contentType = g_file_info_get_attribute_string(info, "standard::content-type")
-                if let contentType {
-                    result = String(cString: contentType)
-                }
-                g_object_unref(info?.cast())
-                if mimeType.hasSuffix("/*") {
-                    return result.hasPrefix(String(mimeType.dropLast()))
-                }
-                return result == mimeType
-            }
+    /// - Returns: True if the file is valid or if no filter is supplied; else false
+    static func filterDroppedFile(_ gpointer: gpointer, url: URL, filter: FileDialogFilter?) -> Bool {
+        guard let filter else {
+            return true
         }
-        // No filter applied
-        return true
-    }
-}
-
-extension AnyView {
-
-    /// Make a Widget accept dropped files
-    /// - Parameters:
-    ///   - filter: The optional filter
-    ///   - handler: The handler for the dropped files
-    /// - Returns: A modified `AnyView`
-    public func fileDropTarget(filter: FileDialogFilter? = nil, handler: @escaping ([URL]?) -> Void) -> AnyView {
-        inspectOnAppear { storage in
-            let controller = ViewStorage(gtk_drop_target_new(gdk_file_list_get_type(), .GDK_ACTION_COPY))
-            gtk_widget_add_controller(storage.opaquePointer?.cast(), controller.opaquePointer)
-            storage.fields[.dropTargetController] = controller
-            controller.connectSignal(name: "drop", type: .pointerDoubleDouble) { args in
-                guard let pointer = args.first as? UnsafeRawPointer else {
-                    return
-                }
-                if let handler = storage.fields[.dropTargetHandler] as? ([URL]?) -> Void {
-                    handler(FileDropTarget.handleDroppedFiles(pointer, filter: filter))
-                }
+        switch filter {
+        case let .extensions(extensions, _):
+            return extensions.contains(url.pathExtension)
+        case let .mimeType(mimeType, _):
+            var result = ""
+            let info = g_file_query_info(
+                OpaquePointer(gpointer),
+                "standard::content-type",
+                .FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
+                nil,
+                nil
+            )
+            let contentType = g_file_info_get_attribute_string(info, "standard::content-type")
+            if let contentType {
+                result = String(cString: contentType)
             }
-            if let name = filter?.name {
-                gtk_widget_set_tooltip_markup(
-                    storage.opaquePointer?.cast(),
-                    name
-                )
+            g_object_unref(info?.cast())
+            if mimeType.hasSuffix("/*") {
+                return result.hasPrefix(String(mimeType.dropLast()))
             }
-        }
-        .inspect { storage, _, updateProperties in
-            if updateProperties {
-                storage.fields[.dropTargetHandler] = handler
-            }
+            return result == mimeType
         }
     }
+
 }

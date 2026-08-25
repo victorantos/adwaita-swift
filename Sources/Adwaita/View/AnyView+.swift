@@ -395,4 +395,33 @@ extension AnyView {
             .sheet(sheet)
     }
 
+    /// Make a Widget accept dropped files.
+    /// - Parameters:
+    ///   - filter: The optional filter.
+    ///   - handler: The handler for the dropped files.
+    /// - Returns: A view.
+    public func fileDropTarget(filter: FileDialogFilter? = nil, handler: @escaping ([URL]?) -> Void) -> AnyView {
+        inspectOnAppear { storage in
+            let controller = ViewStorage(gtk_drop_target_new(gdk_file_list_get_type(), .GDK_ACTION_COPY))
+            gtk_widget_add_controller(storage.opaquePointer?.cast(), controller.opaquePointer)
+            storage.fields[.dropTargetController] = controller
+            controller.connectSignal(name: "drop", type: .pointerDoubleDouble) { args in
+                guard let pointer = args.first as? UnsafeRawPointer else {
+                    return
+                }
+                if let handler = storage.fields[.dropTargetHandler] as? ([URL]?) -> Void {
+                    handler(FileDropTarget.handleDroppedFiles(pointer, filter: filter))
+                }
+            }
+            if let name = filter?.name {
+                gtk_widget_set_tooltip_markup(storage.opaquePointer?.cast(), name)
+            }
+        }
+        .inspect { storage, _, updateProperties in
+            if updateProperties {
+                storage.fields[.dropTargetHandler] = handler
+            }
+        }
+    }
+
 }
