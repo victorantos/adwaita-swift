@@ -28,9 +28,17 @@ struct NavigationViewDemo: View {
     struct WindowContent: View {
 
         @State private var stack = NavigationStack<Int>()
+        @State private var dialog = false
         let spacing = 10
 
         var view: Body {
+            navigationView
+                .dialog(visible: $dialog) {
+                    navigationView
+                }
+        }
+
+        @ViewBuilder var navigationView: Body {
             NavigationView($stack, "Initial View") { component in
                 VStack(spacing: spacing) {
                     Button("Add Next View") {
@@ -38,6 +46,9 @@ struct NavigationViewDemo: View {
                     }
                     Button("Pop View") {
                         stack.pop()
+                    }
+                    Button(dialog ? "Hide Dialog" : "Show Dialog") {
+                        dialog.toggle()
                     }
                 }
                 .padding()

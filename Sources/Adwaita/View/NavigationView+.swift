@@ -6,6 +6,7 @@
 //
 
 import CAdw
+import Foundation
 
 extension NavigationView {
 
@@ -27,24 +28,24 @@ extension NavigationView {
         self.init()
         appearFunctions.append { storage, data in
             let initialStorage = initialView().storage(data: data, type: AdwaitaMainView.self)
-            storage.fields[.mainContent] = [initialStorage]
+            storage.content[.mainContent] = [initialStorage]
             adw_navigation_view_push(
                 storage.opaquePointer,
                 adw_navigation_page_new(initialStorage.opaquePointer?.cast(), initialTitle)
             )
             storage.connectSignal(name: "popped", id: "components", type: .oneArg) { args in
-                guard var storages = storage.fields[.mainContent] as? [ViewStorage],
-                let arg = args.first as? UnsafeRawPointer else {
+                guard let arg = args.first as? UnsafeRawPointer else {
                     return
                 }
-                if storages.last?.opaquePointer == adw_navigation_page_get_child(OpaquePointer(arg).cast())?.opaque() {
-                    storages.removeLast()
-                    storage.fields[.mainContent] = storages
+                let pointer = adw_navigation_page_get_child(OpaquePointer(arg).cast())?.opaque()
+                if let id = storage.fields[pointer?.debugDescription ?? ""] as? UUID {
+                    storage.fields[pointer?.debugDescription ?? ""] = nil
+                    stack.wrappedValue.pop(id: id)
                 }
             }
         }
         updateFunctions.append { [self] storage, data, updateProperties in
-            updateFunction(
+            updateStack(
                 storage: storage,
                 data: data,
                 stack: stack,
@@ -57,32 +58,45 @@ extension NavigationView {
     /// A stack controls a navigation view.
     public struct NavigationStack<Component> where Component: CustomStringConvertible {
 
-        /// The action to run at the next view update, if any.
-        var action: Action<Component>?
+        /// The action history.
+        var history: [Element] = []
 
         /// Initialize a navigation stack.
         public init() { }
 
+        // swiftlint:disable nesting
+        /// An element added to the navigation view.
+        struct Element: Identifiable {
+
+            /// The identifier.
+            var id: UUID = .init()
+            /// The component.
+            var component: Component
+
+        }
+        // swiftlint:enable nesting
+
         /// Remove the last item from the navigation view.
         public mutating func pop() {
-            action = .pop
+            _ = history.popLast()
+        }
+
+        /// Remove the last items until the active item has the specified ID.
+        /// - Parameter id: The identifier.
+        mutating func pop(id: UUID) {
+            if history.contains(where: { $0.id == id }) {
+                while true {
+                    let element = history.popLast()
+                    if element?.id == id || element == nil { break }
+                }
+            }
         }
 
         /// Add a new item to the navigation view.
         /// - Parameter component: The component's value.
         public mutating func push(_ component: Component) {
-            action = .push(component: component)
+            history.append(.init(component: component))
         }
-
-    }
-
-    /// An action to run on a view update.
-    enum Action<Component> {
-
-        /// Remove the last item.
-        case pop
-        /// Add a new item.
-        case push(component: Component)
 
     }
 
@@ -93,57 +107,60 @@ extension NavigationView {
     ///   - stack: The navigation stack for pushing and popping.
     ///   - views: The views.
     ///   - updateProperties: Whether to update properties.
-    func updateFunction<Component>(
+    func updateStack<Component>(
         storage: ViewStorage,
         data: WidgetData,
         stack: Binding<NavigationStack<Component>>,
         views: ((Component) -> Body, Body),
         updateProperties: Bool
     ) {
-        guard var storages = storage.fields[.mainContent] as? [ViewStorage] else {
+        guard var storages = storage.content[.mainContent] else {
             return
         }
-        switch stack.wrappedValue.action {
-        case .pop:
-            if storages.count > 1 {
-                adw_navigation_view_pop(storage.opaquePointer)
-                storages.removeLast()
-            } else { print("Warning: removing the initial view is not allowed.") }
-        case let .push(component):
-            let contentStorage = views.0(component).storage(data: data, type: AdwaitaMainView.self)
-            views.0(component)
-                .updateStorage(contentStorage, data: data, updateProperties: true, type: AdwaitaMainView.self)
-            contentStorage.fields[Self.componentID] = component
-            storages.append(contentStorage)
-            adw_navigation_view_push(
-                storage.opaquePointer,
-                adw_navigation_page_new(contentStorage.opaquePointer?.cast(), component.description)
-            )
-        default:
-            break
-        }
-        data.stateManager.withBlockedUpdates {
-            stack.wrappedValue.action = nil
-        }
-        storage.fields[.mainContent] = storages
-        for storage in storages {
-            if let component = storage.fields[Self.componentID] as? Component {
+        let history = storage.fields[Self.componentID] as? [NavigationStack<Component>.Element] ?? []
+        history.identifiableTransform(
+            to: stack.wrappedValue.history,
+            functions: .init { _ in
+                if storages.count > 1 {
+                    storages.removeLast()
+                    if let last = history.last?.id {
+                        if let index = storage.fields.firstIndex(where: { ($1 as? UUID) == last }) {
+                            storage.fields.remove(at: index)
+                            adw_navigation_view_pop(storage.opaquePointer)
+                        }
+                    }
+                }
+            } insert: { _, element in
+                let component = element.component
+                let contentStorage = views.0(component).storage(data: data, type: AdwaitaMainView.self)
                 views.0(component)
-                    .updateStorage(
-                        storage,
-                        data: data,
-                        updateProperties: updateProperties,
-                        type: AdwaitaMainView.self
-                    )
-            } else {
-                views.1
-                    .updateStorage(
-                        storage,
-                        data: data,
-                        updateProperties: updateProperties,
-                        type: AdwaitaMainView.self
-                    )
+                    .updateStorage(contentStorage, data: data, updateProperties: true, type: AdwaitaMainView.self)
+                storage.fields[contentStorage.opaquePointer?.debugDescription ?? ""] = element.id
+                storages.append(contentStorage)
+                adw_navigation_view_push(
+                    storage.opaquePointer,
+                    adw_navigation_page_new(contentStorage.opaquePointer?.cast(), component.description)
+                )
             }
+        )
+        storage.fields[Self.componentID] = stack.wrappedValue.history
+        storage.content[.mainContent] = storages
+        if let element = stack.wrappedValue.history.last, let storage = storage.content[.mainContent]?.last {
+            views.0(element.component)
+                .updateStorage(
+                    storage,
+                    data: data,
+                    updateProperties: updateProperties,
+                    type: AdwaitaMainView.self
+                )
+        } else if let storage = storage.content[.mainContent]?.first as? ViewStorage {
+            views.1
+                .updateStorage(
+                    storage,
+                    data: data,
+                    updateProperties: updateProperties,
+                    type: AdwaitaMainView.self
+                )
         }
     }
 
