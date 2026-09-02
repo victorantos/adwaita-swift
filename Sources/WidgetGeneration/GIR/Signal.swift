@@ -20,7 +20,6 @@ struct Signal: Decodable {
     /// - Returns: The value as a string.
     func getSignalType(genConfig: GenerationConfiguration) -> String {
         let id = parameters?.parameters.map { $0.type.sType }.joined(separator: ", ") ?? ""
-        print(id)
         return genConfig.signalTypeReplacements[id] ?? "noArgs"
     }
 

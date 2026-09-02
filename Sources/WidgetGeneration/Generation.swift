@@ -22,7 +22,6 @@ struct Generation {
 
     /// The main function.
     func run() throws {
-        removeOldFiles()
         guard let gtkDefinitions = getGtkDefinitions(path: configuration.gtkGirFilePath) else {
             print("failed to get Gtk definitions")
             return
@@ -32,40 +31,29 @@ struct Generation {
             print("failed to get Adw definitions")
             return
         }
+        var content = ""
         for `class` in gtkDefinitions.namespace.classes {
             if let config = configuration.gtkWidgets.first(where: { $0.class == `class`.name }) {
-                createFile(
+                content += getContent(
                     class: `class`,
                     config: config,
                     namespace: gtkDefinitions.namespace,
                     configs: configuration.gtkWidgets
-                )
+                ) + "\n\n"
             }
         }
         for `class` in adwDefinitions.namespace.classes {
             if let config = configuration.adwWidgets.first(where: { $0.class == `class`.name }) {
-                createFile(
+                content += getContent(
                     class: `class`,
                     config: config,
                     namespace: adwDefinitions.namespace,
                     configs: configuration.adwWidgets
-                )
+                ) + "\n\n"
             }
         }
-    }
-
-    /// Remove the old files in the generation directory.
-    func removeOldFiles() {
-        if let fileURLs = try? FileManager.default.contentsOfDirectory(
-            at: .init(fileURLWithPath: configuration.folder),
-            includingPropertiesForKeys: nil,
-            options: .skipsHiddenFiles
-        ) {
-            for fileURL in fileURLs where fileURL.pathExtension == "swift" {
-                print("Removing \(fileURL.lastPathComponent)")
-                try? FileManager.default.removeItem(at: fileURL)
-            }
-        }
+        let data = content.data(using: .utf8)
+        try? data?.write(to: .init(fileURLWithPath: CommandLine.arguments[1]))
     }
 
     /// Get the definitions of a GIR file at a specified path.
@@ -122,13 +110,15 @@ struct Generation {
     ///     - config: The widget configuration.
     ///     - namespace: The namespace.
     ///     - configs: All the available configs.
-    func createFile(`class`: Class, config: WidgetConfiguration, namespace: Namespace, configs: [WidgetConfiguration]) {
+    func getContent(
+        `class`: Class,
+        config: WidgetConfiguration,
+        namespace: Namespace,
+        configs: [WidgetConfiguration]
+    ) -> String {
         print("Generating \(config.name ?? `class`.name).swift")
-        let path = "\(configuration.folder)\(config.name ?? config.class).swift"
-        let data = `class`
+        return `class`
             .generate(config: config, genConfig: configuration, namespace: namespace, configs: configs)
-            .data(using: .utf8)
-        try? data?.write(to: .init(fileURLWithPath: path))
     }
 
 }

@@ -48,6 +48,19 @@ let package = Package(
             name: "CAdw",
             dependencies: ["CAdwLib"]
         ),
+        .executableTarget(
+            name: "WidgetGeneration",
+            dependencies: [
+                .product(name: "XMLCoder", package: "XMLCoder")
+            ],
+            swiftSettings: [.defaultIsolation(MainActor.self)]
+        ),
+        .plugin(
+            name: "GenerateWidgets",
+            capability: .buildTool(),
+            dependencies: ["WidgetGeneration"],
+            path: "Sources/Plugin"
+        ),
         .target(
             name: "Adwaita",
             dependencies: [
@@ -56,14 +69,8 @@ let package = Package(
                 .product(name: "Meta", package: "meta"),
                 .product(name: "MetaSQLite", package: "meta-sqlite")
             ],
-            swiftSettings: [.defaultIsolation(MainActor.self)]
-        ),
-        .executableTarget(
-            name: "Generation",
-            dependencies: [
-                .product(name: "XMLCoder", package: "XMLCoder")
-            ],
-            swiftSettings: [.defaultIsolation(MainActor.self)]
+            swiftSettings: [.defaultIsolation(MainActor.self)],
+            plugins: ["GenerateWidgets"],
         ),
         .executableTarget(
             name: "Demo",
