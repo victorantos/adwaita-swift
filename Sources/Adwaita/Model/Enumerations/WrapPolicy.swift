@@ -8,6 +8,7 @@
 import CAdw
 
 /// The line wrapping behavior in a `AdwWrapLayout`` or `AdwWrapBox``.
+nonisolated
 public enum WrapPolicy: String, CaseIterable {
 
     /// Fit as many children into each line as possible,

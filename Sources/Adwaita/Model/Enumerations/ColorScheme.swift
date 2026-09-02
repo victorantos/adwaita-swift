@@ -8,6 +8,7 @@
 import CAdw
 
 /// The system color scheme.
+nonisolated
 public enum ColorScheme {
 
     /// The dark color scheme.

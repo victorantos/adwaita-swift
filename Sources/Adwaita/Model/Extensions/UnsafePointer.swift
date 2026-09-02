@@ -5,6 +5,7 @@
 //  Created by david-swift on 14.08.26.
 //
 
+nonisolated
 extension UnsafePointer {
 
     /// Convert into an opaque pointer.

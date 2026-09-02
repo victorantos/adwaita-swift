@@ -8,6 +8,7 @@
 import CAdw
 
 /// The line justify behavior in an `AdwWrapLayout` or `AdwWrapBox`.
+nonisolated
 public enum JustifyMode: String, CaseIterable {
 
     // swiftlint:disable discouraged_none_name

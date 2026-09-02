@@ -8,6 +8,7 @@
 import CAdw
 
 /// Control how a content should be made to fit inside an allocation.
+nonisolated
 public enum ContentFit {
 
     /// Make the content fill the entire allocation,

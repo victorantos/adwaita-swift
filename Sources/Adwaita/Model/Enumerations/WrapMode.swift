@@ -8,6 +8,7 @@
 import CAdw
 
 /// Wrap modes for `TextView`/`TextEditor`
+nonisolated
 public enum WrapMode: GtkWrapMode, RawRepresentable {
 
     // swiftlint:disable discouraged_none_name

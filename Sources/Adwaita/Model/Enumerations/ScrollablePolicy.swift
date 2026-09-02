@@ -9,6 +9,7 @@ import CAdw
 
 /// Defines the policy to be used in a scrollable widget
 /// when updating the scrolled window adjustments in a given orientation.
+nonisolated
 public enum ScrollablePolicy {
 
     /// Scrollable adjustments are based on the minimum size.

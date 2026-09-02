@@ -5,6 +5,7 @@
 //  Created by david-swift on 09.09.23.
 //
 
+nonisolated
 extension String {
 
     /// A label for the transition data in a widget's fields.

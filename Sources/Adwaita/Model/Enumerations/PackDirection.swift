@@ -8,6 +8,7 @@
 import CAdw
 
 /// The child packing behavior in a `AdwWrapLayout`` or `AdwWrapBox``.
+nonisolated
 public enum PackDirection: String, CaseIterable {
 
     /// Pack children from left to right for LTR languages, or top to bottom vertically.

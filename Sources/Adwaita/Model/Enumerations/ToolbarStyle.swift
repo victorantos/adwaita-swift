@@ -8,6 +8,7 @@
 import CAdw
 
 /// The top and bottom bar styles.
+nonisolated
 public enum ToolbarStyle {
 
     /// No background, shadow only for scrolled content.

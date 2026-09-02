@@ -8,6 +8,7 @@
 import CAdw
 
 /// The type of license for an application.
+nonisolated
 public enum License {
     /// No license specified.
     case unknown

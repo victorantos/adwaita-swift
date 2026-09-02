@@ -8,6 +8,7 @@
 import CAdw
 
 /// The visibility of a scroll bar.
+nonisolated
 public enum ScrollbarVisibility {
 
     /// The scrollbar is always visible. The view size is independent of the content.

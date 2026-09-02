@@ -5,6 +5,7 @@
 //  Created by david-swift on 15.01.24.
 //
 
+nonisolated
 extension UnsafeMutableRawPointer {
 
     /// Convert into an unsafe mutable pointer of a certain type.

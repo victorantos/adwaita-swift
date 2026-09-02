@@ -9,6 +9,7 @@ import Foundation
 
 // swiftlint:disable type_body_length file_length
 /// An icon.
+nonisolated
 public enum Icon {
 
     /// A preinstalled icon.

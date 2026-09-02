@@ -5,6 +5,7 @@
 //  Created by david-swift on 15.01.24.
 //
 
+nonisolated
 extension Int: @retroactive Identifiable {
 
     /// Get the integer itself as the identifier.

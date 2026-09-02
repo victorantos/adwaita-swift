@@ -8,6 +8,7 @@
 import CAdw
 
 /// length units.
+nonisolated
 public enum LengthUnit: String, CaseIterable {
 
     /// Pixels.

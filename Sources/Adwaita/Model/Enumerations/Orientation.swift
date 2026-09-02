@@ -8,6 +8,7 @@
 import CAdw
 
 /// The orientation of widgets and other objects.
+nonisolated
 public enum Orientation: String, CaseIterable {
 
     /// The element is in horizontal orientation.

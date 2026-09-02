@@ -8,6 +8,7 @@
 import CAdw
 
 /// An action that can be performed when data is dropped.
+nonisolated
 public enum DragAction {
 
     /// Copy the dropped data.

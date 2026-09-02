@@ -8,6 +8,7 @@
 import CAdw
 
 /// The alignment for a widget.
+nonisolated
 public enum Alignment: Int {
 
     /// The widget will fill the available space.

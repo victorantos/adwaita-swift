@@ -1,4 +1,4 @@
-// swift-tools-version: 6.1
+// swift-tools-version: 6.3
 //
 //  Package.swift
 //  Adwaita
@@ -55,18 +55,20 @@ let package = Package(
                 .product(name: "LevenshteinTransformations", package: "levenshtein-transformations"),
                 .product(name: "Meta", package: "meta"),
                 .product(name: "MetaSQLite", package: "meta-sqlite")
-            ]
+            ],
+            swiftSettings: [.defaultIsolation(MainActor.self)]
         ),
         .executableTarget(
             name: "Generation",
             dependencies: [
                 .product(name: "XMLCoder", package: "XMLCoder")
-            ]
+            ],
+            swiftSettings: [.defaultIsolation(MainActor.self)]
         ),
         .executableTarget(
             name: "Demo",
-            dependencies: ["Adwaita"]
+            dependencies: ["Adwaita"],
+            swiftSettings: [.defaultIsolation(MainActor.self)]
         )
-    ],
-    swiftLanguageModes: [.v5]
+    ]
 )

@@ -8,6 +8,7 @@
 import CAdw
 
 /// A transition for a stack.
+nonisolated
 public enum Transition: Int {
 
     // swiftlint:disable missing_docs discouraged_none_name

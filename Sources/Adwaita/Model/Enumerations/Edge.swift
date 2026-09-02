@@ -6,6 +6,7 @@
 //
 
 /// The edges for a widget.
+nonisolated
 public enum Edge {
 
     /// The leading (start) edge.

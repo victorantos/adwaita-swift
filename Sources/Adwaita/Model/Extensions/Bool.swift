@@ -7,6 +7,7 @@
 
 import CAdw
 
+nonisolated
 extension Bool {
 
     /// Get the gboolean for C.

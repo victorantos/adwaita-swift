@@ -5,6 +5,7 @@
 //  Created by david-swift on 21.01.24.
 //
 
+nonisolated
 extension Set where Element == Edge {
 
     /// Horizontal and vertical edges.

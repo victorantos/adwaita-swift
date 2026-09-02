@@ -5,6 +5,7 @@
 //  Created by david-swift on 06.08.23.
 //
 
+nonisolated
 extension Array where Element == String {
 
     /// Get the C version of the array.
@@ -27,6 +28,7 @@ extension Array where Element == String {
 
 }
 
+nonisolated
 extension Array where Element == String {
 
     /// Use the C version of the array.
