@@ -41,7 +41,7 @@ public struct TextView: AdwaitaWidget {
     var padding: InnerPadding?
     /// The (word) wrap mode used when rendering the text.
     @Property(
-        set: { gtk_text_view_set_wrap_mode($0.cast(), $1.rawValue) },
+        set: { gtk_text_view_set_wrap_mode($0.cast(), $1.gtkValue) },
         pointer: OpaquePointer.self
     )
     var wrapMode: WrapMode = .none

@@ -23,7 +23,7 @@ struct TextLabelDemo: View {
             selection: $justify,
             values: Justification.allCases,
             id: \.self,
-            label: \.rawValue
+            label: \.label
         )
         .insensitive(ellipsize)
         .padding()
@@ -35,6 +35,23 @@ struct TextLabelDemo: View {
         Toggle("Ellipsize the text label", isOn: $ellipsize)
             .padding()
             .halign(.center)
+    }
+
+}
+
+extension Justification {
+
+    var label: String {
+        switch self {
+        case .left:
+            "Left"
+        case .right:
+            "Right"
+        case .center:
+            "Center"
+        case .fill:
+            "Fill"
+        }
     }
 
 }

@@ -78,7 +78,7 @@ public struct ViewStack: AdwaitaWidget {
         }
         if let visibleView = storage.content[id.description]?.first {
             if let transition = visibleView.fields[.transition] as? Transition {
-                gtk_stack_set_transition_type(storage.opaquePointer, transition.cTransition)
+                gtk_stack_set_transition_type(storage.opaquePointer, transition.gtkValue)
             }
             if (storage.previousState as? Self)?.id.description != id.description {
                 gtk_stack_set_visible_child_name(storage.opaquePointer, id.description)

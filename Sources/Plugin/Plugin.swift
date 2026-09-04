@@ -18,13 +18,14 @@ struct Plugin: BuildToolPlugin {
     /// - Returns: The commands.
     func createBuildCommands(context: PluginContext, target: Target) throws -> [Command] {
         let outputFile = context.pluginWorkDirectoryURL.appending(path: "GeneratedWidgets.swift")
+        let enumFile = context.pluginWorkDirectoryURL.appending(path: "GeneratedEnums.swift")
         return [
             .buildCommand(
                 displayName: "Generating Widgets",
                 executable: try context.tool(named: "WidgetGeneration").url,
-                arguments: [outputFile.path],
+                arguments: [outputFile.path, enumFile.path],
                 inputFiles: [],
-                outputFiles: [outputFile]
+                outputFiles: [outputFile, enumFile]
             )
         ]
     }

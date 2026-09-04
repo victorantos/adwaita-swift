@@ -54,7 +54,7 @@ extension AnyView {
     /// - Returns: A view.
     public func halign(_ align: Alignment) -> AnyView {
         wrapModifier(properties: [align]) { storage in
-            gtk_widget_set_halign(storage.opaquePointer?.cast(), align.cAlign)
+            gtk_widget_set_halign(storage.opaquePointer?.cast(), align.gtkValue)
         }
     }
 
@@ -63,7 +63,7 @@ extension AnyView {
     /// - Returns: A view.
     public func valign(_ align: Alignment) -> AnyView {
         wrapModifier(properties: [align]) { storage in
-            gtk_widget_set_valign(storage.opaquePointer?.cast(), align.cAlign)
+            gtk_widget_set_valign(storage.opaquePointer?.cast(), align.gtkValue)
         }
     }
 

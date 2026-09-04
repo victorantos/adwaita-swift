@@ -1,4 +1,4 @@
-// swift-tools-version: 6.3
+// swift-tools-version: 6.3;(experimentalCGen)
 //
 //  Package.swift
 //  Adwaita
@@ -44,16 +44,28 @@ let package = Package(
             name: "CAdwLib",
             pkgConfig: "libadwaita-1"
         ),
-        .target(
-            name: "CAdw",
-            dependencies: ["CAdwLib"]
-        ),
         .executableTarget(
             name: "WidgetGeneration",
             dependencies: [
                 .product(name: "XMLCoder", package: "XMLCoder")
             ],
             swiftSettings: [.defaultIsolation(MainActor.self)]
+        ),
+        .plugin(
+            name: "GenerateAPINotes",
+            capability: .buildTool(),
+            dependencies: ["WidgetGeneration"],
+            path: "Sources/PluginNotes"
+        ),
+        .target(
+            name: "CAdw",
+            dependencies: ["CAdwLib"],
+            resources: [
+                .process("include/apinotes.txt"),
+                .process("include/module.txt"),
+                .process("include/adwshim.h")
+            ],
+            plugins: ["GenerateAPINotes"]
         ),
         .plugin(
             name: "GenerateWidgets",

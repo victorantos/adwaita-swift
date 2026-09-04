@@ -11,3 +11,7 @@ DerivedData/
 .Ulysses-Group.plist
 /.docc-build
 /.vscode
+/*.dia
+/*.d
+/*.swiftdeps
+/*.swiftdeps~

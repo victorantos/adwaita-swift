@@ -329,13 +329,13 @@ extension AnyView {
     ///     - scheme: The color scheme.
     ///     - getString: Get the CSS.
     /// - Returns: A view.
-    public func css(scheme: ColorScheme? = nil, getString: @escaping () -> String) -> AnyView {
+    public func css(scheme: InterfaceColorScheme? = nil, getString: @escaping () -> String) -> AnyView {
         wrap { storage, updateProperties in
             let cssID = "internal-css"
-            let providerID = "internal-css-provider"
             let previous = storage.fields[cssID] as? String
             let string = getString()
             if updateProperties, string != previous {
+                let providerID = "internal-css-provider"
                 let provider = gtk_css_provider_new()
                 if let scheme {
                     gtui_cssprovider_set_prefers_color_scheme(provider?.cast(), scheme.gtkValue)

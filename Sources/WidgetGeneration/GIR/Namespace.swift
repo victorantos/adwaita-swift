@@ -10,6 +10,8 @@ struct Namespace: Decodable {
 
     /// The classes.
     var classes: [Class]
+    /// The enumerations.
+    var enumerations: [Enumeration]
     /// The interfaces (protocols).
     var interfaces: [Interface]
 
@@ -20,6 +22,8 @@ struct Namespace: Decodable {
         case classes = "class"
         /// Coding key.
         case interfaces = "interface"
+        /// Coding key.
+        case enumerations = "enumeration"
 
     }
 

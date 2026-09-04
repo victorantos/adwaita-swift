@@ -311,7 +311,7 @@ extension WrapBox {
     public func justify( _ justifyMode: JustifyMode) -> WrapBox {
         var newSelf = self
         newSelf.updateFunctions.append { storage, _, _ in
-            adw_wrap_box_set_justify(storage.opaquePointer, justifyMode.adwValue)
+            adw_wrap_box_set_justify(storage.opaquePointer, justifyMode.gtkValue)
         }
         return newSelf
     }
@@ -322,7 +322,7 @@ extension WrapBox {
     public func wrapPolicy( _ wrapPolicy: WrapPolicy) -> WrapBox {
         var newSelf = self
         newSelf.updateFunctions.append { storage, _, _ in
-            adw_wrap_box_set_wrap_policy(storage.opaquePointer, wrapPolicy.adwValue)
+            adw_wrap_box_set_wrap_policy(storage.opaquePointer, wrapPolicy.gtkValue)
         }
         return newSelf
     }
@@ -333,7 +333,7 @@ extension WrapBox {
     public func packDirection( _ packDirection: PackDirection) -> WrapBox {
         var newSelf = self
         newSelf.updateFunctions.append { storage, _, _ in
-            adw_wrap_box_set_pack_direction(storage.opaquePointer, packDirection.adwValue)
+            adw_wrap_box_set_pack_direction(storage.opaquePointer, packDirection.gtkValue)
         }
         return newSelf
     }
@@ -344,7 +344,7 @@ extension WrapBox {
     public func childSpacingUnit( _ lengthUnit: LengthUnit) -> WrapBox {
         var newSelf = self
         newSelf.updateFunctions.append { storage, _, _ in
-            adw_wrap_box_set_child_spacing_unit(storage.opaquePointer, lengthUnit.adwValue)
+            adw_wrap_box_set_child_spacing_unit(storage.opaquePointer, lengthUnit.gtkValue)
         }
         return newSelf
     }
@@ -355,7 +355,7 @@ extension WrapBox {
     public func lineSpacingUnit( _ lengthUnit: LengthUnit) -> WrapBox {
         var newSelf = self
         newSelf.updateFunctions.append { storage, _, _ in
-            adw_wrap_box_set_line_spacing_unit(storage.opaquePointer, lengthUnit.adwValue)
+            adw_wrap_box_set_line_spacing_unit(storage.opaquePointer, lengthUnit.gtkValue)
         }
         return newSelf
     }
@@ -366,7 +366,7 @@ extension WrapBox {
     public func naturalLineLengthUnit( _ lengthUnit: LengthUnit) -> WrapBox {
         var newSelf = self
         newSelf.updateFunctions.append { storage, _, _ in
-            adw_wrap_box_set_natural_line_length_unit(storage.opaquePointer, lengthUnit.adwValue)
+            adw_wrap_box_set_natural_line_length_unit(storage.opaquePointer, lengthUnit.gtkValue)
         }
         return newSelf
     }

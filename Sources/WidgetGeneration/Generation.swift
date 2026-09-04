@@ -31,6 +31,10 @@ struct Generation {
             print("failed to get Adw definitions")
             return
         }
+        if CommandLine.arguments.count > 3 {
+            try apiNotes(gtk: gtkDefinitions, adw: adwDefinitions)
+            return
+        }
         var content = ""
         for `class` in gtkDefinitions.namespace.classes {
             if let config = configuration.gtkWidgets.first(where: { $0.class == `class`.name }) {
@@ -52,8 +56,39 @@ struct Generation {
                 ) + "\n\n"
             }
         }
+        try write(content, to: CommandLine.arguments[1])
+        try generateEnums(gtk: gtkDefinitions, adw: adwDefinitions)
+    }
+
+    /// Generate enumerations.
+    func generateEnums(gtk: GIR, adw: GIR) throws {
+        var content = ""
+        for enumeration in gtk.namespace.enumerations + adw.namespace.enumerations {
+            print("Generating enum \(enumeration.name)")
+            content += enumeration.generate(genConfig: configuration) + "\n\n"
+        }
+        try write(content, to: CommandLine.arguments[2])
+    }
+
+    /// Generate the API notes.
+    func apiNotes(gtk: GIR, adw: GIR) throws {
+        print("Generating API Notes")
+        var content = try String(contentsOf: .init(fileURLWithPath: CommandLine.arguments[5]), encoding: .utf8) + "\n"
+        for enumeration in gtk.namespace.enumerations + adw.namespace.enumerations {
+            content += enumeration.generateAPINote()
+        }
+        try write(content, to: CommandLine.arguments[2])
+        // modulemap and shim.h (doesn't work otherwise)
+        let map = try String(contentsOf: .init(fileURLWithPath: CommandLine.arguments[6]), encoding: .utf8)
+        try write(map, to: CommandLine.arguments[3])
+        let shim = try String(contentsOf: .init(fileURLWithPath: CommandLine.arguments[4]), encoding: .utf8)
+        try write(shim, to: CommandLine.arguments[1])
+    }
+
+    /// Write a file.
+    func write(_ content: String, to path: String) throws {
         let data = content.data(using: .utf8)
-        try? data?.write(to: .init(fileURLWithPath: CommandLine.arguments[1]))
+        try data?.write(to: URL(fileURLWithPath: path))
     }
 
     /// Get the definitions of a GIR file at a specified path.
@@ -116,7 +151,7 @@ struct Generation {
         namespace: Namespace,
         configs: [WidgetConfiguration]
     ) -> String {
-        print("Generating \(config.name ?? `class`.name).swift")
+        print("Generating widget \(config.name ?? `class`.name)")
         return `class`
             .generate(config: config, genConfig: configuration, namespace: namespace, configs: configs)
     }
