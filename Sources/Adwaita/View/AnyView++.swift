@@ -57,8 +57,9 @@ extension AnyView {
                     fullscreen, let yValue = args.last as? Double else {
                     return
                 }
+                let toolbarHeight = Double(adw_toolbar_view_get_top_bar_height(storage.opaquePointer))
                 var revealTopBar = storage.fields["revealTopBar"] as? Bool ?? true
-                let range: Double = revealTopBar ? 50 : 2
+                let range: Double = revealTopBar ? toolbarHeight : 2
                 revealTopBar = yValue < range ? true : false
                 adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, revealTopBar.cBool)
                 storage.fields["revealTopBar"] = revealTopBar
