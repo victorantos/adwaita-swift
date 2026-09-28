@@ -136,8 +136,8 @@ public class SignalData {
             Double,
             UnsafeMutableRawPointer
         ) -> Void {
-            { _, x, y, data in
-                _ = Self.cast(data).closure([x, y])
+            { _, arg1, arg2, data in
+                _ = Self.cast(data).closure([arg1, arg2])
             }
         }
 

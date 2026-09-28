@@ -53,21 +53,21 @@ extension AnyView {
                 type: .doubleDouble,
                 pointer: motion
             ) { args in
-                guard let fullscreen = storage.fields["fullscreen"] as? Bool,
+                guard let fullscreen = storage.fields[.fullscreen] as? Bool,
                     fullscreen, let yValue = args.last as? Double else {
                     return
                 }
                 let toolbarHeight = Double(adw_toolbar_view_get_top_bar_height(storage.opaquePointer))
-                var revealTopBar = storage.fields["revealTopBar"] as? Bool ?? true
+                var revealTopBar = storage.fields[.revealTopBar] as? Bool ?? true
                 let range: Double = revealTopBar ? toolbarHeight : 2
                 revealTopBar = yValue < range ? true : false
                 adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, revealTopBar.cBool)
-                storage.fields["revealTopBar"] = revealTopBar
+                storage.fields[.revealTopBar] = revealTopBar
             }
             gtk_widget_add_controller(storage.opaquePointer?.cast(), motion)
         }
         toolbar.updateFunctions.append { storage, _, _ in
-            storage.fields["fullscreen"] = fullscreen
+            storage.fields[.fullscreen] = fullscreen
             if fullscreen {
                 adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, false.cBool)
                 adw_toolbar_view_set_extend_content_to_top_edge(storage.opaquePointer, true.cBool)
