@@ -69,8 +69,10 @@ extension AnyView {
             storage.fields["fullscreen"] = fullscreen
             if fullscreen {
                 adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, false.cBool)
+                adw_toolbar_view_set_extend_content_to_top_edge(storage.opaquePointer, true.cBool)
             } else {
                 adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, true.cBool)
+                adw_toolbar_view_set_extend_content_to_top_edge(storage.opaquePointer, false.cBool)
             }
         }
         return toolbar
