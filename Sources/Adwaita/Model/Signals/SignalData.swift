@@ -50,6 +50,8 @@ public class SignalData {
         /// void (*, *, *, gpointer)
         case twoArgs
 
+        /// void (*, double, double, gpointer)
+        case doubleDouble
         /// void (*, *, double, double, gpointer)
         case pointerDoubleDouble
         /// void (*, guint, gpointer)
@@ -127,6 +129,18 @@ public class SignalData {
             }
         }
 
+        /// The handler for doubleDouble.
+        var doubleDoubleHandler: @convention(c) (
+            UnsafeMutableRawPointer,
+            Double,
+            Double,
+            UnsafeMutableRawPointer
+        ) -> Void {
+            { _, x, y, data in
+                _ = Self.cast(data).closure([x, y])
+            }
+        }
+
         /// The closure as a C handler with a return value.
         var boolHandler: @convention(c) (UnsafeMutableRawPointer, UnsafeMutableRawPointer) -> Bool {
             { _, data in
@@ -144,6 +158,8 @@ public class SignalData {
                 unsafeBitCast(threeParamsHandler, to: GCallback.self)
             case .twoArgs:
                 unsafeBitCast(fourParamsHandler, to: GCallback.self)
+            case .doubleDouble:
+                unsafeBitCast(doubleDoubleHandler, to: GCallback.self)
             case .pointerDoubleDouble:
                 unsafeBitCast(fiveParamsHandler, to: GCallback.self)
             case .guint:

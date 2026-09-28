@@ -29,6 +29,53 @@ extension AnyView {
             .revealTopBars(visible)
     }
 
+    /// Add a top toolbar to the view that is hidden while fullscreen.
+    /// - Parameters:
+    ///   - fullscreen: Whether the window is fullscreen.
+    ///   - toolbar: The toolbar's content.
+    /// - Returns: A ToolbarView.
+    ///
+    /// When the mouse moves to the top of the screen the toolbar will be
+    /// revealed. When moving away; it will hide again.
+    public func topToolbar(
+        fullscreen: Bool,
+        @ViewBuilder _ toolbar: @escaping () -> Body
+    ) -> ToolbarView {
+        var toolbar = ToolbarView()
+            .content { self }
+            .top(toolbar)
+            .topBarStyle(fullscreen ? .raised : .flat)
+        toolbar.appearFunctions.append { storage, _ in
+            let motion = gtk_event_controller_motion_new()
+            storage.connectSignal(
+                name: "motion",
+                id: "motion",
+                type: .doubleDouble,
+                pointer: motion
+            ) { args in
+                guard let fullscreen = storage.fields["fullscreen"] as? Bool,
+                    fullscreen, let yValue = args.last as? Double else {
+                    return
+                }
+                var revealTopBar = storage.fields["revealTopBar"] as? Bool ?? true
+                let range: Double = revealTopBar ? 50 : 2
+                revealTopBar = yValue < range ? true : false
+                adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, revealTopBar.cBool)
+                storage.fields["revealTopBar"] = revealTopBar
+            }
+            gtk_widget_add_controller(storage.opaquePointer?.cast(), motion)
+        }
+        toolbar.updateFunctions.append { storage, _, _ in
+            storage.fields["fullscreen"] = fullscreen
+            if fullscreen {
+                adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, false.cBool)
+            } else {
+                adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, true.cBool)
+            }
+        }
+        return toolbar
+    }
+
     /// Add a bottom toolbar to the view.
     /// - Parameters:
     ///   - toolbar: The toolbar's content.

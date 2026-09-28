@@ -126,6 +126,15 @@ extension Window {
         return newSelf
     }
 
+    /// Get and set whether the window is fullscreen.
+    /// - Parameter fullscreen: Whether the window is fullscreen.
+    /// - Returns: The window.
+    public func fullscreen(_ fullscreen: Binding<Bool>?) -> Self {
+        var newSelf = self
+        newSelf.fullscreen = fullscreen
+        return newSelf
+    }
+
     /// Whether the window used the development style.
     /// - Parameter active: Whether the style is active.
     /// - Returns: The window.

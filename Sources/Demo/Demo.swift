@@ -17,11 +17,18 @@ struct Demo: App {
     var app = AdwaitaApp(id: "io.github.AparokshaUI.Demo")
 
     @State private var pictureURL: URL?
+    @State private var fullscreen = false
 
     var scene: Scene {
         Window(id: "main") { window in
-            DemoContent(window: window, app: app, pictureURL: pictureURL)
+            DemoContent(
+                window: window,
+                app: app,
+                fullscreen: $fullscreen,
+                pictureURL: pictureURL
+            )
         }
+        .fullscreen($fullscreen)
         .onOpen { print($0) }
         helperWindows
     }
@@ -102,6 +109,7 @@ struct Demo: App {
         @State private var destroy = false
         var window: AdwaitaWindow
         var app: AdwaitaApp!
+        @Binding var fullscreen: Bool
         var pictureURL: URL?
 
         var view: Body {
@@ -130,8 +138,8 @@ struct Demo: App {
                     icon: selection.icon,
                     description: selection.description
                 ) { selection.view(app: app, window: window, toast: $toast) }
-                .topToolbar {
-                    HeaderBar {
+                .topToolbar(fullscreen: fullscreen) {
+                    HeaderBar(fullscreen: $fullscreen) {
                         Toggle(icon: .default(icon: .sidebarShow), isOn: $sidebarVisible)
                             .tooltip("Toggle Sidebar")
                         DropDown(selection: $title, values: WindowName.allCases)
@@ -252,6 +260,10 @@ struct Demo: App {
                     window.close()
                 }
                 .keyboardShortcut("w".ctrl())
+                MenuSection {
+                    MenuButton("Fullscreen") { fullscreen.toggle() }
+                        .keyboardShortcut("F11")
+                }
                 MenuSection {
                     MenuButton("Preferences") { preferences = true }
                         .keyboardShortcut("comma".ctrl())
