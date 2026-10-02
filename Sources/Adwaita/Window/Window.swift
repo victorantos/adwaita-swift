@@ -47,6 +47,8 @@ public struct Window: AdwaitaSceneElement {
     var defaultHeight: Int?
     /// Whether the window is maximized.
     var maximized: Binding<Bool>?
+    /// Whether the window is fullscreen.
+    var fullscreen: Binding<Bool>?
     /// Whether the window uses the development style.
     var devel: Bool?
     /// Run this function when the window should close.
@@ -246,6 +248,11 @@ public struct Window: AdwaitaSceneElement {
                 template.maximized?.wrappedValue = gtk_window_is_maximized(window.pointer?.cast()) != 0
             }
         }
+        if template.fullscreen != nil {
+            storage.notify(name: "fullscreened", pointer: window.pointer?.opaque()) {
+                template.fullscreen?.wrappedValue = gtk_window_is_fullscreen(window.pointer?.cast()) != 0
+            }
+        }
         if updateProperties {
             template.updateProperties(storage: storage, window: window)
         }
@@ -285,6 +292,13 @@ public struct Window: AdwaitaSceneElement {
                 gtk_window_maximize(window.pointer?.cast())
             } else {
                 gtk_window_unmaximize(window.pointer?.cast())
+            }
+        }
+        if let fullscreen = fullscreen?.wrappedValue {
+            if fullscreen {
+                gtk_window_fullscreen(window.pointer?.cast())
+            } else {
+                gtk_window_unfullscreen(window.pointer?.cast())
             }
         }
         if let onClose {

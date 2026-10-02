@@ -22,6 +22,32 @@ extension HeaderBar {
         self = self.start(start).end(end)
     }
 
+    /// Initialize a header bar.
+    /// - Parameters:
+    ///   - fullscreen: The binding to the fullscreen state.
+    ///   - start: The start content.
+    ///   - end: The end content.
+    ///
+    /// When the window is fullscreen, the title buttons will be hidden
+    /// and an 'exit fullscreen' button will be shown instead.
+    public init(
+        fullscreen: Binding<Bool>,
+        @ViewBuilder start: @escaping () -> Body,
+        @ViewBuilder end: @escaping () -> Body
+    ) {
+        let isFullscreen = fullscreen.wrappedValue
+        self.init()
+        self = self.showStartTitleButtons(!isFullscreen).showEndTitleButtons(!isFullscreen)
+        self = self.start(start).end {
+            if isFullscreen {
+                Button(icon: .default(icon: .viewRestore)) {
+                    fullscreen.wrappedValue = false
+                }
+            }
+            end()
+        }
+    }
+
     /// Initialize an empty header bar.
     /// - Returns: The header bar.
     public static func empty() -> Self {

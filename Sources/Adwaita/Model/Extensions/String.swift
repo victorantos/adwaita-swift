@@ -66,6 +66,10 @@ extension String {
     static var orientation: Self { "orientation" }
     /// The widget spacing label.
     static var spacing: Self { "spacing" }
+    /// A field label for fullscreen state.
+    static var fullscreen: Self { "fullscreen" }
+    /// A field label for revealing the top bar.
+    static var revealTopBar: Self { "reveal-top-bar" }
 
     /// A label for the preferences dialog.
     static func preferencesDialogIndex(index: Int) -> Self {
