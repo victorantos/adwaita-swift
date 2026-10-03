@@ -68,8 +68,9 @@ extension AnyView {
         }
         toolbar.updateFunctions.append { storage, _, _ in
             storage.fields[.fullscreen] = fullscreen
+            let reveal = storage.fields[.revealTopBar] as? Bool ?? false
             if fullscreen {
-                adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, false.cBool)
+                adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, reveal.cBool)
                 adw_toolbar_view_set_extend_content_to_top_edge(storage.opaquePointer, true.cBool)
             } else {
                 adw_toolbar_view_set_reveal_top_bars(storage.opaquePointer, true.cBool)
