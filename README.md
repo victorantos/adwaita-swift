@@ -1,3 +1,9 @@
+> **This is Tapelark's fork** of [Adwaita for Swift](https://git.aparoksha.dev/aparoksha/adwaita-swift) (MIT, upstream
+> history kept; the branch `upstream-main` follows upstream). Its `main` is upstream's `main` at `af5598f` plus three
+> changes: the dependencies are pinned by commit, MetaSQLite and its Linux SQLite copy are left out (the copy replaced
+> the system SQLite for the whole app), and a keyboard shortcut used as its own id gets a valid action name, so its
+> accelerator is bound (`Tests/AdwaitaTests`). Upstream's documentation applies otherwise.
+
 <p align="center">
   <img width="256" alt="Adwaita Icon" src="Icons/AdwaitaIcon.png">
   <h1 align="center">Adwaita for Swift</h1>

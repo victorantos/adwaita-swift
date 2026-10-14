@@ -93,7 +93,7 @@ struct Demo: App {
 
     struct DemoContent: WindowView {
 
-        @State("selection")
+        @State
         private var selection: Page = .welcome
         @State private var toast: Signal = .init()
         @State private var sidebarVisible = true

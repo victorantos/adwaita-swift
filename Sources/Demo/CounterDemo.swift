@@ -11,7 +11,7 @@ import Adwaita
 
 struct CounterDemo: View {
 
-    @State("count")
+    @State
     private var count = 0
 
     var view: Body {

@@ -8,20 +8,17 @@
 
 import PackageDescription
 
-/// The dependencies.
-var dependencies: [Package.Dependency] = [
-    .package(url: "https://git.aparoksha.dev/aparoksha/meta", branch: "main"),
-    .package(url: "https://git.aparoksha.dev/aparoksha/meta-sqlite", branch: "main"),
+/// The dependencies, pinned by commit (this fork: reproducible builds, Flathub's offline sources). MetaSQLite and its
+/// Linux SQLite copy are left out: the copy replaced the system SQLite for every package in the app (no FTS5), and the
+/// app keeps its own database.
+let dependencies: [Package.Dependency] = [
+    .package(url: "https://git.aparoksha.dev/aparoksha/meta", revision: "4d274f3cd042cbc3cb2098838093c65097935349"),
     .package(
         url: "https://git.aparoksha.dev/aparoksha/levenshtein-transformations",
-        branch: "main"
+        revision: "06577a2c4c6419ed859e34a8fb7be87a3b8975da"
     ),
-    .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1")
+    .package(url: "https://github.com/CoreOffice/XMLCoder", exact: "0.18.2")
 ]
-
-#if os(Linux)
-dependencies.append(.package(url: "https://github.com/stephencelis/CSQLite", from: "3.50.4"))
-#endif
 
 /// The Adwaita package.
 let package = Package(
@@ -78,14 +75,18 @@ let package = Package(
             dependencies: [
                 "CAdw",
                 .product(name: "LevenshteinTransformations", package: "levenshtein-transformations"),
-                .product(name: "Meta", package: "meta"),
-                .product(name: "MetaSQLite", package: "meta-sqlite")
+                .product(name: "Meta", package: "meta")
             ],
             swiftSettings: [.defaultIsolation(MainActor.self)],
             plugins: ["GenerateWidgets"],
         ),
         .executableTarget(
             name: "Demo",
+            dependencies: ["Adwaita"],
+            swiftSettings: [.defaultIsolation(MainActor.self)]
+        ),
+        .testTarget(
+            name: "AdwaitaTests",
             dependencies: ["Adwaita"],
             swiftSettings: [.defaultIsolation(MainActor.self)]
         )

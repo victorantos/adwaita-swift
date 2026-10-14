@@ -8,7 +8,6 @@
 import CAdw
 import Foundation
 @_exported import Meta
-@_exported import MetaSQLite
 
 /// The Meta app storage for the Adwaita backend.
 public class AdwaitaApp: AppStorage {
@@ -36,7 +35,6 @@ public class AdwaitaApp: AppStorage {
     public required init(id: String) {
         let flag = GApplicationFlags.APPLICATION_HANDLES_OPEN
         pointer = adw_application_new(id, flag)?.cast()
-        DatabaseInformation.setPath(Self.userDataDir().appendingPathComponent("\(id).sqlite").path)
     }
 
     /// Copy a string to the clipboard.
@@ -116,7 +114,8 @@ public class AdwaitaApp: AppStorage {
             data.closure = { _ in handler() }
             return
         }
-        let action = g_simple_action_new(id, nil)
+        let name = Self.actionName(for: id)
+        let action = g_simple_action_new(name, nil)
         let data = SignalData(closure: handler)
         g_signal_connect_data(
             action?.cast(),
@@ -134,7 +133,7 @@ public class AdwaitaApp: AppStorage {
             signals[id] = data
         }
         let array = [shortcut].cArray
-        gtk_application_set_accels_for_action(pointer, (window == nil ? "app." : "win.") + id, array)
+        gtk_application_set_accels_for_action(pointer, (window == nil ? "app." : "win.") + name, array)
         array?.deallocate()
     }
 
@@ -147,12 +146,28 @@ public class AdwaitaApp: AppStorage {
         window: AdwaitaWindow? = nil
     ) {
         if let window {
-            g_action_map_remove_action(.init(window.pointer), id)
+            g_action_map_remove_action(.init(window.pointer), Self.actionName(for: id))
             window.signals.removeValue(forKey: id)
         } else {
-            g_action_map_remove_action(.init(pointer), id)
+            g_action_map_remove_action(.init(pointer), Self.actionName(for: id))
             signals.removeValue(forKey: id)
         }
+    }
+
+    /// The name of the action behind a keyboard shortcut: the id when GLib takes it as an action name, otherwise
+    /// "shortcut-" and the id's UTF-8 bytes in hexadecimal. A shortcut used as its own id ("<Ctrl>k") is no valid
+    /// action name: GLib refused the action and no accelerator was bound.
+    /// - Parameter id: The keyboard shortcut's id.
+    /// - Returns: A valid action name, the same for the same id.
+    static func actionName(for id: String) -> String {
+        if g_action_name_is_valid(id) != 0 {
+            return id
+        }
+        let hex = id.utf8.map { byte in
+            let digits = String(byte, radix: 16)
+            return digits.count == 1 ? "0" + digits : digits
+        }
+        return "shortcut-" + hex.joined()
     }
 
 }
